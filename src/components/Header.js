@@ -133,7 +133,7 @@ function LogoHeader() {
       className="flex items-center gap-2.5 overflow-hidden min-[680px]:flex-col min-[680px]:items-start min-[680px]:gap-1"
     >
       <Image
-        src="/logoheader.webp"
+        src="/logo-header-sm.webp"
         alt="Sousophone Carbon"
         width={68}
         height={32}
