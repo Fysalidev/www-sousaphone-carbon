@@ -6,7 +6,7 @@ export const metadata = {
 export default function InstrumentPage() {
   return (
     <main className="flex flex-1 flex-col items-center justify-center bg-black px-6">
-      <h1 className="text-4xl font-semibold tracking-widest text-white uppercase">
+      <h1 className="font-display text-4xl font-medium tracking-widest text-white uppercase">
         Sousophone Carbon
       </h1>
     </main>

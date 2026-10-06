@@ -9,6 +9,7 @@
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --font-sans: var(--font-montserrat);
+  --font-display: var(--font-bodoni), Georgia, serif;
 }
 
 body {
