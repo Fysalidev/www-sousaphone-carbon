@@ -20,8 +20,16 @@ export default function RootLayout({ children }) {
       className={`${montserrat.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col">
+        <a
+          href="#contenu"
+          className="sr-only z-[60] focus:not-sr-only focus:fixed focus:left-6 focus:top-6 focus:rounded-full focus:bg-white focus:px-4 focus:py-2 focus:text-sm focus:font-semibold focus:text-black"
+        >
+          Aller au contenu
+        </a>
         <Header />
-        {children}
+        <div id="contenu" tabIndex={-1} className="flex flex-1 flex-col focus:outline-none">
+          {children}
+        </div>
         <Footer />
       </body>
     </html>

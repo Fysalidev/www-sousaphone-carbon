@@ -121,7 +121,7 @@ function Icone({ nom }) {
 
 export default function Home() {
   return (
-    <div className="flex flex-1 flex-col bg-black font-sans text-white">
+    <main className="flex flex-1 flex-col bg-black font-sans text-white">
       <header className="mx-auto flex w-full max-w-xl flex-col items-center gap-6 px-6 pt-14 pb-10 text-center">
         <p className="text-sm font-medium text-zinc-400 underline decoration-[#D4AF37] decoration-2 underline-offset-4">
           Une alliance idéale
@@ -236,6 +236,6 @@ export default function Home() {
           leur niveau.
         </p>
       </section>
-    </div>
+    </main>
   );
 }
