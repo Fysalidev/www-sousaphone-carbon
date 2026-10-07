@@ -18,3 +18,25 @@ body {
   color: var(--foreground);
   font-family: var(--font-montserrat), Arial, Helvetica, sans-serif;
 }
+
+/* Entrée du hero : fondu et glissement vers le haut, déclenchés au
+   chargement de la page. La classe se pose sur l'accroche puis le titre
+   avec un `animation-delay` croissant pour l'effet en cascade ; `backwards`
+   maintient les éléments invisibles pendant leur délai. Désactivée lorsque
+   l'utilisateur demande la réduction des animations. */
+@keyframes entree-hero {
+  from {
+    opacity: 0;
+    transform: translateY(1.5rem);
+  }
+}
+
+.hero-entree {
+  animation: entree-hero 500ms ease-out backwards;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-entree {
+    animation: none;
+  }
+}

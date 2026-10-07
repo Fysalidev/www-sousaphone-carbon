@@ -22,8 +22,9 @@ const LIENS = [
   { href: "/contact", label: "CONTACT" },
 ];
 
-const COULEUR_ACTIF = "text-white";
 const COULEUR_INACTIF = "text-white transition-colors hover:text-[#B69660]";
+const CLASSES_LIEN_DESKTOP =
+  "text-sm font-medium focus-visible:underline focus-visible:underline-offset-4";
 const CLASSES_BOUTON_ROND =
   "inline-flex size-11 shrink-0 items-center justify-center overflow-hidden rounded-full outline-1 -outline-offset-1 outline-stone-800 transition-colors hover:outline-stone-600 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white";
 const CLASSES_BOUTON_FERMER =
@@ -116,22 +117,15 @@ function LogoHeader() {
   );
 }
 
-function LienNav({
-  href,
-  label,
-  actif,
-  classesBase,
-  onClick,
-  couleurActif = COULEUR_ACTIF,
-  couleurInactif = COULEUR_INACTIF,
-}) {
+// Lien de la navigation desktop : blanc, doré au survol, sauf sur la page
+// courante (aria-current="page").
+function LienDesktop({ href, label, actif }) {
   return (
     <Link
       href={href}
       aria-current={actif ? "page" : undefined}
-      onClick={onClick}
-      className={`${classesBase} ${
-        actif ? couleurActif : couleurInactif
+      className={`${CLASSES_LIEN_DESKTOP} ${
+        actif ? "text-white" : COULEUR_INACTIF
       }`}
     >
       {label}
@@ -148,12 +142,7 @@ function NavDesktop({ pathname }) {
       <ul className="flex items-center gap-8">
         {LIENS.map(({ href, label }) => (
           <li key={href}>
-            <LienNav
-              href={href}
-              label={label}
-              actif={pathname === href}
-              classesBase="text-sm font-medium focus-visible:underline focus-visible:underline-offset-4"
-            />
+            <LienDesktop href={href} label={label} actif={pathname === href} />
           </li>
         ))}
       </ul>
@@ -187,7 +176,7 @@ function MenuPleinEcran({ pathname, ouvert, fermer, refDialogue, refFermer }) {
       {fondVisible && (
         <>
           <Image
-            src="/menu-fond.jpg"
+            src="/menu-fond.webp"
             alt=""
             fill
             sizes="100vw"
@@ -365,7 +354,7 @@ export default function Header() {
   }, [ouvert]);
 
   return (
-    <header className="sticky top-0 z-30 bg-black">
+    <header className="sticky top-0 z-30 mx-auto w-full max-w-[1440px] bg-black">
       <div
         inert={ouvert}
         className="flex w-full items-center justify-between gap-6 overflow-hidden px-6 pt-10 pb-5"

@@ -39,7 +39,11 @@ export default function RootLayout({ children }) {
           Aller au contenu
         </a>
         <Header />
-        <div id="contenu" tabIndex={-1} className="flex flex-1 flex-col focus:outline-none">
+        <div
+          id="contenu"
+          tabIndex={-1}
+          className="mx-auto flex w-full max-w-[1440px] flex-1 flex-col focus:outline-none"
+        >
           {children}
         </div>
         <Footer />
