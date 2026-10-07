@@ -3,6 +3,18 @@
 :root {
   --background: #0a0a0a;
   --foreground: #ffffff;
+  /* Hauteur rendue de la barre du header : pt-10 + logo h-8 + pb-5 =
+     92px ; à partir de 680px le logo passe en h-12 et le badge FRANCE
+     se glisse dessous (h-12 + gap-1 + 10px avec leading-none), soit
+     40 + 48 + 4 + 10 + 20 = 122px. Le hero s'en sert pour occuper
+     exactement la hauteur d'écran restante. */
+  --hauteur-barre-header: 92px;
+}
+
+@media (min-width: 680px) {
+  :root {
+    --hauteur-barre-header: 122px;
+  }
 }
 
 @theme inline {
