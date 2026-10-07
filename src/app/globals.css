@@ -10,6 +10,7 @@
   --color-foreground: var(--foreground);
   --font-sans: var(--font-montserrat);
   --font-display: var(--font-bodoni), Georgia, serif;
+  --font-slogan: var(--font-bebas), "Arial Narrow", Arial, sans-serif;
 }
 
 body {

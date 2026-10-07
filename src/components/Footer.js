@@ -1,74 +1,106 @@
-import Link from "next/link";
+"use client";
+
+// Pied de page reprenant le langage visuel de la modale du header
+// (MenuPleinEcran) : fond photo assombri, logo et séparateur doré, sections
+// DÉCOUVRIR / ÉCHANGER, réseaux sociaux et pied légal. Les éléments communs
+// proviennent de MenuCommun.js. Contrairement à la modale : pas de bouton
+// fermer, pas de sémantique dialog ni d'animations d'entrée.
+
+import Image from "next/image";
+import { usePathname } from "next/navigation";
+import {
+  CLASSES_SEPARATEUR_BARRE,
+  Intertitre,
+  LARGEUR_SEPARATEUR,
+  LienMenu,
+  ListeReseaux,
+  LogoMenu,
+  PiedLegal,
+  SeparateurDore,
+} from "./MenuCommun";
+
+// Liens de navigation de la section DÉCOUVRIR.
+const LIENS = [
+  { href: "/", label: "ACCUEIL" },
+  { href: "/instrument", label: "SOUSAPHONE CARBON" },
+  { href: "/galerie", label: "GALERIE" },
+];
 
 export default function Footer() {
+  const pathname = usePathname();
+
   return (
-    <footer className="flex flex-col items-center gap-6 border-t border-white/10 bg-black px-6 py-12 text-center">
-      <p className="font-serif text-2xl font-bold tracking-wide text-[#D4AF37]">
-        SC
-      </p>
-      <p className="text-sm font-medium text-zinc-300">Sousophone Carbon</p>
-      <nav className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-sm text-zinc-400">
-        <Link href="/contact" className="transition-colors hover:text-white">
-          Contact
-        </Link>
-        <Link href="#" className="transition-colors hover:text-white">
-          Mentions légales
-        </Link>
-        <Link href="#" className="transition-colors hover:text-white">
-          Politique de confidentialité
-        </Link>
-      </nav>
-      <div className="flex items-center gap-5 text-zinc-400">
-        <a href="#" aria-label="Facebook" className="transition-colors hover:text-white">
-          <svg className="h-5 w-5" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-            <path d="M13.5 22v-8h2.7l.4-3h-3.1V9c0-.9.3-1.5 1.6-1.5h1.7V4.6c-.3 0-1.3-.1-2.5-.1-2.5 0-4.1 1.5-4.1 4.3V11H7.5v3h2.7v8h3.3z" />
-          </svg>
-        </a>
-        <a href="#" aria-label="Instagram" className="transition-colors hover:text-white">
-          <svg
-            className="h-5 w-5"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="1.8"
-            aria-hidden="true"
-          >
-            <rect x="3" y="3" width="18" height="18" rx="5" />
-            <circle cx="12" cy="12" r="4" />
-            <circle cx="17.2" cy="6.8" r="0.6" fill="currentColor" stroke="none" />
-          </svg>
-        </a>
-        <a href="#" aria-label="X" className="transition-colors hover:text-white">
-          <svg
-            className="h-5 w-5"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinecap="round"
-            aria-hidden="true"
-          >
-            <path d="M4 4l16 16" />
-            <path d="M20 4L4 20" />
-          </svg>
-        </a>
-        <a href="#" aria-label="YouTube" className="transition-colors hover:text-white">
-          <svg
-            className="h-5 w-5"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="1.8"
-            aria-hidden="true"
-          >
-            <rect x="2.5" y="5.5" width="19" height="13" rx="3.5" />
-            <path d="M10 9.5l5 2.5-5 2.5z" fill="currentColor" stroke="none" />
-          </svg>
-        </a>
+    <footer className="relative overflow-x-clip bg-black">
+      {/* Fond photo assombri et voile dégradé, purement décoratifs. */}
+      <Image
+        src="/menu-fond.jpg"
+        alt=""
+        fill
+        sizes="100vw"
+        className="pointer-events-none object-cover object-[40%_50%] brightness-75 contrast-125"
+      />
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-0 bg-linear-to-b from-black/70 via-neutral-800/65 to-black/85"
+      />
+
+      {/* Barre du logo, séparée du contenu par le trait doré. */}
+      <div className="relative z-10 flex w-full px-6 pt-10 pb-3.5">
+        <LogoMenu />
+        <span
+          aria-hidden="true"
+          style={LARGEUR_SEPARATEUR}
+          className={CLASSES_SEPARATEUR_BARRE}
+        />
       </div>
-      <p className="text-xs text-zinc-500">
-        © 2025 Sousophone Carbon. Tous droits réservés.
+
+      {/* Slogan masqué sur petites et moyennes largeurs ; à partir de 900px
+          il est toujours centré sur la droite (ancre à 72% de la largeur),
+          sans risque de chevauchement avec la colonne de liens. */}
+      <p className="pointer-events-none absolute top-[62%] left-[72%] z-10 hidden -translate-x-1/2 -translate-y-1/2 font-slogan text-4xl min-[900px]:block min-[1024px]:text-5xl min-[1440px]:text-6xl tracking-wide text-[#C9A96A]">
+        KEEP COOL PLAY SOUSAPHONE CARBON
       </p>
+
+      <nav
+        aria-label="Navigation pied de page"
+        className="relative z-10 flex flex-col"
+      >
+        <ul className="flex w-full max-w-169.75 flex-col px-6 pt-6 pb-8">
+          <li className="pb-2">
+            <Intertitre>DÉCOUVRIR</Intertitre>
+          </li>
+          {LIENS.map(({ href, label }) => (
+            <li key={href}>
+              <LienMenu href={href} label={label} actif={pathname === href} />
+            </li>
+          ))}
+
+          <li className="pb-2 pt-4">
+            <Intertitre>ÉCHANGER</Intertitre>
+          </li>
+          <li>
+            <LienMenu
+              href="/contact"
+              label="Contact"
+              actif={pathname === "/contact"}
+            />
+            <p className="pb-2 text-xs min-[420px]:text-sm text-stone-200">
+              Atelier en France, sur rendez-vous
+            </p>
+          </li>
+
+          {/* Réseaux sociaux, bornés par le second trait doré. */}
+          <li className="mt-4 pb-4 pt-6">
+            <ListeReseaux />
+            <SeparateurDore />
+          </li>
+
+          {/* Mentions légales, confidentialité et copyright. */}
+          <li className="pt-4">
+            <PiedLegal />
+          </li>
+        </ul>
+      </nav>
     </footer>
   );
 }

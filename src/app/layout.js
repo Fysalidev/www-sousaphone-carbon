@@ -1,4 +1,4 @@
-import { Bodoni_Moda, Montserrat } from "next/font/google";
+import { Bebas_Neue, Bodoni_Moda, Montserrat } from "next/font/google";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import "./globals.css";
@@ -13,6 +13,13 @@ const bodoni = Bodoni_Moda({
   subsets: ["latin"],
 });
 
+// Bebas Neue : police du slogan (capitales condensées, poids unique 400).
+const bebasNeue = Bebas_Neue({
+  variable: "--font-bebas",
+  subsets: ["latin"],
+  weight: "400",
+});
+
 export const metadata = {
   title: "Sousophone Carbon",
   description: "Sousophones en carbone légers, robustes, fabriqués sur mesure.",
@@ -22,7 +29,7 @@ export default function RootLayout({ children }) {
   return (
     <html
       lang="fr"
-      className={`${montserrat.variable} ${bodoni.variable} h-full antialiased`}
+      className={`${montserrat.variable} ${bodoni.variable} ${bebasNeue.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col">
         <a
