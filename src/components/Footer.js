@@ -30,7 +30,7 @@ export default function Footer() {
   const pathname = usePathname();
 
   return (
-    <footer className="relative mx-auto w-full max-w-[1440px] overflow-x-clip bg-black">
+    <footer className="relative w-full overflow-x-clip bg-black">
       {/* Fond photo assombri et voile dégradé, purement décoratifs,
           pleine largeur. */}
       <Image

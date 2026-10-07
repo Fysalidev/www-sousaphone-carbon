@@ -42,7 +42,7 @@ export default function RootLayout({ children }) {
         <div
           id="contenu"
           tabIndex={-1}
-          className="mx-auto flex w-full max-w-[1440px] flex-1 flex-col focus:outline-none"
+          className="flex w-full flex-1 flex-col focus:outline-none"
         >
           {children}
         </div>

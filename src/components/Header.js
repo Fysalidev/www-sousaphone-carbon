@@ -354,7 +354,7 @@ export default function Header() {
   }, [ouvert]);
 
   return (
-    <header className="sticky top-0 z-30 mx-auto w-full max-w-[1440px] bg-black">
+    <header className="sticky top-0 z-30 w-full bg-black">
       <div
         inert={ouvert}
         className="flex w-full items-center justify-between gap-6 overflow-hidden px-6 pt-10 pb-5"
