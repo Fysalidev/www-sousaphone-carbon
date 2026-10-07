@@ -81,7 +81,7 @@ function IconeBurger() {
 function BadgeFrance() {
   return (
     <span className="inline-flex items-center gap-1.5 overflow-hidden pl-2.5">
-      <span className="text-[10px] font-bold text-stone-400">FRANCE</span>
+      <span className="text-[10px] leading-none font-bold text-stone-400">FRANCE</span>
       <span className="inline-flex h-1 w-4 items-start justify-start overflow-hidden rounded-xs">
         <span className="h-1 w-1.5 bg-sky-700" />
         <span className="h-1 w-1.5 bg-white" />
