@@ -18,14 +18,14 @@ const RESEAUX = [
 ];
 
 const COULEUR_ACTIF = "text-white";
-const COULEUR_ACTIF_MENU = "text-white transition-colors hover:text-[#B69660]";
+const COULEUR_ACTIF_MENU = "text-white transition-colors";
 const COULEUR_INACTIF = "text-white transition-colors hover:text-[#B69660]";
 const CLASSES_BOUTON_ROND =
-  "inline-flex size-10 shrink-0 items-center justify-center overflow-hidden rounded-full outline-1 -outline-offset-1 outline-stone-800 transition-colors hover:outline-stone-600 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white";
+  "inline-flex size-11 shrink-0 items-center justify-center overflow-hidden rounded-full outline-1 -outline-offset-1 outline-stone-800 transition-colors hover:outline-stone-600 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white";
 const CLASSES_BOUTON_FERMER =
-  "inline-flex size-10 shrink-0 items-center justify-center overflow-hidden rounded-full outline-2 -outline-offset-1 text-[#B69660] outline-[#B69660] transition-colors hover:text-white hover:outline-white focus-visible:outline-offset-2 focus-visible:outline-white";
+  "inline-flex size-11 shrink-0 items-center justify-center overflow-hidden rounded-full outline-2 -outline-offset-1 text-[#B69660] outline-[#B69660] transition-colors hover:text-white hover:outline-white focus-visible:outline-offset-2 focus-visible:outline-white";
 const CLASSES_LIEN_RESEAU =
-  "inline-flex size-14 items-center justify-center rounded-full outline-2 -outline-offset-1 text-white outline-white transition-colors hover:text-[#B69660] hover:outline-[#B69660] focus-visible:outline-offset-2 focus-visible:outline-[#B69660]";
+  "inline-flex size-12 items-center justify-center rounded-full outline-2 -outline-offset-1 text-white outline-white transition-colors hover:text-[#B69660] hover:outline-[#B69660] focus-visible:outline-offset-2 focus-visible:outline-[#B69660]";
 const CLASSES_TRANSITION_MENU =
   "transition-all duration-500 ease-out motion-reduce:transition-none";
 const SELECTEUR_FOCUSABLES =
@@ -78,7 +78,7 @@ function IconeBurger() {
 function IconeFacebook() {
   return (
     <svg
-      className="size-8"
+      className="size-6"
       viewBox="0 0 24 24"
       fill="none"
       stroke="currentColor"
@@ -95,7 +95,7 @@ function IconeFacebook() {
 function IconeInstagram() {
   return (
     <svg
-      className="size-8"
+      className="size-6"
       viewBox="0 0 24 24"
       fill="none"
       stroke="currentColor"
@@ -130,7 +130,7 @@ function LogoHeader() {
   return (
     <Link
       href="/"
-      className="flex items-center gap-2.5 overflow-hidden min-[680px]:flex-col min-[680px]:items-start min-[680px]:gap-1"
+      className="flex items-center gap-2.5 overflow-hidden rounded-xs focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white min-[680px]:flex-col min-[680px]:items-start min-[680px]:gap-1"
     >
       <Image
         src="/logo-header-sm.webp"
@@ -159,6 +159,7 @@ function LienNav({
   classesBase,
   onClick,
   couleurActif = COULEUR_ACTIF,
+  couleurInactif = COULEUR_INACTIF,
 }) {
   return (
     <Link
@@ -166,7 +167,7 @@ function LienNav({
       aria-current={actif ? "page" : undefined}
       onClick={onClick}
       className={`${classesBase} ${
-        actif ? couleurActif : COULEUR_INACTIF
+        actif ? couleurActif : couleurInactif
       }`}
     >
       {label}
@@ -197,6 +198,12 @@ function NavDesktop({ pathname }) {
 }
 
 function MenuPleinEcran({ pathname, ouvert, fermer, refDialogue, refFermer }) {
+  const [fondVisible, setFondVisible] = useState(false);
+
+  if (ouvert && !fondVisible) {
+    setFondVisible(true);
+  }
+
   return (
     <div
       ref={refDialogue}
@@ -205,11 +212,13 @@ function MenuPleinEcran({ pathname, ouvert, fermer, refDialogue, refFermer }) {
       aria-label="Menu de navigation"
       aria-hidden={!ouvert}
       inert={!ouvert}
-      className={`fixed inset-0 z-50 flex flex-col bg-black transition-opacity duration-300 ease-out motion-reduce:transition-none ${
-        ouvert ? "opacity-100" : "pointer-events-none opacity-0"
+      className={`fixed inset-x-0 top-0 z-50 flex h-dvh w-full flex-col bg-black transition-[opacity,visibility] duration-300 ease-out motion-reduce:transition-none ${
+        ouvert
+          ? "visible opacity-100"
+          : "invisible pointer-events-none opacity-0"
       }`}
     >
-      {ouvert && (
+      {fondVisible && (
         <>
           <Image
             src="/menu-fond.jpg"
@@ -217,15 +226,37 @@ function MenuPleinEcran({ pathname, ouvert, fermer, refDialogue, refFermer }) {
             fill
             sizes="100vw"
             quality={60}
-            className="pointer-events-none object-cover object-[40%_50%] brightness-75 contrast-125"
+            className={`pointer-events-none object-cover object-[40%_50%] brightness-75 contrast-125 transition-opacity duration-300 ease-out motion-reduce:transition-none ${
+              ouvert ? "opacity-100" : "opacity-0"
+            }`}
           />
           <div
             aria-hidden="true"
-            className="pointer-events-none absolute inset-0 bg-linear-to-b from-black/70 via-neutral-800/65 to-black/85"
+            className={`pointer-events-none absolute inset-0 bg-linear-to-b from-black/70 via-neutral-800/65 to-black/85 transition-opacity duration-300 ease-out motion-reduce:transition-none ${
+              ouvert ? "opacity-100" : "opacity-0"
+            }`}
           />
         </>
       )}
-      <div className="relative z-10 flex w-full items-center justify-end gap-6 overflow-hidden px-6 pt-10 pb-5">
+      <div className="relative z-10 flex w-full items-center justify-between gap-6 px-6 pt-10 pb-3.5">
+        <Link
+          href="/"
+          onClick={fermer}
+          className="-my-3.5 -ml-3 shrink-0 rounded-xs focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white"
+        >
+          <Image
+            src="/logo-sans-bg-300px.png"
+            alt="Sousaphone Carbon"
+            width={300}
+            height={105}
+            className="h-16 w-auto"
+          />
+        </Link>
+        <span
+          aria-hidden="true"
+          style={{ width: "calc(64px * 300 / 105)" }}
+          className="pointer-events-none absolute bottom-0 left-3 h-px bg-[#B69660]/40"
+        />
         <button
           type="button"
           ref={refFermer}
@@ -238,27 +269,27 @@ function MenuPleinEcran({ pathname, ouvert, fermer, refDialogue, refFermer }) {
       </div>
       <nav
         aria-label="Menu"
-        className="relative z-10 flex flex-1 items-start overflow-y-auto"
+        className="relative z-10 flex min-h-0 flex-1 flex-col overflow-hidden"
       >
-        <ul className="flex w-full max-w-169.75 flex-col px-6 pt-24 pb-10">
+        <ul className="flex min-h-0 w-full max-w-169.75 flex-1 flex-col px-6 pt-6 pb-8">
           <li
             style={delaiEntree(ouvert, 0)}
-            className={`pb-6 ${classesEntree(ouvert)}`}
+            className={`pb-4 [@media(max-height:600px)]:hidden ${classesEntree(ouvert)}`}
           >
-            <p className="font-display text-[32px] font-medium leading-snug text-stone-100">
+            <p className="font-display text-xl min-[420px]:text-2xl font-medium leading-snug text-stone-100">
               Un instrument d&rsquo;exception, pensé comme une œuvre d&rsquo;art,
               joué comme une évidence.
             </p>
-            <p className="mt-3 text-base text-stone-200">
+            <p className="mt-2 text-xs min-[420px]:text-sm text-stone-200">
               Fabriqué en France, façonné à la main. Parlons de votre futur
               Sousaphone Carbon.
             </p>
           </li>
           <li
             style={delaiEntree(ouvert, 0)}
-            className={`pb-3 pt-6 ${classesEntree(ouvert)}`}
+            className={`pb-2 pt-4 ${classesEntree(ouvert)}`}
           >
-            <p className="text-sm font-bold tracking-[0.25em] text-[#C9A96A]">
+            <p className="text-xs font-bold tracking-[0.25em] text-[#C9A96A]">
               DÉCOUVRIR
             </p>
           </li>
@@ -269,9 +300,9 @@ function MenuPleinEcran({ pathname, ouvert, fermer, refDialogue, refFermer }) {
                 {href === "/contact" && (
                   <li
                     style={delaiEntree(ouvert, index)}
-                    className={`pb-3 pt-6 ${classesEntree(ouvert)}`}
+                    className={`pb-2 pt-4 ${classesEntree(ouvert)}`}
                   >
-                    <p className="text-sm font-bold tracking-[0.25em] text-[#C9A96A]">
+                    <p className="text-xs font-bold tracking-[0.25em] text-[#C9A96A]">
                       ÉCHANGER
                     </p>
                   </li>
@@ -284,17 +315,28 @@ function MenuPleinEcran({ pathname, ouvert, fermer, refDialogue, refFermer }) {
                     href={href}
                     label={label}
                     actif={actif}
-                    classesBase="block py-3 text-2xl font-semibold lowercase first-letter:uppercase focus-visible:underline focus-visible:underline-offset-4 focus-visible:decoration-[#B69660]"
+                    classesBase="block text-base leading-[44px] min-[420px]:text-lg font-normal hover:font-semibold lowercase first-letter:uppercase focus-visible:underline focus-visible:underline-offset-4 focus-visible:decoration-[#B69660]"
                     couleurActif={COULEUR_ACTIF_MENU}
+                    couleurInactif={COULEUR_ACTIF_MENU}
                     onClick={fermer}
                   />
                 </li>
+                {href === "/contact" && (
+                  <li
+                    style={delaiEntree(ouvert, index)}
+                    className={classesEntree(ouvert)}
+                  >
+                    <p className="pb-2 text-xs min-[420px]:text-sm text-stone-200">
+                      Atelier en France, sur rendez-vous
+                    </p>
+                  </li>
+                )}
               </Fragment>
             );
           })}
           <li
             style={delaiEntree(ouvert, LIENS.length)}
-            className={`border-b-[3px] border-[#B69660] pb-6 pt-8 ${classesEntree(ouvert)}`}
+            className={`mt-auto pb-4 pt-6 ${classesEntree(ouvert)}`}
           >
             <div className="flex items-center gap-4">
               {RESEAUX.map(({ href, label }, index) => {
@@ -313,6 +355,11 @@ function MenuPleinEcran({ pathname, ouvert, fermer, refDialogue, refFermer }) {
                 );
               })}
             </div>
+            <span
+              aria-hidden="true"
+              style={{ width: "calc(64px * 300 / 105)" }}
+              className="mt-4 block h-px bg-[#B69660]/40"
+            />
           </li>
           <li
             style={delaiEntree(ouvert, LIENS.length + 1)}
@@ -351,6 +398,12 @@ export default function Header() {
   const refBurger = useRef(null);
   const refDialogue = useRef(null);
   const refFermer = useRef(null);
+  const [dernierPathname, setDernierPathname] = useState(pathname);
+
+  if (pathname !== dernierPathname) {
+    setDernierPathname(pathname);
+    setOuvert(false);
+  }
 
   useEffect(() => {
     if (!ouvert) return;
