@@ -218,9 +218,21 @@ body {
   }
   .hero-bas {
     padding-bottom: 2rem;
+    /* Metrics en overlay sur le bas de la photo : c'est le groupe
+       texte entier qui remonte (marge négative), les metrics
+       passant en tête du groupe via order — seuls eux chevauchent
+       l'image, dont le bas est déjà fondu par le masque ; la
+       promesse et le bouton restent sous la photo. relative :
+       sans lui, la photo (elle aussi relative) se peindrait par-
+       dessus le texte. */
+    position: relative;
+    margin-top: -4rem;
+  }
+  .hero-metrics {
+    order: -1;
+    margin-top: 0;
   }
   .hero-promesse,
-  .hero-metrics,
   .hero-bouton {
     margin-top: 1rem;
   }
