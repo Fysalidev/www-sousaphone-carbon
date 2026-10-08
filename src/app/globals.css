@@ -158,7 +158,10 @@ body {
     font-size: clamp(1.875rem, 1.5875rem + 0.6vw, 3rem);
   }
   .hero-haut p.hero-entree {
-    font-size: clamp(0.625rem, 0.58rem + 0.08vw, 0.875rem);
+    /* Recalé sur la rampe JSX (10px mobile, text-xs à 768px, text-sm
+       à 1555px) : 12px à 768px puis croissance continue jusqu'à
+       14px atteints à 1555px — plus de saut au basculement. */
+    font-size: clamp(0.625rem, 0.63rem + 0.25vw, 0.875rem);
   }
 }
 
@@ -306,15 +309,16 @@ body {
     .hero-photo {
       margin-top: -2rem;
     }
-    /* Test — l'instrument remplit toute la largeur de la boîte
+    /* Adopté — l'instrument remplit toute la largeur de la boîte
        (cover au lieu de contain) : l'image portrait (600×1141)
-       remplit 375px de large pour ~340px de haut, recadrée haut/bas
-       d'environ 185px de chaque côté ; le fondu du masque couvre
-       les lignes de coupe. Le point d'ancrage reste le centre :
-       ajustable (object-position) si le pavillon doit revenir dans
-       le cadre. */
+       remplit 375px de large pour ~340px de haut, recadrée de
+       ~370px au total ; l'ancrage haut garde le pavillon entier,
+       la coupe se reporte sur le bas du corps — fondu du masque et
+       zone de l'overlay metrics. Ajustable en valeur numérique si
+       le cadrage doit descendre sur le corps (object-position). */
     .hero-photo img {
       object-fit: cover;
+      object-position: top;
     }
   }
 }
