@@ -295,6 +295,18 @@ body {
   .hero-bas {
     padding-bottom: 1.5rem;
   }
+  /* Mobile portrait, écran court : l'overlay titre du palier mobile
+     reste actif. La photo est portrait — en contain sa largeur
+     dépend de sa hauteur (≈ 0,53px gagné par px) —, ces 2,75rem
+     rendus agrandissent l'instrument (~15 %) sans rien ajouter à
+     la pile : le titre se pose dans le fondu haut du masque.
+     Portrait seulement : en paysage la photo est trop courte pour
+     l'empilement, et ≥ 48rem le hero bascule en deux colonnes. */
+  @media (max-width: 47.99rem) and (orientation: portrait) {
+    .hero-photo {
+      margin-top: -2rem;
+    }
+  }
 }
 
 @media (max-height: 32rem) {
