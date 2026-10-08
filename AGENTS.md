@@ -7,14 +7,17 @@
   `dev-1008-Session2` si deuxième session du jour).
 - Pousser la branche tôt : chaque push génère une preview Vercel.
   Le rendu se valide sur cette preview avant tout merge.
-- Committer librement au fil de la session.
-- En fin de session : `git switch main && git merge --no-ff <branche>`
-  — les commits intermédiaires restent regroupés sous le commit de
-  merge. Squash (`git merge --squash`) seulement si la session ne
-  mérite qu'un seul commit.
-- Supprimer la branche après merge : `git branch -d <branche>` (après
-  un squash, `-D` : le contenu est dans `main` mais git ne peut pas le
-  vérifier) puis `git push origin --delete <branche>`.
+- Committer librement au fil de la session, avec le message
+  `n | description` (n incrémenté : `1 | Accueil | Hero | Overlay`,
+  `2 | Docs | Convention de commits`, ...).
+- En fin de session : pousser la branche puis ouvrir une Pull Request
+  vers `main` (la branche est protégée : le merge se fait par PR sur
+  GitHub, en merge commit — pas squash — pour garder les commits de
+  session regroupés).
+- Après merge de la PR : `git switch main && git pull`, puis
+  `git branch -d <branche>`. La branche distante disparaît
+  automatiquement si « Automatically delete head branches » est activé
+  dans les réglages du repo.
 - Une session qui part sur deux sujets sans rapport se scinde en deux
   branches plutôt que de merger un mélange.
 - Les branches mortes sont des pièges : on n'en garde aucune.
