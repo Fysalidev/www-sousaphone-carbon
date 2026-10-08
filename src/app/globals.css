@@ -306,6 +306,16 @@ body {
     .hero-photo {
       margin-top: -2rem;
     }
+    /* Test — l'instrument remplit toute la largeur de la boîte
+       (cover au lieu de contain) : l'image portrait (600×1141)
+       remplit 375px de large pour ~340px de haut, recadrée haut/bas
+       d'environ 185px de chaque côté ; le fondu du masque couvre
+       les lignes de coupe. Le point d'ancrage reste le centre :
+       ajustable (object-position) si le pavillon doit revenir dans
+       le cadre. */
+    .hero-photo img {
+      object-fit: cover;
+    }
   }
 }
 
