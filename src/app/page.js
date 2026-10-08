@@ -257,10 +257,12 @@ export default function AccueilPage() {
           trois chiffres clés et appel à l'action, centrés. Le
           dégradé doré haut/bas teinte tout le hero. Sur les écrans
           courts, les paliers .hero-* (globals.css) compressent la
-          typo et les espacements pour tenir dans la hauteur. */}
+          typo et les espacements pour tenir dans la hauteur ; à
+          partir de 768px de large, la classe .hero bascule en deux
+          colonnes : photo à gauche, texte à droite, collés. */}
       <section
         aria-labelledby="titre-hero"
-        className="flex flex-col min-h-[calc(100svh-var(--hauteur-barre-header))] text-center bg-linear-to-b from-[#C9A96A]/10 via-transparent to-[#C9A96A]/10"
+        className="hero flex flex-col min-h-[calc(100svh-var(--hauteur-barre-header))] text-center bg-linear-to-b from-[#C9A96A]/10 via-transparent to-[#C9A96A]/10"
       >
         <div className="hero-haut flex flex-col items-center px-6 pt-12">
           <p className="hero-entree text-[10px] min-[768px]:text-xs min-[1555px]:text-sm font-bold tracking-[0.25em] text-[#C9A96A] [animation-delay:150ms]">

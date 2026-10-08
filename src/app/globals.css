@@ -57,39 +57,97 @@ body {
   }
 }
 
-/* Hero, écran portable (≥ 48rem de large, ≤ 56rem / 900px de haut —
-   MacBook Air et portables typiques) : compression modérée du
-   texte pour rendre de la hauteur à la photo. En empilé, le texte
-   consomme ~480px et n'en laisse que ~180 à l'image ; ce palier
-   ramène la photo à ~270px, avec un plancher à 14rem. Les paliers
-   plus bas ci-dessous resserrent encore. Hors @layer : prime sur
-   les utilitaires Tailwind. */
-@media (min-width: 48rem) and (max-height: 56rem) {
+/* Hero, écran large (≥ 48rem / 768px) : la disposition bascule en
+   deux colonnes — photo à gauche occupant toute la hauteur, texte
+   à droite collé à la photo (aligné côté gauche de sa colonne).
+   L'instrument, portrait, est limité par la hauteur : en colonne
+   il double sa taille sur les écrans bas. En dessous de 48rem, le
+   hero empilé reprend la main. Hors @layer : prime sur les
+   utilitaires Tailwind. */
+@media (min-width: 48rem) {
+  .hero {
+    display: grid;
+    /* Photo à gauche (40 %) — colonne calée sur la largeur réelle
+       de l'instrument (portrait ≈ 0,71 × hauteur du hero) : elle
+       remplit sa colonne au lieu de flotter au milieu d'une
+       colonne trop large. Texte à droite (60 %). */
+    grid-template-columns: minmax(0, 2fr) minmax(0, 3fr);
+    column-gap: 0.5rem;
+    /* Zone de contenu plafonnée à 78rem et centrée : au-delà, les
+       marges latérales grandissent au lieu que les colonnes ne
+       s'étalent jusqu'aux bords. Le fond doré du hero, porté par
+       la section, garde toute la largeur d'écran. */
+    padding-inline: max(2.5rem, calc((100% - 78rem) / 2));
+    grid-template-rows: auto minmax(0, 1fr);
+    grid-template-areas:
+      "photo haut"
+      "photo bas";
+  }
   .hero-haut {
-    padding-top: 1.5rem;
-  }
-  .hero-titre {
-    font-size: 2.25rem;
-  }
-  .hero-promesse {
-    margin-top: 0.75rem;
-    font-size: 0.875rem;
+    grid-area: haut;
+    /* L'ensemble du bloc texte est descendu d'un cran par rapport
+       au bord haut (pt-12 par défaut → 5rem), pour l'équilibrer
+       face à la photo pleine hauteur. */
+    padding-top: 5rem;
+    padding-inline: 0;
+    align-items: flex-start;
+    text-align: left;
   }
   .hero-photo {
-    margin-top: 0.75rem;
-    min-height: 18rem;
-  }
-  .hero-metrics {
-    margin-top: 0.75rem;
-  }
-  .hero-stat-valeur {
-    font-size: 1.5rem;
-  }
-  .hero-bouton {
-    padding-block: 0.5rem;
+    grid-area: photo;
+    margin-top: 0;
   }
   .hero-bas {
-    padding-bottom: 1.5rem;
+    grid-area: bas;
+    padding-inline: 0;
+    align-items: flex-start;
+    text-align: left;
+    /* Groupe compact : le bloc suit le titre au plus près (flex-start
+       par défaut), l'espace restant s'accumule sous le bouton — la
+       photo, elle, garde toute la hauteur. */
+  }
+  /* Le bouton porte `self-center` par défaut : aligné à gauche lui
+     aussi, comme le reste de la colonne. */
+  .hero-bouton {
+    align-self: flex-start;
+  }
+  /* Typographie fluide : clamp() remplace les paliers fixes (les
+     utilitaires text-4xl→7xl du JSX restent actifs sous 48rem,
+     en empilé). Le titre, la promesse, les valeurs et l'accroche
+     grandissent en continu avec la largeur de la fenêtre au lieu
+     de sauter à 1024/1440/1555px — la colonne texte est plus
+     étroite que l'écran, les paliers calés sur l'écran entier
+     donnaient des corps trop grands en colonne. */
+  .hero-titre {
+    font-size: clamp(2.25rem, 1.2rem + 2vw, 4rem);
+  }
+  .hero-promesse {
+    font-size: clamp(1rem, 0.9rem + 0.2vw, 1.25rem);
+  }
+  .hero-stat-valeur {
+    font-size: clamp(1.5rem, 1.1rem + 0.6vw, 2.5rem);
+  }
+  .hero-haut p.hero-entree {
+    font-size: clamp(0.625rem, 0.58rem + 0.08vw, 0.875rem);
+  }
+}
+
+/* Deux colonnes, écran assez haut (≥ 44rem) : espacements du bloc
+   texte — serré sous le titre, plus généreux entre promesse,
+   chiffres et bouton. Les écrans bas gardent les paliers de
+   compression ci-dessous. Hors @layer : prime sur mt-*. */
+@media (min-width: 48rem) and (min-height: 44rem) {
+  .hero-titre {
+    margin-top: 1.5rem;
+  }
+  .hero-promesse {
+    margin-top: 1.5rem;
+  }
+  .hero-metrics {
+    margin-top: 2.5rem;
+  }
+  .hero-bouton {
+    margin-top: 2.5rem;
   }
 }
 
