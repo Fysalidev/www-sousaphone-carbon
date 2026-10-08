@@ -18,7 +18,14 @@ export default function ContactForm() {
         >
           Nom
         </label>
-        <input id="nom" name="nom" type="text" placeholder="Votre nom" className={champ} required />
+        <input
+          id="nom"
+          name="nom"
+          type="text"
+          placeholder="Votre nom"
+          className={champ}
+          required
+        />
       </div>
 
       <div className="flex flex-col gap-2">
@@ -64,7 +71,9 @@ export default function ContactForm() {
       </button>
 
       {state.error ? (
-        <p className="text-sm font-medium text-red-600 dark:text-red-400">{state.error}</p>
+        <p className="text-sm font-medium text-red-600 dark:text-red-400">
+          {state.error}
+        </p>
       ) : null}
       {state.success ? (
         <p className="text-sm font-medium text-green-700 dark:text-green-400">

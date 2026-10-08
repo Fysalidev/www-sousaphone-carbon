@@ -81,7 +81,9 @@ function IconeBurger() {
 function BadgeFrance() {
   return (
     <span className="inline-flex items-center gap-1.5 overflow-hidden pl-2.5">
-      <span className="text-[10px] leading-none font-bold text-stone-400">FRANCE</span>
+      <span className="text-[10px] leading-none font-bold text-stone-400">
+        FRANCE
+      </span>
       <span className="inline-flex h-1 w-4 items-start justify-start overflow-hidden rounded-xs">
         <span className="h-1 w-1.5 bg-sky-700" />
         <span className="h-1 w-1.5 bg-white" />
@@ -99,7 +101,7 @@ function LogoHeader() {
     >
       <Image
         src="/logo-header-sm.webp"
-        alt="Sousophone Carbon"
+        alt="Sousaphone Carbon"
         width={68}
         height={32}
         className="h-8 w-auto min-[680px]:hidden"
@@ -107,7 +109,7 @@ function LogoHeader() {
       />
       <Image
         src="/logo-header-lg.webp"
-        alt="Sousophone Carbon"
+        alt="Sousaphone Carbon"
         width={185}
         height={48}
         className="hidden h-12 w-auto min-[680px]:block"
@@ -219,8 +221,8 @@ function MenuPleinEcran({ pathname, ouvert, fermer, refDialogue, refFermer }) {
             className={`pb-4 [@media(max-height:600px)]:hidden ${classesEntree(ouvert)}`}
           >
             <p className="font-display text-xl min-[420px]:text-2xl font-medium leading-snug text-stone-100">
-              Un instrument d&rsquo;exception, pensé comme une œuvre d&rsquo;art,
-              joué comme une évidence.
+              Un instrument d&rsquo;exception, pensé comme une œuvre
+              d&rsquo;art, joué comme une évidence.
             </p>
             <p className="mt-2 text-xs min-[420px]:text-sm text-stone-200">
               Fabriqué en France, façonné à la main. Parlons de votre futur

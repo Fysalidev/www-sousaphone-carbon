@@ -2,9 +2,9 @@ import Image from "next/image";
 import Link from "next/link";
 
 export const metadata = {
-  title: "Sousaphone Carbon — Sousophones en carbone",
+  title: "Sousaphone Carbon — Sousaphones en carbone",
   description:
-    "Sousophones en carbone légers, robustes et sonorité exceptionnelle, fabriqués sur mesure en France.",
+    "Sousaphones en carbone légers et robustes à la sonorité exceptionnelle, fabriqués sur mesure en France.",
 };
 
 // Page d'accueil : hero empilé sur fond noir, entièrement visible
@@ -16,9 +16,11 @@ export const metadata = {
 // compressent typo et espacements pour que tout tienne à l'écran.
 // Sous le hero, la page suit la maquette mobile (300–640px) : une
 // colonne éditoriale alignée à gauche — étiquette dorée, très grand
-// titre serif, paragraphe — déroulant exigence et ses trois blocs,
+// titre serif, paragraphe — déroulant exigence et ses trois cartes,
 // image pleine largeur, pièces uniques et ses attributs iconés, équipe,
 // puis la clôture narrative. Le footer (déjà en place) referme la page.
+
+// ——— Hero ———
 
 // Pilule « Découvrir l'instrument » : plein or, texte noir, inversion au
 // survol. `classe` porte l'espacement et l'animation d'entrée ;
@@ -59,6 +61,8 @@ function StatProduit({ valeur, legende, pourcent = true, dore = false }) {
   );
 }
 
+// ——— Sections éditoriales (composants partagés) ———
+
 // Étiquette dorée de section : le « branding » SC Sousaphone Carbon qui
 // surmonte chaque grand titre, même traitement que l'accroche du hero.
 function EtiquetteDoree({ children }) {
@@ -69,16 +73,21 @@ function EtiquetteDoree({ children }) {
   );
 }
 
-// Grand titre serif de section : très généreux sur mobile comme sur la
-// maquette, à cheval sur deux lignes quand la phrase est longue.
+// Grand titre serif de section (Bodoni Moda) : très généreux
+// sur mobile comme sur la maquette, à cheval sur deux lignes quand
+// la phrase est longue. Un filet or court sous le titre relie les
+// quatre sections éditoriales de la page.
 function TitreSection({ id, children }) {
   return (
-    <h2
-      id={id}
-      className="mt-4 font-display text-4xl min-[768px]:text-5xl min-[1440px]:text-6xl font-medium leading-tight text-white"
-    >
-      {children}
-    </h2>
+    <div>
+      <h2
+        id={id}
+        className="font-serif-carte mt-4 text-4xl min-[768px]:text-5xl min-[1440px]:text-6xl font-semibold leading-tight text-white"
+      >
+        {children}
+      </h2>
+      <div aria-hidden="true" className="mt-6 h-px w-16 bg-[#C9A96A]" />
+    </div>
   );
 }
 
@@ -106,14 +115,37 @@ function SectionEditoriale({ titreAria, children }) {
   );
 }
 
-// Pastille circulaire à contour doré contenant une icône en trait :
+// ——— Section Exigence ———
+
+// Bloc corps (expertise, innovations, passion) : carte à bordure
+// dorée — numéro doré en Montserrat, intitulé en Bodoni Moda,
+// paragraphe — empilée verticalement comme sur la maquette mobile.
+function BlocCorps({ numero, titre, children }) {
+  return (
+    <article className="rounded-2xl border border-[#C9A96A]/40 p-6">
+      <p className="font-sans text-lg min-[640px]:text-xl min-[1024px]:text-2xl font-bold text-[#C9A96A]">
+        {numero}
+      </p>
+      <h3 className="font-serif-carte mt-2 text-xl min-[640px]:text-2xl min-[1024px]:text-3xl font-medium text-white">
+        {titre}
+      </h3>
+      <p className="font-sans mt-3 text-sm min-[640px]:text-base min-[1024px]:text-lg leading-relaxed text-stone-300">
+        {children}
+      </p>
+    </article>
+  );
+}
+
+// ——— Section Pièces uniques ———
+
+// Pastille circulaire à fond doré contenant une icône au trait noir :
 // langage des cercles de réseaux du menu, décliné pour le contenu.
 // Purement décorative : les textes portent le sens.
 function PastilleIcone({ children }) {
   return (
     <span
       aria-hidden="true"
-      className="inline-flex size-11 shrink-0 items-center justify-center rounded-full text-[#C9A96A] outline-1 -outline-offset-1 outline-[#C9A96A]/40"
+      className="inline-flex size-11 shrink-0 items-center justify-center rounded-full bg-[#C9A96A] text-black"
     >
       {children}
     </span>
@@ -165,19 +197,21 @@ function IconeFaitMain() {
   );
 }
 
-// Bloc corps (expertise, innovations, passion) : intitulé seul puis
-// paragraphe, sans icône — aligné à gauche, empilé verticalement
-// comme sur la maquette mobile.
-function BlocCorps({ titre, children }) {
+// Clé anglaise : réglage et contrôle individuel de chaque instrument.
+function IconeCleAnglaise() {
   return (
-    <article>
-      <h3 className="text-xs min-[640px]:text-sm font-bold tracking-[0.25em] text-white">
-        {titre}
-      </h3>
-      <p className="mt-3 text-sm min-[640px]:text-base leading-relaxed text-stone-300">
-        {children}
-      </p>
-    </article>
+    <svg
+      className="size-5"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.5"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden="true"
+    >
+      <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z" />
+    </svg>
   );
 }
 
@@ -201,6 +235,8 @@ function AttributIcone({ Icone, titre, children }) {
   );
 }
 
+// ——— Données ———
+
 const EQUIPE = [
   "Guillaume COSTE",
   "François COSTE",
@@ -208,6 +244,8 @@ const EQUIPE = [
   "Christian ROSÉ",
   "Victor HEEGE",
 ];
+
+// ——— Page ———
 
 export default function AccueilPage() {
   return (
@@ -237,7 +275,7 @@ export default function AccueilPage() {
             la légèreté en plus
           </h1>
         </div>
-        {/* Photo du sousaphone soussaY (900×1268, fond noir) : le bloc
+        {/* Photo du sousaphone soussa-1 (900×1268, fond noir) : le bloc
             (flex-1, plancher min-h-48) absorbe la hauteur restante
             de l'écran ; object-contain montre l'instrument entier.
             Fonte dans le fond de section teinté : mix-blend-screen
@@ -246,18 +284,18 @@ export default function AccueilPage() {
             (fondu sur ~10 %). */}
         <div className="hero-entree hero-photo relative mt-6 min-h-48 flex-1 w-full [animation-delay:450ms]">
           <Image
-            src="/soussaY.jpg"
+            src="/soussa-1.webp"
             alt="Sousaphone en laiton sur fond sombre"
             fill
             priority
             sizes="100vw"
-            className="object-contain object-center mix-blend-screen [mask-image:linear-gradient(to_bottom,transparent_2%,black_10%,black_90%,transparent_98%)]"
+            className="object-contain object-center mix-blend-screen mask-[linear-gradient(to_bottom,transparent_2%,black_10%,black_90%,transparent_98%)]"
           />
         </div>
         <div className="hero-bas flex flex-col items-center px-6 pb-10">
           <p className="hero-entree hero-promesse mt-6 max-w-xl text-base leading-relaxed text-stone-200 min-[1555px]:max-w-2xl min-[1555px]:text-lg min-[1920px]:max-w-3xl min-[1920px]:text-xl [animation-delay:600ms]">
-            Un corps en fibre de carbone, façonné en France pour libérer
-            le musicien sans jamais altérer le son et la projection.
+            Un corps en fibre de carbone, façonné en France pour libérer le
+            musicien sans jamais altérer le son et la projection.
           </p>
           {/* Chiffres clés : trois groupes terme/définition,
               séparateurs verticaux blancs entre eux ; cellules de
@@ -274,32 +312,27 @@ export default function AccueilPage() {
       </section>
 
       {/* Exigence : étiquette, très grand titre serif et les trois
-          blocs de corps (expertise, innovations, passion) empilés et
-          alignés à gauche, sans icônes, comme sur la maquette
-          300–640px. Rythme vertical généreux entre les blocs. */}
+          cartes à bordure dorée (expertise, innovations, passion),
+          numérotées 01–03, empilées et alignées à gauche. Rythme
+          vertical généreux entre les cartes. */}
       <SectionEditoriale titreAria="titre-exigence">
-        <EtiquetteDoree>SC SOUSAPHONE CARBON</EtiquetteDoree>
+        <EtiquetteDoree>NOTRE DIFFÉRENCE</EtiquetteDoree>
         <TitreSection id="titre-exigence">
           L&rsquo;exigence, à chaque note.
         </TitreSection>
-        <div className="mt-12 space-y-10 min-[768px]:mt-16 min-[768px]:space-y-12">
-          <BlocCorps titre="EXPERTISE RECONNUE">
-            Une exigence totale qui se reflète dans chaque détail : de la
-            création des moules aux mécanismes d&rsquo;ajustage, en passant
-            par la finition soignée de chaque instrument. Sousaphone Carbon
-            représente l&rsquo;alliance parfaite entre tradition artisanale
-            et innovation technologique.
+        <div className="mt-12 space-y-6 min-[768px]:mt-16">
+          <BlocCorps numero="01" titre="Expertise reconnue">
+            Leaders en Europe pour les sousaphones et référence mondiale dans la
+            fabrication artisanale d&rsquo;instruments à vent.
           </BlocCorps>
-          <BlocCorps titre="INNOVATIONS">
-            Sousaphone Carbon intègre des innovations brevetées, comme
-            l&rsquo;accord sonique, les mécanismes ergonomiques et le
-            système anti-fuites breveté. Chaque pièce a été pensée pour
-            durer, tourner vite et épouser le jeu du musicien.
+          <BlocCorps numero="02" titre="Innovations">
+            Corps et pavillon en carbone ultra-léger. Pistons en inox pleine
+            masse, barillet dédié au 4ᵉ système, branche d&rsquo;accord et
+            embout de réglage, uniques.
           </BlocCorps>
-          <BlocCorps titre="PASSION">
-            Une équipe entièrement dédiée, des ouvriers qualifiés, un
-            savoir-faire artisanal. Au cœur de la manufacture Sousaphone,
-            au milieu des montagnes, au cœur de la musique — pour vous.
+          <BlocCorps numero="03" titre="Passion">
+            Une équipe entièrement dédiée à la qualité musicale, au confort de
+            jeu et à la musique pour tous.
           </BlocCorps>
         </div>
       </SectionEditoriale>
@@ -323,27 +356,28 @@ export default function AccueilPage() {
           puis les deux attributs iconés (sur mesure, fait main)
           présents sur la maquette. */}
       <SectionEditoriale titreAria="titre-pieces-uniques">
-        <EtiquetteDoree>SC SOUSAPHONE CARBON</EtiquetteDoree>
+        <EtiquetteDoree>FABRIQUÉ EN FRANCE</EtiquetteDoree>
         <TitreSection id="titre-pieces-uniques">
           Des pièces uniques,
           <br />
           assemblées à la main.
         </TitreSection>
         <ParagrapheSection>
-          Nos instruments sont faits main et chaque exemplaire représente
-          l&rsquo;aboutissement de notre engagement envers l&rsquo;excellence.
-          Chaque instrument est une création unique, avec des
-          caractéristiques spécifiques. Une fabrication en magnésium, une
-          structure robuste et une finition soignée en font des
-          instruments d&rsquo;exception.
+          Nous fabriquons nos pièces et chaque sousaphone prend forme à travers
+          une succession de gestes précis. Une fabrication patiente qui garantit
+          résistance, équilibre, robustesse et propriétés acoustiques
+          d&rsquo;exception.
         </ParagrapheSection>
         <div className="mt-12 space-y-8">
           <AttributIcone Icone={IconeMesures} titre="SUR MESURE">
-            Chaque Sousaphone Carbon est réalisé aux mesures du musicien.
+            Chaque pièce est fabriquée dans nos ateliers en France.
           </AttributIcone>
           <AttributIcone Icone={IconeFaitMain} titre="FAIT MAIN">
-            Assemblé et ajusté à la main, pièce par pièce, dans notre
-            atelier.
+            Chaque instrument est assemblé pièce par pièce, avec le plus grand
+            soin.
+          </AttributIcone>
+          <AttributIcone Icone={IconeCleAnglaise} titre="CONTRÔLE INDIVIDUEL">
+            Chaque instrument est contrôlé et réglé individuellement en atelier.
           </AttributIcone>
         </div>
       </SectionEditoriale>
@@ -351,21 +385,21 @@ export default function AccueilPage() {
       {/* Équipe : très grand titre serif, paragraphe d&rsquo;intro puis
           les cinq noms empilés, séparés par un filet doré. */}
       <SectionEditoriale titreAria="titre-equipe">
+        <EtiquetteDoree>UN TRAVAIL D&rsquo;ÉQUIPE</EtiquetteDoree>
         <TitreSection id="titre-equipe">
           Les mains derrière
           <br />
           l&rsquo;innovation.
         </TitreSection>
         <ParagrapheSection>
-          Dans notre quête de l&rsquo;excellence, chaque membre de notre
-          équipe joue un rôle crucial. Voici ceux qui font de Sousaphone
-          Carbon une réalité.
+          Cinq talents, une même ambition : repousser les limites de
+          l&rsquo;instrument.
         </ParagrapheSection>
         <ul className="mt-12 space-y-6">
           {EQUIPE.map((nom) => (
             <li
               key={nom}
-              className="border-t border-[#C9A96A]/40 pt-4 font-display text-xl min-[640px]:text-2xl text-white"
+              className="border-t border-[#C9A96A]/40 pt-4 font-display font-medium text-xl min-[640px]:text-2xl text-white"
             >
               {nom}
             </li>
@@ -379,12 +413,11 @@ export default function AccueilPage() {
       <SectionEditoriale titreAria="titre-final">
         <EtiquetteDoree>SC SOUSAPHONE CARBON</EtiquetteDoree>
         <TitreSection id="titre-final">
-          Un instrument d&rsquo;exception, pensé pour les musiciens
-          exigeants.
+          Un instrument d&rsquo;exception, pensé pour les musiciens exigeants.
         </TitreSection>
         <ParagrapheSection>
-          Découvrez comment le Sousaphone Carbon peut devenir votre
-          partenaire, pour commencer une aventure musicale unique.
+          Découvrez comment le Sousaphone Carbon peut devenir votre partenaire,
+          pour commencer une aventure musicale unique.
         </ParagrapheSection>
       </SectionEditoriale>
     </main>

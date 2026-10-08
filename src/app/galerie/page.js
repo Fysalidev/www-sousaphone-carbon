@@ -1,6 +1,6 @@
 export const metadata = {
   title: "Galerie",
-  description: "Photos de sousophones et de fanfares.",
+  description: "Photos de sousaphones et de fanfares.",
 };
 
 export default function GaleriePage() {

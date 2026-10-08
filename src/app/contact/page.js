@@ -1,6 +1,7 @@
 export const metadata = {
   title: "Contact",
-  description: "Contactez la fanfare pour un concert ou une question.",
+  description:
+    "Contactez l'atelier pour toute question sur nos sousaphones en carbone.",
 };
 
 export default function ContactPage() {

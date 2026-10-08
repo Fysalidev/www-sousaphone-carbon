@@ -75,11 +75,7 @@ export default function Footer() {
             </li>
             {LIENS.map(({ href, label }) => (
               <li key={href}>
-                <LienMenu
-                  href={href}
-                  label={label}
-                  actif={pathname === href}
-                />
+                <LienMenu href={href} label={label} actif={pathname === href} />
               </li>
             ))}
 
