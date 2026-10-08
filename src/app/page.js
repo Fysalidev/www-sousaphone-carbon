@@ -313,7 +313,7 @@ export default function AccueilPage() {
           visuelle entre les blocs de texte. */}
       <section
         aria-label="Le Sousaphone Carbon en situation de jeu"
-        className="relative h-96 min-[640px]:h-[28rem] min-[1024px]:h-[32rem]"
+        className="relative h-96 min-[640px]:h-112 min-[1024px]:h-128"
       >
         <Image
           src="/menu-fond.webp"
