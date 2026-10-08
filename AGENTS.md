@@ -8,8 +8,8 @@
 - Pousser la branche tôt : chaque push génère une preview Vercel.
   Le rendu se valide sur cette preview avant tout merge.
 - Committer librement au fil de la session, avec le message
-  `dev-MMDD-Session | n` (n incrémenté : `dev-1008-Session | 1`,
-  `dev-1008-Session | 2`, ...).
+  `n | description` (n incrémenté : `1 | Accueil | Hero | Overlay`,
+  `2 | Docs | Convention de commits`, ...).
 - En fin de session : pousser la branche puis ouvrir une Pull Request
   vers `main` (la branche est protégée : le merge se fait par PR sur
   GitHub, en merge commit — pas squash — pour garder les commits de
