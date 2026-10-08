@@ -277,13 +277,13 @@ export default function AccueilPage() {
             la légèreté en plus
           </h1>
         </div>
-        {/* Photo du sousaphone Test.jpg (600×1141, fond noir) : le bloc
-            (flex-1, plancher min-h-48) absorbe la hauteur restante
-            de l'écran ; object-contain montre l'instrument entier.
+        {/* Photos du sousaphone, deux cadrages pour deux dispositions :
+            Test.jpg (600×1141, portrait) en empilé mobile — l'appareil
+            en main et la photo partagent l'orientation verticale ;
+            sousa43.jpg (1521×1141, paysage 4:3) en colonne desktop.
             Fonte dans le fond de section teinté : mix-blend-screen
-            (les zones sombres de l'image laissent passer le fond)
-            et un masque limité aux seuls bords haut/bas de l'image
-            (fondu sur ~10 %). */}
+            (les zones sombres laissent passer le fond) et un masque
+            limité aux seuls bords haut/bas (fondu sur ~10 %). */}
         <div className="hero-entree hero-photo relative mt-6 min-h-48 flex-1 w-full [animation-delay:450ms]">
           <Image
             src="/Test.jpg"
@@ -291,7 +291,15 @@ export default function AccueilPage() {
             fill
             priority
             sizes="100vw"
-            className="object-contain object-center mix-blend-screen mask-[linear-gradient(to_bottom,transparent_2%,black_10%,black_90%,transparent_98%)]"
+            className="object-contain object-center mix-blend-screen mask-[linear-gradient(to_bottom,transparent_2%,black_10%,black_90%,transparent_98%)] min-[768px]:hidden"
+          />
+          <Image
+            src="/sousa34.jpg"
+            alt="Sousaphone en laiton sur fond sombre"
+            fill
+            priority
+            sizes="45vw"
+            className="hidden object-contain object-center mix-blend-screen mask-[linear-gradient(to_bottom,transparent_2%,black_10%,black_90%,transparent_98%)] min-[768px]:block"
           />
         </div>
         <div className="hero-bas flex flex-col items-center px-6 pb-10">

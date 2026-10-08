@@ -202,6 +202,30 @@ body {
   }
 }
 
+/* Hero empilé, mobile (< 48rem) : Test.jpg est élancée et porte du
+   vide autour de l'instrument — on garantit au bloc photo la
+   moitié de l'écran (plancher 50svh) et on allège paddings et
+   marges du texte pour financer la différence : le hero dépasse
+   légèrement la hauteur d'écran, un léger défilement naturel sur
+   mobile. Les écrans bas gardent les paliers de compression
+   ci-dessous. Hors @layer : prime sur les utilitaires. */
+@media (max-width: 47.99rem) {
+  .hero-photo {
+    min-height: 50svh;
+  }
+  .hero-haut {
+    padding-top: 2rem;
+  }
+  .hero-bas {
+    padding-bottom: 2rem;
+  }
+  .hero-promesse,
+  .hero-metrics,
+  .hero-bouton {
+    margin-top: 1rem;
+  }
+}
+
 /* Hero, écrans courts : paliers de compression verticale pour que
    toute la section tienne dans la hauteur d'écran restante après le
    header. Ces règles sont hors @layer : elles priment sur les
