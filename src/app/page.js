@@ -22,7 +22,7 @@ export const metadata = {
 
 // ——— Hero ———
 
-// Pilule « Découvrir l'instrument » : plein or, texte noir, inversion au
+// Pilule « Sousaphone Carbon » : plein or, texte noir, inversion au
 // survol. `classe` porte l'espacement et l'animation d'entrée ;
 // `hero-bouton` le palier de compression sur écrans courts (globals.css).
 function BoutonDecouvrir({ classe = "" }) {
@@ -31,7 +31,7 @@ function BoutonDecouvrir({ classe = "" }) {
       href="/instrument"
       className={`hero-bouton inline-flex items-center gap-3 rounded-full border border-[#C9A96A] bg-[#C9A96A] px-8 py-4 text-xs min-[1555px]:text-sm font-bold tracking-[0.25em] text-black transition-colors hover:bg-black hover:text-[#C9A96A] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white ${classe}`}
     >
-      DÉCOUVRIR L&rsquo;INSTRUMENT
+      SOUSAPHONE CARBON
       <span aria-hidden="true">&rarr;</span>
     </Link>
   );
@@ -277,7 +277,7 @@ export default function AccueilPage() {
             la légèreté en plus
           </h1>
         </div>
-        {/* Photo du sousaphone soussa-1 (900×1268, fond noir) : le bloc
+        {/* Photo du sousaphone Test.jpg (600×1141, fond noir) : le bloc
             (flex-1, plancher min-h-48) absorbe la hauteur restante
             de l'écran ; object-contain montre l'instrument entier.
             Fonte dans le fond de section teinté : mix-blend-screen
@@ -286,7 +286,7 @@ export default function AccueilPage() {
             (fondu sur ~10 %). */}
         <div className="hero-entree hero-photo relative mt-6 min-h-48 flex-1 w-full [animation-delay:450ms]">
           <Image
-            src="/soussa-1.webp"
+            src="/Test.jpg"
             alt="Sousaphone en laiton sur fond sombre"
             fill
             priority
