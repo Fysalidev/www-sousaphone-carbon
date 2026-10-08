@@ -73,11 +73,11 @@ body {
        colonne trop large. Texte à droite (60 %). */
     grid-template-columns: minmax(0, 2fr) minmax(0, 3fr);
     column-gap: 0.5rem;
-    /* Zone de contenu plafonnée à 78rem et centrée : au-delà, les
+    /* Zone de contenu plafonnée à 90rem et centrée : au-delà, les
        marges latérales grandissent au lieu que les colonnes ne
        s'étalent jusqu'aux bords. Le fond doré du hero, porté par
        la section, garde toute la largeur d'écran. */
-    padding-inline: max(2.5rem, calc((100% - 78rem) / 2));
+    padding-inline: max(2.5rem, calc((100% - 90rem) / 2));
     /* Deux rangées-tampons (1fr) encadrent le groupe de texte :
      celui-ci est toujours centré verticalement, comme l'image
      (plafonnée et centrée) — leurs centres restent alignés
@@ -101,11 +101,10 @@ body {
   .hero-photo {
     grid-area: photo;
     margin-top: 0;
-    /* Hauteur fixée : l'image est plafonnée à 40rem (640px) et
-       centrée verticalement dans sa zone — elle ne grandit plus
-       indéfiniment avec les grands écrans ; sur les écrans plus
-       courts, min() la ramène à la hauteur disponible. */
-    height: min(100%, 40rem);
+    /* Hauteur fixée : l'image est plafonnée à 48rem (768px) et
+       centrée verticalement dans sa zone — sur les écrans bas,
+       min() la ramène à la hauteur disponible. */
+    height: min(100%, 48rem);
     align-self: center;
   }
   .hero-bas {
@@ -117,10 +116,27 @@ body {
        par défaut), l'espace restant s'accumule sous le bouton — la
        photo, elle, garde toute la hauteur. */
   }
-  /* Le bouton porte `self-center` par défaut : aligné à gauche lui
-     aussi, comme le reste de la colonne. */
+  /* Le bouton reprend son centrage d'origine : l'utilitaire
+     `self-center` du JSX s'applique à nouveau, sans surcharge
+     d'alignement ici. */
+  /* Bouton aligné à droite sur la mesure du texte : son bord
+     droit épouse celui de la promesse (max-w-xl = 36rem, puis
+     42rem à 1555px et 48rem à 1920px — mêmes paliers que le JSX).
+     margin-right = largeur colonne − mesure : 0 quand la colonne
+     est plus étroite que la mesure. */
   .hero-bouton {
-    align-self: flex-start;
+    align-self: flex-end;
+    margin-right: max(0px, calc(100% - 36rem));
+  }
+  @media (min-width: 96.875rem) {
+    .hero-bouton {
+      margin-right: max(0px, calc(100% - 42rem));
+    }
+  }
+  @media (min-width: 120rem) {
+    .hero-bouton {
+      margin-right: max(0px, calc(100% - 48rem));
+    }
   }
   /* Typographie fluide : clamp() remplace les paliers fixes (les
      utilitaires text-4xl→7xl du JSX restent actifs sous 48rem,
@@ -130,13 +146,13 @@ body {
      étroite que l'écran, les paliers calés sur l'écran entier
      donnaient des corps trop grands en colonne. */
   .hero-titre {
-    font-size: clamp(2.25rem, 1.2rem + 2vw, 4rem);
+    font-size: clamp(2.25rem, 1.2rem + 2vw, 4.5rem);
   }
   .hero-promesse {
-    font-size: clamp(1rem, 0.9rem + 0.2vw, 1.25rem);
+    font-size: clamp(1rem, 0.9rem + 0.2vw, 1.375rem);
   }
   .hero-stat-valeur {
-    font-size: clamp(1.5rem, 1.1rem + 0.6vw, 2.5rem);
+    font-size: clamp(1.5rem, 1.1rem + 0.6vw, 3rem);
   }
   .hero-haut p.hero-entree {
     font-size: clamp(0.625rem, 0.58rem + 0.08vw, 0.875rem);
@@ -159,6 +175,30 @@ body {
   }
   .hero-bouton {
     margin-top: 2.5rem;
+  }
+}
+
+/* Deux colonnes, très grands écrans (≥ 1920px) : la zone de
+   contenu s'élargit à 100rem, l'image reprend toute la hauteur
+   disponible (son plafond ne servait qu'à éviter l'étirement
+   démesuré des écrans moyens — ici, plus la place est grande,
+   plus l'instrument doit en profiter), et la typographie monte
+   d'un cran pour tenir la scène. Hors @layer. */
+@media (min-width: 120rem) {
+  .hero {
+    padding-inline: max(2.5rem, calc((100% - 100rem) / 2));
+  }
+  .hero-photo {
+    height: 100%;
+  }
+  .hero-titre {
+    font-size: clamp(3.5rem, 2rem + 2vw, 5.5rem);
+  }
+  .hero-promesse {
+    font-size: 1.375rem;
+  }
+  .hero-stat-valeur {
+    font-size: 2.75rem;
   }
 }
 
