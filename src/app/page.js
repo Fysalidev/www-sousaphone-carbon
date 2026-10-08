@@ -22,7 +22,7 @@ export const metadata = {
 
 // ——— Hero ———
 
-// Pilule « Découvrir l'instrument » : plein or, texte noir, inversion au
+// Pilule « Sousaphone Carbon » : plein or, texte noir, inversion au
 // survol. `classe` porte l'espacement et l'animation d'entrée ;
 // `hero-bouton` le palier de compression sur écrans courts (globals.css).
 function BoutonDecouvrir({ classe = "" }) {
@@ -31,7 +31,7 @@ function BoutonDecouvrir({ classe = "" }) {
       href="/instrument"
       className={`hero-bouton inline-flex items-center gap-3 rounded-full border border-[#C9A96A] bg-[#C9A96A] px-8 py-4 text-xs min-[1555px]:text-sm font-bold tracking-[0.25em] text-black transition-colors hover:bg-black hover:text-[#C9A96A] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white ${classe}`}
     >
-      DÉCOUVRIR L&rsquo;INSTRUMENT
+      SOUSAPHONE CARBON
       <span aria-hidden="true">&rarr;</span>
     </Link>
   );
@@ -257,10 +257,12 @@ export default function AccueilPage() {
           trois chiffres clés et appel à l'action, centrés. Le
           dégradé doré haut/bas teinte tout le hero. Sur les écrans
           courts, les paliers .hero-* (globals.css) compressent la
-          typo et les espacements pour tenir dans la hauteur. */}
+          typo et les espacements pour tenir dans la hauteur ; à
+          partir de 768px de large, la classe .hero bascule en deux
+          colonnes : photo à gauche, texte à droite, collés. */}
       <section
         aria-labelledby="titre-hero"
-        className="flex flex-col min-h-[calc(100svh-var(--hauteur-barre-header))] text-center bg-linear-to-b from-[#C9A96A]/10 via-transparent to-[#C9A96A]/10"
+        className="hero flex flex-col min-h-[calc(100svh-var(--hauteur-barre-header))] text-center bg-linear-to-b from-[#C9A96A]/10 via-transparent to-[#C9A96A]/10"
       >
         <div className="hero-haut flex flex-col items-center px-6 pt-12">
           <p className="hero-entree text-[10px] min-[768px]:text-xs min-[1555px]:text-sm font-bold tracking-[0.25em] text-[#C9A96A] [animation-delay:150ms]">
@@ -275,21 +277,29 @@ export default function AccueilPage() {
             la légèreté en plus
           </h1>
         </div>
-        {/* Photo du sousaphone soussa-1 (900×1268, fond noir) : le bloc
-            (flex-1, plancher min-h-48) absorbe la hauteur restante
-            de l'écran ; object-contain montre l'instrument entier.
+        {/* Photos du sousaphone, deux cadrages pour deux dispositions :
+            Test.jpg (600×1141, portrait) en empilé mobile — l'appareil
+            en main et la photo partagent l'orientation verticale ;
+            sousa43.jpg (1521×1141, paysage 4:3) en colonne desktop.
             Fonte dans le fond de section teinté : mix-blend-screen
-            (les zones sombres de l'image laissent passer le fond)
-            et un masque limité aux seuls bords haut/bas de l'image
-            (fondu sur ~10 %). */}
+            (les zones sombres laissent passer le fond) et un masque
+            limité aux seuls bords haut/bas (fondu sur ~10 %). */}
         <div className="hero-entree hero-photo relative mt-6 min-h-48 flex-1 w-full [animation-delay:450ms]">
           <Image
-            src="/soussa-1.webp"
+            src="/Test.jpg"
             alt="Sousaphone en laiton sur fond sombre"
             fill
             priority
             sizes="100vw"
-            className="object-contain object-center mix-blend-screen mask-[linear-gradient(to_bottom,transparent_2%,black_10%,black_90%,transparent_98%)]"
+            className="object-contain object-center mix-blend-screen mask-[linear-gradient(to_bottom,transparent_2%,black_10%,black_90%,transparent_98%)] min-[768px]:hidden"
+          />
+          <Image
+            src="/sousa34.jpg"
+            alt="Sousaphone en laiton sur fond sombre"
+            fill
+            priority
+            sizes="45vw"
+            className="hidden object-contain object-center mix-blend-screen mask-[linear-gradient(to_bottom,transparent_2%,black_10%,black_90%,transparent_98%)] min-[768px]:block"
           />
         </div>
         <div className="hero-bas flex flex-col items-center px-6 pb-10">

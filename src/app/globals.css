@@ -4,14 +4,14 @@
   --background: #0a0a0a;
   --foreground: #ffffff;
   /* Hauteur rendue de la barre du header : pt-10 + logo h-8 + pb-5 =
-     92px ; à partir de 680px le logo passe en h-12 et le badge FRANCE
+     92px ; à partir de 768px le logo passe en h-12 et le badge FRANCE
      se glisse dessous (h-12 + gap-1 + 10px avec leading-none), soit
      40 + 48 + 4 + 10 + 20 = 122px. Le hero s'en sert pour occuper
      exactement la hauteur d'écran restante. */
   --hauteur-barre-header: 92px;
 }
 
-@media (min-width: 680px) {
+@media (min-width: 768px) {
   :root {
     --hauteur-barre-header: 122px;
   }
@@ -57,39 +57,204 @@ body {
   }
 }
 
-/* Hero, écran portable (≥ 48rem de large, ≤ 56rem / 900px de haut —
-   MacBook Air et portables typiques) : compression modérée du
-   texte pour rendre de la hauteur à la photo. En empilé, le texte
-   consomme ~480px et n'en laisse que ~180 à l'image ; ce palier
-   ramène la photo à ~270px, avec un plancher à 14rem. Les paliers
-   plus bas ci-dessous resserrent encore. Hors @layer : prime sur
-   les utilitaires Tailwind. */
-@media (min-width: 48rem) and (max-height: 56rem) {
+/* Hero, écran large (≥ 48rem / 768px) : la disposition bascule en
+   deux colonnes — photo à gauche occupant toute la hauteur, texte
+   à droite collé à la photo (aligné côté gauche de sa colonne).
+   L'instrument, portrait, est limité par la hauteur : en colonne
+   il double sa taille sur les écrans bas. En dessous de 48rem, le
+   hero empilé reprend la main. Hors @layer : prime sur les
+   utilitaires Tailwind. */
+@media (min-width: 48rem) {
+  .hero {
+    display: grid;
+    /* Photo à gauche (40 %) — colonne calée sur la largeur réelle
+       de l'instrument (portrait ≈ 0,71 × hauteur du hero) : elle
+       remplit sa colonne au lieu de flotter au milieu d'une
+       colonne trop large. Texte à droite (60 %). */
+    grid-template-columns: minmax(0, 2fr) minmax(0, 3fr);
+    column-gap: 0.5rem;
+    /* Zone de contenu plafonnée à 90rem et centrée : au-delà, les
+       marges latérales grandissent au lieu que les colonnes ne
+       s'étalent jusqu'aux bords. Le fond doré du hero, porté par
+       la section, garde toute la largeur d'écran. */
+    padding-inline: max(2.5rem, calc((100% - 90rem) / 2));
+    /* Deux rangées-tampons (1fr) encadrent le groupe de texte :
+     celui-ci est toujours centré verticalement, comme l'image
+     (plafonnée et centrée) — leurs centres restent alignés
+     quelle que soit la hauteur d'écran. */
+    grid-template-rows: minmax(0, 1fr) auto auto minmax(0, 1fr);
+    grid-template-areas:
+      "photo ."
+      "photo haut"
+      "photo bas"
+      "photo .";
+  }
   .hero-haut {
-    padding-top: 1.5rem;
-  }
-  .hero-titre {
-    font-size: 2.25rem;
-  }
-  .hero-promesse {
-    margin-top: 0.75rem;
-    font-size: 0.875rem;
+    grid-area: haut;
+    /* Groupe centré par les rangées-tampons de la grille : plus de
+       décalage calculé — le pt-12 par défaut est neutralisé. */
+    padding-top: 0;
+    padding-inline: 0;
+    align-items: flex-start;
+    text-align: left;
   }
   .hero-photo {
-    margin-top: 0.75rem;
-    min-height: 18rem;
-  }
-  .hero-metrics {
-    margin-top: 0.75rem;
-  }
-  .hero-stat-valeur {
-    font-size: 1.5rem;
-  }
-  .hero-bouton {
-    padding-block: 0.5rem;
+    grid-area: photo;
+    margin-top: 0;
+    /* Hauteur fixée : l'image est plafonnée à 48rem (768px) et
+       centrée verticalement dans sa zone — sur les écrans bas,
+       min() la ramène à la hauteur disponible. */
+    height: min(100%, 48rem);
+    align-self: center;
   }
   .hero-bas {
-    padding-bottom: 1.5rem;
+    grid-area: bas;
+    padding-inline: 0;
+    align-items: flex-start;
+    text-align: left;
+    /* Groupe compact : le bloc suit le titre au plus près (flex-start
+       par défaut), l'espace restant s'accumule sous le bouton — la
+       photo, elle, garde toute la hauteur. */
+  }
+  /* Le bouton reprend son centrage d'origine : l'utilitaire
+     `self-center` du JSX s'applique à nouveau, sans surcharge
+     d'alignement ici. */
+  /* Bouton aligné à droite sur la mesure du texte : son bord
+     droit épouse celui de la promesse (max-w-xl = 36rem, puis
+     42rem à 1555px et 48rem à 1920px — mêmes paliers que le JSX).
+     margin-right = largeur colonne − mesure : 0 quand la colonne
+     est plus étroite que la mesure. */
+  .hero-bouton {
+    align-self: flex-end;
+    margin-right: max(0px, calc(100% - 36rem));
+  }
+  @media (min-width: 96.875rem) {
+    .hero-bouton {
+      margin-right: max(0px, calc(100% - 42rem));
+    }
+  }
+  @media (min-width: 120rem) {
+    .hero-bouton {
+      margin-right: max(0px, calc(100% - 48rem));
+    }
+  }
+  /* Typographie fluide : clamp() remplace les paliers fixes (les
+     utilitaires text-4xl→7xl du JSX restent actifs sous 48rem,
+     en empilé). Le titre, la promesse, les valeurs et l'accroche
+     grandissent en continu avec la largeur de la fenêtre au lieu
+     de sauter à 1024/1440/1555px — la colonne texte est plus
+     étroite que l'écran, les paliers calés sur l'écran entier
+     donnaient des corps trop grands en colonne. */
+  .hero-titre {
+    font-size: clamp(2.25rem, 1.2rem + 2vw, 4.5rem);
+  }
+  .hero-promesse {
+    font-size: clamp(1rem, 0.9rem + 0.2vw, 1.375rem);
+  }
+  .hero-stat-valeur {
+    /* Minimum calé sur le palier mobile text-3xl (1.875rem) : la
+       valeur ne rétrécit pas au basculement deux colonnes — la
+       formule reprend la même pente (0.6vw) depuis 768px. */
+    font-size: clamp(1.875rem, 1.5875rem + 0.6vw, 3rem);
+  }
+  .hero-haut p.hero-entree {
+    font-size: clamp(0.625rem, 0.58rem + 0.08vw, 0.875rem);
+  }
+}
+
+/* Deux colonnes, écran assez haut (≥ 44rem) : espacements du bloc
+   texte — serré sous le titre, plus généreux entre promesse,
+   chiffres et bouton. Les écrans bas gardent les paliers de
+   compression ci-dessous. Hors @layer : prime sur mt-*. */
+@media (min-width: 48rem) and (min-height: 44rem) {
+  .hero-titre {
+    margin-top: 1.5rem;
+  }
+  .hero-promesse {
+    margin-top: 1.5rem;
+  }
+  .hero-metrics {
+    margin-top: 2.5rem;
+  }
+  .hero-bouton {
+    margin-top: 2.5rem;
+  }
+}
+
+/* Deux colonnes, très grands écrans (≥ 1920px) : la zone de
+   contenu s'élargit à 100rem, l'image reprend toute la hauteur
+   disponible (son plafond ne servait qu'à éviter l'étirement
+   démesuré des écrans moyens — ici, plus la place est grande,
+   plus l'instrument doit en profiter), et la typographie monte
+   d'un cran pour tenir la scène. Hors @layer. */
+@media (min-width: 120rem) {
+  .hero {
+    padding-inline: max(2.5rem, calc((100% - 100rem) / 2));
+  }
+  .hero-photo {
+    height: 100%;
+  }
+  .hero-titre {
+    font-size: clamp(3.5rem, 2rem + 2vw, 5.5rem);
+  }
+  .hero-promesse {
+    font-size: 1.375rem;
+  }
+  .hero-stat-valeur {
+    font-size: 2.75rem;
+  }
+}
+
+/* Hero empilé, mobile (< 48rem) : Test.jpg est élancée et porte du
+   vide autour de l'instrument — la photo garde un plancher à 45 %
+   de l'écran et les deux blocs de texte chevauchent les bords de
+   l'image, fondu par le masque (titre sur le haut, metrics sur le
+   bas), ce qui finance la hauteur de texte : sur les appareils
+   hauts le hero tient à l'écran, sur les plus bas un léger
+   défilement naturel reste possible. Les écrans bas gardent les
+   paliers de compression ci-dessous. Hors @layer : prime sur les
+   utilitaires. */
+@media (max-width: 47.99rem) {
+  .hero-photo {
+    /* Plancher à 45 % de l'écran, pas la moitié : sur les appareils
+       où la pile de texte est trop haute, le plancher 50 % forçait
+       le hero hors de l'écran. Plus bas, il ne change rien aux
+       appareils qui ont de la marge — la photo, flex-1, regonfle
+       pour occuper tout l'espace restant ; il ne sert que de garde-
+       fou quand le texte empiète. */
+    min-height: 45svh;
+    /* La photo remonte sous le titre : son haut est déjà fondu
+       par le masque (transparent 2 % → opaque 10 %), le titre
+       s'y pose en légéreté. */
+    margin-top: -2rem;
+  }
+  .hero-haut {
+    padding-top: 2rem;
+    /* Le titre chevauche la photo : il doit se peindre au-dessus
+       d'elle (relative + z-index, la photo étant elle-même
+       relative et plus loin dans le flux). */
+    position: relative;
+    z-index: 1;
+  }
+  .hero-bas {
+    padding-bottom: 2rem;
+    /* Metrics en overlay sur le bas de la photo : c'est le groupe
+       texte entier qui remonte (marge négative), les metrics
+       passant en tête du groupe via order — seuls eux chevauchent
+       l'image, dont le bas est déjà fondu par le masque ; la
+       promesse et le bouton restent sous la photo. relative :
+       sans lui, la photo (elle aussi relative) se peindrait par-
+       dessus le texte. */
+    position: relative;
+    margin-top: -4rem;
+  }
+  .hero-metrics {
+    order: -1;
+    margin-top: 0;
+  }
+  .hero-promesse,
+  .hero-bouton {
+    margin-top: 1rem;
   }
 }
 

@@ -97,14 +97,14 @@ function LogoHeader() {
   return (
     <Link
       href="/"
-      className="flex items-center gap-2.5 overflow-hidden rounded-xs focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white min-[680px]:flex-col min-[680px]:items-start min-[680px]:gap-1"
+      className="flex items-center gap-2.5 overflow-hidden rounded-xs focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white min-[768px]:flex-col min-[768px]:items-start min-[768px]:gap-1"
     >
       <Image
         src="/logo-header-sm.webp"
         alt="Sousaphone Carbon"
         width={68}
         height={32}
-        className="h-8 w-auto min-[680px]:hidden"
+        className="h-8 w-auto min-[768px]:hidden"
         priority
       />
       <Image
@@ -112,7 +112,7 @@ function LogoHeader() {
         alt="Sousaphone Carbon"
         width={185}
         height={48}
-        className="hidden h-12 w-auto min-[680px]:block"
+        className="hidden h-12 w-auto min-[768px]:block"
       />
       <BadgeFrance />
     </Link>
@@ -135,18 +135,46 @@ function LienDesktop({ href, label, actif }) {
   );
 }
 
+// Bouton « Contacter » : pillule or du hero déclinée pour le header —
+// plein or, texte noir, inversion au survol ; sur la page contact,
+// il s'inverse (contour or sur noir) pour marquer la page active.
+function BoutonContacter({ actif }) {
+  return (
+    <Link
+      href="/contact"
+      aria-current={actif ? "page" : undefined}
+      className={`rounded-full px-5 py-2.5 text-xs font-bold tracking-[0.25em] transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white ${
+        actif
+          ? "border border-[#C9A96A] text-[#C9A96A]"
+          : "bg-[#C9A96A] text-black hover:bg-black hover:text-[#C9A96A]"
+      }`}
+    >
+      CONTACTER
+    </Link>
+  );
+}
+
 function NavDesktop({ pathname }) {
   return (
     <nav
       aria-label="Navigation principale"
-      className="hidden items-center min-[680px]:flex"
+      className="hidden items-center min-[768px]:flex"
     >
       <ul className="flex items-center gap-8">
-        {LIENS.map(({ href, label }) => (
-          <li key={href}>
-            <LienDesktop href={href} label={label} actif={pathname === href} />
-          </li>
-        ))}
+        {LIENS.filter(({ href }) => href !== "/contact").map(
+          ({ href, label }) => (
+            <li key={href}>
+              <LienDesktop
+                href={href}
+                label={label}
+                actif={pathname === href}
+              />
+            </li>
+          ),
+        )}
+        <li>
+          <BoutonContacter actif={pathname === "/contact"} />
+        </li>
       </ul>
     </nav>
   );
@@ -340,7 +368,7 @@ export default function Header() {
       }
     };
 
-    const mediaDesktop = window.matchMedia("(min-width: 680px)");
+    const mediaDesktop = window.matchMedia("(min-width: 768px)");
     const surEcranLarge = (e) => {
       if (e.matches) setOuvert(false);
     };
@@ -377,7 +405,7 @@ export default function Header() {
           onClick={() => setOuvert((v) => !v)}
           aria-expanded={ouvert}
           aria-label={ouvert ? "Fermer le menu" : "Ouvrir le menu"}
-          className={`${CLASSES_BOUTON_ROND} min-[680px]:hidden`}
+          className={`${CLASSES_BOUTON_ROND} min-[768px]:hidden`}
         >
           {ouvert ? <IconeCroix epaisseur={2} /> : <IconeBurger />}
         </button>
