@@ -309,17 +309,6 @@ body {
     .hero-photo {
       margin-top: -2rem;
     }
-    /* Adopté — l'instrument remplit toute la largeur de la boîte
-       (cover au lieu de contain) : l'image portrait (600×1141)
-       remplit 375px de large pour ~340px de haut, recadrée de
-       ~370px au total ; l'ancrage haut garde le pavillon entier,
-       la coupe se reporte sur le bas du corps — fondu du masque et
-       zone de l'overlay metrics. Ajustable en valeur numérique si
-       le cadrage doit descendre sur le corps (object-position). */
-    .hero-photo img {
-      object-fit: cover;
-      object-position: top;
-    }
   }
 }
 
