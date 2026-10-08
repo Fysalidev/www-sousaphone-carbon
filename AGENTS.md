@@ -10,13 +10,14 @@
 - Committer librement au fil de la session, avec le message
   `dev-MMDD-Session | n` (n incrémenté : `dev-1008-Session | 1`,
   `dev-1008-Session | 2`, ...).
-- En fin de session : `git switch main && git merge --no-ff <branche>`
-  — les commits intermédiaires restent regroupés sous le commit de
-  merge. Squash (`git merge --squash`) seulement si la session ne
-  mérite qu'un seul commit.
-- Supprimer la branche après merge : `git branch -d <branche>` (après
-  un squash, `-D` : le contenu est dans `main` mais git ne peut pas le
-  vérifier) puis `git push origin --delete <branche>`.
+- En fin de session : pousser la branche puis ouvrir une Pull Request
+  vers `main` (la branche est protégée : le merge se fait par PR sur
+  GitHub, en merge commit — pas squash — pour garder les commits de
+  session regroupés).
+- Après merge de la PR : `git switch main && git pull`, puis
+  `git branch -d <branche>`. La branche distante disparaît
+  automatiquement si « Automatically delete head branches » est activé
+  dans les réglages du repo.
 - Une session qui part sur deux sujets sans rapport se scinde en deux
   branches plutôt que de merger un mélange.
 - Les branches mortes sont des pièges : on n'en garde aucune.
