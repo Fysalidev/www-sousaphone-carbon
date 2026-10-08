@@ -206,17 +206,23 @@ body {
 }
 
 /* Hero empilé, mobile (< 48rem) : Test.jpg est élancée et porte du
-   vide autour de l'instrument — on garantit au bloc photo la
-   moitié de l'écran (plancher 50svh) et les deux blocs de texte
-   chevauchent les bords de l'image, fondu par le masque (titre
-   sur le haut, metrics sur le bas), qui finance la différence :
-   le hero dépasse légèrement la hauteur d'écran, un léger
-   défilement naturel sur mobile. Les écrans bas gardent les
+   vide autour de l'instrument — la photo garde un plancher à 45 %
+   de l'écran et les deux blocs de texte chevauchent les bords de
+   l'image, fondu par le masque (titre sur le haut, metrics sur le
+   bas), ce qui finance la hauteur de texte : sur les appareils
+   hauts le hero tient à l'écran, sur les plus bas un léger
+   défilement naturel reste possible. Les écrans bas gardent les
    paliers de compression ci-dessous. Hors @layer : prime sur les
    utilitaires. */
 @media (max-width: 47.99rem) {
   .hero-photo {
-    min-height: 50svh;
+    /* Plancher à 45 % de l'écran, pas la moitié : sur les appareils
+       où la pile de texte est trop haute, le plancher 50 % forçait
+       le hero hors de l'écran. Plus bas, il ne change rien aux
+       appareils qui ont de la marge — la photo, flex-1, regonfle
+       pour occuper tout l'espace restant ; il ne sert que de garde-
+       fou quand le texte empiète. */
+    min-height: 45svh;
     /* La photo remonte sous le titre : son haut est déjà fondu
        par le masque (transparent 2 % → opaque 10 %), le titre
        s'y pose en légéreté. */
