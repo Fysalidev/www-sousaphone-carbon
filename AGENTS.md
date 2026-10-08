@@ -3,9 +3,8 @@
 - `main` est la seule branche longue-vive : elle déploie la prod (Vercel).
   Jamais de force-push dessus.
 - Une branche par session de dev, créée depuis `main` en début de
-  session : `git switch -c dev-MMDD-thème` (ex. `dev-1008-resp-hero`).
-  Le thème dans le nom garde la branche identifiable — une date seule
-  ne dit rien de ce qu'elle contient.
+  session : `git switch -c dev-MMDD-Session` (ex. `dev-1008-Session`,
+  `dev-1008-Session2` si deuxième session du jour).
 - Pousser la branche tôt : chaque push génère une preview Vercel.
   Le rendu se valide sur cette preview avant tout merge.
 - Committer librement au fil de la session.
