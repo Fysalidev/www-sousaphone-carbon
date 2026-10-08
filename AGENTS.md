@@ -7,7 +7,9 @@
   `dev-1008-Session2` si deuxième session du jour).
 - Pousser la branche tôt : chaque push génère une preview Vercel.
   Le rendu se valide sur cette preview avant tout merge.
-- Committer librement au fil de la session.
+- Committer librement au fil de la session, avec le message
+  `dev-MMDD-Session | n` (n incrémenté : `dev-1008-Session | 1`,
+  `dev-1008-Session | 2`, ...).
 - En fin de session : `git switch main && git merge --no-ff <branche>`
   — les commits intermédiaires restent regroupés sous le commit de
   merge. Squash (`git merge --squash`) seulement si la session ne
