@@ -353,8 +353,16 @@ export default function Header() {
     };
   }, [ouvert]);
 
+  // Sur l'accueil, le hero démarre sur un dégradé doré à 10 % (#C9A96A
+  // sur noir = #14110B) : le header prend cette couleur exacte pour
+  // se fondre dans le haut du hero ; les autres pages, qui démarrent
+  // sur du noir pur, gardent le noir.
   return (
-    <header className="sticky top-0 z-30 w-full bg-black">
+    <header
+      className={`sticky top-0 z-30 w-full ${
+        pathname === "/" ? "bg-[#14110B]" : "bg-black"
+      }`}
+    >
       <div
         inert={ouvert}
         className="flex w-full items-center justify-between gap-6 overflow-hidden px-6 pt-10 pb-5"
