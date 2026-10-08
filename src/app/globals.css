@@ -152,7 +152,10 @@ body {
     font-size: clamp(1rem, 0.9rem + 0.2vw, 1.375rem);
   }
   .hero-stat-valeur {
-    font-size: clamp(1.5rem, 1.1rem + 0.6vw, 3rem);
+    /* Minimum calé sur le palier mobile text-3xl (1.875rem) : la
+       valeur ne rétrécit pas au basculement deux colonnes — la
+       formule reprend la même pente (0.6vw) depuis 768px. */
+    font-size: clamp(1.875rem, 1.5875rem + 0.6vw, 3rem);
   }
   .hero-haut p.hero-entree {
     font-size: clamp(0.625rem, 0.58rem + 0.08vw, 0.875rem);
