@@ -21,7 +21,11 @@
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --font-sans: var(--font-montserrat);
-  --font-display: var(--font-bodoni), Georgia, serif;
+  /* Bodoni Moda : serif d'affichage unique du site, servant aussi
+     bien les h1 de pages que les titres de sections et de cartes
+     (font-display et font-serif-carte partagent la pile). */
+  --font-display: var(--font-bodoni), "Bodoni Moda", Georgia, serif;
+  --font-serif-carte: var(--font-bodoni), "Bodoni Moda", Georgia, serif;
   --font-slogan: var(--font-bebas), "Arial Narrow", Arial, sans-serif;
 }
 
@@ -50,5 +54,105 @@ body {
 @media (prefers-reduced-motion: reduce) {
   .hero-entree {
     animation: none;
+  }
+}
+
+/* Hero, écran portable (≥ 48rem de large, ≤ 56rem / 900px de haut —
+   MacBook Air et portables typiques) : compression modérée du
+   texte pour rendre de la hauteur à la photo. En empilé, le texte
+   consomme ~480px et n'en laisse que ~180 à l'image ; ce palier
+   ramène la photo à ~270px, avec un plancher à 14rem. Les paliers
+   plus bas ci-dessous resserrent encore. Hors @layer : prime sur
+   les utilitaires Tailwind. */
+@media (min-width: 48rem) and (max-height: 56rem) {
+  .hero-haut {
+    padding-top: 1.5rem;
+  }
+  .hero-titre {
+    font-size: 2.25rem;
+  }
+  .hero-promesse {
+    margin-top: 0.75rem;
+    font-size: 0.875rem;
+  }
+  .hero-photo {
+    margin-top: 0.75rem;
+    min-height: 18rem;
+  }
+  .hero-metrics {
+    margin-top: 0.75rem;
+  }
+  .hero-stat-valeur {
+    font-size: 1.5rem;
+  }
+  .hero-bouton {
+    padding-block: 0.5rem;
+  }
+  .hero-bas {
+    padding-bottom: 1.5rem;
+  }
+}
+
+/* Hero, écrans courts : paliers de compression verticale pour que
+   toute la section tienne dans la hauteur d'écran restante après le
+   header. Ces règles sont hors @layer : elles priment sur les
+   utilitaires Tailwind, y compris les rampes en largeur (un bureau en
+   fenêtre basse reste large). Deux paliers : ≤ 44rem (portable bas,
+   mobile en paysage) puis ≤ 32rem (mobile en paysage très court). */
+@media (max-height: 44rem) {
+  .hero-haut {
+    padding-top: 1.5rem;
+  }
+  .hero-titre {
+    margin-top: 0.5rem;
+    font-size: 1.5rem;
+  }
+  .hero-photo {
+    margin-top: 0.75rem;
+    min-height: 9rem;
+  }
+  .hero-promesse {
+    margin-top: 0.75rem;
+    font-size: 0.875rem;
+  }
+  .hero-metrics {
+    margin-top: 0.75rem;
+  }
+  .hero-stat-valeur {
+    font-size: 1.25rem;
+  }
+  .hero-stat-legende {
+    margin-top: 0.25rem;
+  }
+  .hero-bouton {
+    padding-block: 0.5rem;
+  }
+  .hero-bas {
+    padding-bottom: 1.5rem;
+  }
+}
+
+@media (max-height: 32rem) {
+  .hero-haut {
+    padding-top: 0.75rem;
+  }
+  .hero-titre {
+    font-size: 1.25rem;
+  }
+  .hero-photo {
+    min-height: 6rem;
+  }
+  .hero-promesse {
+    font-size: 0.75rem;
+  }
+  .hero-stat-valeur {
+    font-size: 1rem;
+  }
+  .hero-bouton {
+    padding-inline: 1.5rem;
+    padding-block: 0.375rem;
+  }
+  .hero-bas {
+    padding-bottom: 0.75rem;
   }
 }

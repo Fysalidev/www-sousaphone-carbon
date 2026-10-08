@@ -8,6 +8,7 @@ const montserrat = Montserrat({
   subsets: ["latin"],
 });
 
+// Bodoni Moda : serif d'affichage unique du site.
 const bodoni = Bodoni_Moda({
   variable: "--font-bodoni",
   subsets: ["latin"],
@@ -21,8 +22,9 @@ const bebasNeue = Bebas_Neue({
 });
 
 export const metadata = {
-  title: "Sousophone Carbon",
-  description: "Sousophones en carbone légers, robustes, fabriqués sur mesure.",
+  title: "Sousaphone Carbon",
+  description:
+    "Sousaphones en carbone légers et robustes, fabriqués sur mesure.",
 };
 
 export default function RootLayout({ children }) {
