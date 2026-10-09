@@ -24,6 +24,7 @@ const LIENS = [
   { href: "/", label: "ACCUEIL" },
   { href: "/instrument", label: "SOUSAPHONE CARBON" },
   { href: "/galerie", label: "GALERIE" },
+  { href: "/contact", label: "CONTACT" },
 ];
 
 export default function Footer() {
