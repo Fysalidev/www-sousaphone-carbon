@@ -1,26 +1,31 @@
 # Flux git
 
-- `main` est la seule branche longue-vive : elle déploie la prod (Vercel).
-  Jamais de force-push dessus.
-- Une branche par session de dev, créée depuis `main` en début de
-  session : `git switch -c dev-MMDD-Session` (ex. `dev-1008-Session`,
-  `dev-1008-Session2` si deuxième session du jour).
+- Un seul projet Vercel : la production suit `main`, chaque push de
+  branche génère une preview. Plus de projet « Test » séparé.
+- Deux branches longues-vives, jamais de force-push dessus : `main`
+  (production) et `dev` (intégration, sans déploiement propre).
+- `main` est la branche par défaut du repo GitHub : c'est la
+  référence visible du projet. Toute PR de travail vise `dev` ;
+  `dev` → `main` est la seule porte vers la production.
+- Une branche par session de dev, créée depuis `dev` en début de
+  session : `dev-MMJJ-A` pour la première session du jour,
+  `dev-MMJJ-B` pour la deuxième, `dev-MMJJ-C` pour la troisième, etc.
 - Pousser la branche tôt : chaque push génère une preview Vercel.
   Le rendu se valide sur cette preview avant tout merge.
 - Committer librement au fil de la session, avec le message
-  `n | description` (n incrémenté : `1 | Accueil | Hero | Overlay`,
+  `n   description` (n incrémenté : `1 | Accueil | Hero | Overlay`,
   `2 | Docs | Convention de commits`, ...).
-- En fin de session : pousser la branche puis ouvrir une Pull Request
-  vers `main` (la branche est protégée : le merge se fait par PR sur
-  GitHub, en merge commit — pas squash — pour garder les commits de
-  session regroupés).
-- Après merge de la PR : `git switch main && git pull`, puis
-  `git branch -d <branche>`. La branche distante disparaît
-  automatiquement si « Automatically delete head branches » est activé
-  dans les réglages du repo.
+- Fin de session : PR vers `dev` → merge. Puis
+  `git switch dev && git pull` et `git branch -d <branche>`.
+- À plusieurs : chaque contributeur pousse sa branche et ouvre une PR
+  vers `dev` (jamais directement vers `main`).
+- Mise en prod : quand `dev` est validé, PR `dev` → `main` → merge
+  → déploie la production. Puis `git switch main && git pull`.
+- Le travail quotidien se fait sur `dev` : les pulls réguliers ne
+  portent que sur `dev` ; `main` ne bouge que par PR de mise en prod.
 - Une session qui part sur deux sujets sans rapport se scinde en deux
   branches plutôt que de merger un mélange.
-- Les branches mortes sont des pièges : on n'en garde aucune.
+- Les branches mortes sont des piéges : on n'en garde aucune.
 
 # Projet
 
