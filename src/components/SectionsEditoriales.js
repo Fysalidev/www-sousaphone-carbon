@@ -44,7 +44,7 @@ export function ParagrapheSection({ children }) {
   );
 }
 
-// Séparateur de sections : logo-inter.png (recadré à la main, le
+// Séparateur de sections : logos/logo-inter.png (recadré à la main, le
 // cadrage final est porté par l'asset), aligné à gauche sur la
 // colonne éditoriale — même structure que SectionEditoriale (px-6
 // pleine largeur, colonne max-w-3xl centrée), pour poser son bord
@@ -59,7 +59,7 @@ export function SeparateurSection() {
     <div aria-hidden="true" className="w-full px-6 py-12 min-[768px]:py-16">
       <div className="mx-auto max-w-3xl">
         <Image
-          src="/logo-inter.png"
+          src="/logos/logo-inter.png"
           alt=""
           width={1750}
           height={698}
