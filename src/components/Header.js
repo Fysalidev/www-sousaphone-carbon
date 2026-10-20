@@ -1,6 +1,6 @@
 "use client";
 
-import { Fragment, useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -15,11 +15,12 @@ import {
   SeparateurDore,
 } from "./MenuCommun";
 
+// Liens de navigation de la section DÉCOUVRIR — le contact n'y
+// figure pas : il a sa propre section ÉCHANGER dans le menu.
 const LIENS = [
   { href: "/", label: "ACCUEIL" },
   { href: "/instrument", label: "SOUSAPHONE CARBON" },
   { href: "/galerie", label: "GALERIE" },
-  { href: "/contact", label: "CONTACT" },
 ];
 
 const COULEUR_INACTIF = "text-white transition-colors hover:text-[#B69660]";
@@ -100,7 +101,7 @@ function LogoHeader() {
       className="flex items-center gap-2.5 overflow-hidden rounded-xs focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white min-[768px]:flex-col min-[768px]:items-start min-[768px]:gap-1"
     >
       <Image
-        src="/logo-header-sm.webp"
+        src="/logos/logo-header-sm.webp"
         alt="Sousaphone Carbon"
         width={68}
         height={32}
@@ -108,7 +109,7 @@ function LogoHeader() {
         priority
       />
       <Image
-        src="/logo-header-lg.webp"
+        src="/logos/logo-header-lg.webp"
         alt="Sousaphone Carbon"
         width={185}
         height={48}
@@ -135,15 +136,16 @@ function LienDesktop({ href, label, actif }) {
   );
 }
 
-// Bouton « Contacter » : pillule or du hero déclinée pour le header —
-// plein or, texte noir, inversion au survol ; sur la page contact,
-// il s'inverse (contour or sur noir) pour marquer la page active.
+// Bouton « Contacter » : le bouton or du hero décliné pour le
+// header — plein or, texte noir, inversion au survol ; sur la page
+// contact, il s'inverse (contour or sur noir) pour marquer la page
+// active. Coins arrondis (rounded-lg) alignés sur le bouton du hero.
 function BoutonContacter({ actif }) {
   return (
     <Link
       href="/contact"
       aria-current={actif ? "page" : undefined}
-      className={`rounded-full px-5 py-2.5 text-xs font-bold tracking-[0.25em] transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white ${
+      className={`rounded-lg px-5 py-2.5 text-xs font-bold tracking-[0.25em] transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white ${
         actif
           ? "border border-[#C9A96A] text-[#C9A96A]"
           : "bg-[#C9A96A] text-black hover:bg-black hover:text-[#C9A96A]"
@@ -161,17 +163,11 @@ function NavDesktop({ pathname }) {
       className="hidden items-center min-[768px]:flex"
     >
       <ul className="flex items-center gap-8">
-        {LIENS.filter(({ href }) => href !== "/contact").map(
-          ({ href, label }) => (
-            <li key={href}>
-              <LienDesktop
-                href={href}
-                label={label}
-                actif={pathname === href}
-              />
-            </li>
-          ),
-        )}
+        {LIENS.map(({ href, label }) => (
+          <li key={href}>
+            <LienDesktop href={href} label={label} actif={pathname === href} />
+          </li>
+        ))}
         <li>
           <BoutonContacter actif={pathname === "/contact"} />
         </li>
@@ -206,7 +202,7 @@ function MenuPleinEcran({ pathname, ouvert, fermer, refDialogue, refFermer }) {
       {fondVisible && (
         <>
           <Image
-            src="/menu-fond.webp"
+            src="/photos/menu-fond.webp"
             alt=""
             fill
             sizes="100vw"
@@ -263,51 +259,49 @@ function MenuPleinEcran({ pathname, ouvert, fermer, refDialogue, refFermer }) {
           >
             <Intertitre>DÉCOUVRIR</Intertitre>
           </li>
-          {LIENS.map(({ href, label }, index) => {
-            const actif = pathname === href;
-            return (
-              <Fragment key={href}>
-                {href === "/contact" && (
-                  <li
-                    style={delaiEntree(ouvert, index)}
-                    className={`pb-2 pt-4 ${classesEntree(ouvert)}`}
-                  >
-                    <Intertitre>ÉCHANGER</Intertitre>
-                  </li>
-                )}
-                <li
-                  style={delaiEntree(ouvert, index)}
-                  className={classesEntree(ouvert)}
-                >
-                  <LienMenu
-                    href={href}
-                    label={label}
-                    actif={actif}
-                    onClick={fermer}
-                  />
-                </li>
-                {href === "/contact" && (
-                  <li
-                    style={delaiEntree(ouvert, index)}
-                    className={classesEntree(ouvert)}
-                  >
-                    <p className="pb-2 text-xs min-[420px]:text-sm text-stone-200">
-                      Atelier en France, sur rendez-vous
-                    </p>
-                  </li>
-                )}
-              </Fragment>
-            );
-          })}
+          {LIENS.map(({ href, label }, index) => (
+            <li
+              key={href}
+              style={delaiEntree(ouvert, index)}
+              className={classesEntree(ouvert)}
+            >
+              <LienMenu
+                href={href}
+                label={label}
+                actif={pathname === href}
+                onClick={fermer}
+              />
+            </li>
+          ))}
           <li
             style={delaiEntree(ouvert, LIENS.length)}
+            className={`pb-2 pt-4 ${classesEntree(ouvert)}`}
+          >
+            <Intertitre>ÉCHANGER</Intertitre>
+          </li>
+          <li
+            style={delaiEntree(ouvert, LIENS.length)}
+            className={classesEntree(ouvert)}
+          >
+            <LienMenu
+              href="/contact"
+              label="Contact"
+              actif={pathname === "/contact"}
+              onClick={fermer}
+            />
+            <p className="pb-2 text-xs min-[420px]:text-sm text-stone-200">
+              Atelier en France, sur rendez-vous
+            </p>
+          </li>
+          <li
+            style={delaiEntree(ouvert, LIENS.length + 1)}
             className={`mt-auto pb-4 pt-6 ${classesEntree(ouvert)}`}
           >
             <ListeReseaux />
             <SeparateurDore />
           </li>
           <li
-            style={delaiEntree(ouvert, LIENS.length + 1)}
+            style={delaiEntree(ouvert, LIENS.length + 2)}
             className={`pt-4 ${classesEntree(ouvert)}`}
           >
             <PiedLegal />
@@ -393,9 +387,14 @@ export default function Header() {
         pathname === "/" ? "bg-[#14110B]" : "bg-black"
       }`}
     >
+      {/* Barre du header : contenu borné aux paliers du hero via la
+          classe .header-barre (globals.css, hors @layer) — mobile
+          px-6, puis padding 2.5rem minimum et zone plafonnée à
+          90rem (100rem au-delà de 1920px). Le fond du header, lui,
+          reste pleine largeur. */}
       <div
         inert={ouvert}
-        className="flex w-full items-center justify-between gap-6 overflow-hidden px-6 pt-10 pb-5"
+        className="header-barre flex w-full items-center justify-between gap-6 overflow-hidden px-6 pt-10 pb-5"
       >
         <LogoHeader />
         <NavDesktop pathname={pathname} />

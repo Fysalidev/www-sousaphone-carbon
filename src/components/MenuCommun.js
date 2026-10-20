@@ -132,7 +132,7 @@ export function LogoMenu({ onClick }) {
       className="-my-3.5 -ml-3 shrink-0 rounded-xs focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white"
     >
       <Image
-        src="/logo-sans-bg-300px.png"
+        src="/logos/logo-sans-bg-300px.png"
         alt="Sousaphone Carbon"
         width={300}
         height={105}

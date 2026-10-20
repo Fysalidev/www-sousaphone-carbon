@@ -19,12 +19,12 @@ import {
   SeparateurDore,
 } from "./MenuCommun";
 
-// Liens de navigation de la section DÉCOUVRIR.
+// Liens de navigation de la section DÉCOUVRIR — le contact n'y
+// figure pas : il a sa propre section ÉCHANGER plus bas.
 const LIENS = [
   { href: "/", label: "ACCUEIL" },
   { href: "/instrument", label: "SOUSAPHONE CARBON" },
   { href: "/galerie", label: "GALERIE" },
-  { href: "/contact", label: "CONTACT" },
 ];
 
 export default function Footer() {
@@ -35,7 +35,7 @@ export default function Footer() {
       {/* Fond photo assombri et voile dégradé, purement décoratifs,
           pleine largeur. */}
       <Image
-        src="/menu-fond.webp"
+        src="/photos/menu-fond.webp"
         alt=""
         fill
         sizes="100vw"

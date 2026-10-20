@@ -17,6 +17,25 @@
   }
 }
 
+/* Barre du header, mêmes paliers de largeur que le hero : le contenu
+   (logo, navigation) s'arrête où s'arrête le contenu du hero. Mobile :
+   le px-6 du JSX suffit ; à partir de 48rem le padding lateral
+   grandit — plancher 2.5rem, puis marges de la zone hero plafonnée à
+   90rem — ; à partir de 120rem (1920px) le plafond suit le hero à
+   100rem. Hors @layer : prime sur les utilitaires Tailwind, comme
+   les paliers du hero. */
+@media (min-width: 48rem) {
+  .header-barre {
+    padding-inline: max(2.5rem, calc((100% - 90rem) / 2));
+  }
+}
+
+@media (min-width: 120rem) {
+  .header-barre {
+    padding-inline: max(2.5rem, calc((100% - 100rem) / 2));
+  }
+}
+
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
@@ -208,7 +227,7 @@ body {
   }
 }
 
-/* Hero empilé, mobile (< 48rem) : Test.jpg est élancée et porte du
+/* Hero empilé, mobile (< 48rem) : hero-mobile.webp est élancée et porte du
    vide autour de l'instrument — la photo garde un plancher à 45 %
    de l'écran et les deux blocs de texte chevauchent les bords de
    l'image, fondu par le masque (titre sur le haut, metrics sur le
