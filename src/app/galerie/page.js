@@ -18,11 +18,25 @@ export const metadata = {
 // section galerie de l'accueil.
 
 // Photos de la galerie : src, alt et dimensions intrinsèques (le
-// ratio pilote la hauteur dans la grille).
+// ratio pilote la hauteur dans la grille). Les 33 photos vivent
+// dans public/galerie/ ; les alt des dépôts récents restent
+// génériques — à affiner quand leur contenu sera décrit.
 const PHOTOS = [
   {
     src: "/galerie/galerie-1.webp",
     alt: "Sousaphone Carbon mis en situation",
+    largeur: 900,
+    hauteur: 1268,
+  },
+  {
+    src: "/galerie/galerie-2.webp",
+    alt: "Détail du Sousaphone Carbon",
+    largeur: 900,
+    hauteur: 1268,
+  },
+  {
+    src: "/galerie/galerie-3.webp",
+    alt: "Musicien avec son Sousaphone Carbon",
     largeur: 900,
     hauteur: 1268,
   },
@@ -33,28 +47,178 @@ const PHOTOS = [
     hauteur: 1141,
   },
   {
-    src: "/galerie/galerie-2.webp",
-    alt: "Détail du Sousaphone Carbon",
-    largeur: 900,
-    hauteur: 1268,
-  },
-  {
     src: "/galerie/galerie-5.webp",
     alt: "Le Sousaphone Carbon en scène",
     largeur: 1200,
     hauteur: 649,
   },
   {
-    src: "/galerie/galerie-3.webp",
-    alt: "Musicien avec son Sousaphone Carbon",
-    largeur: 900,
-    hauteur: 1268,
-  },
-  {
     src: "/galerie/galerie-6.webp",
     alt: "Sousaphone Carbon en pleine lumière",
     largeur: 2400,
     hauteur: 3197,
+  },
+  {
+    src: "/galerie/galerie-7.webp",
+    alt: "Photographie du Sousaphone Carbon",
+    largeur: 1016,
+    hauteur: 1612,
+  },
+  {
+    src: "/galerie/galerie-8.webp",
+    alt: "Photographie du Sousaphone Carbon",
+    largeur: 1006,
+    hauteur: 1400,
+  },
+  {
+    src: "/galerie/galerie-9.webp",
+    alt: "Photographie du Sousaphone Carbon",
+    largeur: 948,
+    hauteur: 1696,
+  },
+  {
+    src: "/galerie/galerie-10.webp",
+    alt: "Photographie du Sousaphone Carbon",
+    largeur: 1201,
+    hauteur: 1600,
+  },
+  {
+    src: "/galerie/galerie-11.webp",
+    alt: "Photographie du Sousaphone Carbon",
+    largeur: 2000,
+    hauteur: 1501,
+  },
+  {
+    src: "/galerie/galerie-12.webp",
+    alt: "Photographie du Sousaphone Carbon",
+    largeur: 2000,
+    hauteur: 1501,
+  },
+  {
+    src: "/galerie/galerie-13.webp",
+    alt: "Photographie du Sousaphone Carbon",
+    largeur: 2000,
+    hauteur: 1502,
+  },
+  {
+    src: "/galerie/galerie-14.webp",
+    alt: "Photographie du Sousaphone Carbon",
+    largeur: 1502,
+    hauteur: 2000,
+  },
+  {
+    src: "/galerie/galerie-15.webp",
+    alt: "Photographie du Sousaphone Carbon",
+    largeur: 1501,
+    hauteur: 2000,
+  },
+  {
+    src: "/galerie/galerie-16.webp",
+    alt: "Photographie du Sousaphone Carbon",
+    largeur: 1501,
+    hauteur: 2000,
+  },
+  {
+    src: "/galerie/galerie-17.webp",
+    alt: "Photographie du Sousaphone Carbon",
+    largeur: 1501,
+    hauteur: 2000,
+  },
+  {
+    src: "/galerie/galerie-18.webp",
+    alt: "Photographie du Sousaphone Carbon",
+    largeur: 1501,
+    hauteur: 2000,
+  },
+  {
+    src: "/galerie/galerie-19.webp",
+    alt: "Photographie du Sousaphone Carbon",
+    largeur: 1501,
+    hauteur: 2000,
+  },
+  {
+    src: "/galerie/galerie-20.webp",
+    alt: "Photographie du Sousaphone Carbon",
+    largeur: 1502,
+    hauteur: 2000,
+  },
+  {
+    src: "/galerie/galerie-21.webp",
+    alt: "Photographie du Sousaphone Carbon",
+    largeur: 1501,
+    hauteur: 2000,
+  },
+  {
+    src: "/galerie/galerie-22.webp",
+    alt: "Photographie du Sousaphone Carbon",
+    largeur: 2000,
+    hauteur: 1501,
+  },
+  {
+    src: "/galerie/galerie-23.webp",
+    alt: "Photographie du Sousaphone Carbon",
+    largeur: 1501,
+    hauteur: 2000,
+  },
+  {
+    src: "/galerie/galerie-24.webp",
+    alt: "Photographie du Sousaphone Carbon",
+    largeur: 1501,
+    hauteur: 2000,
+  },
+  {
+    src: "/galerie/galerie-25.webp",
+    alt: "Photographie du Sousaphone Carbon",
+    largeur: 1501,
+    hauteur: 2000,
+  },
+  {
+    src: "/galerie/galerie-26.webp",
+    alt: "Photographie du Sousaphone Carbon",
+    largeur: 1600,
+    hauteur: 1200,
+  },
+  {
+    src: "/galerie/galerie-27.webp",
+    alt: "Photographie du Sousaphone Carbon",
+    largeur: 1200,
+    hauteur: 1600,
+  },
+  {
+    src: "/galerie/galerie-28.webp",
+    alt: "Photographie du Sousaphone Carbon",
+    largeur: 1600,
+    hauteur: 1200,
+  },
+  {
+    src: "/galerie/galerie-29.webp",
+    alt: "Photographie du Sousaphone Carbon",
+    largeur: 1200,
+    hauteur: 1600,
+  },
+  {
+    src: "/galerie/galerie-30.webp",
+    alt: "Photographie du Sousaphone Carbon",
+    largeur: 1202,
+    hauteur: 1600,
+  },
+  {
+    src: "/galerie/galerie-31.webp",
+    alt: "Photographie du Sousaphone Carbon",
+    largeur: 1202,
+    hauteur: 1600,
+  },
+  {
+    src: "/galerie/galerie-32.webp",
+    alt: "Photographie du Sousaphone Carbon",
+    largeur: 1600,
+    hauteur: 1200,
+  },
+  {
+    src: "/galerie/galerie-33.webp",
+    alt: "Photographie du Sousaphone Carbon",
+    largeur: 2000,
+    hauteur: 740,
   },
 ];
 
