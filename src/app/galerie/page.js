@@ -240,16 +240,16 @@ export default function GaleriePage() {
         <ParagrapheSection>
           L&rsquo;atelier, l&rsquo;instrument et les musiciens en situation.
         </ParagrapheSection>
-        {/* Grille masonry : colonnes CSS (1 mobile, 2 à partir de
-            768px, 3 à partir de 1200px), chaque figure garde son
-            ratio naturel — les portraits et les paysages se
-            répartissent d'eux-mêmes. Carte à bordure dorée comme
-            les cartes de contenu du site. */}
+        {/* Effet de survol : la photo est légèrement voilée au repos
+            (brightness-90) ; au survol elle s'éclaire, zoome
+            discrètement dans son cadre (overflow-hidden) et un filet
+            or se dessine en contour — l'outline, contrairement à une
+            bordure, ne décale pas la masonry. */}
         <div className="mt-12 columns-1 gap-6 min-[768px]:columns-2 min-[1200px]:columns-3">
           {PHOTOS.map(({ src, alt, largeur, hauteur }) => (
             <figure
               key={src}
-              className="mb-6 break-inside-avoid overflow-hidden rounded-2xl border border-[#C9A96A]/40"
+              className="group mb-6 break-inside-avoid overflow-hidden rounded-2xl outline-1 -outline-offset-1 outline-transparent transition-[outline-color] duration-300 ease-out hover:outline-[#C9A96A] motion-reduce:transition-none"
             >
               <Image
                 src={src}
@@ -257,7 +257,7 @@ export default function GaleriePage() {
                 width={largeur}
                 height={hauteur}
                 sizes="(min-width: 75rem) 30vw, (min-width: 48rem) 45vw, 100vw"
-                className="h-auto w-full"
+                className="h-auto w-full brightness-90 transition-[filter,transform] duration-500 ease-out group-hover:scale-105 group-hover:brightness-100 motion-reduce:transition-none"
               />
             </figure>
           ))}
