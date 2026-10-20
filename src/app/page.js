@@ -1,10 +1,64 @@
 import Image from "next/image";
 import Link from "next/link";
+import Revelation from "@/components/Revelation";
+
+// URL canonique du site : variable d'environnement si définie, sinon
+// l'URL de déploiement fournie par Vercel, sinon localhost en dev.
+// Sert de base aux URLs absolues d'OpenGraph et de JSON-LD.
+const URL_SITE =
+  process.env.NEXT_PUBLIC_SITE_URL ??
+  (process.env.NEXT_PUBLIC_VERCEL_URL
+    ? `https://${process.env.NEXT_PUBLIC_VERCEL_URL}`
+    : "http://localhost:3000");
+
+const DESCRIPTION =
+  "Sousaphones en carbone légers et robustes à la sonorité exceptionnelle, fabriqués sur mesure en France.";
 
 export const metadata = {
+  metadataBase: new URL(URL_SITE),
   title: "Sousaphone Carbon — Sousaphones en carbone",
-  description:
-    "Sousaphones en carbone légers et robustes à la sonorité exceptionnelle, fabriqués sur mesure en France.",
+  description: DESCRIPTION,
+  openGraph: {
+    type: "website",
+    locale: "fr_FR",
+    url: "/",
+    siteName: "Sousaphone Carbon",
+    title: "Sousaphone Carbon — Sousaphones en carbone",
+    description: DESCRIPTION,
+    images: [
+      {
+        url: "/sousa34.webp",
+        width: 856,
+        height: 1141,
+        alt: "Sousaphone Carbon",
+      },
+    ],
+  },
+};
+
+// Données structurées schema.org pour les moteurs de recherche :
+// l'organisation (fabricant français) et le produit.
+const DONNEES_STRUCTUREES = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      name: "Sousaphone Carbon",
+      url: URL_SITE,
+      logo: `${URL_SITE}/logo-inter.png`,
+      description: "Fabricant français de sousaphones en fibre de carbone.",
+    },
+    {
+      "@type": "Product",
+      name: "Sousaphone Carbon",
+      description:
+        "Sousaphone en fibre de carbone, léger et robuste, fabriqué sur mesure en France.",
+      brand: { "@type": "Brand", name: "Sousaphone Carbon" },
+      image: `${URL_SITE}/sousa34.webp`,
+      material: "Fibre de carbone",
+      countryOfOrigin: { "@type": "Country", name: "France" },
+    },
+  ],
 };
 
 // Page d'accueil : hero empilé sur fond noir, entièrement visible
@@ -17,8 +71,8 @@ export const metadata = {
 // Sous le hero, la page suit la maquette mobile (300–640px) : une
 // colonne éditoriale alignée à gauche — étiquette dorée, très grand
 // titre serif, paragraphe — déroulant exigence et ses trois cartes,
-// pièces uniques et ses attributs iconés, équipe, puis la clôture
-// narrative. Un séparateur logo (logo-inter.png, encre inversée en
+// pièces uniques et ses attributs iconés, équipe, trois vignettes
+// vers la galerie, puis la clôture narrative. Un séparateur logo (logo-inter.png, encre inversée en
 // blanc par filtre CSS) aligné à gauche sur la colonne éditoriale
 // marque chaque transition entre sections. Le footer (déjà en
 // place) referme la page.
@@ -151,14 +205,18 @@ function SeparateurSection() {
 // (max-w-3xl) ; le titre porte l'ancre aria référencée par `titreAria`.
 // Rythme vertical partagé avec le séparateur (py-12 / py-16) : chaque
 // transition section→logo→section est symétrique, sans empilement
-// des paddings.
+// des paddings. Le contenu passe par <Revelation> : il apparaît en
+// fondu à l'arrivée dans la fenêtre (désactivé avec
+// prefers-reduced-motion, visible sans JavaScript).
 function SectionEditoriale({ titreAria, children }) {
   return (
     <section
       aria-labelledby={titreAria}
       className="px-6 py-12 min-[768px]:py-16"
     >
-      <div className="mx-auto max-w-3xl">{children}</div>
+      <div className="mx-auto max-w-3xl">
+        <Revelation>{children}</Revelation>
+      </div>
     </section>
   );
 }
@@ -283,6 +341,31 @@ function AttributIcone({ Icone, titre, children }) {
   );
 }
 
+// ——— Section Galerie ———
+
+// Vignette de la section galerie : photo cliquable vers la page
+// galerie, cadrage portrait unifié (3/4) dans une carte à bordure
+// dorée comme les cartes de contenu — le survol renforce la bordure
+// et zoome légèrement l'image.
+function VignetteGalerie({ src, alt }) {
+  return (
+    <Link
+      href="/galerie"
+      aria-label="Voir la galerie"
+      className="group block overflow-hidden rounded-2xl border border-[#C9A96A]/40 transition-colors hover:border-[#C9A96A] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white"
+    >
+      <Image
+        src={src}
+        alt={alt}
+        width={900}
+        height={1268}
+        sizes="(min-width: 768px) 240px, 100vw"
+        className="aspect-[3/4] w-full object-cover transition-transform duration-500 ease-out group-hover:scale-105 motion-reduce:transition-none"
+      />
+    </Link>
+  );
+}
+
 // ——— Section Équipe ———
 
 // Carte membre : même langage que les cartes Exigence — bordure
@@ -337,6 +420,13 @@ const EQUIPE = [
 export default function AccueilPage() {
   return (
     <main className="flex flex-col bg-black">
+      {/* Données structurées schema.org (Organization + Product). */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(DONNEES_STRUCTUREES),
+        }}
+      />
       {/* Hero empilé sur fond noir, entièrement visible sans
           défilement : accroche dorée et titre centrés en haut,
           photo en bloc de contenu flexible — elle absorbe la hauteur
@@ -365,15 +455,17 @@ export default function AccueilPage() {
           </h1>
         </div>
         {/* Photos du sousaphone, deux cadrages pour deux dispositions :
-            Test.jpg (600×1141, portrait) en empilé mobile — l'appareil
-            en main et la photo partagent l'orientation verticale ;
-            sousa43.jpg (1521×1141, paysage 4:3) en colonne desktop.
+            Test.webp (600×1141, portrait) en empilé mobile —
+            l'appareil en main et la photo partagent l'orientation
+            verticale ; sousa34.webp (856×1141, portrait serré) en
+            colonne desktop. Versions WebP des JPG d'origine
+            (qualité 82, ~5× plus légères).
             Fonte dans le fond de section teinté : mix-blend-screen
             (les zones sombres laissent passer le fond) et un masque
             limité aux seuls bords haut/bas (fondu sur ~10 %). */}
         <div className="hero-entree hero-photo relative mt-6 min-h-48 flex-1 w-full [animation-delay:450ms]">
           <Image
-            src="/Test.jpg"
+            src="/Test.webp"
             alt="Sousaphone en laiton sur fond sombre"
             fill
             priority
@@ -381,7 +473,7 @@ export default function AccueilPage() {
             className="object-contain object-center mix-blend-screen mask-[linear-gradient(to_bottom,transparent_2%,black_10%,black_90%,transparent_98%)] min-[768px]:hidden"
           />
           <Image
-            src="/sousa34.jpg"
+            src="/sousa34.webp"
             alt="Sousaphone en laiton sur fond sombre"
             fill
             priority
@@ -498,6 +590,35 @@ export default function AccueilPage() {
               role={membre.role}
             />
           ))}
+        </div>
+      </SectionEditoriale>
+
+      <SeparateurSection />
+
+      {/* Galerie : trois vignettes portrait teaser vers la page
+          galerie — la respiration visuelle de la page, tous les
+          autres blocs étant textuels. */}
+      <SectionEditoriale titreAria="titre-galerie">
+        <EtiquetteDoree>GALERIE</EtiquetteDoree>
+        <TitreSection id="titre-galerie">
+          L&rsquo;instrument en images.
+        </TitreSection>
+        <ParagrapheSection>
+          L&rsquo;atelier, l&rsquo;instrument et les musiciens en situation.
+        </ParagrapheSection>
+        <div className="mt-12 grid grid-cols-1 gap-6 min-[768px]:grid-cols-3">
+          <VignetteGalerie
+            src="/soussa-1.webp"
+            alt="Sousaphone Carbon mis en situation"
+          />
+          <VignetteGalerie
+            src="/soussaX.webp"
+            alt="Sousaphone Carbon vu de près"
+          />
+          <VignetteGalerie
+            src="/soussaY.webp"
+            alt="Musicien avec son Sousaphone Carbon"
+          />
         </div>
       </SectionEditoriale>
 
