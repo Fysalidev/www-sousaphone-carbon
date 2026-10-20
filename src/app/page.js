@@ -17,10 +17,10 @@ export const metadata = {
 // Sous le hero, la page suit la maquette mobile (300–640px) : une
 // colonne éditoriale alignée à gauche — étiquette dorée, très grand
 // titre serif, paragraphe — déroulant exigence et ses trois cartes,
-// image pleine largeur, pièces uniques et ses attributs iconés, équipe,
-// puis la clôture narrative. Un séparateur logo blanc (logo-sep.png)
-// centré marque chaque transition entre sections, sauf autour de
-// l'image pleine largeur qui joue seule ce rôle. Le footer (déjà en
+// pièces uniques et ses attributs iconés, équipe, puis la clôture
+// narrative. Un séparateur logo (logo-inter.png, encre inversée en
+// blanc par filtre CSS) aligné à gauche sur la colonne éditoriale
+// marque chaque transition entre sections. Le footer (déjà en
 // place) referme la page.
 
 // ——— Hero ———
@@ -105,34 +105,42 @@ function ParagrapheSection({ children }) {
   );
 }
 
-// Séparateur de sections : logo blanc (logo-sep.png, déclinaison
-// claire de logo-inter.png — l'original noir serait invisible sur le
-// fond noir) centré et généreux, rythmant les transitions entre les
-// grandes sections. Purement décoratif (aria-hidden, alt vide) ;
-// l'image pleine largeur sert seule de respiration à son endroit,
-// sans séparateur autour.
+// Séparateur de sections : logo-inter.png aligné à gauche sur la
+// colonne éditoriale — même structure que SectionEditoriale (px-6
+// pleine largeur, colonne max-w-3xl centrée), pour poser son bord
+// gauche exactement à l'aplomb du texte — et généreux. Son encre
+// est noire sur fond transparent, le filtre CSS `invert` la rend
+// blanche à l'affichage, seul moyen de la lire sur le fond noir sans
+// fichier dérivé. Purement décoratif (aria-hidden, alt vide). Même
+// rythme vertical que les sections (py-12 / py-16) : l'espace qui
+// l'entoure est identique au-dessus et en dessous, à chaque
+// transition.
 function SeparateurSection() {
   return (
-    <div aria-hidden="true" className="flex justify-center px-6 py-10">
-      <Image
-        src="/logo-sep.png"
-        alt=""
-        width={2000}
-        height={698}
-        className="h-16 min-[768px]:h-24 w-auto"
-      />
+    <div aria-hidden="true" className="w-full px-6 py-12 min-[768px]:py-16">
+      <div className="mx-auto max-w-3xl">
+        <Image
+          src="/logo-inter.png"
+          alt=""
+          width={2000}
+          height={698}
+          className="h-16 min-[768px]:h-24 w-auto invert"
+        />
+      </div>
     </div>
   );
 }
 
 // Coquille des sections éditoriales : colonne lisible centrée
-// (max-w-3xl) et rythme vertical généreux ; le titre porte l'ancre
-// aria référencée par `titreAria`.
+// (max-w-3xl) ; le titre porte l'ancre aria référencée par `titreAria`.
+// Rythme vertical partagé avec le séparateur (py-12 / py-16) : chaque
+// transition section→logo→section est symétrique, sans empilement
+// des paddings.
 function SectionEditoriale({ titreAria, children }) {
   return (
     <section
       aria-labelledby={titreAria}
-      className="px-6 py-20 min-[768px]:py-28"
+      className="px-6 py-12 min-[768px]:py-16"
     >
       <div className="mx-auto max-w-3xl">{children}</div>
     </section>
@@ -415,21 +423,6 @@ export default function AccueilPage() {
           </BlocCorps>
         </div>
       </SectionEditoriale>
-
-      {/* Image pleine largeur : la musique en situation, respiration
-          visuelle entre les blocs de texte. */}
-      <section
-        aria-label="Le Sousaphone Carbon en situation de jeu"
-        className="relative h-96 min-[640px]:h-112 min-[1024px]:h-128"
-      >
-        <Image
-          src="/menu-fond.webp"
-          alt="Musicien jouant du Sousaphone Carbon"
-          fill
-          sizes="100vw"
-          className="object-cover object-center"
-        />
-      </section>
 
       <SeparateurSection />
 
