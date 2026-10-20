@@ -41,6 +41,22 @@ function BoutonDecouvrir({ classe = "" }) {
   );
 }
 
+// Bouton « Nous contacter » de la clôture : même langage que le
+// bouton du hero (plein or, texte noir, coins adoucis, inversion au
+// survol), sans la classe hero-bouton — les paliers de compression
+// du hero ne concernent pas une section défilée.
+function BoutonContacter() {
+  return (
+    <Link
+      href="/contact"
+      className="inline-flex items-center gap-3 rounded-lg border border-[#C9A96A] bg-[#C9A96A] px-8 py-4 text-xs min-[1555px]:text-sm font-bold tracking-[0.25em] text-black transition-colors hover:bg-black hover:text-[#C9A96A] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
+    >
+      NOUS CONTACTER
+      <span aria-hidden="true">&rarr;</span>
+    </Link>
+  );
+}
+
 // Statistique clé : terme/légende (dt) et définition/valeur (dd) liés
 // sémantiquement ; l'ordre visuel place la valeur au-dessus de la
 // légende via flex. Rampe régulière (24 → 30 → 36 → 48 → 60px), %
@@ -488,8 +504,9 @@ export default function AccueilPage() {
       <SeparateurSection />
 
       {/* Clôture narrative : étiquette, très grand titre serif et
-          paragraphe d&rsquo;ouverture, sans bouton — la maquette
-          referme la page sur ce texte, le footer prend le relais. */}
+          paragraphe d&rsquo;ouverture, refermés par l'appel à
+          l'action « Nous contacter » — la page se termine sur une
+          sortie vers le contact, le footer prend le relais. */}
       <SectionEditoriale titreAria="titre-final">
         <EtiquetteDoree>SC SOUSAPHONE CARBON</EtiquetteDoree>
         <TitreSection id="titre-final">
@@ -499,6 +516,9 @@ export default function AccueilPage() {
           Découvrez comment le Sousaphone Carbon peut devenir votre partenaire,
           pour commencer une aventure musicale unique.
         </ParagrapheSection>
+        <div className="mt-12">
+          <BoutonContacter />
+        </div>
       </SectionEditoriale>
     </main>
   );
