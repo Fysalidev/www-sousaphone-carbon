@@ -101,7 +101,7 @@ function LogoHeader() {
       className="flex items-center gap-2.5 overflow-hidden rounded-xs focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white min-[768px]:flex-col min-[768px]:items-start min-[768px]:gap-1"
     >
       <Image
-        src="/logo-header-sm.webp"
+        src="/logos/logo-header-sm.webp"
         alt="Sousaphone Carbon"
         width={68}
         height={32}
@@ -109,7 +109,7 @@ function LogoHeader() {
         priority
       />
       <Image
-        src="/logo-header-lg.webp"
+        src="/logos/logo-header-lg.webp"
         alt="Sousaphone Carbon"
         width={185}
         height={48}
@@ -202,7 +202,7 @@ function MenuPleinEcran({ pathname, ouvert, fermer, refDialogue, refFermer }) {
       {fondVisible && (
         <>
           <Image
-            src="/menu-fond.webp"
+            src="/photos/menu-fond.webp"
             alt=""
             fill
             sizes="100vw"

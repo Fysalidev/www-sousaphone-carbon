@@ -42,7 +42,7 @@ export const metadata = {
     description: DESCRIPTION,
     images: [
       {
-        url: "/sousa34.webp",
+        url: "/photos/hero-desktop.webp",
         width: 856,
         height: 1141,
         alt: "Sousaphone Carbon",
@@ -60,7 +60,7 @@ const DONNEES_STRUCTUREES = {
       "@type": "Organization",
       name: "Sousaphone Carbon",
       url: URL_SITE,
-      logo: `${URL_SITE}/logo-inter.png`,
+      logo: `${URL_SITE}/logos/logo-inter.png`,
       description: "Fabricant français de sousaphones en fibre de carbone.",
     },
     {
@@ -69,7 +69,7 @@ const DONNEES_STRUCTUREES = {
       description:
         "Sousaphone en fibre de carbone, léger et robuste, fabriqué sur mesure en France.",
       brand: { "@type": "Brand", name: "Sousaphone Carbon" },
-      image: `${URL_SITE}/sousa34.webp`,
+      image: `${URL_SITE}/photos/hero-desktop.webp`,
       material: "Fibre de carbone",
       countryOfOrigin: { "@type": "Country", name: "France" },
     },
@@ -197,9 +197,9 @@ const EQUIPE = [
 ];
 
 const GALERIE = [
-  { src: "/soussa-1.webp", alt: "Sousaphone Carbon mis en situation" },
-  { src: "/soussaX.webp", alt: "Sousaphone Carbon vu de près" },
-  { src: "/soussaY.webp", alt: "Musicien avec son Sousaphone Carbon" },
+  { src: "/photos/galerie-1.webp", alt: "Sousaphone Carbon mis en situation" },
+  { src: "/photos/galerie-2.webp", alt: "Sousaphone Carbon vu de près" },
+  { src: "/photos/galerie-3.webp", alt: "Musicien avec son Sousaphone Carbon" },
 ];
 
 // ——— Page ———
@@ -242,17 +242,17 @@ export default function AccueilPage() {
           </h1>
         </div>
         {/* Photos du sousaphone, deux cadrages pour deux dispositions :
-            Test.webp (600×1141, portrait) en empilé mobile —
-            l'appareil en main et la photo partagent l'orientation
-            verticale ; sousa34.webp (856×1141, portrait serré) en
-            colonne desktop. Versions WebP des JPG d'origine
-            (qualité 82, ~5× plus légères).
+            photos/hero-mobile.webp (600×1141, portrait) en empilé
+            mobile — l'appareil en main et la photo partagent
+            l'orientation verticale ; photos/hero-desktop.webp
+            (856×1141, portrait serré) en colonne desktop (toutes
+            deux en WebP, qualité 82).
             Fonte dans le fond de section teinté : mix-blend-screen
             (les zones sombres laissent passer le fond) et un masque
             limité aux seuls bords haut/bas (fondu sur ~10 %). */}
         <div className="hero-entree hero-photo relative mt-6 min-h-48 flex-1 w-full [animation-delay:450ms]">
           <Image
-            src="/Test.webp"
+            src="/photos/hero-mobile.webp"
             alt="Sousaphone en laiton sur fond sombre"
             fill
             priority
@@ -260,7 +260,7 @@ export default function AccueilPage() {
             className="object-contain object-center mix-blend-screen mask-[linear-gradient(to_bottom,transparent_2%,black_10%,black_90%,transparent_98%)] min-[768px]:hidden"
           />
           <Image
-            src="/sousa34.webp"
+            src="/photos/hero-desktop.webp"
             alt="Sousaphone en laiton sur fond sombre"
             fill
             priority

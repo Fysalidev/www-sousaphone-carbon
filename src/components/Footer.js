@@ -35,7 +35,7 @@ export default function Footer() {
       {/* Fond photo assombri et voile dégradé, purement décoratifs,
           pleine largeur. */}
       <Image
-        src="/menu-fond.webp"
+        src="/photos/menu-fond.webp"
         alt=""
         fill
         sizes="100vw"
