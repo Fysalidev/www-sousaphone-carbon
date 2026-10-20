@@ -105,13 +105,13 @@ function ParagrapheSection({ children }) {
   );
 }
 
-// Séparateur de sections : logo-inter.png aligné à gauche sur la
+// Séparateur de sections : logo-inter.png (recadré à la main, le
+// cadrage final est porté par l'asset), aligné à gauche sur la
 // colonne éditoriale — même structure que SectionEditoriale (px-6
 // pleine largeur, colonne max-w-3xl centrée), pour poser son bord
-// gauche exactement à l'aplomb du texte — et généreux. Son encre
-// est noire sur fond transparent, le filtre CSS `invert` la rend
-// blanche à l'affichage, seul moyen de la lire sur le fond noir sans
-// fichier dérivé. Purement décoratif (aria-hidden, alt vide). Même
+// gauche exactement à l'aplomb du texte. Son encre est noire sur
+// fond transparent, le filtre CSS `invert` la rend blanche à
+// l'affichage. Purement décoratif (aria-hidden, alt vide). Même
 // rythme vertical que les sections (py-12 / py-16) : l'espace qui
 // l'entoure est identique au-dessus et en dessous, à chaque
 // transition.
@@ -122,9 +122,9 @@ function SeparateurSection() {
         <Image
           src="/logo-inter.png"
           alt=""
-          width={2000}
+          width={1750}
           height={698}
-          className="h-16 min-[768px]:h-24 w-auto invert"
+          className="h-24 min-[768px]:h-32 w-auto invert"
         />
       </div>
     </div>
