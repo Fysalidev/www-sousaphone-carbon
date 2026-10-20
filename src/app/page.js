@@ -197,9 +197,12 @@ const EQUIPE = [
 ];
 
 const GALERIE = [
-  { src: "/photos/galerie-1.webp", alt: "Sousaphone Carbon mis en situation" },
-  { src: "/photos/galerie-2.webp", alt: "Sousaphone Carbon vu de près" },
-  { src: "/photos/galerie-3.webp", alt: "Musicien avec son Sousaphone Carbon" },
+  { src: "/galerie/galerie-1.webp", alt: "Sousaphone Carbon mis en situation" },
+  { src: "/galerie/galerie-2.webp", alt: "Sousaphone Carbon vu de près" },
+  {
+    src: "/galerie/galerie-3.webp",
+    alt: "Musicien avec son Sousaphone Carbon",
+  },
 ];
 
 // ——— Page ———

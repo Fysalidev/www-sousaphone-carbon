@@ -21,37 +21,37 @@ export const metadata = {
 // ratio pilote la hauteur dans la grille).
 const PHOTOS = [
   {
-    src: "/photos/galerie-1.webp",
+    src: "/galerie/galerie-1.webp",
     alt: "Sousaphone Carbon mis en situation",
     largeur: 900,
     hauteur: 1268,
   },
   {
-    src: "/photos/galerie-4.webp",
+    src: "/galerie/galerie-4.webp",
     alt: "Sousaphone Carbon vu de trois quarts",
     largeur: 1521,
     hauteur: 1141,
   },
   {
-    src: "/photos/galerie-2.webp",
+    src: "/galerie/galerie-2.webp",
     alt: "Détail du Sousaphone Carbon",
     largeur: 900,
     hauteur: 1268,
   },
   {
-    src: "/photos/galerie-5.webp",
+    src: "/galerie/galerie-5.webp",
     alt: "Le Sousaphone Carbon en scène",
     largeur: 1200,
     hauteur: 649,
   },
   {
-    src: "/photos/galerie-3.webp",
+    src: "/galerie/galerie-3.webp",
     alt: "Musicien avec son Sousaphone Carbon",
     largeur: 900,
     hauteur: 1268,
   },
   {
-    src: "/photos/galerie-6.webp",
+    src: "/galerie/galerie-6.webp",
     alt: "Sousaphone Carbon en pleine lumière",
     largeur: 2400,
     hauteur: 3197,
