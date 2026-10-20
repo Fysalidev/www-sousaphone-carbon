@@ -8,7 +8,9 @@ import {
   IconeFaitMain,
   IconeMesures,
   VignetteGalerie,
+  VignetteGalerieVide,
 } from "@/components/CartesAccueil";
+import { PHOTOS } from "@/components/DonneesGalerie";
 import {
   EtiquetteDoree,
   ParagrapheSection,
@@ -196,24 +198,10 @@ const EQUIPE = [
   },
 ];
 
-// Vignettes de la section galerie : les photos déposées au fil de
-// la session, complétées par le hero en attendant les dépôts
-// suivants — à rebasculer vers des photos de public/galerie/ une
-// fois les emplacements remplis.
-const GALERIE = [
-  {
-    src: "/galerie/galerie-01.webp",
-    alt: "Sousaphone en laiton de profil sur fond noir, pavillon doré au premier plan",
-  },
-  {
-    src: "/galerie/galerie-02.webp",
-    alt: "Photographie du Sousaphone Carbon",
-  },
-  {
-    src: "/photos/hero-mobile.webp",
-    alt: "Sousaphone en laiton sur fond sombre",
-  },
-];
+// Vignettes de la section galerie : les trois premiers emplacements
+// de la galerie (01–03), lus dans DonneesGalerie.js — photo déposée
+// ou placeholder, même gabarit que la page galerie.
+const VIGNETTES = ["01", "02", "03"];
 
 // ——— Page ———
 
@@ -395,9 +383,14 @@ export default function AccueilPage() {
           L&rsquo;atelier, l&rsquo;instrument et les musiciens en situation.
         </ParagrapheSection>
         <div className="mt-12 grid grid-cols-1 gap-6 min-[768px]:grid-cols-3">
-          {GALERIE.map(({ src, alt }) => (
-            <VignetteGalerie key={src} src={src} alt={alt} />
-          ))}
+          {VIGNETTES.map((numero) => {
+            const photo = PHOTOS[numero];
+            return photo ? (
+              <VignetteGalerie key={numero} src={photo.src} alt={photo.alt} />
+            ) : (
+              <VignetteGalerieVide key={numero} numero={numero} />
+            );
+          })}
         </div>
       </SectionEditoriale>
 

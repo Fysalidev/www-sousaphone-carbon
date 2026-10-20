@@ -166,3 +166,25 @@ export function VignetteGalerie({ src, alt }) {
     </Link>
   );
 }
+
+// Placeholder de vignette : même carte cliquable vers la galerie,
+// en attente du dépôt du fichier indiqué — même langage que les
+// placeholders de la page galerie (contour pointillé, nom du
+// fichier attendu et ratio).
+export function VignetteGalerieVide({ numero }) {
+  return (
+    <Link
+      href="/galerie"
+      aria-label="Voir la galerie"
+      className="flex aspect-[3/4] flex-col items-center justify-center gap-1 rounded-2xl border border-dashed border-[#C9A96A]/30 bg-stone-900 p-4 text-center transition-colors hover:border-[#C9A96A] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white"
+    >
+      <p className="text-xs min-[768px]:text-sm font-bold text-[#C9A96A]">
+        galerie-{numero}.webp
+      </p>
+      <p className="text-[10px] min-[768px]:text-xs text-stone-300">3/4</p>
+      <p className="text-[10px] min-[768px]:text-xs text-stone-400">
+        ≈ 740 × 985 px
+      </p>
+    </Link>
+  );
+}
