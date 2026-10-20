@@ -393,9 +393,15 @@ export default function Header() {
         pathname === "/" ? "bg-[#14110B]" : "bg-black"
       }`}
     >
+      {/* Barre du header : même plafond de largeur que la section
+          titre-hero (globals.css) — padding-inline
+          max(2.5rem, (100% - 90rem)/2), porté à 100rem au-delà de
+          1920px — le logo et la navigation s'arrêtent où s'arrête le
+          contenu du hero. Le fond du header, lui, reste pleine
+          largeur. */}
       <div
         inert={ouvert}
-        className="flex w-full items-center justify-between gap-6 overflow-hidden px-6 pt-10 pb-5"
+        className="flex w-full items-center justify-between gap-6 overflow-hidden px-6 pt-10 pb-5 min-[768px]:px-[max(2.5rem,calc((100%_-_90rem)/2))] min-[1920px]:px-[max(2.5rem,calc((100%_-_100rem)/2))]"
       >
         <LogoHeader />
         <NavDesktop pathname={pathname} />
