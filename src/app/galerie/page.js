@@ -33,6 +33,12 @@ const PHOTOS = {
     largeur: 2028,
     hauteur: 1141,
   },
+  "02": {
+    src: "/galerie/galerie-02.webp",
+    alt: "Photographie du Sousaphone Carbon",
+    largeur: 1130,
+    hauteur: 1410,
+  },
 };
 
 // Nombre d'emplacements de la galerie.
