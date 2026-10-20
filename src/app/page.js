@@ -18,7 +18,10 @@ export const metadata = {
 // colonne éditoriale alignée à gauche — étiquette dorée, très grand
 // titre serif, paragraphe — déroulant exigence et ses trois cartes,
 // image pleine largeur, pièces uniques et ses attributs iconés, équipe,
-// puis la clôture narrative. Le footer (déjà en place) referme la page.
+// puis la clôture narrative. Un séparateur logo blanc (logo-sep.png)
+// centré marque chaque transition entre sections, sauf autour de
+// l'image pleine largeur qui joue seule ce rôle. Le footer (déjà en
+// place) referme la page.
 
 // ——— Hero ———
 
@@ -99,6 +102,26 @@ function ParagrapheSection({ children }) {
     <p className="mt-6 max-w-xl text-sm min-[640px]:text-base leading-relaxed text-stone-300">
       {children}
     </p>
+  );
+}
+
+// Séparateur de sections : logo blanc (logo-sep.png, déclinaison
+// claire de logo-inter.png — l'original noir serait invisible sur le
+// fond noir) centré et généreux, rythmant les transitions entre les
+// grandes sections. Purement décoratif (aria-hidden, alt vide) ;
+// l'image pleine largeur sert seule de respiration à son endroit,
+// sans séparateur autour.
+function SeparateurSection() {
+  return (
+    <div aria-hidden="true" className="flex justify-center px-6 py-10">
+      <Image
+        src="/logo-sep.png"
+        alt=""
+        width={2000}
+        height={698}
+        className="h-16 min-[768px]:h-24 w-auto"
+      />
+    </div>
   );
 }
 
@@ -361,6 +384,8 @@ export default function AccueilPage() {
         </div>
       </section>
 
+      <SeparateurSection />
+
       {/* Exigence : étiquette, très grand titre serif et les trois
           cartes à bordure dorée (expertise, innovations, passion),
           numérotées 01–03, empilées et alignées à gauche. Rythme
@@ -406,6 +431,8 @@ export default function AccueilPage() {
         />
       </section>
 
+      <SeparateurSection />
+
       {/* Pièces uniques : étiquette, très grand titre serif, paragraphe
           puis les deux attributs iconés (sur mesure, fait main)
           présents sur la maquette. */}
@@ -436,6 +463,8 @@ export default function AccueilPage() {
         </div>
       </SectionEditoriale>
 
+      <SeparateurSection />
+
       {/* Équipe : très grand titre serif, paragraphe d&rsquo;intro puis
           les cinq cartes à bordure dorée, numérotées 01–05 — numéro
           doré, nom en Bodoni, ligne de rôle en capitales espacées
@@ -462,6 +491,8 @@ export default function AccueilPage() {
           ))}
         </div>
       </SectionEditoriale>
+
+      <SeparateurSection />
 
       {/* Clôture narrative : étiquette, très grand titre serif et
           paragraphe d&rsquo;ouverture, sans bouton — la maquette
