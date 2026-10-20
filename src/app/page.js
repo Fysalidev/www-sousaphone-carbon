@@ -196,15 +196,23 @@ const EQUIPE = [
   },
 ];
 
+// Vignettes de la section galerie : provisoirement la photo déposée
+// (galerie-01) et les deux photos du hero — les autres photos de la
+// galerie ont été retirées en attendant le nouveau dépôt complet.
+// À rebasculer vers des photos de public/galerie/ une fois les 33
+// emplacements remplis.
 const GALERIE = [
   {
     src: "/galerie/galerie-01.webp",
-    alt: "Sousaphone Carbon mis en situation",
+    alt: "Sousaphone en laiton de profil sur fond noir, pavillon doré au premier plan",
   },
-  { src: "/galerie/galerie-02.webp", alt: "Sousaphone Carbon vu de près" },
   {
-    src: "/galerie/galerie-03.webp",
-    alt: "Musicien avec son Sousaphone Carbon",
+    src: "/photos/hero-desktop.webp",
+    alt: "Sousaphone en laiton sur fond sombre",
+  },
+  {
+    src: "/photos/hero-mobile.webp",
+    alt: "Sousaphone en laiton sur fond sombre",
   },
 ];
 
