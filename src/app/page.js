@@ -1,6 +1,21 @@
 import Image from "next/image";
 import Link from "next/link";
-import Revelation from "@/components/Revelation";
+import {
+  AttributIcone,
+  BlocCorps,
+  CarteMembre,
+  IconeCleAnglaise,
+  IconeFaitMain,
+  IconeMesures,
+  VignetteGalerie,
+} from "@/components/CartesAccueil";
+import {
+  EtiquetteDoree,
+  ParagrapheSection,
+  SectionEditoriale,
+  SeparateurSection,
+  TitreSection,
+} from "@/components/SectionsEditoriales";
 
 // URL canonique du site : variable d'environnement si définie, sinon
 // l'URL de déploiement fournie par Vercel, sinon localhost en dev.
@@ -64,48 +79,26 @@ const DONNEES_STRUCTUREES = {
 // Page d'accueil : hero empilé sur fond noir, entièrement visible
 // sur un écran — il occupe au minimum la hauteur restante après le
 // header, la photo absorbant l'espace vertical disponible.
-// Accroche dorée et titre centrés, photo entre le titre et la
-// promesse, puis les trois chiffres clés et l'appel à l'action,
-// centrés ; sur les écrans courts, les paliers .hero-* (globals.css)
-// compressent typo et espacements pour que tout tienne à l'écran.
-// Sous le hero, la page suit la maquette mobile (300–640px) : une
-// colonne éditoriale alignée à gauche — étiquette dorée, très grand
-// titre serif, paragraphe — déroulant exigence et ses trois cartes,
-// pièces uniques et ses attributs iconés, équipe, trois vignettes
-// vers la galerie, puis la clôture narrative. Un séparateur logo (logo-inter.png, encre inversée en
-// blanc par filtre CSS) aligné à gauche sur la colonne éditoriale
-// marque chaque transition entre sections. Le footer (déjà en
-// place) referme la page.
+// Sous le hero, cinq sections éditoriales (exigence, pièces uniques,
+// équipe, galerie, clôture) sépérées par un séparateur logo — leurs
+// primitives vivent dans components/SectionsEditoriales.js, leurs
+// cartes dans components/CartesAccueil.js, leur contenu dans les
+// tableaux de données ci-dessous. Le footer referme la page.
 
 // ——— Hero ———
 
-// Bouton « Sousaphone Carbon » : plein or, texte noir, coins adoucis
-// (rounded-lg) et inversion au survol. `classe` porte l'espacement et
-// l'animation d'entrée ; `hero-bouton` le palier de compression sur
-// écrans courts (globals.css).
-function BoutonDecouvrir({ classe = "" }) {
+// Bouton d'action or : plein or, texte noir, coins adoucis (rounded-lg)
+// et inversion au survol — décliné pour le hero (« Sousaphone
+// Carbon », avec la classe hero-bouton : palier de compression sur
+// écrans courts) et la clôture (« Nous contacter »). `classe` porte
+// l'espacement et l'animation d'entrée.
+function BoutonAction({ href, children, classe = "" }) {
   return (
     <Link
-      href="/instrument"
-      className={`hero-bouton inline-flex items-center gap-3 rounded-lg border border-[#C9A96A] bg-[#C9A96A] px-8 py-4 text-xs min-[1555px]:text-sm font-bold tracking-[0.25em] text-black transition-colors hover:bg-black hover:text-[#C9A96A] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white ${classe}`}
+      href={href}
+      className={`inline-flex items-center gap-3 rounded-lg border border-[#C9A96A] bg-[#C9A96A] px-8 py-4 text-xs min-[1555px]:text-sm font-bold tracking-[0.25em] text-black transition-colors hover:bg-black hover:text-[#C9A96A] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white ${classe}`}
     >
-      SOUSAPHONE CARBON
-      <span aria-hidden="true">&rarr;</span>
-    </Link>
-  );
-}
-
-// Bouton « Nous contacter » de la clôture : même langage que le
-// bouton du hero (plein or, texte noir, coins adoucis, inversion au
-// survol), sans la classe hero-bouton — les paliers de compression
-// du hero ne concernent pas une section défilée.
-function BoutonContacter() {
-  return (
-    <Link
-      href="/contact"
-      className="inline-flex items-center gap-3 rounded-lg border border-[#C9A96A] bg-[#C9A96A] px-8 py-4 text-xs min-[1555px]:text-sm font-bold tracking-[0.25em] text-black transition-colors hover:bg-black hover:text-[#C9A96A] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
-    >
-      NOUS CONTACTER
+      {children}
       <span aria-hidden="true">&rarr;</span>
     </Link>
   );
@@ -135,262 +128,50 @@ function StatProduit({ valeur, legende, pourcent = true, dore = false }) {
   );
 }
 
-// ——— Sections éditoriales (composants partagés) ———
-
-// Étiquette dorée de section : le « branding » SC Sousaphone Carbon qui
-// surmonte chaque grand titre, même traitement que l'accroche du hero.
-function EtiquetteDoree({ children }) {
-  return (
-    <p className="text-[10px] min-[768px]:text-xs min-[1555px]:text-sm font-bold tracking-[0.25em] text-[#C9A96A]">
-      {children}
-    </p>
-  );
-}
-
-// Grand titre serif de section (Bodoni Moda) : très généreux
-// sur mobile comme sur la maquette, à cheval sur deux lignes quand
-// la phrase est longue. Un filet or court sous le titre relie les
-// quatre sections éditoriales de la page.
-function TitreSection({ id, children }) {
-  return (
-    <div>
-      <h2
-        id={id}
-        className="font-serif-carte mt-4 text-4xl min-[768px]:text-5xl min-[1440px]:text-6xl font-semibold leading-tight text-white"
-      >
-        {children}
-      </h2>
-      <div aria-hidden="true" className="mt-6 h-px w-16 bg-[#C9A96A]" />
-    </div>
-  );
-}
-
-// Paragraphe de corps de section : colonne lisible, texte clair sur
-// fond noir.
-function ParagrapheSection({ children }) {
-  return (
-    <p className="mt-6 max-w-xl text-sm min-[640px]:text-base leading-relaxed text-stone-300">
-      {children}
-    </p>
-  );
-}
-
-// Séparateur de sections : logo-inter.png (recadré à la main, le
-// cadrage final est porté par l'asset), aligné à gauche sur la
-// colonne éditoriale — même structure que SectionEditoriale (px-6
-// pleine largeur, colonne max-w-3xl centrée), pour poser son bord
-// gauche exactement à l'aplomb du texte. Son encre est noire sur
-// fond transparent, le filtre CSS `invert` la rend blanche à
-// l'affichage. Purement décoratif (aria-hidden, alt vide). Même
-// rythme vertical que les sections (py-12 / py-16) : l'espace qui
-// l'entoure est identique au-dessus et en dessous, à chaque
-// transition.
-function SeparateurSection() {
-  return (
-    <div aria-hidden="true" className="w-full px-6 py-12 min-[768px]:py-16">
-      <div className="mx-auto max-w-3xl">
-        <Image
-          src="/logo-inter.png"
-          alt=""
-          width={1750}
-          height={698}
-          className="h-24 min-[768px]:h-32 w-auto invert"
-        />
-      </div>
-    </div>
-  );
-}
-
-// Coquille des sections éditoriales : colonne lisible centrée
-// (max-w-3xl) ; le titre porte l'ancre aria référencée par `titreAria`.
-// Rythme vertical partagé avec le séparateur (py-12 / py-16) : chaque
-// transition section→logo→section est symétrique, sans empilement
-// des paddings. Le contenu passe par <Revelation> : il apparaît en
-// fondu à l'arrivée dans la fenêtre (désactivé avec
-// prefers-reduced-motion, visible sans JavaScript).
-function SectionEditoriale({ titreAria, children }) {
-  return (
-    <section
-      aria-labelledby={titreAria}
-      className="px-6 py-12 min-[768px]:py-16"
-    >
-      <div className="mx-auto max-w-3xl">
-        <Revelation>{children}</Revelation>
-      </div>
-    </section>
-  );
-}
-
-// ——— Section Exigence ———
-
-// Bloc corps (expertise, innovations, passion) : carte à bordure
-// dorée — numéro doré en Montserrat, intitulé en Bodoni Moda,
-// paragraphe — empilée verticalement comme sur la maquette mobile.
-function BlocCorps({ numero, titre, children }) {
-  return (
-    <article className="rounded-2xl border border-[#C9A96A]/40 p-6">
-      <p className="font-sans text-lg min-[640px]:text-xl min-[1024px]:text-2xl font-bold text-[#C9A96A]">
-        {numero}
-      </p>
-      <h3 className="font-serif-carte mt-2 text-xl min-[640px]:text-2xl min-[1024px]:text-3xl font-medium text-white">
-        {titre}
-      </h3>
-      <p className="font-sans mt-3 text-sm min-[640px]:text-base min-[1024px]:text-lg leading-relaxed text-stone-300">
-        {children}
-      </p>
-    </article>
-  );
-}
-
-// ——— Section Pièces uniques ———
-
-// Pastille circulaire à fond doré contenant une icône au trait noir :
-// langage des cercles de réseaux du menu, décliné pour le contenu.
-// Purement décorative : les textes portent le sens.
-function PastilleIcone({ children }) {
-  return (
-    <span
-      aria-hidden="true"
-      className="inline-flex size-11 shrink-0 items-center justify-center rounded-full bg-[#C9A96A] text-black"
-    >
-      {children}
-    </span>
-  );
-}
-
-function IconeMesures() {
-  return (
-    <svg
-      className="size-5"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="1.5"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      aria-hidden="true"
-    >
-      <path d="M4 21v-7" />
-      <path d="M4 10V3" />
-      <path d="M12 21v-9" />
-      <path d="M12 8V3" />
-      <path d="M20 21v-5" />
-      <path d="M20 12V3" />
-      <path d="M1 14h6" />
-      <path d="M9 8h6" />
-      <path d="M17 16h6" />
-    </svg>
-  );
-}
-
-function IconeFaitMain() {
-  return (
-    <svg
-      className="size-5"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="1.5"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      aria-hidden="true"
-    >
-      <path d="M18 11V6a2 2 0 0 0-4 0v5" />
-      <path d="M14 10V4a2 2 0 0 0-4 0v6" />
-      <path d="M10 10.5V6a2 2 0 0 0-4 0v8" />
-      <path d="M18 11a2 2 0 1 1 4 0v3a8 8 0 0 1-8 8h-2a8 8 0 0 1-8-8v-2a2 2 0 1 1 4 0" />
-    </svg>
-  );
-}
-
-// Clé anglaise : réglage et contrôle individuel de chaque instrument.
-function IconeCleAnglaise() {
-  return (
-    <svg
-      className="size-5"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="1.5"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      aria-hidden="true"
-    >
-      <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z" />
-    </svg>
-  );
-}
-
-// Attribut iconé (sur mesure, fait main) : pastille à gauche, intitulé
-// et phrase à droite.
-function AttributIcone({ Icone, titre, children }) {
-  return (
-    <div className="flex items-start gap-4">
-      <PastilleIcone>
-        <Icone />
-      </PastilleIcone>
-      <div>
-        <h3 className="text-xs min-[640px]:text-sm font-bold tracking-[0.25em] text-white">
-          {titre}
-        </h3>
-        <p className="mt-2 text-sm min-[640px]:text-base leading-relaxed text-stone-300">
-          {children}
-        </p>
-      </div>
-    </div>
-  );
-}
-
-// ——— Section Galerie ———
-
-// Vignette de la section galerie : photo cliquable vers la page
-// galerie, cadrage portrait unifié (3/4) dans une carte à bordure
-// dorée comme les cartes de contenu — le survol renforce la bordure
-// et zoome légèrement l'image.
-function VignetteGalerie({ src, alt }) {
-  return (
-    <Link
-      href="/galerie"
-      aria-label="Voir la galerie"
-      className="group block overflow-hidden rounded-2xl border border-[#C9A96A]/40 transition-colors hover:border-[#C9A96A] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white"
-    >
-      <Image
-        src={src}
-        alt={alt}
-        width={900}
-        height={1268}
-        sizes="(min-width: 768px) 240px, 100vw"
-        className="aspect-[3/4] w-full object-cover transition-transform duration-500 ease-out group-hover:scale-105 motion-reduce:transition-none"
-      />
-    </Link>
-  );
-}
-
-// ——— Section Équipe ———
-
-// Carte membre : même langage que les cartes Exigence — bordure
-// dorée, numéro doré en Montserrat, nom en Bodoni Moda — la ligne
-// de rôle en petites capitales espacées ne s'affiche que si le
-// membre en a un.
-function CarteMembre({ numero, nom, role }) {
-  return (
-    <article className="rounded-2xl border border-[#C9A96A]/40 p-6">
-      <p className="font-sans text-lg min-[640px]:text-xl min-[1024px]:text-2xl font-bold text-[#C9A96A]">
-        {numero}
-      </p>
-      <h3 className="font-serif-carte mt-2 text-xl min-[640px]:text-2xl min-[1024px]:text-3xl font-medium text-white">
-        {nom}
-      </h3>
-      {role && (
-        <p className="font-sans mt-3 text-[10px] min-[640px]:text-xs font-bold tracking-[0.25em] text-[#C9A96A]">
-          {role}
-        </p>
-      )}
-    </article>
-  );
-}
-
 // ——— Données ———
+// Le contenu éditorial des sections vit ici, en tableaux : modifier
+// un texte ne touche plus la structure JSX de la page.
+
+const EXIGENCE = [
+  {
+    numero: "01",
+    titre: "Expertise reconnue",
+    texte:
+      "Leaders en Europe pour les sousaphones et référence mondiale dans la fabrication artisanale d’instruments à vent.",
+  },
+  {
+    numero: "02",
+    titre: "Innovations",
+    texte:
+      "Corps et pavillon en carbone ultra-léger. Pistons en inox pleine masse, barillet dédié au 4ᵉ système, branche d’accord et embout de réglage, uniques.",
+  },
+  {
+    numero: "03",
+    titre: "Passion",
+    texte:
+      "Une équipe entièrement dédiée à la qualité musicale, au confort de jeu et à la musique pour tous.",
+  },
+];
+
+const ATTRIBUTS = [
+  {
+    Icone: IconeMesures,
+    titre: "SUR MESURE",
+    texte: "Chaque pièce est fabriquée dans nos ateliers en France.",
+  },
+  {
+    Icone: IconeFaitMain,
+    titre: "FAIT MAIN",
+    texte:
+      "Chaque instrument est assemblé pièce par pièce, avec le plus grand soin.",
+  },
+  {
+    Icone: IconeCleAnglaise,
+    titre: "CONTRÔLE INDIVIDUEL",
+    texte:
+      "Chaque instrument est contrôlé et réglé individuellement en atelier.",
+  },
+];
 
 const EQUIPE = [
   {
@@ -413,6 +194,12 @@ const EQUIPE = [
     nom: "Victor HEGE",
     role: "ARTISTE | RELATIONS ARTISTIQUES ET MÉDIAS",
   },
+];
+
+const GALERIE = [
+  { src: "/soussa-1.webp", alt: "Sousaphone Carbon mis en situation" },
+  { src: "/soussaX.webp", alt: "Sousaphone Carbon vu de près" },
+  { src: "/soussaY.webp", alt: "Musicien avec son Sousaphone Carbon" },
 ];
 
 // ——— Page ———
@@ -496,7 +283,12 @@ export default function AccueilPage() {
             <StatProduit valeur="100" legende="CARBONE" />
             <StatProduit valeur="Made" legende="IN FRANCE" pourcent={false} />
           </dl>
-          <BoutonDecouvrir classe="hero-entree mt-6 self-center [animation-delay:900ms]" />
+          <BoutonAction
+            href="/instrument"
+            classe="hero-bouton hero-entree mt-6 self-center [animation-delay:900ms]"
+          >
+            SOUSAPHONE CARBON
+          </BoutonAction>
         </div>
       </section>
 
@@ -504,8 +296,7 @@ export default function AccueilPage() {
 
       {/* Exigence : étiquette, très grand titre serif et les trois
           cartes à bordure dorée (expertise, innovations, passion),
-          numérotées 01–03, empilées et alignées à gauche. Rythme
-          vertical généreux entre les cartes. */}
+          numérotées 01–03, empilées et alignées à gauche. */}
       <SectionEditoriale titreAria="titre-exigence">
         <EtiquetteDoree>NOTRE DIFFÉRENCE</EtiquetteDoree>
         <TitreSection id="titre-exigence">
@@ -516,27 +307,18 @@ export default function AccueilPage() {
           nouvelle expérience musicale.
         </ParagrapheSection>
         <div className="mt-12 space-y-6 min-[768px]:mt-16">
-          <BlocCorps numero="01" titre="Expertise reconnue">
-            Leaders en Europe pour les sousaphones et référence mondiale dans la
-            fabrication artisanale d&rsquo;instruments à vent.
-          </BlocCorps>
-          <BlocCorps numero="02" titre="Innovations">
-            Corps et pavillon en carbone ultra-léger. Pistons en inox pleine
-            masse, barillet dédié au 4ᵉ système, branche d&rsquo;accord et
-            embout de réglage, uniques.
-          </BlocCorps>
-          <BlocCorps numero="03" titre="Passion">
-            Une équipe entièrement dédiée à la qualité musicale, au confort de
-            jeu et à la musique pour tous.
-          </BlocCorps>
+          {EXIGENCE.map(({ numero, titre, texte }) => (
+            <BlocCorps key={numero} numero={numero} titre={titre}>
+              {texte}
+            </BlocCorps>
+          ))}
         </div>
       </SectionEditoriale>
 
       <SeparateurSection />
 
       {/* Pièces uniques : étiquette, très grand titre serif, paragraphe
-          puis les deux attributs iconés (sur mesure, fait main)
-          présents sur la maquette. */}
+          puis les trois attributs iconés. */}
       <SectionEditoriale titreAria="titre-pieces-uniques">
         <EtiquetteDoree>FABRIQUÉ EN FRANCE</EtiquetteDoree>
         <TitreSection id="titre-pieces-uniques">
@@ -551,25 +333,18 @@ export default function AccueilPage() {
           d&rsquo;exception.
         </ParagrapheSection>
         <div className="mt-12 space-y-8">
-          <AttributIcone Icone={IconeMesures} titre="SUR MESURE">
-            Chaque pièce est fabriquée dans nos ateliers en France.
-          </AttributIcone>
-          <AttributIcone Icone={IconeFaitMain} titre="FAIT MAIN">
-            Chaque instrument est assemblé pièce par pièce, avec le plus grand
-            soin.
-          </AttributIcone>
-          <AttributIcone Icone={IconeCleAnglaise} titre="CONTRÔLE INDIVIDUEL">
-            Chaque instrument est contrôlé et réglé individuellement en atelier.
-          </AttributIcone>
+          {ATTRIBUTS.map(({ Icone, titre, texte }) => (
+            <AttributIcone key={titre} Icone={Icone} titre={titre}>
+              {texte}
+            </AttributIcone>
+          ))}
         </div>
       </SectionEditoriale>
 
       <SeparateurSection />
 
       {/* Équipe : très grand titre serif, paragraphe d&rsquo;intro puis
-          les cinq cartes à bordure dorée, numérotées 01–05 — numéro
-          doré, nom en Bodoni, ligne de rôle en capitales espacées
-          quand elle existe. */}
+          les cinq cartes à bordure dorée, numérotées 01–05. */}
       <SectionEditoriale titreAria="titre-equipe">
         <EtiquetteDoree>UN TRAVAIL D&rsquo;ÉQUIPE</EtiquetteDoree>
         <TitreSection id="titre-equipe">
@@ -607,18 +382,9 @@ export default function AccueilPage() {
           L&rsquo;atelier, l&rsquo;instrument et les musiciens en situation.
         </ParagrapheSection>
         <div className="mt-12 grid grid-cols-1 gap-6 min-[768px]:grid-cols-3">
-          <VignetteGalerie
-            src="/soussa-1.webp"
-            alt="Sousaphone Carbon mis en situation"
-          />
-          <VignetteGalerie
-            src="/soussaX.webp"
-            alt="Sousaphone Carbon vu de près"
-          />
-          <VignetteGalerie
-            src="/soussaY.webp"
-            alt="Musicien avec son Sousaphone Carbon"
-          />
+          {GALERIE.map(({ src, alt }) => (
+            <VignetteGalerie key={src} src={src} alt={alt} />
+          ))}
         </div>
       </SectionEditoriale>
 
@@ -638,7 +404,7 @@ export default function AccueilPage() {
           pour commencer une aventure musicale unique.
         </ParagrapheSection>
         <div className="mt-12">
-          <BoutonContacter />
+          <BoutonAction href="/contact">NOUS CONTACTER</BoutonAction>
         </div>
       </SectionEditoriale>
     </main>
