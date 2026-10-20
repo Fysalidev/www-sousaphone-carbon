@@ -1,6 +1,6 @@
 "use client";
 
-import { Fragment, useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -15,11 +15,12 @@ import {
   SeparateurDore,
 } from "./MenuCommun";
 
+// Liens de navigation de la section DÉCOUVRIR — le contact n'y
+// figure pas : il a sa propre section ÉCHANGER dans le menu.
 const LIENS = [
   { href: "/", label: "ACCUEIL" },
   { href: "/instrument", label: "SOUSAPHONE CARBON" },
   { href: "/galerie", label: "GALERIE" },
-  { href: "/contact", label: "CONTACT" },
 ];
 
 const COULEUR_INACTIF = "text-white transition-colors hover:text-[#B69660]";
@@ -162,17 +163,11 @@ function NavDesktop({ pathname }) {
       className="hidden items-center min-[768px]:flex"
     >
       <ul className="flex items-center gap-8">
-        {LIENS.filter(({ href }) => href !== "/contact").map(
-          ({ href, label }) => (
-            <li key={href}>
-              <LienDesktop
-                href={href}
-                label={label}
-                actif={pathname === href}
-              />
-            </li>
-          ),
-        )}
+        {LIENS.map(({ href, label }) => (
+          <li key={href}>
+            <LienDesktop href={href} label={label} actif={pathname === href} />
+          </li>
+        ))}
         <li>
           <BoutonContacter actif={pathname === "/contact"} />
         </li>
@@ -264,51 +259,49 @@ function MenuPleinEcran({ pathname, ouvert, fermer, refDialogue, refFermer }) {
           >
             <Intertitre>DÉCOUVRIR</Intertitre>
           </li>
-          {LIENS.map(({ href, label }, index) => {
-            const actif = pathname === href;
-            return (
-              <Fragment key={href}>
-                {href === "/contact" && (
-                  <li
-                    style={delaiEntree(ouvert, index)}
-                    className={`pb-2 pt-4 ${classesEntree(ouvert)}`}
-                  >
-                    <Intertitre>ÉCHANGER</Intertitre>
-                  </li>
-                )}
-                <li
-                  style={delaiEntree(ouvert, index)}
-                  className={classesEntree(ouvert)}
-                >
-                  <LienMenu
-                    href={href}
-                    label={label}
-                    actif={actif}
-                    onClick={fermer}
-                  />
-                </li>
-                {href === "/contact" && (
-                  <li
-                    style={delaiEntree(ouvert, index)}
-                    className={classesEntree(ouvert)}
-                  >
-                    <p className="pb-2 text-xs min-[420px]:text-sm text-stone-200">
-                      Atelier en France, sur rendez-vous
-                    </p>
-                  </li>
-                )}
-              </Fragment>
-            );
-          })}
+          {LIENS.map(({ href, label }, index) => (
+            <li
+              key={href}
+              style={delaiEntree(ouvert, index)}
+              className={classesEntree(ouvert)}
+            >
+              <LienMenu
+                href={href}
+                label={label}
+                actif={pathname === href}
+                onClick={fermer}
+              />
+            </li>
+          ))}
           <li
             style={delaiEntree(ouvert, LIENS.length)}
+            className={`pb-2 pt-4 ${classesEntree(ouvert)}`}
+          >
+            <Intertitre>ÉCHANGER</Intertitre>
+          </li>
+          <li
+            style={delaiEntree(ouvert, LIENS.length)}
+            className={classesEntree(ouvert)}
+          >
+            <LienMenu
+              href="/contact"
+              label="Contact"
+              actif={pathname === "/contact"}
+              onClick={fermer}
+            />
+            <p className="pb-2 text-xs min-[420px]:text-sm text-stone-200">
+              Atelier en France, sur rendez-vous
+            </p>
+          </li>
+          <li
+            style={delaiEntree(ouvert, LIENS.length + 1)}
             className={`mt-auto pb-4 pt-6 ${classesEntree(ouvert)}`}
           >
             <ListeReseaux />
             <SeparateurDore />
           </li>
           <li
-            style={delaiEntree(ouvert, LIENS.length + 1)}
+            style={delaiEntree(ouvert, LIENS.length + 2)}
             className={`pt-4 ${classesEntree(ouvert)}`}
           >
             <PiedLegal />
