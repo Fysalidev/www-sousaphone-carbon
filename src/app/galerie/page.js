@@ -1,14 +1,104 @@
+import Image from "next/image";
+import {
+  EtiquetteDoree,
+  ParagrapheSection,
+  SectionEditoriale,
+} from "@/components/SectionsEditoriales";
+
 export const metadata = {
-  title: "Galerie",
-  description: "Photos de sousaphones et de fanfares.",
+  title: "Galerie — Sousaphone Carbon",
+  description:
+    "L'atelier, l'instrument et les musiciens en situation : découvrez le Sousaphone Carbon en images.",
 };
+
+// Page galerie : mêmes primitives éditoriales que l'accueil (étiquette
+// dorée, titre serif, filet or, colonne max-w-3xl) puis une grille en
+// colonnes CSS — effet masonry sans JavaScript, chaque photo garde
+// son ratio naturel. La page est la cible des vignettes de la
+// section galerie de l'accueil.
+
+// Photos de la galerie : src, alt et dimensions intrinsèques (le
+// ratio pilote la hauteur dans la grille).
+const PHOTOS = [
+  {
+    src: "/soussa-1.webp",
+    alt: "Sousaphone Carbon mis en situation",
+    largeur: 900,
+    hauteur: 1268,
+  },
+  {
+    src: "/sousa43.webp",
+    alt: "Sousaphone Carbon vu de trois quarts",
+    largeur: 1521,
+    hauteur: 1141,
+  },
+  {
+    src: "/soussaX.webp",
+    alt: "Détail du Sousaphone Carbon",
+    largeur: 900,
+    hauteur: 1268,
+  },
+  {
+    src: "/sousa-test.webp",
+    alt: "Le Sousaphone Carbon en scène",
+    largeur: 1200,
+    hauteur: 649,
+  },
+  {
+    src: "/soussaY.webp",
+    alt: "Musicien avec son Sousaphone Carbon",
+    largeur: 900,
+    hauteur: 1268,
+  },
+  {
+    src: "/sousa-marron.webp",
+    alt: "Sousaphone Carbon en pleine lumière",
+    largeur: 2400,
+    hauteur: 3197,
+  },
+];
 
 export default function GaleriePage() {
   return (
-    <main className="flex flex-1 flex-col items-center justify-center bg-black px-6">
-      <h1 className="font-display text-4xl font-medium tracking-widest text-white uppercase">
-        Galerie
-      </h1>
+    <main className="flex flex-col bg-black">
+      <SectionEditoriale titreAria="titre-galerie">
+        <EtiquetteDoree>GALERIE</EtiquetteDoree>
+        {/* Titre principal de la page : TitreSection produit des h2
+            (sur l'accueil, le h1 vit dans le hero) — ici le h1 est
+            posé directement, avec le même traitement visuel. */}
+        <h1
+          id="titre-galerie"
+          className="font-serif-carte mt-4 text-4xl min-[768px]:text-5xl min-[1440px]:text-6xl font-semibold leading-tight text-white"
+        >
+          L&rsquo;instrument en images.
+        </h1>
+        <div aria-hidden="true" className="mt-6 h-px w-16 bg-[#C9A96A]" />
+        <ParagrapheSection>
+          L&rsquo;atelier, l&rsquo;instrument et les musiciens en situation.
+        </ParagrapheSection>
+        {/* Grille masonry : colonnes CSS (1 mobile, 2 à partir de
+            768px, 3 à partir de 1200px), chaque figure garde son
+            ratio naturel — les portraits et les paysages se
+            répartissent d'eux-mêmes. Carte à bordure dorée comme
+            les cartes de contenu du site. */}
+        <div className="mt-12 columns-1 gap-6 min-[768px]:columns-2 min-[1200px]:columns-3">
+          {PHOTOS.map(({ src, alt, largeur, hauteur }) => (
+            <figure
+              key={src}
+              className="mb-6 break-inside-avoid overflow-hidden rounded-2xl border border-[#C9A96A]/40"
+            >
+              <Image
+                src={src}
+                alt={alt}
+                width={largeur}
+                height={hauteur}
+                sizes="(min-width: 75rem) 30vw, (min-width: 48rem) 45vw, 100vw"
+                className="h-auto w-full"
+              />
+            </figure>
+          ))}
+        </div>
+      </SectionEditoriale>
     </main>
   );
 }
