@@ -1,4 +1,3 @@
-import Image from "next/image";
 import Revelation from "@/components/Revelation";
 import {
   EtiquetteDoree,
@@ -16,213 +15,16 @@ export const metadata = {
 // dorée, h1 serif, filet or), puis la grille des photos s'étend plus
 // large (max-w-6xl) — une composition rythmée plutôt qu'une grille
 // uniforme : le cycle alterne une grande image pleine largeur, une
-// ligne de 2, une ligne de 3, puis de nouveau 2 — quatre cycles
-// complets, la série se referme sur une grande. Chaque photo est
-// cadrée par son ratio imposé (aspect) et l'effet de survol du
-// fichier précédent (éclat, zoom, filet or).
+// ligne de 2, une ligne de 3, puis de nouveau 2.
+//
+// ÉTAT PROVISOIRE — plan de câblage : chaque emplacement affiche un
+// placeholder avec le nom du fichier attendu (public/galerie/) et le
+// ratio à respecter. Une fois les 33 photos déposées sous ces noms
+// exacts, remplacer le rendu des placeholders par <Image> (décommenter
+// le bloc en bas de page).
 
-// Photos de la galerie : src, alt et dimensions intrinsèques (le
-// ratio affiché est piloté par la taille, pas par les dimensions).
-const PHOTOS = [
-  {
-    src: "/galerie/galerie-1.webp",
-    alt: "Sousaphone Carbon mis en situation",
-    largeur: 900,
-    hauteur: 1268,
-  },
-  {
-    src: "/galerie/galerie-2.webp",
-    alt: "Détail du Sousaphone Carbon",
-    largeur: 900,
-    hauteur: 1268,
-  },
-  {
-    src: "/galerie/galerie-3.webp",
-    alt: "Musicien avec son Sousaphone Carbon",
-    largeur: 900,
-    hauteur: 1268,
-  },
-  {
-    src: "/galerie/galerie-4.webp",
-    alt: "Sousaphone Carbon vu de trois quarts",
-    largeur: 1521,
-    hauteur: 1141,
-  },
-  {
-    src: "/galerie/galerie-5.webp",
-    alt: "Le Sousaphone Carbon en scène",
-    largeur: 1200,
-    hauteur: 649,
-  },
-  {
-    src: "/galerie/galerie-6.webp",
-    alt: "Sousaphone Carbon en pleine lumière",
-    largeur: 2400,
-    hauteur: 3197,
-  },
-  {
-    src: "/galerie/galerie-7.webp",
-    alt: "Photographie du Sousaphone Carbon",
-    largeur: 1016,
-    hauteur: 1612,
-  },
-  {
-    src: "/galerie/galerie-8.webp",
-    alt: "Photographie du Sousaphone Carbon",
-    largeur: 1006,
-    hauteur: 1400,
-  },
-  {
-    src: "/galerie/galerie-9.webp",
-    alt: "Photographie du Sousaphone Carbon",
-    largeur: 948,
-    hauteur: 1696,
-  },
-  {
-    src: "/galerie/galerie-10.webp",
-    alt: "Photographie du Sousaphone Carbon",
-    largeur: 1201,
-    hauteur: 1600,
-  },
-  {
-    src: "/galerie/galerie-11.webp",
-    alt: "Photographie du Sousaphone Carbon",
-    largeur: 2000,
-    hauteur: 1501,
-  },
-  {
-    src: "/galerie/galerie-12.webp",
-    alt: "Photographie du Sousaphone Carbon",
-    largeur: 2000,
-    hauteur: 1501,
-  },
-  {
-    src: "/galerie/galerie-13.webp",
-    alt: "Photographie du Sousaphone Carbon",
-    largeur: 2000,
-    hauteur: 1502,
-  },
-  {
-    src: "/galerie/galerie-14.webp",
-    alt: "Photographie du Sousaphone Carbon",
-    largeur: 1502,
-    hauteur: 2000,
-  },
-  {
-    src: "/galerie/galerie-15.webp",
-    alt: "Photographie du Sousaphone Carbon",
-    largeur: 1501,
-    hauteur: 2000,
-  },
-  {
-    src: "/galerie/galerie-16.webp",
-    alt: "Photographie du Sousaphone Carbon",
-    largeur: 1501,
-    hauteur: 2000,
-  },
-  {
-    src: "/galerie/galerie-17.webp",
-    alt: "Photographie du Sousaphone Carbon",
-    largeur: 1501,
-    hauteur: 2000,
-  },
-  {
-    src: "/galerie/galerie-18.webp",
-    alt: "Photographie du Sousaphone Carbon",
-    largeur: 1501,
-    hauteur: 2000,
-  },
-  {
-    src: "/galerie/galerie-19.webp",
-    alt: "Photographie du Sousaphone Carbon",
-    largeur: 1501,
-    hauteur: 2000,
-  },
-  {
-    src: "/galerie/galerie-20.webp",
-    alt: "Photographie du Sousaphone Carbon",
-    largeur: 1502,
-    hauteur: 2000,
-  },
-  {
-    src: "/galerie/galerie-21.webp",
-    alt: "Photographie du Sousaphone Carbon",
-    largeur: 1501,
-    hauteur: 2000,
-  },
-  {
-    src: "/galerie/galerie-22.webp",
-    alt: "Photographie du Sousaphone Carbon",
-    largeur: 2000,
-    hauteur: 1501,
-  },
-  {
-    src: "/galerie/galerie-23.webp",
-    alt: "Photographie du Sousaphone Carbon",
-    largeur: 1501,
-    hauteur: 2000,
-  },
-  {
-    src: "/galerie/galerie-24.webp",
-    alt: "Photographie du Sousaphone Carbon",
-    largeur: 1501,
-    hauteur: 2000,
-  },
-  {
-    src: "/galerie/galerie-25.webp",
-    alt: "Photographie du Sousaphone Carbon",
-    largeur: 1501,
-    hauteur: 2000,
-  },
-  {
-    src: "/galerie/galerie-26.webp",
-    alt: "Photographie du Sousaphone Carbon",
-    largeur: 1600,
-    hauteur: 1200,
-  },
-  {
-    src: "/galerie/galerie-27.webp",
-    alt: "Photographie du Sousaphone Carbon",
-    largeur: 1200,
-    hauteur: 1600,
-  },
-  {
-    src: "/galerie/galerie-28.webp",
-    alt: "Photographie du Sousaphone Carbon",
-    largeur: 1600,
-    hauteur: 1200,
-  },
-  {
-    src: "/galerie/galerie-29.webp",
-    alt: "Photographie du Sousaphone Carbon",
-    largeur: 1200,
-    hauteur: 1600,
-  },
-  {
-    src: "/galerie/galerie-30.webp",
-    alt: "Photographie du Sousaphone Carbon",
-    largeur: 1202,
-    hauteur: 1600,
-  },
-  {
-    src: "/galerie/galerie-31.webp",
-    alt: "Photographie du Sousaphone Carbon",
-    largeur: 1202,
-    hauteur: 1600,
-  },
-  {
-    src: "/galerie/galerie-32.webp",
-    alt: "Photographie du Sousaphone Carbon",
-    largeur: 1600,
-    hauteur: 1200,
-  },
-  {
-    src: "/galerie/galerie-33.webp",
-    alt: "Photographie du Sousaphone Carbon",
-    largeur: 2000,
-    hauteur: 740,
-  },
-];
+// Nombre d'emplacements de la galerie.
+const NOMBRE_PHOTOS = 33;
 
 // Rythme de la composition, répété sur toute la série : une grande
 // pleine largeur, une ligne de 2 (moyennes), une ligne de 3
@@ -240,20 +42,24 @@ const CYCLE = [
 ];
 
 // Empreinte de chaque taille : colonnes occupées (grille de 2
-// colonnes en mobile, 6 au-delà de 768px) et ratio d'affichage —
-// l'object-cover cadre la photo dans son emplacement.
+// colonnes en mobile, 6 au-delà de 768px), ratio d'affichage et
+// dimensions conseillées pour la photo source (rétina 2×, la grille
+// s'affichant au maximum à 1152px de large).
 const EMPREINTES = {
   grande: {
     classes: "col-span-2 md:col-span-6 aspect-[16/10]",
-    sizes: "(min-width: 72rem) 1152px, 100vw",
+    ratio: "16/10",
+    conseils: "≈ 2304 × 1440 px",
   },
   moyenne: {
     classes: "col-span-1 md:col-span-3 aspect-[4/5]",
-    sizes: "(min-width: 48rem) 552px, 100vw",
+    ratio: "4/5",
+    conseils: "≈ 1130 × 1410 px",
   },
   petite: {
     classes: "col-span-1 md:col-span-2 aspect-[3/4]",
-    sizes: "(min-width: 48rem) 368px, 50vw",
+    ratio: "3/4",
+    conseils: "≈ 740 × 985 px",
   },
 };
 
@@ -276,28 +82,33 @@ export default function GaleriePage() {
           L&rsquo;atelier, l&rsquo;instrument et les musiciens en situation.
         </ParagrapheSection>
       </SectionEditoriale>
-      {/* Grille des photos : plus large que la colonne éditoriale
-          (max-w-6xl), composition en grille de 6 colonnes rythmée
-          par le cycle. Au survol : éclat, zoom dans le cadre et
-          filet or en contour (l'outline ne décale pas la grille). */}
-      <section aria-label="Photos" className="px-6 pb-20 min-[768px]:pb-28">
+      {/* Plan de câblage : chaque emplacement indique le fichier
+          attendu dans public/galerie/ et son ratio. Les placeholders
+          reprennent exactement la place des futures photos (mêmes
+          colonnes, mêmes ratios) pour valider la composition. */}
+      <section
+        aria-label="Emplacements"
+        className="px-6 pb-20 min-[768px]:pb-28"
+      >
         <Revelation>
           <div className="mx-auto grid max-w-6xl grid-cols-2 gap-6 md:grid-cols-6">
-            {PHOTOS.map(({ src, alt, largeur, hauteur }, index) => {
+            {Array.from({ length: NOMBRE_PHOTOS }, (_, index) => {
               const empreinte = EMPREINTES[CYCLE[index % CYCLE.length]];
+              const numero = String(index + 1).padStart(2, "0");
               return (
                 <figure
-                  key={src}
-                  className={`group overflow-hidden rounded-2xl outline-1 -outline-offset-1 outline-transparent transition-[outline-color] duration-300 ease-out hover:outline-[#C9A96A] motion-reduce:transition-none ${empreinte.classes}`}
+                  key={numero}
+                  className={`flex flex-col items-center justify-center gap-1 rounded-2xl border border-dashed border-[#C9A96A]/30 bg-stone-900 p-4 text-center ${empreinte.classes}`}
                 >
-                  <Image
-                    src={src}
-                    alt={alt}
-                    width={largeur}
-                    height={hauteur}
-                    sizes={empreinte.sizes}
-                    className="h-full w-full object-cover brightness-90 transition-[filter,transform] duration-500 ease-out group-hover:scale-105 group-hover:brightness-100 motion-reduce:transition-none"
-                  />
+                  <figcaption className="text-xs min-[768px]:text-sm font-bold text-[#C9A96A]">
+                    galerie-{numero}.webp
+                  </figcaption>
+                  <p className="text-[10px] min-[768px]:text-xs text-stone-300">
+                    {empreinte.ratio}
+                  </p>
+                  <p className="text-[10px] min-[768px]:text-xs text-stone-400">
+                    {empreinte.conseils}
+                  </p>
                 </figure>
               );
             })}
