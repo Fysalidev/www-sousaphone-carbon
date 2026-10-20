@@ -236,14 +236,53 @@ function AttributIcone({ Icone, titre, children }) {
   );
 }
 
+// ——— Section Équipe ———
+
+// Carte membre : même langage que les cartes Exigence — bordure
+// dorée, numéro doré en Montserrat, nom en Bodoni Moda — la ligne
+// de rôle en petites capitales espacées ne s'affiche que si le
+// membre en a un.
+function CarteMembre({ numero, nom, role }) {
+  return (
+    <article className="rounded-2xl border border-[#C9A96A]/40 p-6">
+      <p className="font-sans text-lg min-[640px]:text-xl min-[1024px]:text-2xl font-bold text-[#C9A96A]">
+        {numero}
+      </p>
+      <h3 className="font-serif-carte mt-2 text-xl min-[640px]:text-2xl min-[1024px]:text-3xl font-medium text-white">
+        {nom}
+      </h3>
+      {role && (
+        <p className="font-sans mt-3 text-[10px] min-[640px]:text-xs font-bold tracking-[0.25em] text-[#C9A96A]">
+          {role}
+        </p>
+      )}
+    </article>
+  );
+}
+
 // ——— Données ———
 
 const EQUIPE = [
-  "Guillaume COSTE",
-  "François COSTE",
-  "Jérémie WISS",
-  "Christian ROSÉ",
-  "Victor HEEGE",
+  {
+    nom: "Guillaume COSTE",
+    role: "ARTISAN CREATEUR | CONCEPTION - FABRICATION",
+  },
+  {
+    nom: "François COSTE",
+    role: "ARTISAN CREATEUR | CONCEPTION - FABRICATION - VENTE",
+  },
+  {
+    nom: "Jérome WISS",
+    role: "ARTISAN CREATEUR | CONCEPTION - FABRICATION",
+  },
+  {
+    nom: "Christian BOSC",
+    role: "ARTISAN CREATEUR | CONCEPTION - FABRICATION",
+  },
+  {
+    nom: "Victor HEGE",
+    role: "ARTISTE | RELATIONS ARTISTIQUES ET MÉDIAS",
+  },
 ];
 
 // ——— Page ———
@@ -398,7 +437,9 @@ export default function AccueilPage() {
       </SectionEditoriale>
 
       {/* Équipe : très grand titre serif, paragraphe d&rsquo;intro puis
-          les cinq noms empilés, séparés par un filet doré. */}
+          les cinq cartes à bordure dorée, numérotées 01–05 — numéro
+          doré, nom en Bodoni, ligne de rôle en capitales espacées
+          quand elle existe. */}
       <SectionEditoriale titreAria="titre-equipe">
         <EtiquetteDoree>UN TRAVAIL D&rsquo;ÉQUIPE</EtiquetteDoree>
         <TitreSection id="titre-equipe">
@@ -410,16 +451,16 @@ export default function AccueilPage() {
           Cinq talents, une même ambition : repousser les limites de
           l&rsquo;instrument.
         </ParagrapheSection>
-        <ul className="mt-12 space-y-6">
-          {EQUIPE.map((nom) => (
-            <li
-              key={nom}
-              className="border-t border-[#C9A96A]/40 pt-4 font-display font-medium text-xl min-[640px]:text-2xl text-white"
-            >
-              {nom}
-            </li>
+        <div className="mt-12 space-y-6 min-[768px]:mt-16">
+          {EQUIPE.map((membre, index) => (
+            <CarteMembre
+              key={membre.nom}
+              numero={String(index + 1).padStart(2, "0")}
+              nom={membre.nom}
+              role={membre.role}
+            />
           ))}
-        </ul>
+        </div>
       </SectionEditoriale>
 
       {/* Clôture narrative : étiquette, très grand titre serif et
