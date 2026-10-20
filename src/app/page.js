@@ -331,6 +331,10 @@ export default function AccueilPage() {
         <TitreSection id="titre-exigence">
           L&rsquo;exigence, à chaque note.
         </TitreSection>
+        <ParagrapheSection>
+          Une expertise forgée dans nos ateliers, mise au service d&rsquo;une
+          nouvelle expérience musicale.
+        </ParagrapheSection>
         <div className="mt-12 space-y-6 min-[768px]:mt-16">
           <BlocCorps numero="01" titre="Expertise reconnue">
             Leaders en Europe pour les sousaphones et référence mondiale dans la
