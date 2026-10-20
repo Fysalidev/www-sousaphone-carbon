@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Revelation from "@/components/Revelation";
 import {
   EtiquetteDoree,
   ParagrapheSection,
@@ -11,16 +12,17 @@ export const metadata = {
     "L'atelier, l'instrument et les musiciens en situation : découvrez le Sousaphone Carbon en images.",
 };
 
-// Page galerie : mêmes primitives éditoriales que l'accueil (étiquette
-// dorée, titre serif, filet or, colonne max-w-3xl) puis une grille en
-// colonnes CSS — effet masonry sans JavaScript, chaque photo garde
-// son ratio naturel. La page est la cible des vignettes de la
-// section galerie de l'accueil.
+// Page galerie : l'en-tête suit la colonne éditoriale du site (étiquette
+// dorée, h1 serif, filet or), puis la grille des photos s'étend plus
+// large (max-w-6xl) — une composition rythmée plutôt qu'une grille
+// uniforme : le cycle alterne une grande image pleine largeur, une
+// ligne de 2, une ligne de 3, puis de nouveau 2 — quatre cycles
+// complets, la série se referme sur une grande. Chaque photo est
+// cadrée par son ratio imposé (aspect) et l'effet de survol du
+// fichier précédent (éclat, zoom, filet or).
 
 // Photos de la galerie : src, alt et dimensions intrinsèques (le
-// ratio pilote la hauteur dans la grille). Les 33 photos vivent
-// dans public/galerie/ ; les alt des dépôts récents restent
-// génériques — à affiner quand leur contenu sera décrit.
+// ratio affiché est piloté par la taille, pas par les dimensions).
 const PHOTOS = [
   {
     src: "/galerie/galerie-1.webp",
@@ -222,6 +224,39 @@ const PHOTOS = [
   },
 ];
 
+// Rythme de la composition, répété sur toute la série : une grande
+// pleine largeur, une ligne de 2 (moyennes), une ligne de 3
+// (petites), de nouveau 2 — 33 photos = 4 cycles + la grande de
+// clôture.
+const CYCLE = [
+  "grande",
+  "moyenne",
+  "moyenne",
+  "petite",
+  "petite",
+  "petite",
+  "moyenne",
+  "moyenne",
+];
+
+// Empreinte de chaque taille : colonnes occupées (grille de 2
+// colonnes en mobile, 6 au-delà de 768px) et ratio d'affichage —
+// l'object-cover cadre la photo dans son emplacement.
+const EMPREINTES = {
+  grande: {
+    classes: "col-span-2 md:col-span-6 aspect-[16/10]",
+    sizes: "(min-width: 72rem) 1152px, 100vw",
+  },
+  moyenne: {
+    classes: "col-span-1 md:col-span-3 aspect-[4/5]",
+    sizes: "(min-width: 48rem) 552px, 100vw",
+  },
+  petite: {
+    classes: "col-span-1 md:col-span-2 aspect-[3/4]",
+    sizes: "(min-width: 48rem) 368px, 50vw",
+  },
+};
+
 export default function GaleriePage() {
   return (
     <main className="flex flex-col bg-black">
@@ -240,29 +275,35 @@ export default function GaleriePage() {
         <ParagrapheSection>
           L&rsquo;atelier, l&rsquo;instrument et les musiciens en situation.
         </ParagrapheSection>
-        {/* Effet de survol : la photo est légèrement voilée au repos
-            (brightness-90) ; au survol elle s'éclaire, zoome
-            discrètement dans son cadre (overflow-hidden) et un filet
-            or se dessine en contour — l'outline, contrairement à une
-            bordure, ne décale pas la masonry. */}
-        <div className="mt-12 columns-1 gap-6 min-[768px]:columns-2 min-[1200px]:columns-3">
-          {PHOTOS.map(({ src, alt, largeur, hauteur }) => (
-            <figure
-              key={src}
-              className="group mb-6 break-inside-avoid overflow-hidden rounded-2xl outline-1 -outline-offset-1 outline-transparent transition-[outline-color] duration-300 ease-out hover:outline-[#C9A96A] motion-reduce:transition-none"
-            >
-              <Image
-                src={src}
-                alt={alt}
-                width={largeur}
-                height={hauteur}
-                sizes="(min-width: 75rem) 30vw, (min-width: 48rem) 45vw, 100vw"
-                className="h-auto w-full brightness-90 transition-[filter,transform] duration-500 ease-out group-hover:scale-105 group-hover:brightness-100 motion-reduce:transition-none"
-              />
-            </figure>
-          ))}
-        </div>
       </SectionEditoriale>
+      {/* Grille des photos : plus large que la colonne éditoriale
+          (max-w-6xl), composition en grille de 6 colonnes rythmée
+          par le cycle. Au survol : éclat, zoom dans le cadre et
+          filet or en contour (l'outline ne décale pas la grille). */}
+      <section aria-label="Photos" className="px-6 pb-20 min-[768px]:pb-28">
+        <Revelation>
+          <div className="mx-auto grid max-w-6xl grid-cols-2 gap-6 md:grid-cols-6">
+            {PHOTOS.map(({ src, alt, largeur, hauteur }, index) => {
+              const empreinte = EMPREINTES[CYCLE[index % CYCLE.length]];
+              return (
+                <figure
+                  key={src}
+                  className={`group overflow-hidden rounded-2xl outline-1 -outline-offset-1 outline-transparent transition-[outline-color] duration-300 ease-out hover:outline-[#C9A96A] motion-reduce:transition-none ${empreinte.classes}`}
+                >
+                  <Image
+                    src={src}
+                    alt={alt}
+                    width={largeur}
+                    height={hauteur}
+                    sizes={empreinte.sizes}
+                    className="h-full w-full object-cover brightness-90 transition-[filter,transform] duration-500 ease-out group-hover:scale-105 group-hover:brightness-100 motion-reduce:transition-none"
+                  />
+                </figure>
+              );
+            })}
+          </div>
+        </Revelation>
+      </section>
     </main>
   );
 }
