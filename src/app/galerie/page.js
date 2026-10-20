@@ -25,7 +25,9 @@ export const metadata = {
 // intégrer un nouveau fichier, ajouter son entrée dans PHOTOS
 // ci-dessous (src, alt, dimensions) — le reste reste en placeholder.
 
-// Photos déposées, par numéro d'emplacement.
+// Photos déposées, par numéro d'emplacement. Le paramètre ?v=N dans
+// src court-circuite les caches (navigateur et optimiseur) : il faut
+// l'incrémenter à chaque remplacement d'un fichier sous le même nom.
 const PHOTOS = {
   "01": {
     src: "/galerie/galerie-01.webp",
