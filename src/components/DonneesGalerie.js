@@ -64,4 +64,10 @@ export const PHOTOS = {
     largeur: 1130,
     hauteur: 1410,
   },
+  "03": {
+    src: "/galerie/galerie-03.webp",
+    alt: "Photographie du Sousaphone Carbon",
+    largeur: 1130,
+    hauteur: 1410,
+  },
 };
