@@ -55,6 +55,14 @@ const PHOTOS = {
     src: "/galerie/galerie-09.webp",
     alt: "Photographie du Sousaphone Carbon",
   },
+  10: {
+    src: "/galerie/galerie-10.webp",
+    alt: "Photographie du Sousaphone Carbon",
+  },
+  11: {
+    src: "/galerie/galerie-11.webp",
+    alt: "Photographie du Sousaphone Carbon",
+  },
 };
 
 // Nombre d'emplacements de la galerie.
