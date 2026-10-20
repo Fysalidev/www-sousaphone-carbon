@@ -65,7 +65,7 @@ export default function ContactForm() {
       <button
         type="submit"
         disabled={pending}
-        className="flex h-12 w-fit items-center justify-center rounded-full bg-foreground px-5 text-base font-medium text-background transition-colors hover:bg-[#383838] disabled:opacity-50 dark:hover:bg-[#ccc]"
+        className="flex h-12 w-fit items-center justify-center rounded-lg bg-foreground px-5 text-base font-medium text-background transition-colors hover:bg-[#383838] disabled:opacity-50 dark:hover:bg-[#ccc]"
       >
         {pending ? "Envoi…" : "Envoyer"}
       </button>
