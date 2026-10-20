@@ -22,14 +22,15 @@ export const metadata = {
 
 // ——— Hero ———
 
-// Pilule « Sousaphone Carbon » : plein or, texte noir, inversion au
-// survol. `classe` porte l'espacement et l'animation d'entrée ;
-// `hero-bouton` le palier de compression sur écrans courts (globals.css).
+// Bouton « Sousaphone Carbon » : plein or, texte noir, coins adoucis
+// (rounded-lg) et inversion au survol. `classe` porte l'espacement et
+// l'animation d'entrée ; `hero-bouton` le palier de compression sur
+// écrans courts (globals.css).
 function BoutonDecouvrir({ classe = "" }) {
   return (
     <Link
       href="/instrument"
-      className={`hero-bouton inline-flex items-center gap-3 rounded-full border border-[#C9A96A] bg-[#C9A96A] px-8 py-4 text-xs min-[1555px]:text-sm font-bold tracking-[0.25em] text-black transition-colors hover:bg-black hover:text-[#C9A96A] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white ${classe}`}
+      className={`hero-bouton inline-flex items-center gap-3 rounded-lg border border-[#C9A96A] bg-[#C9A96A] px-8 py-4 text-xs min-[1555px]:text-sm font-bold tracking-[0.25em] text-black transition-colors hover:bg-black hover:text-[#C9A96A] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white ${classe}`}
     >
       SOUSAPHONE CARBON
       <span aria-hidden="true">&rarr;</span>
