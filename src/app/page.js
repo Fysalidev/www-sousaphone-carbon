@@ -241,7 +241,7 @@ export default function AccueilPage() {
             </p>
             <h1
               id="titre-hero"
-              className="hero-entree hero-titre mt-4 font-sans font-bold text-white [animation-delay:300ms]"
+              className="hero-entree hero-titre mt-4 font-sans font-bold leading-tight text-white [animation-delay:300ms]"
             >
               L&rsquo;âme intacte
               <br />
