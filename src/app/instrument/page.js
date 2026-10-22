@@ -188,15 +188,16 @@ export default function InstrumentPage() {
         </ParagrapheSection>
       </SectionEditoriale>
 
-      {/* Bandeau doré « une question » : le seul moment clair de la
-          page — fond or plein écran, textes noirs, bouton plein noir.
+      {/* Boîte dorée « une question » : le seul moment clair de la
+          page — fond or de la largeur du texte (max-w-3xl), centré
+          et à coins adoucis, textes noirs, bouton plein noir.
           Il ouvre directement la porte du contact. */}
       <section
         aria-labelledby="titre-question"
-        className="bg-[#C9A96A] px-6 py-12 min-[768px]:py-16"
+        className="px-6 py-12 min-[768px]:py-16"
       >
         <Revelation>
-          <div className="mx-auto max-w-3xl text-center">
+          <div className="mx-auto max-w-3xl rounded-2xl bg-[#C9A96A] px-6 py-12 text-center min-[768px]:py-16">
             <h2
               id="titre-question"
               className="font-serif-carte text-3xl min-[640px]:text-4xl min-[1024px]:text-5xl font-semibold leading-tight text-black"
