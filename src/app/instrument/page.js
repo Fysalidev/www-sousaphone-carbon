@@ -16,10 +16,11 @@ export const metadata = {
 
 // Page instrument : le produit lui-même, du hero « nouvelle génération »
 // (photo de l'instrument, texte à gauche en deux colonnes sur desktop)
-// à la clôture « un instrument d'exception ». Les sections reprennent
-// les primitives de l'accueil (étiquette dorée, titre serif, paragraphe,
-// coquille max-w-3xl) et sont séparées par le même séparateur logo.
-// Le header et le footer du projet encadrent la page (layout.js).
+// à la clôture « pièce unique » et son appel à l'action. Les sections
+// reprennent les primitives de l'accueil (étiquette dorée, titre serif,
+// paragraphe, coquille max-w-3xl) et sont séparées par le même
+// séparateur logo. Le header et le footer du projet encadrent la page
+// (layout.js).
 
 // Bouton d'action or, même langage que l'accueil : plein or, texte
 // noir, coins adoucis et inversion au survol. `inverse` le décline
@@ -328,8 +329,7 @@ export default function InstrumentPage() {
       <SeparateurSection />
 
       {/* Le geste juste : précision et son, refermés par la citation
-          de l'atelier — serif italique, attribution en petites
-          capitales dorées. */}
+          de l'atelier — serif italique dorée. */}
       <SectionEditoriale titreAria="titre-geste">
         <EtiquetteDoree>LE GESTE JUSTE</EtiquetteDoree>
         <h2
