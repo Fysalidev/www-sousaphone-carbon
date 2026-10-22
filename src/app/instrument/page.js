@@ -107,7 +107,7 @@ export default function InstrumentPage() {
           (mix-blend-screen, masque limité aux bords) que le hero
           d'accueil. */}
       <section className="flex flex-col bg-linear-to-b from-[#C9A96A]/10 via-transparent to-[#C9A96A]/10 min-[768px]:min-h-[calc(100svh-var(--hauteur-barre-header))]">
-        <div className="flex w-full flex-1 flex-col items-center px-6 pt-12 pb-10 text-center min-[768px]:mx-auto min-[768px]:grid min-[768px]:max-w-[90rem] min-[768px]:grid-cols-[minmax(0,3fr)_minmax(0,2fr)] min-[768px]:items-center min-[768px]:gap-10 min-[768px]:pt-0 min-[768px]:pb-0 min-[768px]:text-left">
+        <div className="flex w-full flex-1 flex-col items-center px-6 pt-12 pb-10 text-center min-[768px]:mx-auto min-[768px]:grid min-[768px]:max-w-[90rem] min-[768px]:grid-cols-[minmax(0,3fr)_minmax(0,2fr)] min-[768px]:items-center min-[768px]:gap-10 min-[768px]:pt-0 min-[768px]:text-left">
           <div className="flex flex-col items-center min-[768px]:items-start">
             <p className="hero-entree text-[10px] min-[768px]:text-xs min-[1555px]:text-sm font-bold tracking-[0.25em] text-[#C9A96A] [animation-delay:150ms]">
               SOUSAPHONE NOUVELLE GÉNÉRATION
@@ -123,6 +123,24 @@ export default function InstrumentPage() {
               légèreté. Plus résistant et remarquablement plus doux que ses
               prédécesseurs.
             </p>
+            {/* Chiffres clés, sous la promesse dans la colonne texte
+                (à gauche de la photo) sur desktop (≥ 768px) ; sur
+                mobile, la section dédiée ci-dessous prend le
+                relais. */}
+            <dl
+              aria-label="Chiffres clés"
+              className="hero-entree mt-10 hidden w-full grid-cols-3 gap-10 min-[768px]:grid [animation-delay:750ms]"
+            >
+              {STATS.map((stat) => (
+                <StatCommentee
+                  key={stat.legende}
+                  valeur={stat.valeur}
+                  legende={stat.legende}
+                  description={stat.description}
+                  dore={stat.dore}
+                />
+              ))}
+            </dl>
           </div>
           {/* Photo de l'instrument : galerie-05.webp (740×1038) sert
               les deux dispositions — empilé mobile et colonne
@@ -143,31 +161,12 @@ export default function InstrumentPage() {
             />
           </div>
         </div>
-        {/* Chiffres clés, remontés en bas du hero sur desktop (≥ 768px)
-            : la section force la hauteur plein écran, le bloc texte/
-            photo en absorbe l'essentiel et les trois stats commentées
-            se posent au bas de la scène. Sur mobile, la section
-            dédiée ci-dessous prend le relais. */}
-        <dl
-          aria-label="Chiffres clés"
-          className="hero-entree mx-auto hidden w-full max-w-[90rem] grid-cols-3 gap-10 px-6 pb-10 min-[768px]:grid [animation-delay:750ms]"
-        >
-          {STATS.map((stat) => (
-            <StatCommentee
-              key={stat.legende}
-              valeur={stat.valeur}
-              legende={stat.legende}
-              description={stat.description}
-              dore={stat.dore}
-            />
-          ))}
-        </dl>
       </section>
 
       {/* Chiffres clés commentés, mobile uniquement (sur desktop ils
-          vivent en bas du hero) : les trois mêmes stats que l'accueil
-          (-40 %, 100 %, 100 %) avec ici une phrase d'explication sous
-          chacune, empilées et centrées. */}
+          vivent dans la colonne texte du hero) : les trois mêmes stats
+          que l'accueil (-40 %, 100 %, 100 %) avec ici une phrase
+          d'explication sous chacune, empilées et centrées. */}
       <section
         aria-label="Chiffres clés"
         className="px-6 py-12 min-[768px]:hidden"
