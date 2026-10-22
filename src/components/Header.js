@@ -136,10 +136,9 @@ function LienDesktop({ href, label, actif }) {
   );
 }
 
-// Bouton « Contacter » : le bouton or du hero décliné pour le
-// header — plein or, texte noir, inversion au survol ; sur la page
-// contact, il s'inverse (contour or sur noir) pour marquer la page
-// active. Pilule (rounded-full) alignée sur le bouton du hero.
+// Bouton « Contacter » : la pilule contour du hero déclinée pour le
+// header — bordure et texte or, l'or arrive au survol ; sur la page
+// contact, il passe en plein or pour marquer la page active.
 function BoutonContacter({ actif }) {
   return (
     <Link
@@ -147,8 +146,8 @@ function BoutonContacter({ actif }) {
       aria-current={actif ? "page" : undefined}
       className={`rounded-full px-5 py-2.5 text-xs font-bold tracking-[0.25em] transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white ${
         actif
-          ? "border border-[#C9A96A] text-[#C9A96A]"
-          : "bg-[#C9A96A] text-black hover:bg-black hover:text-[#C9A96A]"
+          ? "border border-[#C9A96A] bg-[#C9A96A] text-black"
+          : "border border-[#C9A96A]/70 bg-transparent text-[#C9A96A] hover:border-[#C9A96A] hover:bg-[#C9A96A] hover:text-black"
       }`}
     >
       CONTACTER

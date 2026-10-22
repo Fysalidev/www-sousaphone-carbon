@@ -22,9 +22,10 @@ export const metadata = {
 // bandeau logo (BandeauLogo). Le header et le footer du projet
 // encadrent la page (layout.js).
 
-// Bouton d'action or, même langage que l'accueil : plein or, texte
-// noir, pilule (rounded-full) et inversion au survol. `inverse` le
-// décline pour le bandeau doré (plein noir, texte or) — c'est le
+// Bouton d'action pilule contour (rounded-full) : bordure et texte
+// or, fond transparent, l'or arrive au survol — même langage que
+// l'accueil. `inverse` le décline pour le bandeau doré (plein noir,
+// texte or) : un contour or serait illisible sur fond or, c'est le
 // seul point où le bouton vit sur un fond clair.
 function BoutonAction({ href, children, inverse = false, classe = "" }) {
   return (
@@ -33,7 +34,7 @@ function BoutonAction({ href, children, inverse = false, classe = "" }) {
       className={`inline-flex items-center gap-3 rounded-full border px-8 py-4 texte-bouton font-bold tracking-[0.25em] transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 ${
         inverse
           ? "border-black bg-black text-[#C9A96A] hover:bg-black/80 focus-visible:outline-black"
-          : "border-[#C9A96A] bg-[#C9A96A] text-black hover:bg-black hover:text-[#C9A96A] focus-visible:outline-white"
+          : "border-[#C9A96A]/70 bg-transparent text-[#C9A96A] hover:border-[#C9A96A] hover:bg-[#C9A96A] hover:text-black focus-visible:outline-white"
       } ${classe}`}
     >
       {children}
