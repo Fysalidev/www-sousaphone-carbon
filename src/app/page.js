@@ -16,7 +16,6 @@ import {
   EtiquetteDoree,
   ParagrapheSection,
   SectionEditoriale,
-  SeparateurSection,
   TitreSection,
 } from "@/components/SectionsEditoriales";
 
@@ -50,8 +49,8 @@ const DONNEES_STRUCTUREES = {
 // sur un écran — il occupe au minimum la hauteur restante après le
 // header, la photo absorbant l'espace vertical disponible.
 // Sous le hero, cinq sections éditoriales (exigence, pièces uniques,
-// équipe, galerie, clôture) sépérées par un séparateur logo — leurs
-// primitives vivent dans components/SectionsEditoriales.js, leurs
+// équipe, galerie, clôture), chacune ouverte par le bandeau logo —
+// leurs primitives vivent dans components/SectionsEditoriales.js, leurs
 // cartes dans components/CartesAccueil.js, leur contenu dans les
 // tableaux de données ci-dessous. Le footer referme la page.
 
@@ -253,12 +252,10 @@ export default function AccueilPage() {
         </div>
       </section>
 
-      <SeparateurSection />
-
       {/* Exigence : étiquette, très grand titre serif et les trois
           cartes à bordure dorée (expertise, innovations, passion),
           numérotées 01–03, empilées et alignées à gauche. */}
-      <SectionEditoriale titreAria="titre-exigence">
+      <SectionEditoriale titreAria="titre-exigence" bandeau>
         <EtiquetteDoree>NOTRE DIFFÉRENCE</EtiquetteDoree>
         <TitreSection id="titre-exigence">
           L&rsquo;exigence, à chaque note.
@@ -276,11 +273,9 @@ export default function AccueilPage() {
         </div>
       </SectionEditoriale>
 
-      <SeparateurSection />
-
       {/* Pièces uniques : étiquette, très grand titre serif, paragraphe
           puis les trois attributs iconés. */}
-      <SectionEditoriale titreAria="titre-pieces-uniques">
+      <SectionEditoriale titreAria="titre-pieces-uniques" bandeau>
         <EtiquetteDoree>FABRIQUÉ EN FRANCE</EtiquetteDoree>
         <TitreSection id="titre-pieces-uniques">
           Des pièces uniques,
@@ -302,11 +297,9 @@ export default function AccueilPage() {
         </div>
       </SectionEditoriale>
 
-      <SeparateurSection />
-
       {/* Équipe : très grand titre serif, paragraphe d&rsquo;intro puis
           les cinq cartes à bordure dorée, numérotées 01–05. */}
-      <SectionEditoriale titreAria="titre-equipe">
+      <SectionEditoriale titreAria="titre-equipe" bandeau>
         <EtiquetteDoree>UN TRAVAIL D&rsquo;ÉQUIPE</EtiquetteDoree>
         <TitreSection id="titre-equipe">
           Les mains derrière
@@ -329,12 +322,10 @@ export default function AccueilPage() {
         </div>
       </SectionEditoriale>
 
-      <SeparateurSection />
-
       {/* Galerie : trois vignettes portrait teaser vers la page
           galerie — la respiration visuelle de la page, tous les
           autres blocs étant textuels. */}
-      <SectionEditoriale titreAria="titre-galerie">
+      <SectionEditoriale titreAria="titre-galerie" bandeau>
         <EtiquetteDoree>GALERIE</EtiquetteDoree>
         <TitreSection id="titre-galerie">
           L&rsquo;instrument en images.
@@ -354,13 +345,11 @@ export default function AccueilPage() {
         </div>
       </SectionEditoriale>
 
-      <SeparateurSection />
-
       {/* Clôture narrative : étiquette, très grand titre serif et
           paragraphe d&rsquo;ouverture, refermés par l'appel à
           l'action « Nous contacter » — la page se termine sur une
           sortie vers le contact, le footer prend le relais. */}
-      <SectionEditoriale titreAria="titre-final">
+      <SectionEditoriale titreAria="titre-final" bandeau>
         <EtiquetteDoree>SC SOUSAPHONE CARBON</EtiquetteDoree>
         <TitreSection id="titre-final">
           Un instrument d&rsquo;exception, pensé pour les musiciens exigeants.

@@ -125,7 +125,7 @@ const EMPREINTES = {
 export default function GaleriePage() {
   return (
     <main className="flex flex-col bg-black">
-      <SectionEditoriale titreAria="titre-galerie">
+      <SectionEditoriale titreAria="titre-galerie" bandeau>
         <EtiquetteDoree>GALERIE</EtiquetteDoree>
         <h1
           id="titre-galerie"

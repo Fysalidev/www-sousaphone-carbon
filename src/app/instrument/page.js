@@ -17,11 +17,10 @@ export const metadata = {
 // Page instrument : le produit lui-même, du hero « nouvelle génération »
 // (photo de l'instrument, texte à gauche en deux colonnes sur desktop)
 // à la clôture « pièce unique » et son appel à l'action. Les sections
-// reprennent les primitives de l'accueil (étiquette dorée, titre serif,
-// paragraphe, coquille max-w-3xl) ; prototype en cours : chaque section
-// ouvre sur le bandeau logo (BandeauLogo) au lieu du séparateur
-// intercalaire encore en vigueur sur les autres pages. Le header et le
-// footer du projet encadrent la page (layout.js).
+// reprennent les primitives communes (étiquette dorée, titre serif,
+// paragraphe, coquille max-w-3xl) ; chaque section ouvre sur le
+// bandeau logo (BandeauLogo). Le header et le footer du projet
+// encadrent la page (layout.js).
 
 // Bouton d'action or, même langage que l'accueil : plein or, texte
 // noir, coins adoucis et inversion au survol. `inverse` le décline
@@ -268,9 +267,7 @@ export default function InstrumentPage() {
         </Revelation>
       </section>
 
-      {/* L'art du souffle : édition limitée et fabrication artisanale.
-          Prototype : chaque section ouvre sur le bandeau logo, les
-          séparateurs intercalaires sont retirés. */}
+      {/* L'art du souffle : édition limitée et fabrication artisanale. */}
       <SectionEditoriale titreAria="titre-souffle" bandeau>
         <EtiquetteDoree>L&rsquo;ART DU SOUFFLE</EtiquetteDoree>
         <h2
@@ -293,8 +290,7 @@ export default function InstrumentPage() {
       {/* Boîte dorée « une question » : le seul moment clair de la
           page — fond or de la largeur du texte (max-w-3xl), centré
           et à coins adoucis, textes noirs, bouton plein noir. Le
-          bandeau logo ouvre la section comme partout (prototype).
-          Empilé et centré sur mobile ; à partir de 768px le texte
+          bandeau logo ouvre la section comme partout. Empilé et centré sur mobile ; à partir de 768px le texte
           passe à gauche et le bouton se cale à droite de la boîte.
           Il ouvre directement la porte du contact. */}
       <section
@@ -357,7 +353,7 @@ export default function InstrumentPage() {
           s'empilent dans l'ordre de lecture. La zone texte porte
           l'ancre du titre de section : l'union du carbone et du
           laiton. Ligne 2 : grande image pleine colonne sous la
-          mosaïque. Bandeau logo en tête, comme partout (prototype). */}
+          mosaïque. Bandeau logo en tête, comme partout. */}
       <section
         aria-labelledby="titre-details"
         className="px-6 py-12 min-[768px]:py-16"
@@ -412,7 +408,7 @@ export default function InstrumentPage() {
           à l'action « Nous contacter » — dernière section de la page,
           le footer prend le relais. Rythme élargi (py-16 / py-24) :
           la clôture respire davantage avant la photo de fond du
-          footer. Bandeau logo en tête, comme partout (prototype). */}
+          footer. Bandeau logo en tête, comme partout. */}
       <SectionEditoriale
         titreAria="titre-piece-unique"
         classe="py-16 min-[768px]:py-24"
