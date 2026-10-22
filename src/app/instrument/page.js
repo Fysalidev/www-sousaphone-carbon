@@ -188,8 +188,6 @@ export default function InstrumentPage() {
         </ParagrapheSection>
       </SectionEditoriale>
 
-      <SeparateurSection />
-
       {/* Bandeau doré « une question » : le seul moment clair de la
           page — fond or plein écran, textes noirs, bouton plein noir.
           Il ouvre directement la porte du contact. */}
