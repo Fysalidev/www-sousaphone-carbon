@@ -16,7 +16,6 @@ import {
   EtiquetteDoree,
   ParagrapheSection,
   SectionEditoriale,
-  SeparateurSection,
   TitreSection,
 } from "@/components/SectionsEditoriales";
 
@@ -50,25 +49,31 @@ const DONNEES_STRUCTUREES = {
 // sur un écran — il occupe au minimum la hauteur restante après le
 // header, la photo absorbant l'espace vertical disponible.
 // Sous le hero, cinq sections éditoriales (exigence, pièces uniques,
-// équipe, galerie, clôture) sépérées par un séparateur logo — leurs
-// primitives vivent dans components/SectionsEditoriales.js, leurs
+// équipe, galerie, clôture), chacune ouverte par le bandeau logo —
+// leurs primitives vivent dans components/SectionsEditoriales.js, leurs
 // cartes dans components/CartesAccueil.js, leur contenu dans les
 // tableaux de données ci-dessous. Le footer referme la page.
 
 // ——— Hero ———
 
-// Bouton d'action or : plein or, texte noir, coins adoucis (rounded-lg)
-// et inversion au survol — décliné pour le hero (« Sousaphone
+// Bouton d'action or : pilule or pleine (rounded-full) — fond or,
+// texte noir, inversion au survol ; micro-interaction : la flèche
+// glisse à droite au survol. Décliné pour le hero (« Sousaphone
 // Carbon ») et la clôture (« Nous contacter »). `classe` porte
 // l'espacement et l'animation d'entrée.
 function BoutonAction({ href, children, classe = "" }) {
   return (
     <Link
       href={href}
-      className={`inline-flex items-center gap-3 rounded-lg border border-[#C9A96A] bg-[#C9A96A] px-8 py-4 texte-bouton font-bold tracking-[0.25em] text-black transition-colors hover:bg-black hover:text-[#C9A96A] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white ${classe}`}
+      className={`group inline-flex items-center gap-3 rounded-full border border-[#C9A96A] bg-[#C9A96A] px-8 py-4 texte-bouton font-bold tracking-[0.25em] text-black transition-colors hover:bg-black hover:text-[#C9A96A] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white ${classe}`}
     >
       {children}
-      <span aria-hidden="true">&rarr;</span>
+      <span
+        aria-hidden="true"
+        className="transition-transform duration-300 ease-out group-hover:translate-x-1 motion-reduce:transition-none"
+      >
+        &rarr;
+      </span>
     </Link>
   );
 }
@@ -146,19 +151,19 @@ const ATTRIBUTS = [
 const EQUIPE = [
   {
     nom: "Guillaume COSTE",
-    role: "ARTISAN CREATEUR | CONCEPTION - FABRICATION",
+    role: "ARTISAN CRÉATEUR | CONCEPTION - FABRICATION",
   },
   {
     nom: "François COSTE",
-    role: "ARTISAN CREATEUR | CONCEPTION - FABRICATION - VENTE",
+    role: "ARTISAN CRÉATEUR | CONCEPTION - FABRICATION - VENTE",
   },
   {
-    nom: "Jérome WISS",
-    role: "ARTISAN CREATEUR | CONCEPTION - FABRICATION",
+    nom: "Jérôme WISS",
+    role: "ARTISAN CRÉATEUR | CONCEPTION - FABRICATION",
   },
   {
     nom: "Christian BOSC",
-    role: "ARTISAN CREATEUR | CONCEPTION - FABRICATION",
+    role: "ARTISAN CRÉATEUR | CONCEPTION - FABRICATION",
   },
   {
     nom: "Victor HEGE",
@@ -253,12 +258,10 @@ export default function AccueilPage() {
         </div>
       </section>
 
-      <SeparateurSection />
-
       {/* Exigence : étiquette, très grand titre serif et les trois
           cartes à bordure dorée (expertise, innovations, passion),
           numérotées 01–03, empilées et alignées à gauche. */}
-      <SectionEditoriale titreAria="titre-exigence">
+      <SectionEditoriale titreAria="titre-exigence" bandeau>
         <EtiquetteDoree>NOTRE DIFFÉRENCE</EtiquetteDoree>
         <TitreSection id="titre-exigence">
           L&rsquo;exigence, à chaque note.
@@ -276,11 +279,9 @@ export default function AccueilPage() {
         </div>
       </SectionEditoriale>
 
-      <SeparateurSection />
-
       {/* Pièces uniques : étiquette, très grand titre serif, paragraphe
           puis les trois attributs iconés. */}
-      <SectionEditoriale titreAria="titre-pieces-uniques">
+      <SectionEditoriale titreAria="titre-pieces-uniques" bandeau>
         <EtiquetteDoree>FABRIQUÉ EN FRANCE</EtiquetteDoree>
         <TitreSection id="titre-pieces-uniques">
           Des pièces uniques,
@@ -288,10 +289,10 @@ export default function AccueilPage() {
           assemblées à la main.
         </TitreSection>
         <ParagrapheSection>
-          Nous fabriquons nos pièces et chaque sousaphone prend forme à travers
-          une succession de gestes précis. Une fabrication patiente qui garantit
-          résistance, équilibre, robustesse et propriétés acoustiques
-          d&rsquo;exception.
+          Chaque pièce est façonnée avec exigence. Chaque sousaphone prend
+          forme, geste après geste, dans nos ateliers. De cette patience
+          naissent des instruments résistants, équilibrés, aux propriétés
+          acoustiques d&rsquo;exception.
         </ParagrapheSection>
         <div className="mt-12 space-y-8">
           {ATTRIBUTS.map(({ Icone, titre, texte }) => (
@@ -302,11 +303,9 @@ export default function AccueilPage() {
         </div>
       </SectionEditoriale>
 
-      <SeparateurSection />
-
       {/* Équipe : très grand titre serif, paragraphe d&rsquo;intro puis
           les cinq cartes à bordure dorée, numérotées 01–05. */}
-      <SectionEditoriale titreAria="titre-equipe">
+      <SectionEditoriale titreAria="titre-equipe" bandeau>
         <EtiquetteDoree>UN TRAVAIL D&rsquo;ÉQUIPE</EtiquetteDoree>
         <TitreSection id="titre-equipe">
           Les mains derrière
@@ -329,12 +328,10 @@ export default function AccueilPage() {
         </div>
       </SectionEditoriale>
 
-      <SeparateurSection />
-
       {/* Galerie : trois vignettes portrait teaser vers la page
           galerie — la respiration visuelle de la page, tous les
           autres blocs étant textuels. */}
-      <SectionEditoriale titreAria="titre-galerie">
+      <SectionEditoriale titreAria="titre-galerie" bandeau>
         <EtiquetteDoree>GALERIE</EtiquetteDoree>
         <TitreSection id="titre-galerie">
           L&rsquo;instrument en images.
@@ -354,13 +351,11 @@ export default function AccueilPage() {
         </div>
       </SectionEditoriale>
 
-      <SeparateurSection />
-
       {/* Clôture narrative : étiquette, très grand titre serif et
           paragraphe d&rsquo;ouverture, refermés par l'appel à
           l'action « Nous contacter » — la page se termine sur une
           sortie vers le contact, le footer prend le relais. */}
-      <SectionEditoriale titreAria="titre-final">
+      <SectionEditoriale titreAria="titre-final" bandeau>
         <EtiquetteDoree>SC SOUSAPHONE CARBON</EtiquetteDoree>
         <TitreSection id="titre-final">
           Un instrument d&rsquo;exception, pensé pour les musiciens exigeants.

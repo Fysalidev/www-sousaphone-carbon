@@ -170,7 +170,8 @@ export function VignetteGalerie({ src, alt }) {
 // Placeholder de vignette : même carte cliquable vers la galerie,
 // en attente du dépôt du fichier indiqué — même langage que les
 // placeholders de la page galerie (contour pointillé, nom du
-// fichier attendu et ratio).
+// fichier attendu, ratio et consigne d'alt : décrire la scène
+// visible en 10–20 mots, pas le nom du produit).
 export function VignetteGalerieVide({ numero }) {
   return (
     <Link
@@ -184,6 +185,9 @@ export function VignetteGalerieVide({ numero }) {
       <p className="text-[10px] min-[768px]:text-xs text-stone-300">3/4</p>
       <p className="text-[10px] min-[768px]:text-xs text-stone-400">
         ≈ 740 × 985 px
+      </p>
+      <p className="text-[10px] min-[768px]:text-xs text-stone-500">
+        alt&nbsp;: décrire la scène en 10–20 mots
       </p>
     </Link>
   );

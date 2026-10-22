@@ -2,10 +2,10 @@ import Image from "next/image";
 import Link from "next/link";
 import Revelation from "@/components/Revelation";
 import {
+  BandeauLogo,
   EtiquetteDoree,
   ParagrapheSection,
   SectionEditoriale,
-  SeparateurSection,
 } from "@/components/SectionsEditoriales";
 
 export const metadata = {
@@ -16,27 +16,34 @@ export const metadata = {
 
 // Page instrument : le produit lui-même, du hero « nouvelle génération »
 // (photo de l'instrument, texte à gauche en deux colonnes sur desktop)
-// à la clôture « un instrument d'exception ». Les sections reprennent
-// les primitives de l'accueil (étiquette dorée, titre serif, paragraphe,
-// coquille max-w-3xl) et sont séparées par le même séparateur logo.
-// Le header et le footer du projet encadrent la page (layout.js).
+// à la clôture « pièce unique » et son appel à l'action. Les sections
+// reprennent les primitives communes (étiquette dorée, titre serif,
+// paragraphe, coquille max-w-3xl) ; chaque section ouvre sur le
+// bandeau logo (BandeauLogo). Le header et le footer du projet
+// encadrent la page (layout.js).
 
-// Bouton d'action or, même langage que l'accueil : plein or, texte
-// noir, coins adoucis et inversion au survol. `inverse` le décline
-// pour le bandeau doré (plein noir, texte or) — c'est le seul point
-// où le bouton vit sur un fond clair.
+// Bouton d'action pilule or pleine (rounded-full) : fond or, texte
+// noir, inversion au survol ; micro-interaction : la flèche glisse
+// à droite au survol. `inverse` le décline pour le bandeau doré
+// (plein noir, texte or) — c'est le seul point où le bouton vit
+// sur un fond clair.
 function BoutonAction({ href, children, inverse = false, classe = "" }) {
   return (
     <Link
       href={href}
-      className={`inline-flex items-center gap-3 rounded-lg border px-8 py-4 texte-bouton font-bold tracking-[0.25em] transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 ${
+      className={`group inline-flex items-center gap-3 rounded-full border px-8 py-4 texte-bouton font-bold tracking-[0.25em] transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 ${
         inverse
           ? "border-black bg-black text-[#C9A96A] hover:bg-black/80 focus-visible:outline-black"
           : "border-[#C9A96A] bg-[#C9A96A] text-black hover:bg-black hover:text-[#C9A96A] focus-visible:outline-white"
       } ${classe}`}
     >
       {children}
-      <span aria-hidden="true">&rarr;</span>
+      <span
+        aria-hidden="true"
+        className="transition-transform duration-300 ease-out group-hover:translate-x-1 motion-reduce:transition-none"
+      >
+        &rarr;
+      </span>
     </Link>
   );
 }
@@ -70,6 +77,45 @@ function StatCommentee({ valeur, legende, description, dore = false }) {
   );
 }
 
+// Emplacement photo de la mosaïque « Détails de fabrication » :
+// carte à bordure dorée quand la photo est déposée, sinon placeholder
+// pointillé (fichier attendu, ratio, dimensions conseillées) sur le
+// même langage que la galerie. `empreinte` porte le ratio d'affichage
+// (classes aspect), les conseils de taille de la source et le sizes
+// de l'optimiseur.
+function EmplacementDetail({ photo, empreinte }) {
+  return photo ? (
+    <div
+      className={`relative overflow-hidden rounded-2xl border border-[#C9A96A]/40 ${empreinte.classes}`}
+    >
+      <Image
+        src={photo.src}
+        alt={photo.alt}
+        fill
+        sizes={empreinte.sizes}
+        className="object-cover brightness-90"
+      />
+    </div>
+  ) : (
+    <div
+      className={`flex w-full flex-col items-center justify-center gap-1 rounded-2xl border border-dashed border-[#C9A96A]/30 bg-stone-900 p-4 text-center ${empreinte.classes}`}
+    >
+      <p className="text-xs min-[768px]:text-sm font-bold text-[#C9A96A]">
+        {empreinte.fichier}
+      </p>
+      <p className="text-[10px] min-[768px]:text-xs text-stone-300">
+        {empreinte.ratio}
+      </p>
+      <p className="text-[10px] min-[768px]:text-xs text-stone-400">
+        {empreinte.conseils}
+      </p>
+      <p className="text-[10px] min-[768px]:text-xs text-stone-500">
+        alt&nbsp;: {empreinte.alt}
+      </p>
+    </div>
+  );
+}
+
 // ——— Données ———
 // Le contenu éditorial de la page vit ici, en tableaux : modifier un
 // texte ne touche pas la structure JSX.
@@ -78,21 +124,60 @@ const STATS = [
   {
     valeur: "-40",
     legende: "DE POIDS",
-    description: "Une mobilité transformée, sans compromis sonore.",
+    description: "Une mobilité accrue, sans compromis sonore.",
     dore: true,
   },
   {
     valeur: "100",
     legende: "CARBONE",
-    description:
-      "Dans son ensemble, le sousaphone est fabriqué en fibre de carbone.",
+    description: "Corps fabriqué en fibre de carbone.",
   },
   {
     valeur: "100",
-    legende: "MADE IN FRANCE",
+    legende: "ARTISANAL",
     description: "Fabriqué à la main dans nos ateliers, au cœur de la France.",
   },
 ];
+
+// Mosaïque « Détails de fabrication » : photo verticale à gauche,
+// photo paysage puis zone texte de même taille à droite. Photos à
+// déposer dans public/photos/ puis renseigner src/alt ici —
+// l'emplacement correspondant bascule du placeholder à l'image.
+// Empreintes : colonne affichée ≈ 372px sur desktop, conseils en
+// rétina 2×.
+const PHOTOS_DETAILS = {
+  verticale: null, // ex. { src: "/photos/details-01.webp", alt: "…" }
+  paysage: null, // ex. { src: "/photos/details-02.webp", alt: "…" }
+  grande: null, // ex. { src: "/photos/details-03.webp", alt: "…" }
+};
+
+const EMPREINTES_DETAILS = {
+  verticale: {
+    classes: "aspect-[3/4]",
+    fichier: "photos/details-01.webp",
+    ratio: "3/4",
+    conseils: "≈ 750 × 1000 px",
+    // Alt suggéré au dépôt, à ajuster à la scène réelle.
+    alt: "pistons et embout du sousaphone en gros plan",
+    sizes: "(min-width: 768px) 24rem, calc(100vw - 3rem)",
+  },
+  paysage: {
+    classes: "aspect-[3/2]",
+    fichier: "photos/details-02.webp",
+    ratio: "3/2",
+    conseils: "≈ 750 × 500 px",
+    alt: "bloc de pistons et tubulures du sousaphone",
+    sizes: "(min-width: 768px) 24rem, calc(100vw - 3rem)",
+  },
+  grande: {
+    classes: "aspect-[16/10]",
+    fichier: "photos/details-03.webp",
+    ratio: "16/10",
+    conseils: "≈ 1536 × 960 px",
+    alt: "vue large d'un détail de fabrication",
+    sizes: "(min-width: 768px) 48rem, calc(100vw - 3rem)",
+  },
+};
 
 // ——— Page ———
 
@@ -126,9 +211,9 @@ export default function InstrumentPage() {
               Une innovation mondiale.
             </h1>
             <p className="hero-entree instrument-promesse mt-6 max-w-xl text-base leading-relaxed text-stone-200 min-[768px]:max-w-lg [animation-delay:450ms]">
-              Un sousaphone artisanal qui conjugue tradition, innovation et
-              légèreté. Plus résistant et remarquablement plus doux que ses
-              prédécesseurs.
+              Pièce unique artisanale en carbone, alliant tradition et
+              technologies contemporaines. Légère, résistante, à
+              l&rsquo;acoustique remarquable.
             </p>
             {/* Chiffres clés, sous la promesse dans la colonne texte
                 (à gauche de la photo) sur desktop (≥ 768px) ;
@@ -173,9 +258,9 @@ export default function InstrumentPage() {
       </section>
 
       {/* Chiffres clés commentés, mobile uniquement (sur desktop ils
-          vivent dans la colonne texte du hero) : les trois mêmes stats
-          que l'accueil (-40 %, 100 %, 100 %) avec ici une phrase
-          d'explication sous chacune, empilées et centrées. */}
+          vivent dans la colonne texte du hero) : les trois chiffres
+          du hero avec ici une phrase d'explication sous chacun,
+          empilés et centrés. */}
       <section
         aria-label="Chiffres clés"
         className="px-6 py-12 min-[768px]:hidden"
@@ -195,10 +280,8 @@ export default function InstrumentPage() {
         </Revelation>
       </section>
 
-      <SeparateurSection />
-
       {/* L'art du souffle : édition limitée et fabrication artisanale. */}
-      <SectionEditoriale titreAria="titre-souffle">
+      <SectionEditoriale titreAria="titre-souffle" bandeau>
         <EtiquetteDoree>L&rsquo;ART DU SOUFFLE</EtiquetteDoree>
         <h2
           id="titre-souffle"
@@ -210,16 +293,17 @@ export default function InstrumentPage() {
         {/* Mesure élargie à la colonne éditoriale complète : le texte
             épouse la largeur du titre au lieu de couper tôt. */}
         <ParagrapheSection largeur="max-w-3xl">
-          Nous fabriquons nos pièces et chaque sousaphone prend forme à travers
-          une succession de gestes précis. Une fabrication patiente qui garantit
-          résistance, équilibre et propriétés acoustiques d&rsquo;exception.
+          Chaque pièce est façonnée avec exigence. Chaque sousaphone prend
+          forme, geste après geste, dans nos ateliers. De cette patience
+          naissent des instruments résistants, équilibrés, aux propriétés
+          acoustiques d&rsquo;exception.
         </ParagrapheSection>
       </SectionEditoriale>
 
       {/* Boîte dorée « une question » : le seul moment clair de la
           page — fond or de la largeur du texte (max-w-3xl), centré
-          et à coins adoucis, textes noirs, bouton plein noir.
-          Empilé et centré sur mobile ; à partir de 768px le texte
+          et à coins adoucis, textes noirs, bouton plein noir. Le
+          bandeau logo ouvre la section comme partout. Empilé et centré sur mobile ; à partir de 768px le texte
           passe à gauche et le bouton se cale à droite de la boîte.
           Il ouvre directement la porte du contact. */}
       <section
@@ -227,6 +311,7 @@ export default function InstrumentPage() {
         className="px-6 py-12 min-[768px]:py-16"
       >
         <Revelation>
+          <BandeauLogo />
           <div className="mx-auto max-w-3xl rounded-2xl bg-[#C9A96A] px-6 py-12 text-center min-[768px]:flex min-[768px]:items-center min-[768px]:justify-between min-[768px]:gap-10 min-[768px]:py-16 min-[768px]:text-left">
             <div>
               <h2
@@ -236,9 +321,8 @@ export default function InstrumentPage() {
                 Une question sur le sousaphone&nbsp;?
               </h2>
               <p className="paragraphe-section mx-auto mt-4 max-w-xl leading-relaxed text-black/80 min-[768px]:mx-0">
-                Nous sommes à votre écoute pour vous accompagner dans votre
-                projet, répondre à vos questions techniques ou organiser une
-                prise de contact.
+                Question technique, projet, envie d&rsquo;essai&nbsp;: nous
+                sommes à votre écoute pour vous accompagner à chaque étape.
               </p>
             </div>
             <div className="mt-8 min-[768px]:mt-0 min-[768px]:flex-none">
@@ -250,12 +334,9 @@ export default function InstrumentPage() {
         </Revelation>
       </section>
 
-      <SeparateurSection />
-
       {/* Le geste juste : précision et son, refermés par la citation
-          de l'atelier — serif italique, attribution en petites
-          capitales dorées. */}
-      <SectionEditoriale titreAria="titre-geste">
+          de l'atelier — serif italique dorée. */}
+      <SectionEditoriale titreAria="titre-geste" bandeau>
         <EtiquetteDoree>LE GESTE JUSTE</EtiquetteDoree>
         <h2
           id="titre-geste"
@@ -267,107 +348,100 @@ export default function InstrumentPage() {
         </h2>
         <div aria-hidden="true" className="mt-6 h-px w-16 bg-[#C9A96A]" />
         <ParagrapheSection largeur="max-w-3xl">
-          Chaque courbe est finie et ajustée au plus près. Les pistons répondent
-          sans effort. Les finitions sont impeccables — le son, lui, reste
-          généreux.
+          Chaque courbe est formée, ajustée, puis polie lentement. Les pistons
+          répondent sans effort&nbsp;; les brasures disparaissent sous la
+          lumière. Un fini unique.
         </ParagrapheSection>
-        <blockquote className="mt-10 text-center">
-          <p className="citation-serif mx-auto max-w-xl font-serif-carte italic leading-snug text-white">
+        <blockquote className="mt-8 text-center">
+          <p className="citation-serif mx-auto max-w-xl font-serif-carte italic leading-snug text-[#C9A96A]">
             «&nbsp;Le métal garde la mémoire du geste.&nbsp;»
           </p>
-          <cite className="mt-4 block text-[10px] min-[640px]:text-xs font-bold not-italic tracking-[0.25em] text-[#C9A96A]">
-            L&rsquo;ATELIER DE PRÉCISION
-          </cite>
         </blockquote>
       </SectionEditoriale>
 
-      <SeparateurSection />
-
-      {/* Détails de fabrication : même gabarit que les sections
-          éditoriales (max-w-3xl) — la page garde un rythme régulier,
-          la photo 16/10 dans sa carte à bordure dorée épouse la
-          colonne de texte. */}
+      {/* Détails de fabrication : étiquette puis mosaïque éditoriale —
+          photo verticale à gauche, photo paysage puis zone texte de
+          même taille à droite (la colonne de droite s'étire à la
+          hauteur de la verticale) ; sur mobile les trois blocs
+          s'empilent dans l'ordre de lecture. La zone texte porte
+          l'ancre du titre de section : l'union du carbone et du
+          laiton. Ligne 2 : grande image pleine colonne sous la
+          mosaïque. Bandeau logo en tête, comme partout. */}
       <section
         aria-labelledby="titre-details"
         className="px-6 py-12 min-[768px]:py-16"
       >
         <Revelation>
           <div className="mx-auto max-w-3xl">
-            <EtiquetteDoree>L&rsquo;ATELIER DE PRÉCISION</EtiquetteDoree>
-            <h2
-              id="titre-details"
-              className="titre-section font-serif-carte mt-4 font-semibold leading-tight text-white"
-            >
-              Détails de fabrication.
-            </h2>
-            <div aria-hidden="true" className="mt-6 h-px w-16 bg-[#C9A96A]" />
-            <div className="mt-12 min-[768px]:mt-16 overflow-hidden rounded-2xl border border-[#C9A96A]/40">
-              <Image
-                src="/galerie/galerie-01.webp"
-                alt="Sousaphone de profil sur fond noir, pavillon doré au premier plan"
-                width={1600}
-                height={1000}
-                sizes="(min-width: 768px) 48rem, 100vw"
-                className="aspect-[16/10] w-full object-cover brightness-90"
+            <BandeauLogo />
+            <EtiquetteDoree>DÉTAILS DE FABRICATION</EtiquetteDoree>
+            <div className="mt-12 grid grid-cols-1 gap-6 min-[768px]:mt-16 min-[768px]:grid-cols-2">
+              <EmplacementDetail
+                photo={PHOTOS_DETAILS.verticale}
+                empreinte={EMPREINTES_DETAILS.verticale}
+              />
+              <div className="flex flex-col gap-6">
+                <EmplacementDetail
+                  photo={PHOTOS_DETAILS.paysage}
+                  empreinte={EMPREINTES_DETAILS.paysage}
+                />
+                {/* Zone texte : remplissage élastique (flex-1, min-h-0)
+                    sous la photo paysage — la photo verticale fixe la
+                    hauteur de la ligne de grille, la colonne droite
+                    s'étire à l'identique et la zone absorbe l'espace
+                    restant : photo + texte = hauteur de details-01.
+                    Typo resserrée (text-2xl/3xl, pas la rampe
+                    titre-section) pour tenir dans sa part de
+                    hauteur. */}
+                <div className="flex min-h-0 flex-1 flex-col justify-center rounded-2xl border border-[#C9A96A]/40 px-6 py-6">
+                  <p className="etiquette-doree font-bold tracking-[0.25em] text-[#C9A96A]">
+                    MATIÈRE
+                  </p>
+                  <h2
+                    id="titre-details"
+                    className="font-serif-carte mt-3 text-2xl min-[768px]:text-3xl font-semibold leading-tight text-white"
+                  >
+                    L&rsquo;union du carbone et du laiton
+                  </h2>
+                </div>
+              </div>
+            </div>
+            {/* Ligne 2 : grande image pleine colonne sous la mosaïque. */}
+            <div className="mt-6">
+              <EmplacementDetail
+                photo={PHOTOS_DETAILS.grande}
+                empreinte={EMPREINTES_DETAILS.grande}
               />
             </div>
           </div>
         </Revelation>
       </section>
 
-      <SeparateurSection />
-
       {/* Pièce unique : la promesse sur mesure, refermée par l'appel
-          à l'action « Nous contacter ». */}
-      <SectionEditoriale titreAria="titre-piece-unique">
+          à l'action « Nous contacter » — dernière section de la page,
+          le footer prend le relais. Rythme élargi (py-16 / py-24) :
+          la clôture respire davantage avant la photo de fond du
+          footer. Bandeau logo en tête, comme partout. */}
+      <SectionEditoriale
+        titreAria="titre-piece-unique"
+        classe="py-16 min-[768px]:py-24"
+        bandeau
+      >
         <EtiquetteDoree>PIÈCE UNIQUE — SÉRIE CARBONE</EtiquetteDoree>
         <h2
           id="titre-piece-unique"
           className="font-serif-carte mt-4 text-4xl min-[768px]:text-5xl min-[1440px]:text-6xl font-semibold leading-tight text-white"
         >
-          Un instrument à votre mesure.
+          Un instrument unique, à votre mesure.
         </h2>
         <div aria-hidden="true" className="mt-6 h-px w-16 bg-[#C9A96A]" />
         <ParagrapheSection largeur="max-w-3xl">
-          Du premier souffle à la dernière note, chaque sousaphone est assemblé
-          et réglé à la main. Une précision sculpturale, une légèreté nouvelle,
-          une âme intacte.
+          Du premier tracé à la dernière note, chaque exemplaire est assemblé et
+          réglé dans nos ateliers. Une présence sculpturale, une légèreté
+          nouvelle, une âme intacte.
         </ParagrapheSection>
         <div className="mt-12">
           <BoutonAction href="/contact">NOUS CONTACTER</BoutonAction>
-        </div>
-      </SectionEditoriale>
-
-      <SeparateurSection />
-
-      {/* Clôture « instrument d'exception » : la promesse finale,
-          illustrée par une photo de la galerie en cadrage portrait —
-          la page se referme avant le footer. */}
-      <SectionEditoriale titreAria="titre-exception">
-        <EtiquetteDoree>UN INSTRUMENT D&rsquo;EXCEPTION</EtiquetteDoree>
-        <h2
-          id="titre-exception"
-          className="font-serif-carte mt-4 text-4xl min-[768px]:text-5xl min-[1440px]:text-6xl font-semibold leading-tight text-white"
-        >
-          Pensé comme une œuvre d&rsquo;art,
-          <br />
-          joué comme un rêve.
-        </h2>
-        <div aria-hidden="true" className="mt-6 h-px w-16 bg-[#C9A96A]" />
-        <ParagrapheSection largeur="max-w-3xl">
-          Fabriqué en France, façonné à la main : le partenaire de votre
-          batterie fanfare, pensé pour durer et pour faire de chaque passage une
-          signature.
-        </ParagrapheSection>
-        <div className="mt-12 min-[768px]:mt-16 overflow-hidden rounded-2xl border border-[#C9A96A]/40">
-          <Image
-            src="/galerie/galerie-02.webp"
-            alt="Photographie du Sousaphone Carbon"
-            width={900}
-            height={1200}
-            sizes="(min-width: 768px) 36rem, 100vw"
-            className="aspect-[3/4] w-full object-cover brightness-90"
-          />
         </div>
       </SectionEditoriale>
     </main>

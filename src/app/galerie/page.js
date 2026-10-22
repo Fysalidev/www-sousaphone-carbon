@@ -125,7 +125,7 @@ const EMPREINTES = {
 export default function GaleriePage() {
   return (
     <main className="flex flex-col bg-black">
-      <SectionEditoriale titreAria="titre-galerie">
+      <SectionEditoriale titreAria="titre-galerie" bandeau>
         <EtiquetteDoree>GALERIE</EtiquetteDoree>
         <h1
           id="titre-galerie"
@@ -179,6 +179,9 @@ export default function GaleriePage() {
                   </p>
                   <p className="text-[10px] min-[768px]:text-xs text-stone-400">
                     {empreinte.conseils}
+                  </p>
+                  <p className="text-[10px] min-[768px]:text-xs text-stone-500">
+                    alt&nbsp;: décrire la scène en 10–20 mots
                   </p>
                 </figure>
               );
