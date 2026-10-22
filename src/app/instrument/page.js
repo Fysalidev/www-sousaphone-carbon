@@ -198,8 +198,8 @@ export default function InstrumentPage() {
               Une innovation mondiale.
             </h1>
             <p className="hero-entree instrument-promesse mt-6 max-w-xl text-base leading-relaxed text-stone-200 min-[768px]:max-w-lg [animation-delay:450ms]">
-              Pièces uniques artisanales en carbone, alliant tradition et
-              technologies contemporaines. Légères, résistantes, à
+              Pièce unique artisanale en carbone, alliant tradition et
+              technologies contemporaines. Légère, résistante, à
               l&rsquo;acoustique remarquable.
             </p>
             {/* Chiffres clés, sous la promesse dans la colonne texte
