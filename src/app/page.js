@@ -11,6 +11,7 @@ import {
   VignetteGalerieVide,
 } from "@/components/CartesAccueil";
 import { PHOTOS } from "@/components/DonneesGalerie";
+import { URL_SITE } from "@/lib/site";
 import {
   EtiquetteDoree,
   ParagrapheSection,
@@ -19,42 +20,9 @@ import {
   TitreSection,
 } from "@/components/SectionsEditoriales";
 
-// URL canonique du site : variable d'environnement si définie, sinon
-// l'URL de déploiement fournie par Vercel, sinon localhost en dev.
-// Sert de base aux URLs absolues d'OpenGraph et de JSON-LD.
-const URL_SITE =
-  process.env.NEXT_PUBLIC_SITE_URL ??
-  (process.env.NEXT_PUBLIC_VERCEL_URL
-    ? `https://${process.env.NEXT_PUBLIC_VERCEL_URL}`
-    : "http://localhost:3000");
-
-const DESCRIPTION =
-  "Sousaphones en carbone légers et robustes à la sonorité exceptionnelle, fabriqués sur mesure en France.";
-
-export const metadata = {
-  metadataBase: new URL(URL_SITE),
-  title: "Sousaphone Carbon — Sousaphones en carbone",
-  description: DESCRIPTION,
-  openGraph: {
-    type: "website",
-    locale: "fr_FR",
-    url: "/",
-    siteName: "Sousaphone Carbon",
-    title: "Sousaphone Carbon — Sousaphones en carbone",
-    description: DESCRIPTION,
-    images: [
-      {
-        url: "/photos/hero-desktop.webp",
-        width: 856,
-        height: 1141,
-        alt: "Sousaphone Carbon",
-      },
-    ],
-  },
-};
-
-// Données structurées schema.org pour les moteurs de recherche :
-// l'organisation (fabricant français) et le produit.
+// Métadonnées (titre, description, Open Graph) : couvertes par le
+// layout — seule la page d'accueil porte les données structurées
+// schema.org ci-dessous.
 const DONNEES_STRUCTUREES = {
   "@context": "https://schema.org",
   "@graph": [

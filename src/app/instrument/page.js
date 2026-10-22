@@ -9,7 +9,7 @@ import {
 } from "@/components/SectionsEditoriales";
 
 export const metadata = {
-  title: "L'instrument — Sousaphone Carbon",
+  title: "L'instrument",
   description:
     "Découvrez le Sousaphone Carbon, sousaphone en fibre de carbone fabriqué sur mesure en France.",
 };

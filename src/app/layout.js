@@ -1,4 +1,5 @@
 import { Bebas_Neue, Bodoni_Moda, Montserrat } from "next/font/google";
+import { DESCRIPTION, URL_SITE } from "@/lib/site";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import "./globals.css";
@@ -24,10 +25,34 @@ const bebasNeue = Bebas_Neue({
   weight: "400",
 });
 
+// Métadonnées mère : titre (gabarit « Page — Sousaphone Carbon » pour
+// les pages filles), description, Open Graph — image paysage
+// galerie-01, mieux taillée pour les cartes de partage que le
+// portrait du hero — et carte Twitter large. Les pages filles
+// n'ont plus qu'à donner leur titre court.
 export const metadata = {
-  title: "Sousaphone Carbon",
-  description:
-    "Sousaphones en carbone légers et robustes, fabriqués sur mesure.",
+  metadataBase: new URL(URL_SITE),
+  title: {
+    default: "Sousaphone Carbon — Sousaphones en carbone",
+    template: "%s — Sousaphone Carbon",
+  },
+  description: DESCRIPTION,
+  openGraph: {
+    type: "website",
+    locale: "fr_FR",
+    siteName: "Sousaphone Carbon",
+    title: "Sousaphone Carbon — Sousaphones en carbone",
+    description: DESCRIPTION,
+    images: [
+      {
+        url: "/galerie/galerie-01.webp",
+        width: 2028,
+        height: 1141,
+        alt: "Sousaphone Carbon",
+      },
+    ],
+  },
+  twitter: { card: "summary_large_image" },
 };
 
 export default function RootLayout({ children }) {

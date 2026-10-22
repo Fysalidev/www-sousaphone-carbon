@@ -387,14 +387,14 @@ export default function Header() {
         pathname === "/" ? "bg-[#14110B]" : "bg-black"
       }`}
     >
-      {/* Barre du header : contenu borné aux paliers du hero via la
-          classe .header-barre (globals.css, hors @layer) — mobile
-          px-6, puis padding 2.5rem minimum et zone plafonnée à
-          90rem (100rem au-delà de 1920px). Le fond du header, lui,
-          reste pleine largeur. */}
+      {/* Barre du header : contenu aligné sur la zone de texte du
+          hero via la classe .zone-contenu (globals.css, hors
+          @layer, partagée avec le footer) — mobile px-6, puis à
+          partir de 48rem le padding suit la zone 87rem. Le fond du
+          header, lui, reste pleine largeur. */}
       <div
         inert={ouvert}
-        className="header-barre flex w-full items-center justify-between gap-6 overflow-hidden px-6 pt-10 pb-5"
+        className="zone-contenu flex w-full items-center justify-between gap-6 overflow-hidden px-6 pt-10 pb-5"
       >
         <LogoHeader />
         <NavDesktop pathname={pathname} />

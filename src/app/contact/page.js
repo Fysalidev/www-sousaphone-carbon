@@ -1,5 +1,5 @@
 export const metadata = {
-  title: "Contact — Sousaphone Carbon",
+  title: "Contact",
   description:
     "Contactez l'atelier pour toute question sur nos sousaphones en carbone.",
 };

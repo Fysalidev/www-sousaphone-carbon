@@ -6,7 +6,7 @@ import {
 } from "@/components/SectionsEditoriales";
 
 export const metadata = {
-  title: "Galerie — Sousaphone Carbon",
+  title: "Galerie",
   description:
     "L'atelier, l'instrument et les musiciens en situation : découvrez le Sousaphone Carbon en images.",
 };

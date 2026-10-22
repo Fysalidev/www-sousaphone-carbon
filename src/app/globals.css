@@ -17,18 +17,18 @@
   }
 }
 
-/* Barre du header : le contenu (logo, navigation) s'arrête
+/* Zone de contenu du site (header, footer) : le contenu s'arrête
    exactement où s'arrête le texte des heroes — zone 90rem (max-w-
    [90rem] du JSX) moins les gouttières px-6, soit 87rem de texte
    centré. Mobile : le px-6 du JSX suffit ; à partir de 48rem le
    padding latéral grandit — plancher 1.5rem, puis marges de la
    zone. Grille des largeurs du site : hero 90rem, sections
-   larges (chiffres, détails, galerie) 72rem, prose éditoriale
-   (sections, boîte question, menu) 48rem — toutes centrées,
+   larges (chiffres, galerie) 72rem, prose éditoriale (sections,
+   boîte question, menu, footer) 48rem — toutes centrées,
    gouttière px-6. Hors @layer : prime sur les utilitaires
    Tailwind, comme les rampes du hero. */
 @media (min-width: 48rem) {
-  .header-barre {
+  .zone-contenu {
     padding-inline: max(1.5rem, calc((100% - 87rem) / 2));
   }
 }
