@@ -118,7 +118,7 @@ export default function InstrumentPage() {
             </p>
             <h1
               id="titre-hero"
-              className="hero-entree instrument-titre mt-4 font-sans font-bold leading-tight text-white [animation-delay:300ms]"
+              className="hero-entree instrument-titre mt-4 font-sans font-bold leading-[1.125] text-white [animation-delay:300ms]"
             >
               Une innovation mondiale.
             </h1>
