@@ -136,8 +136,8 @@ function LienDesktop({ href, label, actif }) {
   );
 }
 
-// Bouton « Contacter » : la pilule contour du hero déclinée pour le
-// header — bordure et texte or, l'or arrive au survol ; sur la page
+// Bouton « Contacter » : la pilule noire du hero déclinée pour le
+// header — fond noir, texte or, l'or arrive au survol ; sur la page
 // contact, il passe en plein or pour marquer la page active.
 function BoutonContacter({ actif }) {
   return (
@@ -147,7 +147,7 @@ function BoutonContacter({ actif }) {
       className={`rounded-full px-5 py-2.5 text-xs font-bold tracking-[0.25em] transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white ${
         actif
           ? "border border-[#C9A96A] bg-[#C9A96A] text-black"
-          : "border border-[#C9A96A]/70 bg-transparent text-[#C9A96A] hover:border-[#C9A96A] hover:bg-[#C9A96A] hover:text-black"
+          : "bg-black text-[#C9A96A] hover:bg-[#C9A96A] hover:text-black"
       }`}
     >
       CONTACTER

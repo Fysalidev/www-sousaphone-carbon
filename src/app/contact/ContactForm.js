@@ -141,7 +141,7 @@ export default function ContactForm() {
         <button
           type="submit"
           disabled={pending}
-          className="inline-flex items-center gap-3 rounded-full border border-[#C9A96A]/70 bg-transparent px-8 py-4 texte-bouton font-bold tracking-[0.25em] text-[#C9A96A] transition-colors hover:border-[#C9A96A] hover:bg-[#C9A96A] hover:text-black focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white disabled:pointer-events-none disabled:opacity-50"
+          className="inline-flex items-center gap-3 rounded-full bg-black px-8 py-4 texte-bouton font-bold tracking-[0.25em] text-[#C9A96A] transition-colors hover:bg-[#C9A96A] hover:text-black focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white disabled:pointer-events-none disabled:opacity-50"
         >
           {pending ? "ENVOI EN COURS…" : "ENVOYER"}
           <span aria-hidden="true">&rarr;</span>
