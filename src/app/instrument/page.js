@@ -44,22 +44,26 @@ function BoutonAction({ href, children, inverse = false, classe = "" }) {
 // Statistique commentée du bloc chiffres clés : valeur et légende
 // sémantiquement liées (dt/dd, valeur au-dessus via flex), la phrase
 // d'explication en dessous — même structure que les stats du hero
-// d'accueil, avec le niveau de description en plus.
+// d'accueil, avec le niveau de description en plus. Les classes
+// instrument-stat-* ne s'activent que dans le hero (scopées
+// .instrument-hero dans globals.css) : typographie fluide,
+// alignement gauche et descriptions masquées sous 1280px ; la
+// section mobile garde ses paliers centrés.
 function StatCommentee({ valeur, legende, description, dore = false }) {
   return (
-    <div className="flex flex-col text-center">
-      <dt className="order-2 mt-2 text-[10px] min-[640px]:text-xs min-[1555px]:text-sm font-bold tracking-[0.25em] max-[399px]:tracking-widest text-[#C9A96A]">
+    <div className="instrument-stat flex flex-col text-center">
+      <dt className="instrument-stat-legende order-2 mt-2 text-[10px] min-[640px]:text-xs min-[1555px]:text-sm font-bold tracking-[0.25em] max-[399px]:tracking-widest text-[#C9A96A]">
         {legende}
       </dt>
       <dd
-        className={`order-1 font-sans text-2xl min-[640px]:text-3xl min-[1024px]:text-4xl font-bold ${
+        className={`instrument-stat-valeur order-1 font-sans text-2xl min-[640px]:text-3xl min-[1024px]:text-4xl font-bold ${
           dore ? "text-[#C9A96A]" : "text-white"
         }`}
       >
         {valeur}
         <span>%</span>
       </dd>
-      <p className="order-3 mt-3 text-sm min-[640px]:text-base leading-relaxed text-stone-300">
+      <p className="instrument-stat-description order-3 mt-3 text-sm min-[640px]:text-base leading-relaxed text-stone-300">
         {description}
       </p>
     </div>
@@ -98,20 +102,23 @@ export default function InstrumentPage() {
       {/* Hero « nouvelle génération » : accroche dorée, titre Montserrat
           et promesse, photo de l'instrument — empilés et centrés sur
           mobile, en deux colonnes à partir de 768px avec le texte à
-          gauche et l'instrument à droite. La section occupe au minimum
-          la hauteur d'écran restante après le header ; sur mobile la
-          photo, flex-1, absorbe l'espace vertical disponible. Même
-          fond dégradé doré haut/bas et mêmes photos (mix-blend-screen,
-          masque limité aux bords) que le hero d'accueil. */}
-      <section className="flex flex-col bg-linear-to-b from-[#C9A96A]/10 via-transparent to-[#C9A96A]/10 min-h-[calc(100svh-var(--hauteur-barre-header))]">
+          gauche et l'instrument à droite. Sur desktop (≥ 768px) la
+          section occupe au minimum la hauteur d'écran restante après
+          le header ; sur mobile le hero est compact : la photo, en
+          aspect 3/4 plafonnée à 45 % de l'écran, garde l'instrument
+          à taille contenue et laisse les sections suivantes proches.
+          Même fond dégradé doré haut/bas et même traitement de photo
+          (mix-blend-screen, masque limité aux bords) que le hero
+          d'accueil. */}
+      <section className="instrument-hero flex flex-col bg-linear-to-b from-[#C9A96A]/10 via-transparent to-[#C9A96A]/10 min-[768px]:min-h-[calc(100svh-var(--hauteur-barre-header))]">
         <div className="flex w-full flex-1 flex-col items-center px-6 pt-12 pb-10 text-center min-[768px]:mx-auto min-[768px]:grid min-[768px]:max-w-[90rem] min-[768px]:grid-cols-[minmax(0,3fr)_minmax(0,2fr)] min-[768px]:items-center min-[768px]:gap-10 min-[768px]:pt-0 min-[768px]:text-left">
           <div className="flex flex-col items-center min-[768px]:items-start">
-            <p className="hero-entree text-[10px] min-[768px]:text-xs min-[1555px]:text-sm font-bold tracking-[0.25em] text-[#C9A96A] [animation-delay:150ms]">
-              SOUSAPHONE NOUVELLE GÉNÉRATION
+            <p className="hero-entree instrument-accroche font-bold tracking-[0.25em] text-[#C9A96A] [animation-delay:150ms]">
+              LE SOUSAPHONE RÉINVENTÉ
             </p>
             <h1
               id="titre-hero"
-              className="hero-entree mt-4 font-sans text-3xl min-[640px]:text-4xl min-[1024px]:text-5xl min-[1440px]:text-6xl font-bold text-white [animation-delay:300ms]"
+              className="hero-entree instrument-titre mt-4 font-sans font-bold text-white [animation-delay:300ms]"
             >
               Une innovation mondiale.
             </h1>
@@ -120,43 +127,55 @@ export default function InstrumentPage() {
               légèreté. Plus résistant et remarquablement plus doux que ses
               prédécesseurs.
             </p>
+            {/* Chiffres clés, sous la promesse dans la colonne texte
+                (à gauche de la photo) sur desktop (≥ 768px) ;
+                l'alignement, la typo fluide et le passage en lignes
+                éditoriales sous 1280px vivent dans globals.css
+                (scopés .instrument-hero). Sur mobile, la section
+                dédiée ci-dessous prend le relais. */}
+            <dl
+              aria-label="Chiffres clés"
+              className="hero-entree mt-10 hidden w-full grid-cols-1 gap-6 min-[768px]:grid min-[1280px]:grid-cols-3 min-[1280px]:gap-10 [animation-delay:750ms]"
+            >
+              {STATS.map((stat) => (
+                <StatCommentee
+                  key={stat.legende}
+                  valeur={stat.valeur}
+                  legende={stat.legende}
+                  description={stat.description}
+                  dore={stat.dore}
+                />
+              ))}
+            </dl>
           </div>
-          {/* Photos de l'instrument, mêmes fichiers et même traitement
-              que le hero d'accueil : hero-mobile.webp (600×1141) en
-              empilé mobile, hero-desktop.webp (856×1141) en colonne
-              desktop, object-contain pour ne jamais déformer
-              l'instrument et ratio 3/4 sur desktop pour le tenir en
-              hauteur. */}
-          <div className="hero-entree relative mt-6 min-h-64 flex-1 w-full [animation-delay:600ms] min-[768px]:mt-0 min-[768px]:aspect-[3/4] min-[768px]:max-h-[48rem] min-[768px]:flex-none">
+          {/* Photo de l'instrument : galerie-05.webp (740×1038) sert
+              les deux dispositions — empilé mobile et colonne
+              desktop —, avec le même traitement que le hero
+              d'accueil : object-contain pour ne jamais déformer
+              l'instrument, mix-blend-screen pour fondre dans le fond
+              doré, masque limité aux bords haut/bas. Boîte en aspect
+              3/4 à toutes les largeurs, plafonnée à 45svh sur mobile
+              (hero compact) et 48rem sur desktop. */}
+          <div className="hero-entree relative mt-6 min-h-64 w-full aspect-[3/4] max-h-[45svh] [animation-delay:600ms] min-[768px]:mt-0 min-[768px]:max-h-[48rem]">
             <Image
-              src="/photos/hero-mobile.webp"
-              alt="Sousaphone sur fond sombre"
+              src="/galerie/galerie-05.webp"
+              alt="Photographie du Sousaphone Carbon"
               fill
               priority
-              sizes="100vw"
-              className="object-contain object-center mix-blend-screen mask-[linear-gradient(to_bottom,transparent_2%,black_10%,black_90%,transparent_98%)] min-[768px]:hidden"
-            />
-            <Image
-              src="/photos/hero-desktop.webp"
-              alt="Sousaphone sur fond sombre"
-              fill
-              priority
-              sizes="40vw"
-              className="hidden object-contain object-center mix-blend-screen mask-[linear-gradient(to_bottom,transparent_2%,black_10%,black_90%,transparent_98%)] min-[768px]:block"
+              sizes="(min-width: 768px) 40vw, calc(100vw - 3rem)"
+              className="object-contain object-center mix-blend-screen mask-[linear-gradient(to_bottom,transparent_2%,black_10%,black_90%,transparent_98%)]"
             />
           </div>
         </div>
       </section>
 
-      <SeparateurSection />
-
-      {/* Chiffres clés commentés : les trois mêmes stats que l'accueil
-          (-40 %, 100 %, 100 %) avec ici une phrase d'explication sous
-          chacune. Trois colonnes à partir de 768px, empilées et
-          centrées en dessous. */}
+      {/* Chiffres clés commentés, mobile uniquement (sur desktop ils
+          vivent dans la colonne texte du hero) : les trois mêmes stats
+          que l'accueil (-40 %, 100 %, 100 %) avec ici une phrase
+          d'explication sous chacune, empilées et centrées. */}
       <section
         aria-label="Chiffres clés"
-        className="px-6 py-12 min-[768px]:py-16"
+        className="px-6 py-12 min-[768px]:hidden"
       >
         <Revelation>
           <dl className="mx-auto grid max-w-6xl grid-cols-1 gap-10 min-[768px]:grid-cols-3">
@@ -185,37 +204,41 @@ export default function InstrumentPage() {
           Fabriqué à la main.
         </h2>
         <div aria-hidden="true" className="mt-6 h-px w-16 bg-[#C9A96A]" />
-        <ParagrapheSection>
-          Nous fabriquons des sousaphones en édition limitée, principalement
-          pour les fanfares et les orchestres. Le savoir-faire artisanal et
-          l&rsquo;utilisation de matériaux innovants font de nos instruments des
-          pièces uniques, alliant tradition et modernité.
+        {/* Mesure élargie à la colonne éditoriale complète : le texte
+            épouse la largeur du titre au lieu de couper tôt. */}
+        <ParagrapheSection largeur="max-w-3xl">
+          Nous fabriquons nos pièces et chaque sousaphone prend forme à travers
+          une succession de gestes précis. Une fabrication patiente qui garantit
+          résistance, équilibre et propriétés acoustiques d&rsquo;exception.
         </ParagrapheSection>
       </SectionEditoriale>
 
-      <SeparateurSection />
-
-      {/* Bandeau doré « une question » : le seul moment clair de la
-          page — fond or plein écran, textes noirs, bouton plein noir.
+      {/* Boîte dorée « une question » : le seul moment clair de la
+          page — fond or de la largeur du texte (max-w-3xl), centré
+          et à coins adoucis, textes noirs, bouton plein noir.
+          Empilé et centré sur mobile ; à partir de 768px le texte
+          passe à gauche et le bouton se cale à droite de la boîte.
           Il ouvre directement la porte du contact. */}
       <section
         aria-labelledby="titre-question"
-        className="bg-[#C9A96A] px-6 py-12 min-[768px]:py-16"
+        className="px-6 py-12 min-[768px]:py-16"
       >
         <Revelation>
-          <div className="mx-auto max-w-3xl text-center">
-            <h2
-              id="titre-question"
-              className="font-serif-carte text-3xl min-[640px]:text-4xl min-[1024px]:text-5xl font-semibold leading-tight text-black"
-            >
-              Une question sur le sousaphone&nbsp;?
-            </h2>
-            <p className="mx-auto mt-4 max-w-xl text-sm min-[640px]:text-base leading-relaxed text-black/80">
-              Nous sommes à votre écoute pour vous accompagner dans votre
-              projet, répondre à vos questions techniques ou organiser une prise
-              de contact.
-            </p>
-            <div className="mt-8">
+          <div className="mx-auto max-w-3xl rounded-2xl bg-[#C9A96A] px-6 py-12 text-center min-[768px]:flex min-[768px]:items-center min-[768px]:justify-between min-[768px]:gap-10 min-[768px]:py-16 min-[768px]:text-left">
+            <div>
+              <h2
+                id="titre-question"
+                className="font-serif-carte text-3xl min-[640px]:text-4xl min-[1024px]:text-5xl font-semibold leading-tight text-black"
+              >
+                Une question sur le sousaphone&nbsp;?
+              </h2>
+              <p className="mx-auto mt-4 max-w-xl text-sm min-[640px]:text-base leading-relaxed text-black/80 min-[768px]:mx-0">
+                Nous sommes à votre écoute pour vous accompagner dans votre
+                projet, répondre à vos questions techniques ou organiser une
+                prise de contact.
+              </p>
+            </div>
+            <div className="mt-8 min-[768px]:mt-0 min-[768px]:flex-none">
               <BoutonAction href="/contact" inverse>
                 NOUS CONTACTER
               </BoutonAction>
@@ -240,7 +263,7 @@ export default function InstrumentPage() {
           comme signature.
         </h2>
         <div aria-hidden="true" className="mt-6 h-px w-16 bg-[#C9A96A]" />
-        <ParagrapheSection>
+        <ParagrapheSection largeur="max-w-3xl">
           Chaque courbe est finie et ajustée au plus près. Les pistons répondent
           sans effort. Les finitions sont impeccables — le son, lui, reste
           généreux.
@@ -303,7 +326,7 @@ export default function InstrumentPage() {
           Un instrument à votre mesure.
         </h2>
         <div aria-hidden="true" className="mt-6 h-px w-16 bg-[#C9A96A]" />
-        <ParagrapheSection>
+        <ParagrapheSection largeur="max-w-3xl">
           Du premier souffle à la dernière note, chaque sousaphone est assemblé
           et réglé à la main. Une précision sculpturale, une légèreté nouvelle,
           une âme intacte.
@@ -329,7 +352,7 @@ export default function InstrumentPage() {
           joué comme un rêve.
         </h2>
         <div aria-hidden="true" className="mt-6 h-px w-16 bg-[#C9A96A]" />
-        <ParagrapheSection>
+        <ParagrapheSection largeur="max-w-3xl">
           Fabriqué en France, façonné à la main : le partenaire de votre
           batterie fanfare, pensé pour durer et pour faire de chaque passage une
           signature.
