@@ -79,20 +79,51 @@ export function SeparateurSection() {
   );
 }
 
+// Bandeau d'ouverture de section : le logo séparateur porté par la
+// section elle-même (prototype de la page instrument) plutôt que
+// posé entre les sections — même asset, même traitement (encre noire
+// inversée en blanc), taille resserrée (h-16 / h-20) alignée sur la
+// colonne éditoriale. Purement décoratif (aria-hidden, alt vide).
+export function BandeauLogo() {
+  return (
+    <div
+      aria-hidden="true"
+      className="mx-auto max-w-3xl pb-8 min-[768px]:pb-10"
+    >
+      <Image
+        src="/logos/logo-inter.png"
+        alt=""
+        width={1750}
+        height={698}
+        sizes="(min-width: 768px) 200px, 160px"
+        className="h-16 min-[768px]:h-20 w-auto invert"
+      />
+    </div>
+  );
+}
+
 // Coquille des sections éditoriales : colonne lisible centrée
 // (max-w-3xl) ; le titre porte l'ancre aria référencée par `titreAria`.
 // Rythme vertical partagé avec le séparateur (py-12 / py-16) : chaque
 // transition section→logo→section est symétrique, sans empilement
 // des paddings. `classe` écarte la mesure pour une section donnée
-// (ex. padding vertical élargi de la clôture). Le contenu passe par
-// <Revelation> : il apparaît en fondu à l'arrivée dans la fenêtre
-// (désactivé avec prefers-reduced-motion, visible sans JavaScript).
-export function SectionEditoriale({ titreAria, children, classe = "" }) {
+// (ex. padding vertical élargi de la clôture) ; `bandeau` pose le
+// logo en tête de section (prototype instrument). Le contenu passe
+// par <Revelation> : il apparaît en fondu à l'arrivée dans la
+// fenêtre (désactivé avec prefers-reduced-motion, visible sans
+// JavaScript).
+export function SectionEditoriale({
+  titreAria,
+  children,
+  classe = "",
+  bandeau = false,
+}) {
   return (
     <section
       aria-labelledby={titreAria}
       className={`px-6 py-12 min-[768px]:py-16 ${classe}`}
     >
+      {bandeau && <BandeauLogo />}
       <div className="mx-auto max-w-3xl">
         <Revelation>{children}</Revelation>
       </div>

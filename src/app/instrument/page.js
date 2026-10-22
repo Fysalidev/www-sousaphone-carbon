@@ -2,10 +2,10 @@ import Image from "next/image";
 import Link from "next/link";
 import Revelation from "@/components/Revelation";
 import {
+  BandeauLogo,
   EtiquetteDoree,
   ParagrapheSection,
   SectionEditoriale,
-  SeparateurSection,
 } from "@/components/SectionsEditoriales";
 
 export const metadata = {
@@ -18,9 +18,10 @@ export const metadata = {
 // (photo de l'instrument, texte à gauche en deux colonnes sur desktop)
 // à la clôture « pièce unique » et son appel à l'action. Les sections
 // reprennent les primitives de l'accueil (étiquette dorée, titre serif,
-// paragraphe, coquille max-w-3xl) et sont séparées par le même
-// séparateur logo. Le header et le footer du projet encadrent la page
-// (layout.js).
+// paragraphe, coquille max-w-3xl) ; prototype en cours : chaque section
+// ouvre sur le bandeau logo (BandeauLogo) au lieu du séparateur
+// intercalaire encore en vigueur sur les autres pages. Le header et le
+// footer du projet encadrent la page (layout.js).
 
 // Bouton d'action or, même langage que l'accueil : plein or, texte
 // noir, coins adoucis et inversion au survol. `inverse` le décline
@@ -267,10 +268,10 @@ export default function InstrumentPage() {
         </Revelation>
       </section>
 
-      <SeparateurSection />
-
-      {/* L'art du souffle : édition limitée et fabrication artisanale. */}
-      <SectionEditoriale titreAria="titre-souffle">
+      {/* L'art du souffle : édition limitée et fabrication artisanale.
+          Prototype : chaque section ouvre sur le bandeau logo, les
+          séparateurs intercalaires sont retirés. */}
+      <SectionEditoriale titreAria="titre-souffle" bandeau>
         <EtiquetteDoree>L&rsquo;ART DU SOUFFLE</EtiquetteDoree>
         <h2
           id="titre-souffle"
@@ -289,20 +290,19 @@ export default function InstrumentPage() {
         </ParagrapheSection>
       </SectionEditoriale>
 
-      <SeparateurSection />
-
       {/* Boîte dorée « une question » : le seul moment clair de la
           page — fond or de la largeur du texte (max-w-3xl), centré
-          et à coins adoucis, textes noirs, bouton plein noir.
-          Encadrée par deux séparateurs logo comme les autres
-          sections. Empilé et centré sur mobile ; à partir de 768px
-          le texte passe à gauche et le bouton se cale à droite de
-          la boîte. Il ouvre directement la porte du contact. */}
+          et à coins adoucis, textes noirs, bouton plein noir. Le
+          bandeau logo ouvre la section comme partout (prototype).
+          Empilé et centré sur mobile ; à partir de 768px le texte
+          passe à gauche et le bouton se cale à droite de la boîte.
+          Il ouvre directement la porte du contact. */}
       <section
         aria-labelledby="titre-question"
         className="px-6 py-12 min-[768px]:py-16"
       >
         <Revelation>
+          <BandeauLogo />
           <div className="mx-auto max-w-3xl rounded-2xl bg-[#C9A96A] px-6 py-12 text-center min-[768px]:flex min-[768px]:items-center min-[768px]:justify-between min-[768px]:gap-10 min-[768px]:py-16 min-[768px]:text-left">
             <div>
               <h2
@@ -325,11 +325,9 @@ export default function InstrumentPage() {
         </Revelation>
       </section>
 
-      <SeparateurSection />
-
       {/* Le geste juste : précision et son, refermés par la citation
           de l'atelier — serif italique dorée. */}
-      <SectionEditoriale titreAria="titre-geste">
+      <SectionEditoriale titreAria="titre-geste" bandeau>
         <EtiquetteDoree>LE GESTE JUSTE</EtiquetteDoree>
         <h2
           id="titre-geste"
@@ -352,8 +350,6 @@ export default function InstrumentPage() {
         </blockquote>
       </SectionEditoriale>
 
-      <SeparateurSection />
-
       {/* Détails de fabrication : étiquette puis mosaïque éditoriale —
           photo verticale à gauche, photo paysage puis zone texte de
           même taille à droite (la colonne de droite s'étire à la
@@ -361,13 +357,14 @@ export default function InstrumentPage() {
           s'empilent dans l'ordre de lecture. La zone texte porte
           l'ancre du titre de section : l'union du carbone et du
           laiton. Ligne 2 : grande image pleine colonne sous la
-          mosaïque. */}
+          mosaïque. Bandeau logo en tête, comme partout (prototype). */}
       <section
         aria-labelledby="titre-details"
         className="px-6 py-12 min-[768px]:py-16"
       >
         <Revelation>
           <div className="mx-auto max-w-3xl">
+            <BandeauLogo />
             <EtiquetteDoree>DÉTAILS DE FABRICATION</EtiquetteDoree>
             <div className="mt-12 grid grid-cols-1 gap-6 min-[768px]:mt-16 min-[768px]:grid-cols-2">
               <EmplacementDetail
@@ -411,16 +408,15 @@ export default function InstrumentPage() {
         </Revelation>
       </section>
 
-      <SeparateurSection />
-
       {/* Pièce unique : la promesse sur mesure, refermée par l'appel
           à l'action « Nous contacter » — dernière section de la page,
           le footer prend le relais. Rythme élargi (py-16 / py-24) :
           la clôture respire davantage avant la photo de fond du
-          footer. */}
+          footer. Bandeau logo en tête, comme partout (prototype). */}
       <SectionEditoriale
         titreAria="titre-piece-unique"
         classe="py-16 min-[768px]:py-24"
+        bandeau
       >
         <EtiquetteDoree>PIÈCE UNIQUE — SÉRIE CARBONE</EtiquetteDoree>
         <h2
