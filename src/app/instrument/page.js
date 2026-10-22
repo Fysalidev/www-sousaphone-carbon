@@ -109,6 +109,9 @@ function EmplacementDetail({ photo, empreinte }) {
       <p className="text-[10px] min-[768px]:text-xs text-stone-400">
         {empreinte.conseils}
       </p>
+      <p className="text-[10px] min-[768px]:text-xs text-stone-500">
+        alt&nbsp;: {empreinte.alt}
+      </p>
     </div>
   );
 }
@@ -154,6 +157,8 @@ const EMPREINTES_DETAILS = {
     fichier: "photos/details-01.webp",
     ratio: "3/4",
     conseils: "≈ 750 × 1000 px",
+    // Alt suggéré au dépôt, à ajuster à la scène réelle.
+    alt: "pistons et embout du sousaphone en gros plan",
     sizes: "(min-width: 768px) 24rem, calc(100vw - 3rem)",
   },
   paysage: {
@@ -161,6 +166,7 @@ const EMPREINTES_DETAILS = {
     fichier: "photos/details-02.webp",
     ratio: "3/2",
     conseils: "≈ 750 × 500 px",
+    alt: "bloc de pistons et tubulures du sousaphone",
     sizes: "(min-width: 768px) 24rem, calc(100vw - 3rem)",
   },
   grande: {
@@ -168,6 +174,7 @@ const EMPREINTES_DETAILS = {
     fichier: "photos/details-03.webp",
     ratio: "16/10",
     conseils: "≈ 1536 × 960 px",
+    alt: "vue large d'un détail de fabrication",
     sizes: "(min-width: 768px) 48rem, calc(100vw - 3rem)",
   },
 };

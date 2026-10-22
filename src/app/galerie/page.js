@@ -180,6 +180,9 @@ export default function GaleriePage() {
                   <p className="text-[10px] min-[768px]:text-xs text-stone-400">
                     {empreinte.conseils}
                   </p>
+                  <p className="text-[10px] min-[768px]:text-xs text-stone-500">
+                    alt&nbsp;: décrire la scène en 10–20 mots
+                  </p>
                 </figure>
               );
             })}
