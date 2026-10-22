@@ -9,7 +9,7 @@ import {
 } from "@/components/SectionsEditoriales";
 
 export const metadata = {
-  title: "L'instrument — Sousaphone Carbon",
+  title: "L'instrument",
   description:
     "Découvrez le Sousaphone Carbon, sousaphone en fibre de carbone fabriqué sur mesure en France.",
 };
@@ -29,7 +29,7 @@ function BoutonAction({ href, children, inverse = false, classe = "" }) {
   return (
     <Link
       href={href}
-      className={`inline-flex items-center gap-3 rounded-lg border px-8 py-4 text-xs min-[1555px]:text-sm font-bold tracking-[0.25em] transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 ${
+      className={`inline-flex items-center gap-3 rounded-lg border px-8 py-4 texte-bouton font-bold tracking-[0.25em] transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 ${
         inverse
           ? "border-black bg-black text-[#C9A96A] hover:bg-black/80 focus-visible:outline-black"
           : "border-[#C9A96A] bg-[#C9A96A] text-black hover:bg-black hover:text-[#C9A96A] focus-visible:outline-white"
@@ -52,18 +52,18 @@ function BoutonAction({ href, children, inverse = false, classe = "" }) {
 function StatCommentee({ valeur, legende, description, dore = false }) {
   return (
     <div className="instrument-stat flex flex-col text-center">
-      <dt className="instrument-stat-legende order-2 mt-2 text-[10px] min-[640px]:text-xs min-[1555px]:text-sm font-bold tracking-[0.25em] max-[399px]:tracking-widest text-[#C9A96A]">
+      <dt className="instrument-stat-legende etiquette-doree order-2 mt-2 font-bold tracking-[0.25em] max-[399px]:tracking-widest text-[#C9A96A]">
         {legende}
       </dt>
       <dd
-        className={`instrument-stat-valeur order-1 font-sans text-2xl min-[640px]:text-3xl min-[1024px]:text-4xl font-bold ${
+        className={`instrument-stat-valeur stat-valeur order-1 font-sans font-bold ${
           dore ? "text-[#C9A96A]" : "text-white"
         }`}
       >
         {valeur}
         <span>%</span>
       </dd>
-      <p className="instrument-stat-description order-3 mt-3 text-sm min-[640px]:text-base leading-relaxed text-stone-300">
+      <p className="instrument-stat-description paragraphe-section order-3 mt-3 leading-relaxed text-stone-300">
         {description}
       </p>
     </div>
@@ -111,18 +111,18 @@ export default function InstrumentPage() {
           (mix-blend-screen, masque limité aux bords) que le hero
           d'accueil. */}
       <section className="instrument-hero flex flex-col bg-linear-to-b from-[#C9A96A]/10 via-transparent to-[#C9A96A]/10 min-[768px]:min-h-[calc(100svh-var(--hauteur-barre-header))]">
-        <div className="flex w-full flex-1 flex-col items-center px-6 pt-12 pb-10 text-center min-[768px]:mx-auto min-[768px]:grid min-[768px]:max-w-[90rem] min-[768px]:grid-cols-[minmax(0,3fr)_minmax(0,2fr)] min-[768px]:items-center min-[768px]:gap-10 min-[768px]:pt-0 min-[768px]:text-left">
+        <div className="flex w-full flex-1 flex-col items-center px-6 pt-12 pb-12 text-center min-[768px]:mx-auto min-[768px]:grid min-[768px]:max-w-[90rem] min-[768px]:grid-cols-[minmax(0,3fr)_minmax(0,2fr)] min-[768px]:items-center min-[768px]:gap-10 min-[768px]:pt-0 min-[768px]:text-left">
           <div className="flex flex-col items-center min-[768px]:items-start">
             <p className="hero-entree instrument-accroche font-bold tracking-[0.25em] text-[#C9A96A] [animation-delay:150ms]">
               LE SOUSAPHONE RÉINVENTÉ
             </p>
             <h1
               id="titre-hero"
-              className="hero-entree instrument-titre mt-4 font-sans font-bold text-white [animation-delay:300ms]"
+              className="hero-entree instrument-titre mt-4 font-sans font-bold leading-[1.125] text-white [animation-delay:300ms]"
             >
               Une innovation mondiale.
             </h1>
-            <p className="hero-entree mt-6 max-w-xl text-base leading-relaxed text-stone-200 min-[768px]:max-w-lg [animation-delay:450ms]">
+            <p className="hero-entree instrument-promesse mt-6 max-w-xl text-base leading-relaxed text-stone-200 min-[768px]:max-w-lg [animation-delay:450ms]">
               Un sousaphone artisanal qui conjugue tradition, innovation et
               légèreté. Plus résistant et remarquablement plus doux que ses
               prédécesseurs.
@@ -228,11 +228,11 @@ export default function InstrumentPage() {
             <div>
               <h2
                 id="titre-question"
-                className="font-serif-carte text-3xl min-[640px]:text-4xl min-[1024px]:text-5xl font-semibold leading-tight text-black"
+                className="titre-boite font-serif-carte font-semibold leading-tight text-black"
               >
                 Une question sur le sousaphone&nbsp;?
               </h2>
-              <p className="mx-auto mt-4 max-w-xl text-sm min-[640px]:text-base leading-relaxed text-black/80 min-[768px]:mx-0">
+              <p className="paragraphe-section mx-auto mt-4 max-w-xl leading-relaxed text-black/80 min-[768px]:mx-0">
                 Nous sommes à votre écoute pour vous accompagner dans votre
                 projet, répondre à vos questions techniques ou organiser une
                 prise de contact.
@@ -269,7 +269,7 @@ export default function InstrumentPage() {
           généreux.
         </ParagrapheSection>
         <blockquote className="mt-10 text-center">
-          <p className="mx-auto max-w-xl font-serif-carte text-2xl min-[640px]:text-3xl italic leading-snug text-white">
+          <p className="citation-serif mx-auto max-w-xl font-serif-carte italic leading-snug text-white">
             «&nbsp;Le métal garde la mémoire du geste.&nbsp;»
           </p>
           <cite className="mt-4 block text-[10px] min-[640px]:text-xs font-bold not-italic tracking-[0.25em] text-[#C9A96A]">
@@ -281,31 +281,30 @@ export default function InstrumentPage() {
       <SeparateurSection />
 
       {/* Détails de fabrication : même gabarit que les sections
-          éditoriales mais sur la colonne large de la galerie
-          (max-w-6xl) pour donner de l'ampleur à la photo — premier
-          cliché de la galerie, cadrage 16/10 dans une carte à bordure
-          dorée. */}
+          éditoriales (max-w-3xl) — la page garde un rythme régulier,
+          la photo 16/10 dans sa carte à bordure dorée épouse la
+          colonne de texte. */}
       <section
         aria-labelledby="titre-details"
         className="px-6 py-12 min-[768px]:py-16"
       >
         <Revelation>
-          <div className="mx-auto max-w-6xl">
+          <div className="mx-auto max-w-3xl">
             <EtiquetteDoree>L&rsquo;ATELIER DE PRÉCISION</EtiquetteDoree>
             <h2
               id="titre-details"
-              className="font-serif-carte mt-4 text-4xl min-[768px]:text-5xl min-[1440px]:text-6xl font-semibold leading-tight text-white"
+              className="titre-section font-serif-carte mt-4 font-semibold leading-tight text-white"
             >
               Détails de fabrication.
             </h2>
             <div aria-hidden="true" className="mt-6 h-px w-16 bg-[#C9A96A]" />
-            <div className="mt-10 overflow-hidden rounded-2xl border border-[#C9A96A]/40">
+            <div className="mt-12 min-[768px]:mt-16 overflow-hidden rounded-2xl border border-[#C9A96A]/40">
               <Image
                 src="/galerie/galerie-01.webp"
                 alt="Sousaphone de profil sur fond noir, pavillon doré au premier plan"
                 width={1600}
                 height={1000}
-                sizes="(min-width: 1152px) 72rem, 100vw"
+                sizes="(min-width: 768px) 48rem, 100vw"
                 className="aspect-[16/10] w-full object-cover brightness-90"
               />
             </div>
@@ -357,7 +356,7 @@ export default function InstrumentPage() {
           batterie fanfare, pensé pour durer et pour faire de chaque passage une
           signature.
         </ParagrapheSection>
-        <div className="mt-10 overflow-hidden rounded-2xl border border-[#C9A96A]/40">
+        <div className="mt-12 min-[768px]:mt-16 overflow-hidden rounded-2xl border border-[#C9A96A]/40">
           <Image
             src="/galerie/galerie-02.webp"
             alt="Photographie du Sousaphone Carbon"
