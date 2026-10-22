@@ -70,6 +70,42 @@ function StatCommentee({ valeur, legende, description, dore = false }) {
   );
 }
 
+// Emplacement photo de la mosaïque « Détails de fabrication » :
+// carte à bordure dorée quand la photo est déposée, sinon placeholder
+// pointillé (fichier attendu, ratio, dimensions conseillées) sur le
+// même langage que la galerie. `empreinte` porte le ratio d'affichage
+// (classes aspect), les conseils de taille de la source et le sizes
+// de l'optimiseur.
+function EmplacementDetail({ photo, empreinte }) {
+  return photo ? (
+    <div
+      className={`relative overflow-hidden rounded-2xl border border-[#C9A96A]/40 ${empreinte.classes}`}
+    >
+      <Image
+        src={photo.src}
+        alt={photo.alt}
+        fill
+        sizes={empreinte.sizes}
+        className="object-cover brightness-90"
+      />
+    </div>
+  ) : (
+    <div
+      className={`flex w-full flex-col items-center justify-center gap-1 rounded-2xl border border-dashed border-[#C9A96A]/30 bg-stone-900 p-4 text-center ${empreinte.classes}`}
+    >
+      <p className="text-xs min-[768px]:text-sm font-bold text-[#C9A96A]">
+        {empreinte.fichier}
+      </p>
+      <p className="text-[10px] min-[768px]:text-xs text-stone-300">
+        {empreinte.ratio}
+      </p>
+      <p className="text-[10px] min-[768px]:text-xs text-stone-400">
+        {empreinte.conseils}
+      </p>
+    </div>
+  );
+}
+
 // ——— Données ———
 // Le contenu éditorial de la page vit ici, en tableaux : modifier un
 // texte ne touche pas la structure JSX.
@@ -78,21 +114,63 @@ const STATS = [
   {
     valeur: "-40",
     legende: "DE POIDS",
-    description: "Une mobilité transformée, sans compromis sonore.",
+    description: "Une mobilité accrue, sans compromis sonore.",
     dore: true,
   },
   {
     valeur: "100",
     legende: "CARBONE",
-    description:
-      "Dans son ensemble, le sousaphone est fabriqué en fibre de carbone.",
+    description: "Corps fabriqué en fibre de carbone.",
   },
   {
     valeur: "100",
-    legende: "MADE IN FRANCE",
+    legende: "ARTISANAL",
     description: "Fabriqué à la main dans nos ateliers, au cœur de la France.",
   },
 ];
+
+// Photo d'illustration sous la citation « Le geste juste » : à déposer
+// dans public/photos/geste-juste.webp (ratio 16/10, ≈ 1600 × 1000 px
+// en rétina 2× pour la colonne de 48rem), puis renseigner src et alt
+// ici — le placeholder laisse alors place à l'image, même gabarit
+// que la carte photo de la section « Détails de fabrication ».
+const PHOTO_GESTE = null;
+
+// Mosaïque « Détails de fabrication » : photo verticale à gauche,
+// photo paysage puis zone texte de même taille à droite. Photos à
+// déposer dans public/photos/ puis renseigner src/alt ici —
+// l'emplacement correspondant bascule du placeholder à l'image.
+// Empreintes : colonne affichée ≈ 372px sur desktop, conseils en
+// rétina 2×.
+const PHOTOS_DETAILS = {
+  verticale: null, // ex. { src: "/photos/details-01.webp", alt: "…" }
+  paysage: null, // ex. { src: "/photos/details-02.webp", alt: "…" }
+  grande: null, // ex. { src: "/photos/details-03.webp", alt: "…" }
+};
+
+const EMPREINTES_DETAILS = {
+  verticale: {
+    classes: "aspect-[3/4]",
+    fichier: "photos/details-01.webp",
+    ratio: "3/4",
+    conseils: "≈ 750 × 1000 px",
+    sizes: "(min-width: 768px) 24rem, calc(100vw - 3rem)",
+  },
+  paysage: {
+    classes: "aspect-[3/2]",
+    fichier: "photos/details-02.webp",
+    ratio: "3/2",
+    conseils: "≈ 750 × 500 px",
+    sizes: "(min-width: 768px) 24rem, calc(100vw - 3rem)",
+  },
+  grande: {
+    classes: "aspect-[16/10]",
+    fichier: "photos/details-03.webp",
+    ratio: "16/10",
+    conseils: "≈ 1536 × 960 px",
+    sizes: "(min-width: 768px) 48rem, calc(100vw - 3rem)",
+  },
+};
 
 // ——— Page ———
 
@@ -126,9 +204,9 @@ export default function InstrumentPage() {
               Une innovation mondiale.
             </h1>
             <p className="hero-entree instrument-promesse mt-6 max-w-xl text-base leading-relaxed text-stone-200 min-[768px]:max-w-lg [animation-delay:450ms]">
-              Un sousaphone artisanal qui conjugue tradition, innovation et
-              légèreté. Plus résistant et remarquablement plus doux que ses
-              prédécesseurs.
+              Pièces uniques artisanales en carbone, alliant tradition et
+              technologies contemporaines. Légères, résistantes, à
+              l&rsquo;acoustique remarquable.
             </p>
             {/* Chiffres clés, sous la promesse dans la colonne texte
                 (à gauche de la photo) sur desktop (≥ 768px) ;
@@ -210,9 +288,10 @@ export default function InstrumentPage() {
         {/* Mesure élargie à la colonne éditoriale complète : le texte
             épouse la largeur du titre au lieu de couper tôt. */}
         <ParagrapheSection largeur="max-w-3xl">
-          Nous fabriquons nos pièces et chaque sousaphone prend forme à travers
-          une succession de gestes précis. Une fabrication patiente qui garantit
-          résistance, équilibre et propriétés acoustiques d&rsquo;exception.
+          Chaque pièce est façonnée à la main. Chaque sousaphone prend forme,
+          geste après geste, dans nos ateliers. De cette patience naissent des
+          instruments résistants, équilibrés, aux propriétés acoustiques
+          d&rsquo;exception.
         </ParagrapheSection>
       </SectionEditoriale>
 
@@ -236,9 +315,9 @@ export default function InstrumentPage() {
                 Une question sur le sousaphone&nbsp;?
               </h2>
               <p className="paragraphe-section mx-auto mt-4 max-w-xl leading-relaxed text-black/80 min-[768px]:mx-0">
-                Nous sommes à votre écoute pour vous accompagner dans votre
-                projet, répondre à vos questions techniques ou organiser une
-                prise de contact.
+                Une question technique, un projet, une envie
+                d&rsquo;essai&nbsp;? Nous sommes à votre écoute pour vous
+                accompagner à chaque étape.
               </p>
             </div>
             <div className="mt-8 min-[768px]:mt-0 min-[768px]:flex-none">
@@ -267,48 +346,90 @@ export default function InstrumentPage() {
         </h2>
         <div aria-hidden="true" className="mt-6 h-px w-16 bg-[#C9A96A]" />
         <ParagrapheSection largeur="max-w-3xl">
-          Chaque courbe est finie et ajustée au plus près. Les pistons répondent
-          sans effort. Les finitions sont impeccables — le son, lui, reste
-          généreux.
+          Chaque courbe est formée, ajustée, puis polie lentement. Les pistons
+          répondent sans effort&nbsp;; les brasures disparaissent sous la
+          lumière. Un fini unique.
         </ParagrapheSection>
         <blockquote className="mt-10 text-center">
-          <p className="citation-serif mx-auto max-w-xl font-serif-carte italic leading-snug text-white">
+          <p className="citation-serif mx-auto max-w-xl font-serif-carte italic leading-snug text-[#C9A96A]">
             «&nbsp;Le métal garde la mémoire du geste.&nbsp;»
           </p>
-          <cite className="mt-4 block text-[10px] min-[640px]:text-xs font-bold not-italic tracking-[0.25em] text-[#C9A96A]">
-            L&rsquo;ATELIER DE PRÉCISION
-          </cite>
         </blockquote>
+        {/* Photo sous la citation : carte à bordure dorée pleine
+            colonne quand la photo est déposée, sinon placeholder
+            pointillé (fichier attendu, ratio, dimensions conseillées)
+            sur le même langage que la galerie. */}
+        {PHOTO_GESTE ? (
+          <div className="mt-12 overflow-hidden rounded-2xl border border-[#C9A96A]/40">
+            <Image
+              src={PHOTO_GESTE.src}
+              alt={PHOTO_GESTE.alt}
+              width={1600}
+              height={1000}
+              sizes="(min-width: 768px) 48rem, 100vw"
+              className="aspect-[16/10] w-full object-cover brightness-90"
+            />
+          </div>
+        ) : (
+          <div className="mt-12 flex aspect-[16/10] w-full flex-col items-center justify-center gap-1 rounded-2xl border border-dashed border-[#C9A96A]/30 bg-stone-900 p-4 text-center">
+            <p className="text-xs min-[768px]:text-sm font-bold text-[#C9A96A]">
+              photos/geste-juste.webp
+            </p>
+            <p className="text-[10px] min-[768px]:text-xs text-stone-300">
+              16/10
+            </p>
+            <p className="text-[10px] min-[768px]:text-xs text-stone-400">
+              ≈ 1600 × 1000 px
+            </p>
+          </div>
+        )}
       </SectionEditoriale>
 
       <SeparateurSection />
 
-      {/* Détails de fabrication : même gabarit que les sections
-          éditoriales (max-w-3xl) — la page garde un rythme régulier,
-          la photo 16/10 dans sa carte à bordure dorée épouse la
-          colonne de texte. */}
+      {/* Détails de fabrication : étiquette puis mosaïque éditoriale —
+          photo verticale à gauche, photo paysage puis zone texte de
+          même taille à droite (la colonne de droite s'étire à la
+          hauteur de la verticale) ; sur mobile les trois blocs
+          s'empilent dans l'ordre de lecture. La zone texte porte
+          l'ancre du titre de section : l'union du carbone et du
+          laiton. Ligne 2 : grande image pleine colonne sous la
+          mosaïque. */}
       <section
         aria-labelledby="titre-details"
         className="px-6 py-12 min-[768px]:py-16"
       >
         <Revelation>
           <div className="mx-auto max-w-3xl">
-            <EtiquetteDoree>L&rsquo;ATELIER DE PRÉCISION</EtiquetteDoree>
-            <h2
-              id="titre-details"
-              className="titre-section font-serif-carte mt-4 font-semibold leading-tight text-white"
-            >
-              Détails de fabrication.
-            </h2>
-            <div aria-hidden="true" className="mt-6 h-px w-16 bg-[#C9A96A]" />
-            <div className="mt-12 min-[768px]:mt-16 overflow-hidden rounded-2xl border border-[#C9A96A]/40">
-              <Image
-                src="/galerie/galerie-01.webp"
-                alt="Sousaphone de profil sur fond noir, pavillon doré au premier plan"
-                width={1600}
-                height={1000}
-                sizes="(min-width: 768px) 48rem, 100vw"
-                className="aspect-[16/10] w-full object-cover brightness-90"
+            <EtiquetteDoree>DÉTAILS DE FABRICATION</EtiquetteDoree>
+            <div className="mt-12 grid grid-cols-1 gap-6 min-[768px]:mt-16 min-[768px]:grid-cols-2">
+              <EmplacementDetail
+                photo={PHOTOS_DETAILS.verticale}
+                empreinte={EMPREINTES_DETAILS.verticale}
+              />
+              <div className="flex flex-col gap-6">
+                <EmplacementDetail
+                  photo={PHOTOS_DETAILS.paysage}
+                  empreinte={EMPREINTES_DETAILS.paysage}
+                />
+                <div className="flex flex-1 flex-col justify-center rounded-2xl border border-[#C9A96A]/40 px-6 py-8">
+                  <p className="etiquette-doree font-bold tracking-[0.25em] text-[#C9A96A]">
+                    MATIÈRE
+                  </p>
+                  <h2
+                    id="titre-details"
+                    className="titre-section font-serif-carte mt-4 font-semibold leading-tight text-white"
+                  >
+                    L&rsquo;union du carbone et du laiton
+                  </h2>
+                </div>
+              </div>
+            </div>
+            {/* Ligne 2 : grande image pleine colonne sous la mosaïque. */}
+            <div className="mt-6">
+              <EmplacementDetail
+                photo={PHOTOS_DETAILS.grande}
+                empreinte={EMPREINTES_DETAILS.grande}
               />
             </div>
           </div>
@@ -325,13 +446,13 @@ export default function InstrumentPage() {
           id="titre-piece-unique"
           className="font-serif-carte mt-4 text-4xl min-[768px]:text-5xl min-[1440px]:text-6xl font-semibold leading-tight text-white"
         >
-          Un instrument à votre mesure.
+          Un instrument unique, à votre mesure.
         </h2>
         <div aria-hidden="true" className="mt-6 h-px w-16 bg-[#C9A96A]" />
         <ParagrapheSection largeur="max-w-3xl">
-          Du premier souffle à la dernière note, chaque sousaphone est assemblé
-          et réglé à la main. Une précision sculpturale, une légèreté nouvelle,
-          une âme intacte.
+          Du premier tracé à la dernière note, chaque exemplaire est assemblé et
+          réglé dans nos ateliers. Une présence sculpturale, une légèreté
+          nouvelle, une âme intacte.
         </ParagrapheSection>
         <div className="mt-12">
           <BoutonAction href="/contact">NOUS CONTACTER</BoutonAction>
