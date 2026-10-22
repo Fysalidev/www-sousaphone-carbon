@@ -454,10 +454,11 @@ body {
   .instrument-hero .instrument-stat-description {
     grid-column: 2;
     grid-row: 2;
-    /* Quasi collée à la légende : la marge négative absorbe le vide
-       de la boîte de ligne de la légende et le demi-interligne
-       supérieur de la phrase. */
-    margin-top: -0.25rem;
-    line-height: 1.5;
+    /* Quasi collée à la légende : -8px absorbent le vide de la
+       boîte de ligne de la légende ET le demi-interligne supérieur
+       de la phrase — les glyphes de la phrase se posent juste sous
+       la ligne de base de la légende. */
+    margin-top: -0.5rem;
+    line-height: 1.25;
   }
 }
