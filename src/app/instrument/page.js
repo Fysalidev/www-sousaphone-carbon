@@ -22,21 +22,28 @@ export const metadata = {
 // bandeau logo (BandeauLogo). Le header et le footer du projet
 // encadrent la page (layout.js).
 
-// Bouton d'action pilule noire (rounded-full) : fond noir, texte
-// or, l'or arrive au survol (fond or, texte noir). Sur le fond noir
-// de la page elle vit en fantôme, seul le texte affiche ; sur le
-// bandeau doré elle tranche franchement. `inverse` ne change que la
-// couleur du liseré de focus (noir sur fond or).
+// Bouton d'action pilule or pleine (rounded-full) : fond or, texte
+// noir, inversion au survol ; micro-interaction : la flèche glisse
+// à droite au survol. `inverse` le décline pour le bandeau doré
+// (plein noir, texte or) — c'est le seul point où le bouton vit
+// sur un fond clair.
 function BoutonAction({ href, children, inverse = false, classe = "" }) {
   return (
     <Link
       href={href}
-      className={`inline-flex items-center gap-3 rounded-full bg-black px-8 py-4 texte-bouton font-bold tracking-[0.25em] text-[#C9A96A] transition-colors hover:bg-[#C9A96A] hover:text-black focus-visible:outline-2 focus-visible:outline-offset-2 ${
-        inverse ? "focus-visible:outline-black" : "focus-visible:outline-white"
+      className={`group inline-flex items-center gap-3 rounded-full border px-8 py-4 texte-bouton font-bold tracking-[0.25em] transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 ${
+        inverse
+          ? "border-black bg-black text-[#C9A96A] hover:bg-black/80 focus-visible:outline-black"
+          : "border-[#C9A96A] bg-[#C9A96A] text-black hover:bg-black hover:text-[#C9A96A] focus-visible:outline-white"
       } ${classe}`}
     >
       {children}
-      <span aria-hidden="true">&rarr;</span>
+      <span
+        aria-hidden="true"
+        className="transition-transform duration-300 ease-out group-hover:translate-x-1 motion-reduce:transition-none"
+      >
+        &rarr;
+      </span>
     </Link>
   );
 }
