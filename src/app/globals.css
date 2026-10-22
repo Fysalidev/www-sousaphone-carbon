@@ -436,7 +436,9 @@ body {
     display: grid;
     grid-template-columns: auto minmax(0, 1fr);
     column-gap: 1.25rem;
-    align-items: baseline;
+    /* Haut de la valeur et haut de la légende alignés (start), la
+       phrase se glisse sous la légende. */
+    align-items: start;
   }
   .instrument-hero .instrument-stat dd {
     grid-column: 1;
