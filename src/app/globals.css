@@ -233,6 +233,11 @@ body {
        tienne sur une ligne dans sa colonne, atteint à 2040px. */
     font-size: clamp(2.25rem, 1.2rem + 2vw, 3.75rem);
   }
+  .instrument-hero .instrument-promesse {
+    /* Même rampe que la promesse du hero d'accueil : 16px à 768px,
+       croissance continue, 22px atteints à 3800px. */
+    font-size: clamp(1rem, 0.9rem + 0.2vw, 1.375rem);
+  }
   .instrument-hero .instrument-stat-valeur {
     font-size: clamp(1.875rem, 1.5875rem + 0.6vw, 3rem);
   }

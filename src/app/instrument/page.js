@@ -122,7 +122,7 @@ export default function InstrumentPage() {
             >
               Une innovation mondiale.
             </h1>
-            <p className="hero-entree mt-6 max-w-xl text-base leading-relaxed text-stone-200 min-[768px]:max-w-lg [animation-delay:450ms]">
+            <p className="hero-entree instrument-promesse mt-6 max-w-xl text-base leading-relaxed text-stone-200 min-[768px]:max-w-lg [animation-delay:450ms]">
               Un sousaphone artisanal qui conjugue tradition, innovation et
               légèreté. Plus résistant et remarquablement plus doux que ses
               prédécesseurs.
