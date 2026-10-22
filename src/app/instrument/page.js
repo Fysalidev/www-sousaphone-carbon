@@ -145,8 +145,6 @@ export default function InstrumentPage() {
         </div>
       </section>
 
-      <SeparateurSection />
-
       {/* Chiffres clés commentés : les trois mêmes stats que l'accueil
           (-40 %, 100 %, 100 %) avec ici une phrase d'explication sous
           chacune. Trois colonnes à partir de 768px, empilées et
