@@ -133,7 +133,7 @@ export default function InstrumentPage() {
               alt="Sousaphone sur fond sombre"
               fill
               priority
-              sizes="100vw"
+              sizes="calc(100vw - 3rem)"
               className="object-contain object-center mix-blend-screen mask-[linear-gradient(to_bottom,transparent_2%,black_10%,black_90%,transparent_98%)] min-[768px]:hidden"
             />
             <Image
