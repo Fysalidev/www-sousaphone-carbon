@@ -114,7 +114,7 @@ export default function InstrumentPage() {
         <div className="flex w-full flex-1 flex-col items-center px-6 pt-12 pb-10 text-center min-[768px]:mx-auto min-[768px]:grid min-[768px]:max-w-[90rem] min-[768px]:grid-cols-[minmax(0,3fr)_minmax(0,2fr)] min-[768px]:items-center min-[768px]:gap-10 min-[768px]:pt-0 min-[768px]:text-left">
           <div className="flex flex-col items-center min-[768px]:items-start">
             <p className="hero-entree instrument-accroche font-bold tracking-[0.25em] text-[#C9A96A] [animation-delay:150ms]">
-              SOUSAPHONE NOUVELLE GÉNÉRATION
+              LE SOUSAPHONE RÉINVENTÉ
             </p>
             <h1
               id="titre-hero"
