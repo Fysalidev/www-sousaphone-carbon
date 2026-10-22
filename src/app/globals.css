@@ -282,7 +282,10 @@ body {
        phrase se glisse sous la légende. */
     align-items: start;
   }
-  .instrument-hero .instrument-stat dd {
+  /* La valeur (dd instrument-stat-valeur) en colonne 1 ; la
+     description, devenue dd elle aussi, garde sa règle dédiée en
+     colonne 2 ci-dessous. */
+  .instrument-hero .instrument-stat-valeur {
     grid-column: 1;
     grid-row: 1;
   }

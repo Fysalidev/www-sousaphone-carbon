@@ -63,9 +63,9 @@ function StatCommentee({ valeur, legende, description, dore = false }) {
         {valeur}
         <span>%</span>
       </dd>
-      <p className="instrument-stat-description paragraphe-section order-3 mt-3 leading-relaxed text-stone-300">
+      <dd className="instrument-stat-description paragraphe-section order-3 mt-3 leading-relaxed text-stone-300">
         {description}
-      </p>
+      </dd>
     </div>
   );
 }
