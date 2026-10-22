@@ -395,9 +395,6 @@ body {
    rampe empilée et la rampe desktop). Les classes instrument-stat-*
    sont posées par StatCommentee mais ne s'activent qu'ici : la
    section mobile des chiffres clés garde ses paliers centrés.
-   Sous 80rem (1280px), la colonne texte est trop étroite pour trois
-   colonnes commentées : les stats s'empilent en colonne unique,
-   alignées à gauche, et les descriptions attendent la place.
    Hors @layer : prime sur les utilitaires. */
 .instrument-hero .instrument-accroche {
   /* 10px à 320px, 12px à 768px. */
@@ -428,8 +425,31 @@ body {
     text-align: left;
   }
 }
+/* Sous 80rem (1280px), la colonne texte est trop étroite pour trois
+   colonnes commentées : les stats deviennent des lignes éditoriales
+   — valeur à gauche, légende et phrase empilées à droite — si bien
+   que toute l'information reste visible à toutes les largeurs. À
+   partir de 80rem, le gabarit trois colonnes reprend la main.
+   Hors @layer : prime sur les utilitaires. */
 @media (min-width: 48rem) and (max-width: 79.99rem) {
+  .instrument-hero .instrument-stat {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr);
+    column-gap: 1.25rem;
+    align-items: baseline;
+  }
+  .instrument-hero .instrument-stat dd {
+    grid-column: 1;
+    grid-row: 1;
+  }
+  .instrument-hero .instrument-stat dt {
+    grid-column: 2;
+    grid-row: 1;
+    margin-top: 0;
+  }
   .instrument-hero .instrument-stat-description {
-    display: none;
+    grid-column: 2;
+    grid-row: 2;
+    margin-top: 0.25rem;
   }
 }

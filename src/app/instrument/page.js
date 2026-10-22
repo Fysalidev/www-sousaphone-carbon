@@ -129,8 +129,8 @@ export default function InstrumentPage() {
             </p>
             {/* Chiffres clés, sous la promesse dans la colonne texte
                 (à gauche de la photo) sur desktop (≥ 768px) ;
-                l'alignement, la typo fluide et le masquage des
-                descriptions sous 1280px vivent dans globals.css
+                l'alignement, la typo fluide et le passage en lignes
+                éditoriales sous 1280px vivent dans globals.css
                 (scopés .instrument-hero). Sur mobile, la section
                 dédiée ci-dessous prend le relais. */}
             <dl
