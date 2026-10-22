@@ -412,13 +412,21 @@ export default function InstrumentPage() {
                   photo={PHOTOS_DETAILS.paysage}
                   empreinte={EMPREINTES_DETAILS.paysage}
                 />
-                <div className="flex flex-1 flex-col justify-center rounded-2xl border border-[#C9A96A]/40 px-6 py-8">
+                {/* Zone texte : remplissage élastique (flex-1, min-h-0)
+                    sous la photo paysage — la photo verticale fixe la
+                    hauteur de la ligne de grille, la colonne droite
+                    s'étire à l'identique et la zone absorbe l'espace
+                    restant : photo + texte = hauteur de details-01.
+                    Typo resserrée (text-2xl/3xl, pas la rampe
+                    titre-section) pour tenir dans sa part de
+                    hauteur. */}
+                <div className="flex min-h-0 flex-1 flex-col justify-center rounded-2xl border border-[#C9A96A]/40 px-6 py-6">
                   <p className="etiquette-doree font-bold tracking-[0.25em] text-[#C9A96A]">
                     MATIÈRE
                   </p>
                   <h2
                     id="titre-details"
-                    className="titre-section font-serif-carte mt-4 font-semibold leading-tight text-white"
+                    className="font-serif-carte mt-3 text-2xl min-[768px]:text-3xl font-semibold leading-tight text-white"
                   >
                     L&rsquo;union du carbone et du laiton
                   </h2>
