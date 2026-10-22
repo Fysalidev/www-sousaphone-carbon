@@ -10,7 +10,7 @@ import Revelation from "./Revelation";
 // surmonte chaque grand titre, même traitement que l'accroche du hero.
 export function EtiquetteDoree({ children }) {
   return (
-    <p className="text-[10px] min-[768px]:text-xs min-[1555px]:text-sm font-bold tracking-[0.25em] text-[#C9A96A]">
+    <p className="etiquette-doree font-bold tracking-[0.25em] text-[#C9A96A]">
       {children}
     </p>
   );
@@ -25,7 +25,7 @@ export function TitreSection({ id, children }) {
     <div>
       <h2
         id={id}
-        className="font-serif-carte mt-4 text-4xl min-[768px]:text-5xl min-[1440px]:text-6xl font-semibold leading-tight text-white"
+        className="titre-section font-serif-carte mt-4 font-semibold leading-tight text-white"
       >
         {children}
       </h2>
@@ -34,11 +34,15 @@ export function TitreSection({ id, children }) {
   );
 }
 
-// Paragraphe de corps de section : colonne lisible, texte clair sur
-// fond noir.
-export function ParagrapheSection({ children }) {
+// Paragraphe de corps de section : colonne lisible (36rem par
+// défaut), texte clair sur fond noir — `largeur` permet d'écarter
+// la mesure pour un paragraphe donné (ex. aligné sur la colonne
+// éditoriale complète).
+export function ParagrapheSection({ children, largeur = "max-w-xl" }) {
   return (
-    <p className="mt-6 max-w-xl text-sm min-[640px]:text-base leading-relaxed text-stone-300">
+    <p
+      className={`paragraphe-section mt-6 ${largeur} leading-relaxed text-stone-300`}
+    >
       {children}
     </p>
   );
@@ -50,13 +54,13 @@ export function ParagrapheSection({ children }) {
 // pleine largeur, colonne max-w-3xl centrée), pour poser son bord
 // gauche exactement à l'aplomb du texte. Son encre est noire sur
 // fond transparent, le filtre CSS `invert` la rend blanche à
-// l'affichage. Purement décoratif (aria-hidden, alt vide). Même
-// rythme vertical que les sections (py-12 / py-16) : l'espace qui
-// l'entoure est identique au-dessus et en dessous, à chaque
-// transition.
+// l'affichage. Purement décoratif (aria-hidden, alt vide). Rythme
+// allégé (py-8 / py-10) : le logo garde sa taille signature, l'air
+// autour est réduit pour que les transitions respirent sans étirer
+// la page — l'espace reste identique au-dessus et en dessous.
 export function SeparateurSection() {
   return (
-    <div aria-hidden="true" className="w-full px-6 py-12 min-[768px]:py-16">
+    <div aria-hidden="true" className="w-full px-6 py-8 min-[768px]:py-10">
       <div className="mx-auto max-w-3xl">
         <Image
           src="/logos/logo-inter.png"

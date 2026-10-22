@@ -218,7 +218,7 @@ function MenuPleinEcran({ pathname, ouvert, fermer, refDialogue, refFermer }) {
           />
         </>
       )}
-      <div className="relative z-10 flex w-full items-center justify-between gap-6 px-6 pt-10 pb-3.5">
+      <div className="zone-contenu relative z-10 flex w-full items-center justify-between gap-6 px-6 pt-10 pb-3.5">
         <LogoMenu onClick={fermer} />
         <span
           aria-hidden="true"
@@ -237,18 +237,18 @@ function MenuPleinEcran({ pathname, ouvert, fermer, refDialogue, refFermer }) {
       </div>
       <nav
         aria-label="Menu"
-        className="relative z-10 flex min-h-0 flex-1 flex-col overflow-hidden"
+        className="zone-contenu relative z-10 flex min-h-0 flex-1 flex-col overflow-hidden px-6"
       >
-        <ul className="flex min-h-0 w-full max-w-169.75 flex-1 flex-col px-6 pt-6 pb-8">
+        <ul className="flex min-h-0 w-full max-w-3xl flex-1 flex-col pt-6 pb-8">
           <li
             style={delaiEntree(ouvert, 0)}
             className={`pb-4 [@media(max-height:600px)]:hidden ${classesEntree(ouvert)}`}
           >
-            <p className="font-display text-xl min-[420px]:text-2xl font-medium leading-snug text-stone-100">
+            <p className="titre-menu font-display font-medium leading-snug text-stone-100">
               Un instrument d&rsquo;exception, pensé comme une œuvre
               d&rsquo;art, joué comme une évidence.
             </p>
-            <p className="mt-2 text-xs min-[420px]:text-sm text-stone-200">
+            <p className="legende-menu mt-2 text-stone-200">
               Fabriqué en France, façonné à la main. Parlons de votre futur
               Sousaphone Carbon.
             </p>
@@ -377,24 +377,29 @@ export default function Header() {
     };
   }, [ouvert]);
 
-  // Sur l'accueil, le hero démarre sur un dégradé doré à 10 % (#C9A96A
-  // sur noir = #14110B) : le header prend cette couleur exacte pour
-  // se fondre dans le haut du hero ; les autres pages, qui démarrent
-  // sur du noir pur, gardent le noir.
+  // Fond du header épousant le hero : les pages qui commencent par
+  // le dégradé doré (accueil, instrument, 404 et toute page future)
+  // ont un sommet teinté or/10 sur noir — #C9A96A/10 sur noir =
+  // #14110B — que le header reprend pour une couture invisible ;
+  // les pages à sommet noir pur (galerie, contact) gardent le
+  // noir. Solide dans tous les cas : le header reste sticky et
+  // doit masquer le contenu au défilement.
   return (
     <header
       className={`sticky top-0 z-30 w-full ${
-        pathname === "/" ? "bg-[#14110B]" : "bg-black"
+        pathname === "/galerie" || pathname === "/contact"
+          ? "bg-black"
+          : "bg-[#14110B]"
       }`}
     >
-      {/* Barre du header : contenu borné aux paliers du hero via la
-          classe .header-barre (globals.css, hors @layer) — mobile
-          px-6, puis padding 2.5rem minimum et zone plafonnée à
-          90rem (100rem au-delà de 1920px). Le fond du header, lui,
-          reste pleine largeur. */}
+      {/* Barre du header : contenu aligné sur la zone de texte du
+          hero via la classe .zone-contenu (globals.css, hors
+          @layer, partagée avec le footer) — mobile px-6, puis à
+          partir de 48rem le padding suit la zone 87rem. Le fond du
+          header, lui, reste pleine largeur. */}
       <div
         inert={ouvert}
-        className="header-barre flex w-full items-center justify-between gap-6 overflow-hidden px-6 pt-10 pb-5"
+        className="zone-contenu flex w-full items-center justify-between gap-6 overflow-hidden px-6 pt-10 pb-5"
       >
         <LogoHeader />
         <NavDesktop pathname={pathname} />

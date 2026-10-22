@@ -12,13 +12,13 @@ import Link from "next/link";
 export function BlocCorps({ numero, titre, children }) {
   return (
     <article className="rounded-2xl border border-[#C9A96A]/40 p-6">
-      <p className="font-sans text-lg min-[640px]:text-xl min-[1024px]:text-2xl font-bold text-[#C9A96A]">
+      <p className="numero-carte font-sans font-bold text-[#C9A96A]">
         {numero}
       </p>
-      <h3 className="font-serif-carte mt-2 text-xl min-[640px]:text-2xl min-[1024px]:text-3xl font-medium text-white">
+      <h3 className="titre-carte font-serif-carte mt-2 font-medium text-white">
         {titre}
       </h3>
-      <p className="font-sans mt-3 text-sm min-[640px]:text-base min-[1024px]:text-lg leading-relaxed text-stone-300">
+      <p className="paragraphe-carte font-sans mt-3 leading-relaxed text-stone-300">
         {children}
       </p>
     </article>
@@ -32,14 +32,14 @@ export function BlocCorps({ numero, titre, children }) {
 export function CarteMembre({ numero, nom, role }) {
   return (
     <article className="rounded-2xl border border-[#C9A96A]/40 p-6">
-      <p className="font-sans text-lg min-[640px]:text-xl min-[1024px]:text-2xl font-bold text-[#C9A96A]">
+      <p className="numero-carte font-sans font-bold text-[#C9A96A]">
         {numero}
       </p>
-      <h3 className="font-serif-carte mt-2 text-xl min-[640px]:text-2xl min-[1024px]:text-3xl font-medium text-white">
+      <h3 className="titre-carte font-serif-carte mt-2 font-medium text-white">
         {nom}
       </h3>
       {role && (
-        <p className="font-sans mt-3 text-[10px] min-[640px]:text-xs font-bold tracking-[0.25em] text-[#C9A96A]">
+        <p className="etiquette-doree font-sans mt-3 font-bold tracking-[0.25em] text-[#C9A96A]">
           {role}
         </p>
       )}
@@ -133,10 +133,10 @@ export function AttributIcone({ Icone, titre, children }) {
         <Icone />
       </PastilleIcone>
       <div>
-        <h3 className="text-xs min-[640px]:text-sm font-bold tracking-[0.25em] text-white">
+        <h3 className="legende-attribut font-bold tracking-[0.25em] text-white">
           {titre}
         </h3>
-        <p className="mt-2 text-sm min-[640px]:text-base leading-relaxed text-stone-300">
+        <p className="paragraphe-section mt-2 leading-relaxed text-stone-300">
           {children}
         </p>
       </div>

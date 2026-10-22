@@ -17,22 +17,19 @@
   }
 }
 
-/* Barre du header, mêmes paliers de largeur que le hero : le contenu
-   (logo, navigation) s'arrête où s'arrête le contenu du hero. Mobile :
-   le px-6 du JSX suffit ; à partir de 48rem le padding lateral
-   grandit — plancher 2.5rem, puis marges de la zone hero plafonnée à
-   90rem — ; à partir de 120rem (1920px) le plafond suit le hero à
-   100rem. Hors @layer : prime sur les utilitaires Tailwind, comme
-   les paliers du hero. */
+/* Zone de contenu du site (header, footer) : le contenu s'arrête
+   exactement où s'arrête le texte des heroes — zone 90rem (max-w-
+   [90rem] du JSX) moins les gouttières px-6, soit 87rem de texte
+   centré. Mobile : le px-6 du JSX suffit ; à partir de 48rem le
+   padding latéral grandit — plancher 1.5rem, puis marges de la
+   zone. Grille des largeurs du site : hero 90rem, sections
+   larges (chiffres, galerie) 72rem, prose éditoriale (sections,
+   boîte question, menu, footer) 48rem — toutes centrées,
+   gouttière px-6. Hors @layer : prime sur les utilitaires
+   Tailwind, comme les rampes du hero. */
 @media (min-width: 48rem) {
-  .header-barre {
-    padding-inline: max(2.5rem, calc((100% - 90rem) / 2));
-  }
-}
-
-@media (min-width: 120rem) {
-  .header-barre {
-    padding-inline: max(2.5rem, calc((100% - 100rem) / 2));
+  .zone-contenu {
+    padding-inline: max(1.5rem, calc((100% - 87rem) / 2));
   }
 }
 
@@ -75,283 +72,235 @@ body {
     animation: none;
   }
 }
+/* Hero accueil : même mécanique que la page instrument — la
+   disposition (photo à gauche, texte à droite, pile compacte sur
+   mobile, plein écran desktop) vit dans le JSX en utilitaires
+   Tailwind ; ici ne restent que la mesure de la promesse et les
+   rampes de typographie fluide, qui se raccordent sans couture à
+   768px entre l'empilé et le desktop. Hors @layer : prime sur les
+   utilitaires (les tailles du JSX ont été retirées). */
+.hero {
+  --mesure-promesse: clamp(36rem, 28rem + 1.0417vw, 48rem);
+}
 
-/* Hero, écran large (≥ 48rem / 768px) : la disposition bascule en
-   deux colonnes — photo à gauche occupant toute la hauteur, texte
-   à droite collé à la photo (aligné côté gauche de sa colonne).
-   L'instrument, portrait, est limité par la hauteur : en colonne
-   il double sa taille sur les écrans bas. En dessous de 48rem, le
-   hero empilé reprend la main. Hors @layer : prime sur les
-   utilitaires Tailwind. */
-@media (min-width: 48rem) {
-  .hero {
-    display: grid;
-    /* Photo à gauche (40 %) — colonne calée sur la largeur réelle
-       de l'instrument (portrait ≈ 0,71 × hauteur du hero) : elle
-       remplit sa colonne au lieu de flotter au milieu d'une
-       colonne trop large. Texte à droite (60 %). */
-    grid-template-columns: minmax(0, 2fr) minmax(0, 3fr);
-    column-gap: 0.5rem;
-    /* Zone de contenu plafonnée à 90rem et centrée : au-delà, les
-       marges latérales grandissent au lieu que les colonnes ne
-       s'étalent jusqu'aux bords. Le fond doré du hero, porté par
-       la section, garde toute la largeur d'écran. */
-    padding-inline: max(2.5rem, calc((100% - 90rem) / 2));
-    /* Deux rangées-tampons (1fr) encadrent le groupe de texte :
-     celui-ci est toujours centré verticalement, comme l'image
-     (plafonnée et centrée) — leurs centres restent alignés
-     quelle que soit la hauteur d'écran. */
-    grid-template-rows: minmax(0, 1fr) auto auto minmax(0, 1fr);
-    grid-template-areas:
-      "photo ."
-      "photo haut"
-      "photo bas"
-      "photo .";
-  }
-  .hero-haut {
-    grid-area: haut;
-    /* Groupe centré par les rangées-tampons de la grille : plus de
-       décalage calculé — le pt-12 par défaut est neutralisé. */
-    padding-top: 0;
-    padding-inline: 0;
-    align-items: flex-start;
-    text-align: left;
-  }
-  .hero-photo {
-    grid-area: photo;
-    margin-top: 0;
-    /* Hauteur fixée : l'image est plafonnée à 48rem (768px) et
-       centrée verticalement dans sa zone — sur les écrans bas,
-       min() la ramène à la hauteur disponible. */
-    height: min(100%, 48rem);
-    align-self: center;
-  }
-  .hero-bas {
-    grid-area: bas;
-    padding-inline: 0;
-    align-items: flex-start;
-    text-align: left;
-    /* Groupe compact : le bloc suit le titre au plus près (flex-start
-       par défaut), l'espace restant s'accumule sous le bouton — la
-       photo, elle, garde toute la hauteur. */
-  }
-  /* Le bouton reprend son centrage d'origine : l'utilitaire
-     `self-center` du JSX s'applique à nouveau, sans surcharge
-     d'alignement ici. */
-  /* Bouton aligné à droite sur la mesure du texte : son bord
-     droit épouse celui de la promesse (max-w-xl = 36rem, puis
-     42rem à 1555px et 48rem à 1920px — mêmes paliers que le JSX).
-     margin-right = largeur colonne − mesure : 0 quand la colonne
-     est plus étroite que la mesure. */
-  .hero-bouton {
-    align-self: flex-end;
-    margin-right: max(0px, calc(100% - 36rem));
-  }
-  @media (min-width: 96.875rem) {
-    .hero-bouton {
-      margin-right: max(0px, calc(100% - 42rem));
-    }
-  }
-  @media (min-width: 120rem) {
-    .hero-bouton {
-      margin-right: max(0px, calc(100% - 48rem));
-    }
-  }
-  /* Typographie fluide : clamp() remplace les paliers fixes (les
-     utilitaires text-4xl→7xl du JSX restent actifs sous 48rem,
-     en empilé). Le titre, la promesse, les valeurs et l'accroche
-     grandissent en continu avec la largeur de la fenêtre au lieu
-     de sauter à 1024/1440/1555px — la colonne texte est plus
-     étroite que l'écran, les paliers calés sur l'écran entier
-     donnaient des corps trop grands en colonne. */
+.hero-promesse {
+  max-width: var(--mesure-promesse);
+}
+
+/* Typographie du hero accueil, empilé mobile (< 48rem) : chaque
+   texte suit une rampe continue dont le plafond correspond
+   exactement au plancher de la rampe desktop à 768px. */
+@media (max-width: 47.99rem) {
   .hero-titre {
-    font-size: clamp(2.25rem, 1.2rem + 2vw, 4.5rem);
+    /* 30px à 320px, 36px à 768px. */
+    font-size: clamp(1.875rem, 1.6071rem + 1.3393vw, 2.25rem);
+  }
+  .hero-accroche {
+    /* 10px à 320px, 12px à 768px. */
+    font-size: clamp(0.625rem, 0.5357rem + 0.4464vw, 0.75rem);
+  }
+  .hero-stat-valeur {
+    /* 24px à 320px, 30px à 768px. */
+    font-size: clamp(1.5rem, 1.2321rem + 1.3393vw, 1.875rem);
+  }
+  .hero-stat-legende {
+    /* 10px à 320px, 12px à 768px. */
+    font-size: clamp(0.625rem, 0.5357rem + 0.4464vw, 0.75rem);
+  }
+}
+
+/* Typographie du hero accueil, desktop (≥ 48rem) : rampes continues
+   — le titre, la promesse, les valeurs et l'accroche grandissent
+   avec la fenêtre au lieu de sauter de palier. Le plafond du titre
+   (5.5rem, atteint à 3440px) prolonge la croissance sur très
+   grands écrans. */
+@media (min-width: 48rem) {
+  .hero-titre {
+    font-size: clamp(2.25rem, 1.2rem + 2vw, 5.5rem);
   }
   .hero-promesse {
     font-size: clamp(1rem, 0.9rem + 0.2vw, 1.375rem);
   }
   .hero-stat-valeur {
-    /* Minimum calé sur le palier mobile text-3xl (1.875rem) : la
-       valeur ne rétrécit pas au basculement deux colonnes — la
-       formule reprend la même pente (0.6vw) depuis 768px. */
     font-size: clamp(1.875rem, 1.5875rem + 0.6vw, 3rem);
   }
-  .hero-haut p.hero-entree {
-    /* Recalé sur la rampe JSX (10px mobile, text-xs à 768px, text-sm
-       à 1555px) : 12px à 768px puis croissance continue jusqu'à
-       14px atteints à 1555px — plus de saut au basculement. */
+  .hero-stat-legende {
+    font-size: clamp(0.75rem, 0.6667rem + 0.1736vw, 0.875rem);
+  }
+  .hero-accroche {
     font-size: clamp(0.625rem, 0.63rem + 0.25vw, 0.875rem);
   }
 }
 
-/* Deux colonnes, écran assez haut (≥ 44rem) : espacements du bloc
-   texte — serré sous le titre, plus généreux entre promesse,
-   chiffres et bouton. Les écrans bas gardent les paliers de
-   compression ci-dessous. Hors @layer : prime sur mt-*. */
-@media (min-width: 48rem) and (min-height: 44rem) {
-  .hero-titre {
-    margin-top: 1.5rem;
-  }
-  .hero-promesse {
-    margin-top: 1.5rem;
-  }
-  .hero-metrics {
-    margin-top: 2.5rem;
-  }
-  .hero-bouton {
-    margin-top: 2.5rem;
+/* ——— Typographie des sections : rampes continues ———
+   Même principe que les heroes : chaque texte suit une rampe
+   clamp() du mobile à l'ultra-large, sans saut de palier — les
+   utilitaires Tailwind de taille ont été retirés du JSX des
+   primitives (SectionsEditoriales, CartesAccueil, StatCommentee).
+   Les micro-légendes d'habillage (numéros de vignettes, « 3/4 »
+   de la galerie) gardent leurs paliers : ce sont des détails
+   d'interface, pas de la typo de section. Hors @layer : prime sur
+   les utilitaires. */
+
+/* Grand titre serif de section : 36px constants sur mobile,
+   croissance continue de 36px (768px) à 60px (1920px). */
+.titre-section {
+  font-size: clamp(2.25rem, 1.25rem + 2.083vw, 3.75rem);
+}
+
+/* Titre de la boîte « Une question » : 30px sur mobile, croissance
+   de 30px (640px) à 48px (1200px). */
+.titre-boite {
+  font-size: clamp(1.875rem, 0.5938rem + 3.2143vw, 3rem);
+}
+
+/* Citation serif italique : 24px à 320px, 30px à 640px. */
+.citation-serif {
+  font-size: clamp(1.5rem, 1.125rem + 1.875vw, 1.875rem);
+}
+
+/* Titre de carte (Bodoni medium) : 20px à 320px, 30px à 1024px. */
+.titre-carte {
+  font-size: clamp(1.25rem, 0.9665rem + 1.4205vw, 1.875rem);
+}
+
+/* Numéro doré de carte : 18px à 320px, 24px à 1024px. */
+.numero-carte {
+  font-size: clamp(1.125rem, 0.9545rem + 0.8523vw, 1.5rem);
+}
+
+/* Étiquette dorée : 10px à 320px, 12px à 768px, 14px à 1555px. */
+.etiquette-doree {
+  font-size: clamp(0.625rem, 0.5357rem + 0.4464vw, 0.75rem);
+}
+@media (min-width: 48rem) {
+  .etiquette-doree {
+    font-size: clamp(0.625rem, 0.63rem + 0.25vw, 0.875rem);
   }
 }
 
-/* Deux colonnes, très grands écrans (≥ 1920px) : la zone de
-   contenu s'élargit à 100rem, l'image reprend toute la hauteur
-   disponible (son plafond ne servait qu'à éviter l'étirement
-   démesuré des écrans moyens — ici, plus la place est grande,
-   plus l'instrument doit en profiter), et la typographie monte
-   d'un cran pour tenir la scène. Hors @layer. */
-@media (min-width: 120rem) {
-  .hero {
-    padding-inline: max(2.5rem, calc((100% - 100rem) / 2));
-  }
-  .hero-photo {
-    height: 100%;
-  }
-  .hero-titre {
-    font-size: clamp(3.5rem, 2rem + 2vw, 5.5rem);
-  }
-  .hero-promesse {
-    font-size: 1.375rem;
-  }
-  .hero-stat-valeur {
-    font-size: 2.75rem;
-  }
+/* Paragraphe de corps de section : 14px à 320px, 16px à 640px. */
+.paragraphe-section {
+  font-size: clamp(0.875rem, 0.75rem + 0.625vw, 1rem);
 }
 
-/* Hero empilé, mobile (< 48rem) : hero-mobile.webp est élancée et porte du
-   vide autour de l'instrument — la photo garde un plancher à 45 %
-   de l'écran et les deux blocs de texte chevauchent les bords de
-   l'image, fondu par le masque (titre sur le haut, metrics sur le
-   bas), ce qui finance la hauteur de texte : sur les appareils
-   hauts le hero tient à l'écran, sur les plus bas un léger
-   défilement naturel reste possible. Les écrans bas gardent les
-   paliers de compression ci-dessous. Hors @layer : prime sur les
-   utilitaires. */
-@media (max-width: 47.99rem) {
-  .hero-photo {
-    /* Plancher à 45 % de l'écran, pas la moitié : sur les appareils
-       où la pile de texte est trop haute, le plancher 50 % forçait
-       le hero hors de l'écran. Plus bas, il ne change rien aux
-       appareils qui ont de la marge — la photo, flex-1, regonfle
-       pour occuper tout l'espace restant ; il ne sert que de garde-
-       fou quand le texte empiète. */
-    min-height: 45svh;
-    /* La photo remonte sous le titre : son haut est déjà fondu
-       par le masque (transparent 2 % → opaque 10 %), le titre
-       s'y pose en légéreté. */
-    margin-top: -2rem;
+/* Paragraphe de carte : 14px à 320px, 18px à 1024px. */
+.paragraphe-carte {
+  font-size: clamp(0.875rem, 0.7614rem + 0.5682vw, 1.125rem);
+}
+
+/* Valeur des stats commentées : 24px à 320px, 36px à 1024px —
+   dans le hero instrument, les règles .instrument-hero dédiées
+   priment (spécificité supérieure). */
+.stat-valeur {
+  font-size: clamp(1.5rem, 1.1591rem + 1.7045vw, 2.25rem);
+}
+
+/* Libellé d'attribut iconé : 12px à 320px, 14px à 640px. */
+.legende-attribut {
+  font-size: clamp(0.75rem, 0.625rem + 0.625vw, 0.875rem);
+}
+
+/* Lien de menu (overlay et footer) : 16px à 320px, 18px à 420px. */
+.lien-menu {
+  font-size: clamp(1rem, 0.6rem + 2vw, 1.125rem);
+}
+
+/* Titre d'accroche du menu : 20px à 320px, 24px à 420px. */
+.titre-menu {
+  font-size: clamp(1.25rem, 0.45rem + 4vw, 1.5rem);
+}
+
+/* Légende du menu et ligne d'atelier du footer : 12px à 320px,
+   14px à 420px. */
+.legende-menu {
+  font-size: clamp(0.75rem, 0.35rem + 2vw, 0.875rem);
+}
+
+/* Texte des boutons d'action : 12px à 320px, 14px à 1555px. */
+.texte-bouton {
+  font-size: clamp(0.75rem, 0.7176rem + 0.1619vw, 0.875rem);
+}
+
+/* Hero instrument (scopé .instrument-hero) : typographie fluide,
+   mêmes rampes continues que le hero d'accueil — l'accroche, le
+   titre et les valeurs grandissent avec la fenêtre au lieu de
+   sauter de palier (les utilitaires Tailwind de taille ont été
+   retirés du JSX du hero ; raccords sans couture à 768px entre la
+   rampe empilée et la rampe desktop). Les classes instrument-stat-*
+   sont posées par StatCommentee mais ne s'activent qu'ici : la
+   section mobile des chiffres clés garde ses paliers centrés.
+   Hors @layer : prime sur les utilitaires. */
+.instrument-hero .instrument-accroche {
+  /* 10px à 320px, 12px à 768px. */
+  font-size: clamp(0.625rem, 0.5357rem + 0.4464vw, 0.75rem);
+}
+.instrument-hero .instrument-titre {
+  /* 30px à 320px, 36px à 768px. */
+  font-size: clamp(1.875rem, 1.6071rem + 1.3393vw, 2.25rem);
+}
+@media (min-width: 48rem) {
+  .instrument-hero .instrument-accroche {
+    /* 12px à 768px, 14px atteints à 1555px. */
+    font-size: clamp(0.625rem, 0.63rem + 0.25vw, 0.875rem);
   }
-  .hero-haut {
-    padding-top: 2rem;
-    /* Le titre chevauche la photo : il doit se peindre au-dessus
-       d'elle (relative + z-index, la photo étant elle-même
-       relative et plus loin dans le flux). */
-    position: relative;
-    z-index: 1;
+  .instrument-hero .instrument-titre {
+    /* Même rampe que l'accueil, cap compris : l'échelle des deux
+       heroes est identique sur tout l'éventail — sur très grands
+       écrans le titre passe sur deux lignes, comme celui de
+       l'accueil. */
+    font-size: clamp(2.25rem, 1.2rem + 2vw, 5.5rem);
   }
-  .hero-bas {
-    padding-bottom: 2rem;
-    /* Metrics en overlay sur le bas de la photo : c'est le groupe
-       texte entier qui remonte (marge négative), les metrics
-       passant en tête du groupe via order — seuls eux chevauchent
-       l'image, dont le bas est déjà fondu par le masque ; la
-       promesse et le bouton restent sous la photo. relative :
-       sans lui, la photo (elle aussi relative) se peindrait par-
-       dessus le texte. */
-    position: relative;
-    margin-top: -4rem;
+  .instrument-hero .instrument-promesse {
+    /* Même rampe que la promesse du hero d'accueil : 16px à 768px,
+       croissance continue, 22px atteints à 3800px. */
+    font-size: clamp(1rem, 0.9rem + 0.2vw, 1.375rem);
   }
-  .hero-metrics {
-    order: -1;
+  .instrument-hero .instrument-stat-valeur {
+    font-size: clamp(1.875rem, 1.5875rem + 0.6vw, 3rem);
+  }
+  .instrument-hero .instrument-stat-legende {
+    font-size: clamp(0.75rem, 0.6667rem + 0.1736vw, 0.875rem);
+  }
+  .instrument-hero .instrument-stat {
+    /* Aligné à gauche, comme le reste de la colonne texte. */
+    text-align: left;
+  }
+}
+/* Sous 80rem (1280px), la colonne texte est trop étroite pour trois
+   colonnes commentées : les stats deviennent des lignes éditoriales
+   — valeur à gauche, légende et phrase empilées à droite — si bien
+   que toute l'information reste visible à toutes les largeurs. À
+   partir de 80rem, le gabarit trois colonnes reprend la main.
+   Hors @layer : prime sur les utilitaires. */
+@media (min-width: 48rem) and (max-width: 79.99rem) {
+  .instrument-hero .instrument-stat {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr);
+    column-gap: 1.25rem;
+    /* Haut de la valeur et haut de la légende alignés (start), la
+       phrase se glisse sous la légende. */
+    align-items: start;
+  }
+  .instrument-hero .instrument-stat dd {
+    grid-column: 1;
+    grid-row: 1;
+  }
+  .instrument-hero .instrument-stat dt {
+    grid-column: 2;
+    grid-row: 1;
     margin-top: 0;
+    /* Légende resserrée au maximum sur sa phrase. */
+    line-height: 1;
   }
-  .hero-promesse,
-  .hero-bouton {
-    margin-top: 1rem;
-  }
-}
-
-/* Hero, écrans courts : paliers de compression verticale pour que
-   toute la section tienne dans la hauteur d'écran restante après le
-   header. Ces règles sont hors @layer : elles priment sur les
-   utilitaires Tailwind, y compris les rampes en largeur (un bureau en
-   fenêtre basse reste large). Deux paliers : ≤ 44rem (portable bas,
-   mobile en paysage) puis ≤ 32rem (mobile en paysage très court). */
-@media (max-height: 44rem) {
-  .hero-haut {
-    padding-top: 1.5rem;
-  }
-  .hero-titre {
-    margin-top: 0.5rem;
-    font-size: 1.5rem;
-  }
-  .hero-photo {
-    margin-top: 0.75rem;
-    min-height: 9rem;
-  }
-  .hero-promesse {
-    margin-top: 0.75rem;
-    font-size: 0.875rem;
-  }
-  .hero-metrics {
-    margin-top: 0.75rem;
-  }
-  .hero-stat-valeur {
-    font-size: 1.25rem;
-  }
-  .hero-stat-legende {
-    margin-top: 0.25rem;
-  }
-  .hero-bouton {
-    padding-block: 0.5rem;
-  }
-  .hero-bas {
-    padding-bottom: 1.5rem;
-  }
-  /* Mobile portrait, écran court : l'overlay titre du palier mobile
-     reste actif. La photo est portrait — en contain sa largeur
-     dépend de sa hauteur (≈ 0,53px gagné par px) —, ces 2,75rem
-     rendus agrandissent l'instrument (~15 %) sans rien ajouter à
-     la pile : le titre se pose dans le fondu haut du masque.
-     Portrait seulement : en paysage la photo est trop courte pour
-     l'empilement, et ≥ 48rem le hero bascule en deux colonnes. */
-  @media (max-width: 47.99rem) and (orientation: portrait) {
-    .hero-photo {
-      margin-top: -2rem;
-    }
-  }
-}
-
-@media (max-height: 32rem) {
-  .hero-haut {
-    padding-top: 0.75rem;
-  }
-  .hero-titre {
-    font-size: 1.25rem;
-  }
-  .hero-photo {
-    min-height: 6rem;
-  }
-  .hero-promesse {
-    font-size: 0.75rem;
-  }
-  .hero-stat-valeur {
-    font-size: 1rem;
-  }
-  .hero-bouton {
-    padding-inline: 1.5rem;
-    padding-block: 0.375rem;
-  }
-  .hero-bas {
-    padding-bottom: 0.75rem;
+  .instrument-hero .instrument-stat-description {
+    grid-column: 2;
+    grid-row: 2;
+    /* Quasi collée à la légende : -8px absorbent le vide de la
+       boîte de ligne de la légende ET le demi-interligne supérieur
+       de la phrase — les glyphes de la phrase se posent juste sous
+       la ligne de base de la légende. */
+    margin-top: -0.5rem;
+    line-height: 1.25;
   }
 }

@@ -46,11 +46,13 @@ export default function Footer() {
         className="pointer-events-none absolute inset-0 bg-linear-to-b from-black/70 via-neutral-800/65 to-black/85"
       />
 
-      {/* Contenu du footer, lui-même plafonné à 1440px comme le header et
-          le main ; le slogan en position absolue se cale sur ce cadre. */}
+      {/* Contenu du footer : barre du logo et colonne de navigation
+          alignées sur la même zone de contenu que le header
+          (.zone-contenu, cf. globals.css) ; le slogan en position
+          absolue se cale sur le cadre de la page. */}
       <div className="relative z-10">
         {/* Barre du logo, séparée du contenu par le trait doré. */}
-        <div className="relative flex w-full px-6 pt-10 pb-3.5">
+        <div className="zone-contenu relative flex w-full px-6 pt-10 pb-3.5">
           <LogoMenu />
           <span
             aria-hidden="true"
@@ -68,9 +70,9 @@ export default function Footer() {
 
         <nav
           aria-label="Navigation pied de page"
-          className="relative flex flex-col"
+          className="zone-contenu relative flex flex-col px-6"
         >
-          <ul className="flex w-full max-w-169.75 flex-col px-6 pt-6 pb-8">
+          <ul className="flex w-full max-w-3xl flex-col pt-6 pb-8">
             <li className="pb-2">
               <Intertitre>DÉCOUVRIR</Intertitre>
             </li>
@@ -89,7 +91,7 @@ export default function Footer() {
                 label="Contact"
                 actif={pathname === "/contact"}
               />
-              <p className="pb-2 text-xs min-[420px]:text-sm text-stone-200">
+              <p className="legende-menu pb-2 text-stone-200">
                 Atelier en France, sur rendez-vous
               </p>
             </li>

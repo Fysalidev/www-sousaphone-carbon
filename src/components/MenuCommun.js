@@ -18,9 +18,13 @@ export const RESEAUX = [
 // et du ratio natif du PNG 300x105. Suit automatiquement la largeur du bloc logo.
 export const LARGEUR_SEPARATEUR = { width: "calc(64px * 300 / 105)" };
 
-// Trait doré calé au bas de la barre du logo ; le parent doit être `relative`.
+// Trait doré calé au bas de la barre du logo, aligné sur la boîte du
+// logo : il suit la zone de contenu (même formule que .zone-contenu,
+// cf. globals.css) moins la marge négative du logo (-ml-3), si bien
+// qu'il reste à l'aplomb du logo à toutes les largeurs. Le parent
+// doit être `relative`.
 export const CLASSES_SEPARATEUR_BARRE =
-  "pointer-events-none absolute bottom-0 left-3 h-px bg-[#B69660]/40";
+  "pointer-events-none absolute bottom-0 h-px bg-[#B69660]/40 [left:calc(max(1.5rem,(100%_-_87rem)/2)_-_0.75rem)]";
 
 function IconeFacebook() {
   return (
@@ -78,7 +82,7 @@ export function LienMenu({ href, label, actif, onClick }) {
       href={href}
       aria-current={actif ? "page" : undefined}
       onClick={onClick}
-      className="block text-base leading-11 min-[420px]:text-lg font-normal lowercase first-letter:uppercase hover:font-semibold focus-visible:underline focus-visible:underline-offset-4 focus-visible:decoration-[#B69660] text-white transition-colors"
+      className="lien-menu block leading-11 font-normal lowercase first-letter:uppercase hover:font-semibold focus-visible:underline focus-visible:underline-offset-4 focus-visible:decoration-[#B69660] text-white transition-colors"
     >
       {label}
     </Link>
