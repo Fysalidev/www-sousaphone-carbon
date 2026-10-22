@@ -5,7 +5,7 @@ export const metadata = {
 };
 
 import ContactForm from "./ContactForm";
-import { EtiquetteDoree } from "@/components/SectionsEditoriales";
+import { BandeauLogo, EtiquetteDoree } from "@/components/SectionsEditoriales";
 
 // Page contact : même gabarit éditorial que les autres pages —
 // étiquette dorée, grand titre Bodoni, filet, intro —, puis le
@@ -21,6 +21,7 @@ export default function ContactPage() {
         className="px-6 py-12 min-[768px]:py-16"
       >
         <div className="mx-auto max-w-3xl">
+          <BandeauLogo />
           <EtiquetteDoree>CONTACT</EtiquetteDoree>
           <h1
             id="titre-contact"
