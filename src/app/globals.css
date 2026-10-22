@@ -448,12 +448,13 @@ body {
     grid-column: 2;
     grid-row: 1;
     margin-top: 0;
-    /* Légende resserrée sur sa phrase : pas de marge entre les deux. */
-    line-height: 1.25;
+    /* Légende resserrée au maximum sur sa phrase. */
+    line-height: 1;
   }
   .instrument-hero .instrument-stat-description {
     grid-column: 2;
     grid-row: 2;
     margin-top: 0;
+    line-height: 1.5;
   }
 }
