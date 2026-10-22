@@ -281,16 +281,15 @@ export default function InstrumentPage() {
       <SeparateurSection />
 
       {/* Détails de fabrication : même gabarit que les sections
-          éditoriales mais un cran plus large (max-w-5xl, 1024px)
-          — assez pour donner de l'ampleur au premier cliché de la
-          galerie, cadrage 16/10 dans une carte à bordure dorée,
-          sans étaler la section sur toute la colonne galerie. */}
+          éditoriales (max-w-3xl) — la page garde un rythme régulier,
+          la photo 16/10 dans sa carte à bordure dorée épouse la
+          colonne de texte. */}
       <section
         aria-labelledby="titre-details"
         className="px-6 py-12 min-[768px]:py-16"
       >
         <Revelation>
-          <div className="mx-auto max-w-5xl">
+          <div className="mx-auto max-w-3xl">
             <EtiquetteDoree>L&rsquo;ATELIER DE PRÉCISION</EtiquetteDoree>
             <h2
               id="titre-details"
@@ -305,7 +304,7 @@ export default function InstrumentPage() {
                 alt="Sousaphone de profil sur fond noir, pavillon doré au premier plan"
                 width={1600}
                 height={1000}
-                sizes="(min-width: 1024px) 64rem, 100vw"
+                sizes="(min-width: 768px) 48rem, 100vw"
                 className="aspect-[16/10] w-full object-cover brightness-90"
               />
             </div>
