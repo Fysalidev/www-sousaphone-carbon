@@ -146,7 +146,7 @@ export default function ContactForm() {
           {pending ? "ENVOI EN COURS…" : "ENVOYER"}
           <span aria-hidden="true">&rarr;</span>
         </button>
-        <p className="paragraphe-section mt-4 leading-relaxed text-stone-500">
+        <p className="paragraphe-section mt-4 leading-relaxed text-stone-400">
           * champs requis — l&rsquo;atelier répond généralement sous quelques
           jours.
         </p>
