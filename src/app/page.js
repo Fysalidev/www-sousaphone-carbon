@@ -56,7 +56,7 @@ const DONNEES_STRUCTUREES = {
 
 // ——— Hero ———
 
-// Bouton d'action or : plein or, texte noir, coins adoucis (rounded-lg)
+// Bouton d'action or : plein or, texte noir, pilule (rounded-full)
 // et inversion au survol — décliné pour le hero (« Sousaphone
 // Carbon ») et la clôture (« Nous contacter »). `classe` porte
 // l'espacement et l'animation d'entrée.
@@ -64,7 +64,7 @@ function BoutonAction({ href, children, classe = "" }) {
   return (
     <Link
       href={href}
-      className={`inline-flex items-center gap-3 rounded-lg border border-[#C9A96A] bg-[#C9A96A] px-8 py-4 texte-bouton font-bold tracking-[0.25em] text-black transition-colors hover:bg-black hover:text-[#C9A96A] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white ${classe}`}
+      className={`inline-flex items-center gap-3 rounded-full border border-[#C9A96A] bg-[#C9A96A] px-8 py-4 texte-bouton font-bold tracking-[0.25em] text-black transition-colors hover:bg-black hover:text-[#C9A96A] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white ${classe}`}
     >
       {children}
       <span aria-hidden="true">&rarr;</span>
