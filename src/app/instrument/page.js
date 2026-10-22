@@ -180,7 +180,9 @@ export default function InstrumentPage() {
           Fabriqué à la main.
         </h2>
         <div aria-hidden="true" className="mt-6 h-px w-16 bg-[#C9A96A]" />
-        <ParagrapheSection>
+        {/* Mesure élargie à la colonne éditoriale complète : le texte
+            épouse la largeur du titre au lieu de couper tôt. */}
+        <ParagrapheSection largeur="max-w-3xl">
           Nous fabriquons nos pièces et chaque sousaphone prend forme à travers
           une succession de gestes précis. Une fabrication patiente qui garantit
           résistance, équilibre et propriétés acoustiques d&rsquo;exception.

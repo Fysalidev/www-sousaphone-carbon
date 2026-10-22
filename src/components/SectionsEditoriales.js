@@ -34,11 +34,15 @@ export function TitreSection({ id, children }) {
   );
 }
 
-// Paragraphe de corps de section : colonne lisible, texte clair sur
-// fond noir.
-export function ParagrapheSection({ children }) {
+// Paragraphe de corps de section : colonne lisible (36rem par
+// défaut), texte clair sur fond noir — `largeur` permet d'écarter
+// la mesure pour un paragraphe donné (ex. aligné sur la colonne
+// éditoriale complète).
+export function ParagrapheSection({ children, largeur = "max-w-xl" }) {
   return (
-    <p className="mt-6 max-w-xl text-sm min-[640px]:text-base leading-relaxed text-stone-300">
+    <p
+      className={`mt-6 ${largeur} text-sm min-[640px]:text-base leading-relaxed text-stone-300`}
+    >
       {children}
     </p>
   );
