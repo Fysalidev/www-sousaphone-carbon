@@ -312,9 +312,8 @@ export default function InstrumentPage() {
                 Une question sur le sousaphone&nbsp;?
               </h2>
               <p className="paragraphe-section mx-auto mt-4 max-w-xl leading-relaxed text-black/80 min-[768px]:mx-0">
-                Une question technique, un projet, une envie
-                d&rsquo;essai&nbsp;? Nous sommes à votre écoute pour vous
-                accompagner à chaque étape.
+                Question technique, projet, envie d&rsquo;essai&nbsp;: nous
+                sommes à votre écoute pour vous accompagner à chaque étape.
               </p>
             </div>
             <div className="mt-8 min-[768px]:mt-0 min-[768px]:flex-none">
