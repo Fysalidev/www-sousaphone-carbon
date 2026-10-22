@@ -129,13 +129,6 @@ const STATS = [
   },
 ];
 
-// Photo d'illustration sous la citation « Le geste juste » : à déposer
-// dans public/photos/geste-juste.webp (ratio 16/10, ≈ 1600 × 1000 px
-// en rétina 2× pour la colonne de 48rem), puis renseigner src et alt
-// ici — le placeholder laisse alors place à l'image, même gabarit
-// que la carte photo de la section « Détails de fabrication ».
-const PHOTO_GESTE = null;
-
 // Mosaïque « Détails de fabrication » : photo verticale à gauche,
 // photo paysage puis zone texte de même taille à droite. Photos à
 // déposer dans public/photos/ puis renseigner src/alt ici —
@@ -355,34 +348,6 @@ export default function InstrumentPage() {
             «&nbsp;Le métal garde la mémoire du geste.&nbsp;»
           </p>
         </blockquote>
-        {/* Photo sous la citation : carte à bordure dorée pleine
-            colonne quand la photo est déposée, sinon placeholder
-            pointillé (fichier attendu, ratio, dimensions conseillées)
-            sur le même langage que la galerie. */}
-        {PHOTO_GESTE ? (
-          <div className="mt-12 overflow-hidden rounded-2xl border border-[#C9A96A]/40">
-            <Image
-              src={PHOTO_GESTE.src}
-              alt={PHOTO_GESTE.alt}
-              width={1600}
-              height={1000}
-              sizes="(min-width: 768px) 48rem, 100vw"
-              className="aspect-[16/10] w-full object-cover brightness-90"
-            />
-          </div>
-        ) : (
-          <div className="mt-12 flex aspect-[16/10] w-full flex-col items-center justify-center gap-1 rounded-2xl border border-dashed border-[#C9A96A]/30 bg-stone-900 p-4 text-center">
-            <p className="text-xs min-[768px]:text-sm font-bold text-[#C9A96A]">
-              photos/geste-juste.webp
-            </p>
-            <p className="text-[10px] min-[768px]:text-xs text-stone-300">
-              16/10
-            </p>
-            <p className="text-[10px] min-[768px]:text-xs text-stone-400">
-              ≈ 1600 × 1000 px
-            </p>
-          </div>
-        )}
       </SectionEditoriale>
 
       <SeparateurSection />
