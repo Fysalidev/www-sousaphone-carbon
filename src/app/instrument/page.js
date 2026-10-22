@@ -98,13 +98,15 @@ export default function InstrumentPage() {
       {/* Hero « nouvelle génération » : accroche dorée, titre Montserrat
           et promesse, photo de l'instrument — empilés et centrés sur
           mobile, en deux colonnes à partir de 768px avec le texte à
-          gauche et l'instrument à droite. La section occupe au minimum
-          la hauteur d'écran restante après le header ; sur mobile la
-          photo, flex-1, absorbe l'espace vertical disponible. Même
-          fond dégradé doré haut/bas et même traitement de photo
+          gauche et l'instrument à droite. Sur desktop (≥ 768px) la
+          section occupe au minimum la hauteur d'écran restante après
+          le header ; sur mobile le hero est compact : la photo, en
+          aspect 3/4 plafonnée à 45 % de l'écran, garde l'instrument
+          à taille contenue et laisse les sections suivantes proches.
+          Même fond dégradé doré haut/bas et même traitement de photo
           (mix-blend-screen, masque limité aux bords) que le hero
           d'accueil. */}
-      <section className="flex flex-col bg-linear-to-b from-[#C9A96A]/10 via-transparent to-[#C9A96A]/10 min-h-[calc(100svh-var(--hauteur-barre-header))]">
+      <section className="flex flex-col bg-linear-to-b from-[#C9A96A]/10 via-transparent to-[#C9A96A]/10 min-[768px]:min-h-[calc(100svh-var(--hauteur-barre-header))]">
         <div className="flex w-full flex-1 flex-col items-center px-6 pt-12 pb-10 text-center min-[768px]:mx-auto min-[768px]:grid min-[768px]:max-w-[90rem] min-[768px]:grid-cols-[minmax(0,3fr)_minmax(0,2fr)] min-[768px]:items-center min-[768px]:gap-10 min-[768px]:pt-0 min-[768px]:text-left">
           <div className="flex flex-col items-center min-[768px]:items-start">
             <p className="hero-entree text-[10px] min-[768px]:text-xs min-[1555px]:text-sm font-bold tracking-[0.25em] text-[#C9A96A] [animation-delay:150ms]">
@@ -127,9 +129,10 @@ export default function InstrumentPage() {
               desktop —, avec le même traitement que le hero
               d'accueil : object-contain pour ne jamais déformer
               l'instrument, mix-blend-screen pour fondre dans le fond
-              doré, masque limité aux bords haut/bas, ratio 3/4 sur
-              desktop pour le tenir en hauteur. */}
-          <div className="hero-entree relative mt-6 min-h-64 flex-1 w-full [animation-delay:600ms] min-[768px]:mt-0 min-[768px]:aspect-[3/4] min-[768px]:max-h-[48rem] min-[768px]:flex-none">
+              doré, masque limité aux bords haut/bas. Boîte en aspect
+              3/4 à toutes les largeurs, plafonnée à 45svh sur mobile
+              (hero compact) et 48rem sur desktop. */}
+          <div className="hero-entree relative mt-6 min-h-64 w-full aspect-[3/4] max-h-[45svh] [animation-delay:600ms] min-[768px]:mt-0 min-[768px]:max-h-[48rem]">
             <Image
               src="/galerie/galerie-05.webp"
               alt="Photographie du Sousaphone Carbon"
