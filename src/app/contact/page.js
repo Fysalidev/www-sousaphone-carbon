@@ -10,8 +10,9 @@ import { EtiquetteDoree } from "@/components/SectionsEditoriales";
 // Page contact : même gabarit éditorial que les autres pages —
 // étiquette dorée, grand titre Bodoni, filet, intro —, puis le
 // formulaire dans la colonne de prose (48rem). Le formulaire vit
-// dans ContactForm.js (composant client) et sa validation dans
-// actions.js (server action).
+// dans ContactForm.js (composant client) : pour l'instant la
+// soumission est simulee (stade UX/UI), la fonctionnalite reelle
+// s'integrera plus tard.
 export default function ContactPage() {
   return (
     <main className="flex flex-col bg-black">

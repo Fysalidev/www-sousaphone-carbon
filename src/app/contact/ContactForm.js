@@ -1,7 +1,16 @@
 "use client";
 
 import { useActionState } from "react";
-import { submitContact } from "./actions";
+
+// Soumission simulee : aucun traitement reel pour l'instant —
+// cette page vit au stade UX/UI. Le parcours visuel (envoi, etat
+// en cours, confirmation) reste validable sur la preview grace a
+// ce placeholder ; l'integration reelle (server action, e-mail ou
+// base) se branchera plus tard a la place.
+async function soumettreSimule() {
+  await new Promise((retour) => setTimeout(retour, 800));
+  return { success: "Merci pour votre message, nous vous répondrons vite." };
+}
 
 // Champs de saisie : fond à peine teinté d'or, bordure dorée
 // adoucie qui se renforce au focus, texte blanc, placeholder
@@ -38,7 +47,7 @@ function Champ({ id, label, requis = false, ...props }) {
 // le formulaire laisse place à une confirmation, pour un retour
 // visuel clair sans rechargement.
 export default function ContactForm() {
-  const [state, formAction, pending] = useActionState(submitContact, {});
+  const [state, formAction, pending] = useActionState(soumettreSimule, {});
 
   if (state.success) {
     return (
