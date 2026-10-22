@@ -288,12 +288,15 @@ export default function InstrumentPage() {
         </ParagrapheSection>
       </SectionEditoriale>
 
+      <SeparateurSection />
+
       {/* Boîte dorée « une question » : le seul moment clair de la
           page — fond or de la largeur du texte (max-w-3xl), centré
           et à coins adoucis, textes noirs, bouton plein noir.
-          Empilé et centré sur mobile ; à partir de 768px le texte
-          passe à gauche et le bouton se cale à droite de la boîte.
-          Il ouvre directement la porte du contact. */}
+          Encadrée par deux séparateurs logo comme les autres
+          sections. Empilé et centré sur mobile ; à partir de 768px
+          le texte passe à gauche et le bouton se cale à droite de
+          la boîte. Il ouvre directement la porte du contact. */}
       <section
         aria-labelledby="titre-question"
         className="px-6 py-12 min-[768px]:py-16"
@@ -343,7 +346,7 @@ export default function InstrumentPage() {
           répondent sans effort&nbsp;; les brasures disparaissent sous la
           lumière. Un fini unique.
         </ParagrapheSection>
-        <blockquote className="mt-10 text-center">
+        <blockquote className="mt-8 text-center">
           <p className="citation-serif mx-auto max-w-xl font-serif-carte italic leading-snug text-[#C9A96A]">
             «&nbsp;Le métal garde la mémoire du geste.&nbsp;»
           </p>
