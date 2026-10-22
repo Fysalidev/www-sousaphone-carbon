@@ -377,14 +377,19 @@ export default function Header() {
     };
   }, [ouvert]);
 
-  // Sur l'accueil, le hero démarre sur un dégradé doré à 10 % (#C9A96A
-  // sur noir = #14110B) : le header prend cette couleur exacte pour
-  // se fondre dans le haut du hero ; les autres pages, qui démarrent
-  // sur du noir pur, gardent le noir.
+  // Fond du header épousant le hero : les pages qui commencent par
+  // le dégradé doré (accueil, instrument, 404 et toute page future)
+  // ont un sommet teinté or/10 sur noir — #C9A96A/10 sur noir =
+  // #14110B — que le header reprend pour une couture invisible ;
+  // les pages à sommet noir pur (galerie, contact) gardent le
+  // noir. Solide dans tous les cas : le header reste sticky et
+  // doit masquer le contenu au défilement.
   return (
     <header
       className={`sticky top-0 z-30 w-full ${
-        pathname === "/" ? "bg-[#14110B]" : "bg-black"
+        pathname === "/galerie" || pathname === "/contact"
+          ? "bg-black"
+          : "bg-[#14110B]"
       }`}
     >
       {/* Barre du header : contenu aligné sur la zone de texte du
