@@ -54,13 +54,13 @@ export function ParagrapheSection({ children, largeur = "max-w-xl" }) {
 // pleine largeur, colonne max-w-3xl centrée), pour poser son bord
 // gauche exactement à l'aplomb du texte. Son encre est noire sur
 // fond transparent, le filtre CSS `invert` la rend blanche à
-// l'affichage. Purement décoratif (aria-hidden, alt vide). Même
-// rythme vertical que les sections (py-12 / py-16) : l'espace qui
-// l'entoure est identique au-dessus et en dessous, à chaque
-// transition.
+// l'affichage. Purement décoratif (aria-hidden, alt vide). Rythme
+// allégé (py-8 / py-10) : le logo garde sa taille signature, l'air
+// autour est réduit pour que les transitions respirent sans étirer
+// la page — l'espace reste identique au-dessus et en dessous.
 export function SeparateurSection() {
   return (
-    <div aria-hidden="true" className="w-full px-6 py-12 min-[768px]:py-16">
+    <div aria-hidden="true" className="w-full px-6 py-8 min-[768px]:py-10">
       <div className="mx-auto max-w-3xl">
         <Image
           src="/logos/logo-inter.png"

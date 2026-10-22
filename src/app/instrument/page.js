@@ -111,7 +111,7 @@ export default function InstrumentPage() {
           (mix-blend-screen, masque limité aux bords) que le hero
           d'accueil. */}
       <section className="instrument-hero flex flex-col bg-linear-to-b from-[#C9A96A]/10 via-transparent to-[#C9A96A]/10 min-[768px]:min-h-[calc(100svh-var(--hauteur-barre-header))]">
-        <div className="flex w-full flex-1 flex-col items-center px-6 pt-12 pb-10 text-center min-[768px]:mx-auto min-[768px]:grid min-[768px]:max-w-[90rem] min-[768px]:grid-cols-[minmax(0,3fr)_minmax(0,2fr)] min-[768px]:items-center min-[768px]:gap-10 min-[768px]:pt-0 min-[768px]:text-left">
+        <div className="flex w-full flex-1 flex-col items-center px-6 pt-12 pb-12 text-center min-[768px]:mx-auto min-[768px]:grid min-[768px]:max-w-[90rem] min-[768px]:grid-cols-[minmax(0,3fr)_minmax(0,2fr)] min-[768px]:items-center min-[768px]:gap-10 min-[768px]:pt-0 min-[768px]:text-left">
           <div className="flex flex-col items-center min-[768px]:items-start">
             <p className="hero-entree instrument-accroche font-bold tracking-[0.25em] text-[#C9A96A] [animation-delay:150ms]">
               LE SOUSAPHONE RÉINVENTÉ
@@ -298,7 +298,7 @@ export default function InstrumentPage() {
               Détails de fabrication.
             </h2>
             <div aria-hidden="true" className="mt-6 h-px w-16 bg-[#C9A96A]" />
-            <div className="mt-10 overflow-hidden rounded-2xl border border-[#C9A96A]/40">
+            <div className="mt-12 min-[768px]:mt-16 overflow-hidden rounded-2xl border border-[#C9A96A]/40">
               <Image
                 src="/galerie/galerie-01.webp"
                 alt="Sousaphone de profil sur fond noir, pavillon doré au premier plan"
@@ -356,7 +356,7 @@ export default function InstrumentPage() {
           batterie fanfare, pensé pour durer et pour faire de chaque passage une
           signature.
         </ParagrapheSection>
-        <div className="mt-10 overflow-hidden rounded-2xl border border-[#C9A96A]/40">
+        <div className="mt-12 min-[768px]:mt-16 overflow-hidden rounded-2xl border border-[#C9A96A]/40">
           <Image
             src="/galerie/galerie-02.webp"
             alt="Photographie du Sousaphone Carbon"

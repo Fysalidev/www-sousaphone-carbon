@@ -228,7 +228,7 @@ export default function AccueilPage() {
         aria-labelledby="titre-hero"
         className="hero flex flex-col bg-linear-to-b from-[#C9A96A]/10 via-transparent to-[#C9A96A]/10 min-[768px]:min-h-[calc(100svh-var(--hauteur-barre-header))]"
       >
-        <div className="flex w-full flex-1 flex-col items-center px-6 pt-12 pb-10 text-center min-[768px]:mx-auto min-[768px]:grid min-[768px]:max-w-[90rem] min-[768px]:grid-cols-[minmax(0,2fr)_minmax(0,3fr)] min-[768px]:items-center min-[768px]:gap-10 min-[768px]:pt-0 min-[768px]:text-left">
+        <div className="flex w-full flex-1 flex-col items-center px-6 pt-12 pb-12 text-center min-[768px]:mx-auto min-[768px]:grid min-[768px]:max-w-[90rem] min-[768px]:grid-cols-[minmax(0,2fr)_minmax(0,3fr)] min-[768px]:items-center min-[768px]:gap-10 min-[768px]:pt-0 min-[768px]:text-left">
           {/* Texte de l'accueil : accroche, titre, promesse, puis
               les trois chiffres clés (termes/définitions séparés
               par des filets verticaux) et l'appel à l'action. En

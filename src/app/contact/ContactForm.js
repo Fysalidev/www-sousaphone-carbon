@@ -51,7 +51,7 @@ export default function ContactForm() {
 
   if (state.success) {
     return (
-      <div className="mt-10 rounded-2xl border border-[#C9A96A]/40 bg-[#C9A96A]/[0.06] px-6 py-10 text-center">
+      <div className="mt-12 min-[768px]:mt-16 rounded-2xl border border-[#C9A96A]/40 bg-[#C9A96A]/[0.06] px-6 py-10 text-center">
         <p className="titre-carte font-serif-carte font-medium text-white">
           Merci — votre message est bien envoyé.
         </p>
@@ -66,7 +66,7 @@ export default function ContactForm() {
   return (
     <form
       action={formAction}
-      className="mt-10 grid grid-cols-1 gap-6 min-[768px]:grid-cols-2"
+      className="mt-12 min-[768px]:mt-16 grid grid-cols-1 gap-6 min-[768px]:grid-cols-2"
     >
       <Champ
         id="nom"
