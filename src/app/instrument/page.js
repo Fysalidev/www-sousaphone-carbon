@@ -239,7 +239,7 @@ export default function InstrumentPage() {
           comme signature.
         </h2>
         <div aria-hidden="true" className="mt-6 h-px w-16 bg-[#C9A96A]" />
-        <ParagrapheSection>
+        <ParagrapheSection largeur="max-w-3xl">
           Chaque courbe est finie et ajustée au plus près. Les pistons répondent
           sans effort. Les finitions sont impeccables — le son, lui, reste
           généreux.
@@ -302,7 +302,7 @@ export default function InstrumentPage() {
           Un instrument à votre mesure.
         </h2>
         <div aria-hidden="true" className="mt-6 h-px w-16 bg-[#C9A96A]" />
-        <ParagrapheSection>
+        <ParagrapheSection largeur="max-w-3xl">
           Du premier souffle à la dernière note, chaque sousaphone est assemblé
           et réglé à la main. Une précision sculpturale, une légèreté nouvelle,
           une âme intacte.
@@ -328,7 +328,7 @@ export default function InstrumentPage() {
           joué comme un rêve.
         </h2>
         <div aria-hidden="true" className="mt-6 h-px w-16 bg-[#C9A96A]" />
-        <ParagrapheSection>
+        <ParagrapheSection largeur="max-w-3xl">
           Fabriqué en France, façonné à la main : le partenaire de votre
           batterie fanfare, pensé pour durer et pour faire de chaque passage une
           signature.
