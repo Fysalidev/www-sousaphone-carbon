@@ -289,10 +289,10 @@ export default function AccueilPage() {
           assemblées à la main.
         </TitreSection>
         <ParagrapheSection>
-          Nous fabriquons nos pièces et chaque sousaphone prend forme à travers
-          une succession de gestes précis. Une fabrication patiente qui garantit
-          résistance, équilibre, robustesse et propriétés acoustiques
-          d&rsquo;exception.
+          Chaque pièce est façonnée avec exigence. Chaque sousaphone prend
+          forme, geste après geste, dans nos ateliers. De cette patience
+          naissent des instruments résistants, équilibrés, aux propriétés
+          acoustiques d&rsquo;exception.
         </ParagrapheSection>
         <div className="mt-12 space-y-8">
           {ATTRIBUTS.map(({ Icone, titre, texte }) => (
