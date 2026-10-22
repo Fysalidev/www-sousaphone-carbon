@@ -181,10 +181,9 @@ export default function InstrumentPage() {
         </h2>
         <div aria-hidden="true" className="mt-6 h-px w-16 bg-[#C9A96A]" />
         <ParagrapheSection>
-          Nous fabriquons des sousaphones en édition limitée, principalement
-          pour les fanfares et les orchestres. Le savoir-faire artisanal et
-          l&rsquo;utilisation de matériaux innovants font de nos instruments des
-          pièces uniques, alliant tradition et modernité.
+          Nous fabriquons nos pièces et chaque sousaphone prend forme à travers
+          une succession de gestes précis. Une fabrication patiente qui garantit
+          résistance, équilibre et propriétés acoustiques d&rsquo;exception.
         </ParagrapheSection>
       </SectionEditoriale>
 
