@@ -386,3 +386,50 @@ body {
     padding-bottom: 0.75rem;
   }
 }
+
+/* Hero instrument (scopé .instrument-hero) : typographie fluide,
+   mêmes rampes continues que le hero d'accueil — l'accroche, le
+   titre et les valeurs grandissent avec la fenêtre au lieu de
+   sauter de palier (les utilitaires Tailwind de taille ont été
+   retirés du JSX du hero ; raccords sans couture à 768px entre la
+   rampe empilée et la rampe desktop). Les classes instrument-stat-*
+   sont posées par StatCommentee mais ne s'activent qu'ici : la
+   section mobile des chiffres clés garde ses paliers centrés.
+   Sous 80rem (1280px), la colonne texte est trop étroite pour trois
+   colonnes commentées : les stats s'empilent en colonne unique,
+   alignées à gauche, et les descriptions attendent la place.
+   Hors @layer : prime sur les utilitaires. */
+.instrument-hero .instrument-accroche {
+  /* 10px à 320px, 12px à 768px. */
+  font-size: clamp(0.625rem, 0.5357rem + 0.4464vw, 0.75rem);
+}
+.instrument-hero .instrument-titre {
+  /* 30px à 320px, 36px à 768px. */
+  font-size: clamp(1.875rem, 1.6071rem + 1.3393vw, 2.25rem);
+}
+@media (min-width: 48rem) {
+  .instrument-hero .instrument-accroche {
+    /* 12px à 768px, 14px atteints à 1555px. */
+    font-size: clamp(0.625rem, 0.63rem + 0.25vw, 0.875rem);
+  }
+  .instrument-hero .instrument-titre {
+    /* Même pente que l'accueil ; plafond 60px pour que le titre
+       tienne sur une ligne dans sa colonne, atteint à 2040px. */
+    font-size: clamp(2.25rem, 1.2rem + 2vw, 3.75rem);
+  }
+  .instrument-hero .instrument-stat-valeur {
+    font-size: clamp(1.875rem, 1.5875rem + 0.6vw, 3rem);
+  }
+  .instrument-hero .instrument-stat-legende {
+    font-size: clamp(0.75rem, 0.6667rem + 0.1736vw, 0.875rem);
+  }
+  .instrument-hero .instrument-stat {
+    /* Aligné à gauche, comme le reste de la colonne texte. */
+    text-align: left;
+  }
+}
+@media (min-width: 48rem) and (max-width: 79.99rem) {
+  .instrument-hero .instrument-stat-description {
+    display: none;
+  }
+}

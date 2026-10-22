@@ -44,22 +44,26 @@ function BoutonAction({ href, children, inverse = false, classe = "" }) {
 // Statistique commentée du bloc chiffres clés : valeur et légende
 // sémantiquement liées (dt/dd, valeur au-dessus via flex), la phrase
 // d'explication en dessous — même structure que les stats du hero
-// d'accueil, avec le niveau de description en plus.
+// d'accueil, avec le niveau de description en plus. Les classes
+// instrument-stat-* ne s'activent que dans le hero (scopées
+// .instrument-hero dans globals.css) : typographie fluide,
+// alignement gauche et descriptions masquées sous 1280px ; la
+// section mobile garde ses paliers centrés.
 function StatCommentee({ valeur, legende, description, dore = false }) {
   return (
-    <div className="flex flex-col text-center">
-      <dt className="order-2 mt-2 text-[10px] min-[640px]:text-xs min-[1555px]:text-sm font-bold tracking-[0.25em] max-[399px]:tracking-widest text-[#C9A96A]">
+    <div className="instrument-stat flex flex-col text-center">
+      <dt className="instrument-stat-legende order-2 mt-2 text-[10px] min-[640px]:text-xs min-[1555px]:text-sm font-bold tracking-[0.25em] max-[399px]:tracking-widest text-[#C9A96A]">
         {legende}
       </dt>
       <dd
-        className={`order-1 font-sans text-2xl min-[640px]:text-3xl min-[1024px]:text-4xl font-bold ${
+        className={`instrument-stat-valeur order-1 font-sans text-2xl min-[640px]:text-3xl min-[1024px]:text-4xl font-bold ${
           dore ? "text-[#C9A96A]" : "text-white"
         }`}
       >
         {valeur}
         <span>%</span>
       </dd>
-      <p className="order-3 mt-3 text-sm min-[640px]:text-base leading-relaxed text-stone-300">
+      <p className="instrument-stat-description order-3 mt-3 text-sm min-[640px]:text-base leading-relaxed text-stone-300">
         {description}
       </p>
     </div>
@@ -106,15 +110,15 @@ export default function InstrumentPage() {
           Même fond dégradé doré haut/bas et même traitement de photo
           (mix-blend-screen, masque limité aux bords) que le hero
           d'accueil. */}
-      <section className="flex flex-col bg-linear-to-b from-[#C9A96A]/10 via-transparent to-[#C9A96A]/10 min-[768px]:min-h-[calc(100svh-var(--hauteur-barre-header))]">
+      <section className="instrument-hero flex flex-col bg-linear-to-b from-[#C9A96A]/10 via-transparent to-[#C9A96A]/10 min-[768px]:min-h-[calc(100svh-var(--hauteur-barre-header))]">
         <div className="flex w-full flex-1 flex-col items-center px-6 pt-12 pb-10 text-center min-[768px]:mx-auto min-[768px]:grid min-[768px]:max-w-[90rem] min-[768px]:grid-cols-[minmax(0,3fr)_minmax(0,2fr)] min-[768px]:items-center min-[768px]:gap-10 min-[768px]:pt-0 min-[768px]:text-left">
           <div className="flex flex-col items-center min-[768px]:items-start">
-            <p className="hero-entree text-[10px] min-[768px]:text-xs min-[1555px]:text-sm font-bold tracking-[0.25em] text-[#C9A96A] [animation-delay:150ms]">
+            <p className="hero-entree instrument-accroche font-bold tracking-[0.25em] text-[#C9A96A] [animation-delay:150ms]">
               SOUSAPHONE NOUVELLE GÉNÉRATION
             </p>
             <h1
               id="titre-hero"
-              className="hero-entree mt-4 font-sans text-3xl min-[640px]:text-4xl min-[1024px]:text-5xl min-[1440px]:text-6xl font-bold text-white [animation-delay:300ms]"
+              className="hero-entree instrument-titre mt-4 font-sans font-bold text-white [animation-delay:300ms]"
             >
               Une innovation mondiale.
             </h1>
@@ -124,12 +128,14 @@ export default function InstrumentPage() {
               prédécesseurs.
             </p>
             {/* Chiffres clés, sous la promesse dans la colonne texte
-                (à gauche de la photo) sur desktop (≥ 768px) ; sur
-                mobile, la section dédiée ci-dessous prend le
-                relais. */}
+                (à gauche de la photo) sur desktop (≥ 768px) ;
+                l'alignement, la typo fluide et le masquage des
+                descriptions sous 1280px vivent dans globals.css
+                (scopés .instrument-hero). Sur mobile, la section
+                dédiée ci-dessous prend le relais. */}
             <dl
               aria-label="Chiffres clés"
-              className="hero-entree mt-10 hidden w-full grid-cols-3 gap-10 min-[768px]:grid [animation-delay:750ms]"
+              className="hero-entree mt-10 hidden w-full grid-cols-1 gap-6 min-[768px]:grid min-[1280px]:grid-cols-3 min-[1280px]:gap-10 [animation-delay:750ms]"
             >
               {STATS.map((stat) => (
                 <StatCommentee
