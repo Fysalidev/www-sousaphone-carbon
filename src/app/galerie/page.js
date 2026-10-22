@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Revelation from "@/components/Revelation";
 import {
   EtiquetteDoree,
@@ -97,23 +98,27 @@ const CYCLE = [
 
 // Empreinte de chaque taille : colonnes occupées (grille de 2
 // colonnes en mobile, 6 au-delà de 768px), ratio d'affichage —
-// l'object-cover cadre la photo dans son emplacement — et
-// dimensions conseillées pour la source (rétina 2×).
+// l'object-cover cadre la photo dans son emplacement —, dimensions
+// conseillées pour la source (rétina 2×) et sizes pour l'optimiseur
+// d'images (mêmes valeurs que DonneesGalerie.js).
 const EMPREINTES = {
   grande: {
     classes: "col-span-2 md:col-span-6 aspect-[16/10]",
     conseils: "≈ 2304 × 1440 px",
     ratio: "16/10",
+    sizes: "(min-width: 72rem) 1152px, 100vw",
   },
   moyenne: {
     classes: "col-span-1 md:col-span-3 aspect-[4/5]",
     conseils: "≈ 1130 × 1410 px",
     ratio: "4/5",
+    sizes: "(min-width: 48rem) 552px, 50vw",
   },
   petite: {
     classes: "col-span-1 md:col-span-2 aspect-[3/4]",
     conseils: "≈ 740 × 985 px",
     ratio: "3/4",
+    sizes: "(min-width: 48rem) 368px, 50vw",
   },
 };
 
@@ -134,10 +139,12 @@ export default function GaleriePage() {
         </ParagrapheSection>
       </SectionEditoriale>
       {/* Grille des photos : max-w-6xl, composition en 6 colonnes
-          rythmée par le cycle. Emplacement rempli : <img> brut vers
-          le fichier (aucune couche entre le dépôt et l'affichage).
-          Emplacement vide : placeholder pointillé avec le fichier
-          attendu et son ratio. */}
+          rythmée par le cycle. Les photos passent par l'optimiseur
+          d'images (next/image, fill + sizes de l'empreinte) : la
+          galerie est entièrement intégrée, plus besoin de servir
+          les fichiers bruts — chaque cellule reçoit la variante
+          taillée à sa taille réelle. Emplacement vide : placeholder
+          pointillé avec le fichier attendu et son ratio. */}
       <section aria-label="Photos" className="px-6 pb-20 min-[768px]:pb-28">
         <Revelation>
           <div className="mx-auto grid max-w-6xl grid-cols-2 gap-6 md:grid-cols-6">
@@ -148,14 +155,15 @@ export default function GaleriePage() {
               return photo ? (
                 <figure
                   key={numero}
-                  className={`group overflow-hidden rounded-2xl outline-1 -outline-offset-1 outline-transparent transition-[outline-color] duration-300 ease-out hover:outline-[#C9A96A] motion-reduce:transition-none ${empreinte.classes}`}
+                  className={`group relative overflow-hidden rounded-2xl outline-1 -outline-offset-1 outline-transparent transition-[outline-color] duration-300 ease-out hover:outline-[#C9A96A] motion-reduce:transition-none ${empreinte.classes}`}
                 >
-                  {/* eslint-disable-next-line @next/next/no-img-element -- servie brute, hors optimiseur, pour afficher exactement le fichier déposé. */}
-                  <img
+                  <Image
                     src={photo.src}
                     alt={photo.alt}
+                    fill
+                    sizes={empreinte.sizes}
                     loading="lazy"
-                    className="h-full w-full object-cover brightness-90 transition-[filter,transform] duration-500 ease-out group-hover:scale-105 group-hover:brightness-100 motion-reduce:transition-none"
+                    className="object-cover brightness-90 transition-[filter,transform] duration-500 ease-out group-hover:scale-105 group-hover:brightness-100 motion-reduce:transition-none"
                   />
                 </figure>
               ) : (

@@ -40,7 +40,7 @@ export const EMPREINTES = {
     classes: "col-span-1 md:col-span-3 aspect-[4/5]",
     conseils: "≈ 1130 × 1410 px",
     ratio: "4/5",
-    sizes: "(min-width: 48rem) 552px, 100vw",
+    sizes: "(min-width: 48rem) 552px, 50vw",
   },
   petite: {
     classes: "col-span-1 md:col-span-2 aspect-[3/4]",
