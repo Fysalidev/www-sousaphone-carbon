@@ -229,9 +229,11 @@ body {
     font-size: clamp(0.625rem, 0.63rem + 0.25vw, 0.875rem);
   }
   .instrument-hero .instrument-titre {
-    /* Même pente que l'accueil ; plafond 60px pour que le titre
-       tienne sur une ligne dans sa colonne, atteint à 2040px. */
-    font-size: clamp(2.25rem, 1.2rem + 2vw, 3.75rem);
+    /* Même rampe que l'accueil, cap compris : l'échelle des deux
+       heroes est identique sur tout l'éventail — sur très grands
+       écrans le titre passe sur deux lignes, comme celui de
+       l'accueil. */
+    font-size: clamp(2.25rem, 1.2rem + 2vw, 5.5rem);
   }
   .instrument-hero .instrument-promesse {
     /* Même rampe que la promesse du hero d'accueil : 16px à 768px,
