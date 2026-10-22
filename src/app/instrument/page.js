@@ -447,7 +447,8 @@ export default function InstrumentPage() {
       <SeparateurSection />
 
       {/* Pièce unique : la promesse sur mesure, refermée par l'appel
-          à l'action « Nous contacter ». */}
+          à l'action « Nous contacter » — dernière section de la page,
+          le footer prend le relais. */}
       <SectionEditoriale titreAria="titre-piece-unique">
         <EtiquetteDoree>PIÈCE UNIQUE — SÉRIE CARBONE</EtiquetteDoree>
         <h2
@@ -464,39 +465,6 @@ export default function InstrumentPage() {
         </ParagrapheSection>
         <div className="mt-12">
           <BoutonAction href="/contact">NOUS CONTACTER</BoutonAction>
-        </div>
-      </SectionEditoriale>
-
-      <SeparateurSection />
-
-      {/* Clôture « instrument d'exception » : la promesse finale,
-          illustrée par une photo de la galerie en cadrage portrait —
-          la page se referme avant le footer. */}
-      <SectionEditoriale titreAria="titre-exception">
-        <EtiquetteDoree>UN INSTRUMENT D&rsquo;EXCEPTION</EtiquetteDoree>
-        <h2
-          id="titre-exception"
-          className="font-serif-carte mt-4 text-4xl min-[768px]:text-5xl min-[1440px]:text-6xl font-semibold leading-tight text-white"
-        >
-          Pensé comme une œuvre d&rsquo;art,
-          <br />
-          joué comme un rêve.
-        </h2>
-        <div aria-hidden="true" className="mt-6 h-px w-16 bg-[#C9A96A]" />
-        <ParagrapheSection largeur="max-w-3xl">
-          Fabriqué en France, façonné à la main : le partenaire de votre
-          batterie fanfare, pensé pour durer et pour faire de chaque passage une
-          signature.
-        </ParagrapheSection>
-        <div className="mt-12 min-[768px]:mt-16 overflow-hidden rounded-2xl border border-[#C9A96A]/40">
-          <Image
-            src="/galerie/galerie-02.webp"
-            alt="Photographie du Sousaphone Carbon"
-            width={900}
-            height={1200}
-            sizes="(min-width: 768px) 36rem, 100vw"
-            className="aspect-[3/4] w-full object-cover brightness-90"
-          />
         </div>
       </SectionEditoriale>
     </main>
