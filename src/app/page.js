@@ -158,7 +158,7 @@ const EQUIPE = [
     role: "ARTISAN CRÉATEUR | CONCEPTION - FABRICATION - VENTE",
   },
   {
-    nom: "Jérome WISS",
+    nom: "Jérôme WISS",
     role: "ARTISAN CRÉATEUR | CONCEPTION - FABRICATION",
   },
   {
