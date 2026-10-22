@@ -76,6 +76,20 @@ body {
   }
 }
 
+/* Mesure de la promesse : largeur max de son texte, en rampe continue
+   — 36rem à 768px, 48rem atteints à 1920px — à la place des paliers
+   fixes max-w-xl/2xl/3xl du JSX. Le bouton s'y cale (margin-right)
+   pour suivre le bord droit du texte sans saut à 1555px/1920px ;
+   sur mobile le plancher 36rem reproduit l'ancien max-w-xl. Hors
+   @layer : prime sur les utilitaires. */
+.hero {
+  --mesure-promesse: clamp(36rem, 28rem + 1.0417vw, 48rem);
+}
+
+.hero-promesse {
+  max-width: var(--mesure-promesse);
+}
+
 /* Hero, écran large (≥ 48rem / 768px) : la disposition bascule en
    deux colonnes — photo à gauche occupant toute la hauteur, texte
    à droite collé à la photo (aligné côté gauche de sa colonne).
@@ -138,48 +152,45 @@ body {
   /* Le bouton reprend son centrage d'origine : l'utilitaire
      `self-center` du JSX s'applique à nouveau, sans surcharge
      d'alignement ici. */
-  /* Bouton aligné à droite sur la mesure du texte : son bord
-     droit épouse celui de la promesse (max-w-xl = 36rem, puis
-     42rem à 1555px et 48rem à 1920px — mêmes paliers que le JSX).
-     margin-right = largeur colonne − mesure : 0 quand la colonne
-     est plus étroite que la mesure. */
+  /* Bouton aligné à droite sur la mesure du texte : son bord droit
+     épouse celui de la promesse via --mesure-promesse (rampe
+     continue, cf. plus haut) — margin-right = largeur colonne −
+     mesure : 0 quand la colonne est plus étroite que la mesure,
+     sans aucun saut. */
   .hero-bouton {
     align-self: flex-end;
-    margin-right: max(0px, calc(100% - 36rem));
+    margin-right: max(0px, calc(100% - var(--mesure-promesse)));
   }
-  @media (min-width: 96.875rem) {
-    .hero-bouton {
-      margin-right: max(0px, calc(100% - 42rem));
-    }
-  }
-  @media (min-width: 120rem) {
-    .hero-bouton {
-      margin-right: max(0px, calc(100% - 48rem));
-    }
-  }
-  /* Typographie fluide : clamp() remplace les paliers fixes (les
-     utilitaires text-4xl→7xl du JSX restent actifs sous 48rem,
-     en empilé). Le titre, la promesse, les valeurs et l'accroche
-     grandissent en continu avec la largeur de la fenêtre au lieu
-     de sauter à 1024/1440/1555px — la colonne texte est plus
+  /* Typographie fluide : clamp() remplace les paliers fixes — les
+     tailles du JSX ont été retirées, chaque texte suit une rampe
+     continue qui se raccorde sans couture à celle du hero empilé à
+     768px (cf. bloc < 48rem). Le titre, la promesse, les valeurs et
+     l'accroche grandissent en continu avec la largeur de la fenêtre
+     au lieu de sauter à 1024/1440/1555px — la colonne texte est plus
      étroite que l'écran, les paliers calés sur l'écran entier
-     donnaient des corps trop grands en colonne. */
+     donnaient des corps trop grands en colonne. Le plafond du titre
+     (5.5rem, atteint à 3440px) prolonge la croissance sur très
+     grands écrans : l'ancien cran à 1920px est absorbé par la rampe. */
   .hero-titre {
-    font-size: clamp(2.25rem, 1.2rem + 2vw, 4.5rem);
+    font-size: clamp(2.25rem, 1.2rem + 2vw, 5.5rem);
   }
   .hero-promesse {
     font-size: clamp(1rem, 0.9rem + 0.2vw, 1.375rem);
   }
   .hero-stat-valeur {
-    /* Minimum calé sur le palier mobile text-3xl (1.875rem) : la
-       valeur ne rétrécit pas au basculement deux colonnes — la
+    /* Minimum calé sur le plafond de la rampe mobile (30px à 768px) :
+       la valeur ne rétrécit pas au basculement deux colonnes — la
        formule reprend la même pente (0.6vw) depuis 768px. */
     font-size: clamp(1.875rem, 1.5875rem + 0.6vw, 3rem);
   }
+  .hero-stat-legende {
+    /* 12px à 768px, 14px atteints à 1920px : remplace les paliers
+       text-xs/text-sm du JSX, sans saut à 1555px. */
+    font-size: clamp(0.75rem, 0.6667rem + 0.1736vw, 0.875rem);
+  }
   .hero-haut p.hero-entree {
-    /* Recalé sur la rampe JSX (10px mobile, text-xs à 768px, text-sm
-       à 1555px) : 12px à 768px puis croissance continue jusqu'à
-       14px atteints à 1555px — plus de saut au basculement. */
+    /* 12px à 768px puis croissance continue jusqu'à 14px atteints à
+       1555px : raccord sans couture avec la rampe mobile à 768px. */
     font-size: clamp(0.625rem, 0.63rem + 0.25vw, 0.875rem);
   }
 }
@@ -204,26 +215,18 @@ body {
 }
 
 /* Deux colonnes, très grands écrans (≥ 1920px) : la zone de
-   contenu s'élargit à 100rem, l'image reprend toute la hauteur
+   contenu s'élargit à 100rem et l'image reprend toute la hauteur
    disponible (son plafond ne servait qu'à éviter l'étirement
    démesuré des écrans moyens — ici, plus la place est grande,
-   plus l'instrument doit en profiter), et la typographie monte
-   d'un cran pour tenir la scène. Hors @layer. */
+   plus l'instrument doit en profiter). La typographie, elle, n'a
+   plus de cran ici : les rampes continues ci-dessus traversent
+   ce palier sans saut. Hors @layer. */
 @media (min-width: 120rem) {
   .hero {
     padding-inline: max(2.5rem, calc((100% - 100rem) / 2));
   }
   .hero-photo {
     height: 100%;
-  }
-  .hero-titre {
-    font-size: clamp(3.5rem, 2rem + 2vw, 5.5rem);
-  }
-  .hero-promesse {
-    font-size: 1.375rem;
-  }
-  .hero-stat-valeur {
-    font-size: 2.75rem;
   }
 }
 
@@ -237,6 +240,28 @@ body {
    paliers de compression ci-dessous. Hors @layer : prime sur les
    utilitaires. */
 @media (max-width: 47.99rem) {
+  /* Typographie fluide en empilé : les tailles du JSX (paliers
+     640px/768px) sont retirées — chaque texte suit une rampe continue
+     dont le plafond correspond exactement au plancher de la rampe
+     desktop à 768px (raccord sans couture au basculement). Les
+     écrans courts gardent les paliers de compression ci-dessous,
+     qui priment sur ces rampes. */
+  .hero-titre {
+    /* 30px à 320px, 36px à 768px (plafond de la rampe empilée). */
+    font-size: clamp(1.875rem, 1.6071rem + 1.3393vw, 2.25rem);
+  }
+  .hero-haut p.hero-entree {
+    /* 10px à 320px, 12px à 768px. */
+    font-size: clamp(0.625rem, 0.5357rem + 0.4464vw, 0.75rem);
+  }
+  .hero-stat-valeur {
+    /* 24px à 320px, 30px à 768px. */
+    font-size: clamp(1.5rem, 1.2321rem + 1.3393vw, 1.875rem);
+  }
+  .hero-stat-legende {
+    /* 10px à 320px, 12px à 768px. */
+    font-size: clamp(0.625rem, 0.5357rem + 0.4464vw, 0.75rem);
+  }
   .hero-photo {
     /* Plancher à 45 % de l'écran, pas la moitié : sur les appareils
        où la pile de texte est trop haute, le plancher 50 % forçait

@@ -108,18 +108,19 @@ function BoutonAction({ href, children, classe = "" }) {
 
 // Statistique clé : terme/légende (dt) et définition/valeur (dd) liés
 // sémantiquement ; l'ordre visuel place la valeur au-dessus de la
-// légende via flex. Rampe régulière (24 → 30 → 36 → 48 → 60px), %
-// solidaire de la couleur de la valeur (or si `dore`, blanc sinon).
+// légende via flex. Les tailles vivent dans globals.css (rampes
+// fluides .hero-stat-valeur / .hero-stat-legende), % solidaire de la
+// couleur de la valeur (or si `dore`, blanc sinon).
 // Tracking des légendes resserré sous 400px pour éviter les débordements
 // sur les très petits écrans.
 function StatProduit({ valeur, legende, pourcent = true, dore = false }) {
   return (
     <div className="flex flex-col text-center">
-      <dt className="hero-stat-legende order-2 mt-2 text-[10px] min-[640px]:text-xs min-[1555px]:text-sm font-bold tracking-[0.25em] max-[399px]:tracking-widest text-[#C9A96A]">
+      <dt className="hero-stat-legende order-2 mt-2 font-bold tracking-[0.25em] max-[399px]:tracking-widest text-[#C9A96A]">
         {legende}
       </dt>
       <dd
-        className={`hero-stat-valeur order-1 font-sans text-2xl min-[640px]:text-3xl min-[1024px]:text-4xl min-[1440px]:text-5xl min-[1555px]:text-6xl font-bold ${
+        className={`hero-stat-valeur order-1 font-sans font-bold ${
           dore ? "text-[#C9A96A]" : "text-white"
         }`}
       >
@@ -220,9 +221,11 @@ export default function AccueilPage() {
           photo en bloc de contenu flexible — elle absorbe la hauteur
           disponible entre les deux blocs de texte —, puis promesse,
           trois chiffres clés et appel à l'action, centrés. Le
-          dégradé doré haut/bas teinte tout le hero. Sur les écrans
-          courts, les paliers .hero-* (globals.css) compressent la
-          typo et les espacements pour tenir dans la hauteur ; à
+          dégradé doré haut/bas teinte tout le hero. La typographie
+          (accroche, titre, promesse, valeurs, légendes) suit des
+          rampes continues dans globals.css — aucune taille ne vit
+          ici. Sur les écrans courts, les paliers .hero-* compriment
+          la typo et les espacements pour tenir dans la hauteur ; à
           partir de 768px de large, la classe .hero bascule en deux
           colonnes : photo à gauche, texte à droite, collés. */}
       <section
@@ -230,12 +233,12 @@ export default function AccueilPage() {
         className="hero flex flex-col min-h-[calc(100svh-var(--hauteur-barre-header))] text-center bg-linear-to-b from-[#C9A96A]/10 via-transparent to-[#C9A96A]/10"
       >
         <div className="hero-haut flex flex-col items-center px-6 pt-12">
-          <p className="hero-entree text-[10px] min-[768px]:text-xs min-[1555px]:text-sm font-bold tracking-[0.25em] text-[#C9A96A] [animation-delay:150ms]">
+          <p className="hero-entree font-bold tracking-[0.25em] text-[#C9A96A] [animation-delay:150ms]">
             L&rsquo;EXCELLENCE, AUTREMENT
           </p>
           <h1
             id="titre-hero"
-            className="hero-entree hero-titre mt-4 font-sans text-3xl min-[640px]:text-4xl min-[1024px]:text-5xl min-[1440px]:text-6xl min-[1555px]:text-7xl font-bold text-white [animation-delay:300ms]"
+            className="hero-entree hero-titre mt-4 font-sans font-bold text-white [animation-delay:300ms]"
           >
             L&rsquo;âme intacte
             <br />
@@ -270,7 +273,7 @@ export default function AccueilPage() {
           />
         </div>
         <div className="hero-bas flex flex-col items-center px-6 pb-10">
-          <p className="hero-entree hero-promesse mt-6 max-w-xl text-base leading-relaxed text-stone-200 min-[1555px]:max-w-2xl min-[1555px]:text-lg min-[1920px]:max-w-3xl min-[1920px]:text-xl [animation-delay:600ms]">
+          <p className="hero-entree hero-promesse mt-6 text-base leading-relaxed text-stone-200 [animation-delay:600ms]">
             Un corps en fibre de carbone, façonné en France pour libérer le
             musicien sans jamais altérer le son et la projection.
           </p>
