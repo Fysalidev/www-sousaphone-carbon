@@ -8,10 +8,13 @@ const montserrat = Montserrat({
   subsets: ["latin"],
 });
 
-// Bodoni Moda : serif d'affichage unique du site.
+// Bodoni Moda : serif d'affichage unique du site — normal (titres)
+// et italique (citations), variable : le subset latin est plus
+// léger que des instances statiques et couvre 400–900.
 const bodoni = Bodoni_Moda({
   variable: "--font-bodoni",
   subsets: ["latin"],
+  style: ["normal", "italic"],
 });
 
 // Bebas Neue : police du slogan (capitales condensées, poids unique 400).
