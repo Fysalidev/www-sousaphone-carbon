@@ -191,25 +191,29 @@ export default function InstrumentPage() {
       {/* Boîte dorée « une question » : le seul moment clair de la
           page — fond or de la largeur du texte (max-w-3xl), centré
           et à coins adoucis, textes noirs, bouton plein noir.
+          Empilé et centré sur mobile ; à partir de 768px le texte
+          passe à gauche et le bouton se cale à droite de la boîte.
           Il ouvre directement la porte du contact. */}
       <section
         aria-labelledby="titre-question"
         className="px-6 py-12 min-[768px]:py-16"
       >
         <Revelation>
-          <div className="mx-auto max-w-3xl rounded-2xl bg-[#C9A96A] px-6 py-12 text-center min-[768px]:py-16">
-            <h2
-              id="titre-question"
-              className="font-serif-carte text-3xl min-[640px]:text-4xl min-[1024px]:text-5xl font-semibold leading-tight text-black"
-            >
-              Une question sur le sousaphone&nbsp;?
-            </h2>
-            <p className="mx-auto mt-4 max-w-xl text-sm min-[640px]:text-base leading-relaxed text-black/80">
-              Nous sommes à votre écoute pour vous accompagner dans votre
-              projet, répondre à vos questions techniques ou organiser une prise
-              de contact.
-            </p>
-            <div className="mt-8">
+          <div className="mx-auto max-w-3xl rounded-2xl bg-[#C9A96A] px-6 py-12 text-center min-[768px]:flex min-[768px]:items-center min-[768px]:justify-between min-[768px]:gap-10 min-[768px]:py-16 min-[768px]:text-left">
+            <div>
+              <h2
+                id="titre-question"
+                className="font-serif-carte text-3xl min-[640px]:text-4xl min-[1024px]:text-5xl font-semibold leading-tight text-black"
+              >
+                Une question sur le sousaphone&nbsp;?
+              </h2>
+              <p className="mx-auto mt-4 max-w-xl text-sm min-[640px]:text-base leading-relaxed text-black/80 min-[768px]:mx-0">
+                Nous sommes à votre écoute pour vous accompagner dans votre
+                projet, répondre à vos questions techniques ou organiser une
+                prise de contact.
+              </p>
+            </div>
+            <div className="mt-8 min-[768px]:mt-0 min-[768px]:flex-none">
               <BoutonAction href="/contact" inverse>
                 NOUS CONTACTER
               </BoutonAction>
