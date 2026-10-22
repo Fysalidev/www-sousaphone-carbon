@@ -282,10 +282,10 @@ export default function InstrumentPage() {
         {/* Mesure élargie à la colonne éditoriale complète : le texte
             épouse la largeur du titre au lieu de couper tôt. */}
         <ParagrapheSection largeur="max-w-3xl">
-          Chaque pièce est façonnée à la main. Chaque sousaphone prend forme,
-          geste après geste, dans nos ateliers. De cette patience naissent des
-          instruments résistants, équilibrés, aux propriétés acoustiques
-          d&rsquo;exception.
+          Chaque pièce est façonnée avec exigence. Chaque sousaphone prend
+          forme, geste après geste, dans nos ateliers. De cette patience
+          naissent des instruments résistants, équilibrés, aux propriétés
+          acoustiques d&rsquo;exception.
         </ParagrapheSection>
       </SectionEditoriale>
 
