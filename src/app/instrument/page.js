@@ -29,7 +29,7 @@ function BoutonAction({ href, children, inverse = false, classe = "" }) {
   return (
     <Link
       href={href}
-      className={`inline-flex items-center gap-3 rounded-lg border px-8 py-4 text-xs min-[1555px]:text-sm font-bold tracking-[0.25em] transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 ${
+      className={`inline-flex items-center gap-3 rounded-lg border px-8 py-4 texte-bouton font-bold tracking-[0.25em] transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 ${
         inverse
           ? "border-black bg-black text-[#C9A96A] hover:bg-black/80 focus-visible:outline-black"
           : "border-[#C9A96A] bg-[#C9A96A] text-black hover:bg-black hover:text-[#C9A96A] focus-visible:outline-white"
@@ -52,18 +52,18 @@ function BoutonAction({ href, children, inverse = false, classe = "" }) {
 function StatCommentee({ valeur, legende, description, dore = false }) {
   return (
     <div className="instrument-stat flex flex-col text-center">
-      <dt className="instrument-stat-legende order-2 mt-2 text-[10px] min-[640px]:text-xs min-[1555px]:text-sm font-bold tracking-[0.25em] max-[399px]:tracking-widest text-[#C9A96A]">
+      <dt className="instrument-stat-legende etiquette-doree order-2 mt-2 font-bold tracking-[0.25em] max-[399px]:tracking-widest text-[#C9A96A]">
         {legende}
       </dt>
       <dd
-        className={`instrument-stat-valeur order-1 font-sans text-2xl min-[640px]:text-3xl min-[1024px]:text-4xl font-bold ${
+        className={`instrument-stat-valeur stat-valeur order-1 font-sans font-bold ${
           dore ? "text-[#C9A96A]" : "text-white"
         }`}
       >
         {valeur}
         <span>%</span>
       </dd>
-      <p className="instrument-stat-description order-3 mt-3 text-sm min-[640px]:text-base leading-relaxed text-stone-300">
+      <p className="instrument-stat-description paragraphe-section order-3 mt-3 leading-relaxed text-stone-300">
         {description}
       </p>
     </div>
@@ -228,11 +228,11 @@ export default function InstrumentPage() {
             <div>
               <h2
                 id="titre-question"
-                className="font-serif-carte text-3xl min-[640px]:text-4xl min-[1024px]:text-5xl font-semibold leading-tight text-black"
+                className="titre-boite font-serif-carte font-semibold leading-tight text-black"
               >
                 Une question sur le sousaphone&nbsp;?
               </h2>
-              <p className="mx-auto mt-4 max-w-xl text-sm min-[640px]:text-base leading-relaxed text-black/80 min-[768px]:mx-0">
+              <p className="paragraphe-section mx-auto mt-4 max-w-xl leading-relaxed text-black/80 min-[768px]:mx-0">
                 Nous sommes à votre écoute pour vous accompagner dans votre
                 projet, répondre à vos questions techniques ou organiser une
                 prise de contact.
@@ -269,7 +269,7 @@ export default function InstrumentPage() {
           généreux.
         </ParagrapheSection>
         <blockquote className="mt-10 text-center">
-          <p className="mx-auto max-w-xl font-serif-carte text-2xl min-[640px]:text-3xl italic leading-snug text-white">
+          <p className="citation-serif mx-auto max-w-xl font-serif-carte italic leading-snug text-white">
             «&nbsp;Le métal garde la mémoire du geste.&nbsp;»
           </p>
           <cite className="mt-4 block text-[10px] min-[640px]:text-xs font-bold not-italic tracking-[0.25em] text-[#C9A96A]">

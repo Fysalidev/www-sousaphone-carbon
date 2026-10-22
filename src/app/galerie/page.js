@@ -124,7 +124,7 @@ export default function GaleriePage() {
         <EtiquetteDoree>GALERIE</EtiquetteDoree>
         <h1
           id="titre-galerie"
-          className="font-serif-carte mt-4 text-4xl min-[768px]:text-5xl min-[1440px]:text-6xl font-semibold leading-tight text-white"
+          className="titre-section font-serif-carte mt-4 font-semibold leading-tight text-white"
         >
           L&rsquo;instrument en images.
         </h1>

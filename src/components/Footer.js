@@ -70,7 +70,7 @@ export default function Footer() {
           aria-label="Navigation pied de page"
           className="relative flex flex-col"
         >
-          <ul className="flex w-full max-w-169.75 flex-col px-6 pt-6 pb-8">
+          <ul className="flex w-full max-w-3xl flex-col px-6 pt-6 pb-8">
             <li className="pb-2">
               <Intertitre>DÉCOUVRIR</Intertitre>
             </li>

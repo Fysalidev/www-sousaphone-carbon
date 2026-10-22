@@ -17,15 +17,19 @@
   }
 }
 
-/* Barre du header : le contenu (logo, navigation) s'arrête où
-   s'arrête la zone de contenu des heroes (plafonnée à 90rem,
-   cf. max-w-[90rem] du JSX). Mobile : le px-6 du JSX suffit ; à
-   partir de 48rem le padding latéral grandit — plancher 2.5rem,
-   puis marges de la zone. Hors @layer : prime sur les utilitaires
+/* Barre du header : le contenu (logo, navigation) s'arrête
+   exactement où s'arrête le texte des heroes — zone 90rem (max-w-
+   [90rem] du JSX) moins les gouttières px-6, soit 87rem de texte
+   centré. Mobile : le px-6 du JSX suffit ; à partir de 48rem le
+   padding latéral grandit — plancher 1.5rem, puis marges de la
+   zone. Grille des largeurs du site : hero 90rem, sections
+   larges (chiffres, détails, galerie) 72rem, prose éditoriale
+   (sections, boîte question, menu) 48rem — toutes centrées,
+   gouttière px-6. Hors @layer : prime sur les utilitaires
    Tailwind, comme les rampes du hero. */
 @media (min-width: 48rem) {
   .header-barre {
-    padding-inline: max(2.5rem, calc((100% - 90rem) / 2));
+    padding-inline: max(1.5rem, calc((100% - 87rem) / 2));
   }
 }
 
@@ -126,6 +130,80 @@ body {
   .hero-accroche {
     font-size: clamp(0.625rem, 0.63rem + 0.25vw, 0.875rem);
   }
+}
+
+/* ——— Typographie des sections : rampes continues ———
+   Même principe que les heroes : chaque texte suit une rampe
+   clamp() du mobile à l'ultra-large, sans saut de palier — les
+   utilitaires Tailwind de taille ont été retirés du JSX des
+   primitives (SectionsEditoriales, CartesAccueil, StatCommentee).
+   Les micro-légendes d'habillage (numéros de vignettes, « 3/4 »
+   de la galerie) gardent leurs paliers : ce sont des détails
+   d'interface, pas de la typo de section. Hors @layer : prime sur
+   les utilitaires. */
+
+/* Grand titre serif de section : 36px constants sur mobile,
+   croissance continue de 36px (768px) à 60px (1920px). */
+.titre-section {
+  font-size: clamp(2.25rem, 1.25rem + 2.083vw, 3.75rem);
+}
+
+/* Titre de la boîte « Une question » : 30px sur mobile, croissance
+   de 30px (640px) à 48px (1200px). */
+.titre-boite {
+  font-size: clamp(1.875rem, 0.5938rem + 3.2143vw, 3rem);
+}
+
+/* Citation serif italique : 24px à 320px, 30px à 640px. */
+.citation-serif {
+  font-size: clamp(1.5rem, 1.125rem + 1.875vw, 1.875rem);
+}
+
+/* Titre de carte (Bodoni medium) : 20px à 320px, 30px à 1024px. */
+.titre-carte {
+  font-size: clamp(1.25rem, 0.9665rem + 1.4205vw, 1.875rem);
+}
+
+/* Numéro doré de carte : 18px à 320px, 24px à 1024px. */
+.numero-carte {
+  font-size: clamp(1.125rem, 0.9545rem + 0.8523vw, 1.5rem);
+}
+
+/* Étiquette dorée : 10px à 320px, 12px à 768px, 14px à 1555px. */
+.etiquette-doree {
+  font-size: clamp(0.625rem, 0.5357rem + 0.4464vw, 0.75rem);
+}
+@media (min-width: 48rem) {
+  .etiquette-doree {
+    font-size: clamp(0.625rem, 0.63rem + 0.25vw, 0.875rem);
+  }
+}
+
+/* Paragraphe de corps de section : 14px à 320px, 16px à 640px. */
+.paragraphe-section {
+  font-size: clamp(0.875rem, 0.75rem + 0.625vw, 1rem);
+}
+
+/* Paragraphe de carte : 14px à 320px, 18px à 1024px. */
+.paragraphe-carte {
+  font-size: clamp(0.875rem, 0.7614rem + 0.5682vw, 1.125rem);
+}
+
+/* Valeur des stats commentées : 24px à 320px, 36px à 1024px —
+   dans le hero instrument, les règles .instrument-hero dédiées
+   priment (spécificité supérieure). */
+.stat-valeur {
+  font-size: clamp(1.5rem, 1.1591rem + 1.7045vw, 2.25rem);
+}
+
+/* Libellé d'attribut iconé : 12px à 320px, 14px à 640px. */
+.legende-attribut {
+  font-size: clamp(0.75rem, 0.625rem + 0.625vw, 0.875rem);
+}
+
+/* Texte des boutons d'action : 12px à 320px, 14px à 1555px. */
+.texte-bouton {
+  font-size: clamp(0.75rem, 0.7176rem + 0.1619vw, 0.875rem);
 }
 
 /* Hero instrument (scopé .instrument-hero) : typographie fluide,

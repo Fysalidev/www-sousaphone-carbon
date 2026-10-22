@@ -10,7 +10,7 @@ import Revelation from "./Revelation";
 // surmonte chaque grand titre, même traitement que l'accroche du hero.
 export function EtiquetteDoree({ children }) {
   return (
-    <p className="text-[10px] min-[768px]:text-xs min-[1555px]:text-sm font-bold tracking-[0.25em] text-[#C9A96A]">
+    <p className="etiquette-doree font-bold tracking-[0.25em] text-[#C9A96A]">
       {children}
     </p>
   );
@@ -25,7 +25,7 @@ export function TitreSection({ id, children }) {
     <div>
       <h2
         id={id}
-        className="font-serif-carte mt-4 text-4xl min-[768px]:text-5xl min-[1440px]:text-6xl font-semibold leading-tight text-white"
+        className="titre-section font-serif-carte mt-4 font-semibold leading-tight text-white"
       >
         {children}
       </h2>
@@ -41,7 +41,7 @@ export function TitreSection({ id, children }) {
 export function ParagrapheSection({ children, largeur = "max-w-xl" }) {
   return (
     <p
-      className={`mt-6 ${largeur} text-sm min-[640px]:text-base leading-relaxed text-stone-300`}
+      className={`paragraphe-section mt-6 ${largeur} leading-relaxed text-stone-300`}
     >
       {children}
     </p>

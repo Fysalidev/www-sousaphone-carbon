@@ -239,7 +239,7 @@ function MenuPleinEcran({ pathname, ouvert, fermer, refDialogue, refFermer }) {
         aria-label="Menu"
         className="relative z-10 flex min-h-0 flex-1 flex-col overflow-hidden"
       >
-        <ul className="flex min-h-0 w-full max-w-169.75 flex-1 flex-col px-6 pt-6 pb-8">
+        <ul className="flex min-h-0 w-full max-w-3xl flex-1 flex-col px-6 pt-6 pb-8">
           <li
             style={delaiEntree(ouvert, 0)}
             className={`pb-4 [@media(max-height:600px)]:hidden ${classesEntree(ouvert)}`}
