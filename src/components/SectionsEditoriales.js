@@ -67,6 +67,11 @@ export function SeparateurSection() {
           alt=""
           width={1750}
           height={698}
+          /* Le logo s'affiche à hauteur fixe (h-24 mobile, h-32
+             desktop), soit ~240px / ~320px de large : sans `sizes`,
+             l'optimiseur servirait la variante 3840px issue des
+             dimensions intrinsèques — 30KB perdus par séparateur. */
+          sizes="(min-width: 768px) 340px, 250px"
           className="h-24 min-[768px]:h-32 w-auto invert"
         />
       </div>
