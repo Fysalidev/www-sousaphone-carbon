@@ -148,22 +148,21 @@ export default function InstrumentPage() {
               ))}
             </dl>
           </div>
-          {/* Photo de l'instrument : galerie-05-hd.webp (1100×2429,
-              portrait très élancé — ratio ≈ 0,45) sert les deux
-              dispositions — empilé mobile et colonne desktop —, avec
-              le même traitement que le hero d'accueil :
-              object-contain pour ne jamais déformer l'instrument,
-              mix-blend-screen pour fondre dans le fond doré, masque
-              limité aux bords haut/bas. La boîte reste en aspect 3/4
-              (plafonnée à 45svh sur mobile, 48rem sur desktop) :
-              l'image se cale sur la hauteur et se centre dedans. */}
+          {/* Photo de l'instrument : galerie-05.webp (740×1038) sert
+              les deux dispositions — empilé mobile et colonne
+              desktop —, avec le même traitement que le hero
+              d'accueil : object-contain pour ne jamais déformer
+              l'instrument, mix-blend-screen pour fondre dans le fond
+              doré, masque limité aux bords haut/bas. Boîte en aspect
+              3/4 à toutes les largeurs, plafonnée à 45svh sur mobile
+              (hero compact) et 48rem sur desktop. */}
           <div className="hero-entree relative mt-6 min-h-64 w-full aspect-[3/4] max-h-[45svh] [animation-delay:600ms] min-[768px]:mt-0 min-[768px]:max-h-[48rem]">
             <Image
-              src="/galerie/galerie-05-hd.webp"
+              src="/galerie/galerie-05.webp"
               alt="Photographie du Sousaphone Carbon"
               fill
               priority
-              sizes="(min-width: 768px) 25vw, 50vw"
+              sizes="(min-width: 768px) 40vw, calc(100vw - 3rem)"
               className="object-contain object-center mix-blend-screen mask-[linear-gradient(to_bottom,transparent_2%,black_10%,black_90%,transparent_98%)]"
             />
           </div>
