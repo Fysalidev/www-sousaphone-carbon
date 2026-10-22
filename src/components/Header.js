@@ -218,7 +218,7 @@ function MenuPleinEcran({ pathname, ouvert, fermer, refDialogue, refFermer }) {
           />
         </>
       )}
-      <div className="relative z-10 flex w-full items-center justify-between gap-6 px-6 pt-10 pb-3.5">
+      <div className="zone-contenu relative z-10 flex w-full items-center justify-between gap-6 px-6 pt-10 pb-3.5">
         <LogoMenu onClick={fermer} />
         <span
           aria-hidden="true"
@@ -237,18 +237,18 @@ function MenuPleinEcran({ pathname, ouvert, fermer, refDialogue, refFermer }) {
       </div>
       <nav
         aria-label="Menu"
-        className="relative z-10 flex min-h-0 flex-1 flex-col overflow-hidden"
+        className="zone-contenu relative z-10 flex min-h-0 flex-1 flex-col overflow-hidden px-6"
       >
-        <ul className="flex min-h-0 w-full max-w-3xl flex-1 flex-col px-6 pt-6 pb-8">
+        <ul className="flex min-h-0 w-full max-w-3xl flex-1 flex-col pt-6 pb-8">
           <li
             style={delaiEntree(ouvert, 0)}
             className={`pb-4 [@media(max-height:600px)]:hidden ${classesEntree(ouvert)}`}
           >
-            <p className="font-display text-xl min-[420px]:text-2xl font-medium leading-snug text-stone-100">
+            <p className="titre-menu font-display font-medium leading-snug text-stone-100">
               Un instrument d&rsquo;exception, pensé comme une œuvre
               d&rsquo;art, joué comme une évidence.
             </p>
-            <p className="mt-2 text-xs min-[420px]:text-sm text-stone-200">
+            <p className="legende-menu mt-2 text-stone-200">
               Fabriqué en France, façonné à la main. Parlons de votre futur
               Sousaphone Carbon.
             </p>

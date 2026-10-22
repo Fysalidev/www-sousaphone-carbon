@@ -91,7 +91,7 @@ export default function Footer() {
                 label="Contact"
                 actif={pathname === "/contact"}
               />
-              <p className="pb-2 text-xs min-[420px]:text-sm text-stone-200">
+              <p className="legende-menu pb-2 text-stone-200">
                 Atelier en France, sur rendez-vous
               </p>
             </li>

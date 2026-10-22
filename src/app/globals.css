@@ -201,6 +201,22 @@ body {
   font-size: clamp(0.75rem, 0.625rem + 0.625vw, 0.875rem);
 }
 
+/* Lien de menu (overlay et footer) : 16px à 320px, 18px à 420px. */
+.lien-menu {
+  font-size: clamp(1rem, 0.6rem + 2vw, 1.125rem);
+}
+
+/* Titre d'accroche du menu : 20px à 320px, 24px à 420px. */
+.titre-menu {
+  font-size: clamp(1.25rem, 0.45rem + 4vw, 1.5rem);
+}
+
+/* Légende du menu et ligne d'atelier du footer : 12px à 320px,
+   14px à 420px. */
+.legende-menu {
+  font-size: clamp(0.75rem, 0.35rem + 2vw, 0.875rem);
+}
+
 /* Texte des boutons d'action : 12px à 320px, 14px à 1555px. */
 .texte-bouton {
   font-size: clamp(0.75rem, 0.7176rem + 0.1619vw, 0.875rem);

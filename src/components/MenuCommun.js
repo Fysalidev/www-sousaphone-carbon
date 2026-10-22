@@ -78,7 +78,7 @@ export function LienMenu({ href, label, actif, onClick }) {
       href={href}
       aria-current={actif ? "page" : undefined}
       onClick={onClick}
-      className="block text-base leading-11 min-[420px]:text-lg font-normal lowercase first-letter:uppercase hover:font-semibold focus-visible:underline focus-visible:underline-offset-4 focus-visible:decoration-[#B69660] text-white transition-colors"
+      className="lien-menu block leading-11 font-normal lowercase first-letter:uppercase hover:font-semibold focus-visible:underline focus-visible:underline-offset-4 focus-visible:decoration-[#B69660] text-white transition-colors"
     >
       {label}
     </Link>
