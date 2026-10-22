@@ -91,8 +91,7 @@ const DONNEES_STRUCTUREES = {
 
 // Bouton d'action or : plein or, texte noir, coins adoucis (rounded-lg)
 // et inversion au survol — décliné pour le hero (« Sousaphone
-// Carbon », avec la classe hero-bouton : palier de compression sur
-// écrans courts) et la clôture (« Nous contacter »). `classe` porte
+// Carbon ») et la clôture (« Nous contacter »). `classe` porte
 // l'espacement et l'animation d'entrée.
 function BoutonAction({ href, children, classe = "" }) {
   return (
@@ -216,83 +215,73 @@ export default function AccueilPage() {
           __html: JSON.stringify(DONNEES_STRUCTUREES),
         }}
       />
-      {/* Hero empilé sur fond noir, entièrement visible sans
-          défilement : accroche dorée et titre centrés en haut,
-          photo en bloc de contenu flexible — elle absorbe la hauteur
-          disponible entre les deux blocs de texte —, puis promesse,
-          trois chiffres clés et appel à l'action, centrés. Le
-          dégradé doré haut/bas teinte tout le hero. La typographie
+      {/* Hero même mécanique que la page instrument, en miroir :
+          photo à gauche, texte à droite. Empilé et centré sur
+          mobile (accroche, titre, promesse, chiffres, bouton, puis
+          photo), plein écran à partir de 768px avec la photo en
+          aspect 3/4 plafonnée et le texte dans sa colonne. Le
+          dégradé doré haut/bas teinte tout le hero ; la typographie
           (accroche, titre, promesse, valeurs, légendes) suit des
           rampes continues dans globals.css — aucune taille ne vit
-          ici. Sur les écrans courts, les paliers .hero-* compriment
-          la typo et les espacements pour tenir dans la hauteur ; à
-          partir de 768px de large, la classe .hero bascule en deux
-          colonnes : photo à gauche, texte à droite, collés. */}
+          ici. */}
       <section
         aria-labelledby="titre-hero"
-        className="hero flex flex-col min-h-[calc(100svh-var(--hauteur-barre-header))] text-center bg-linear-to-b from-[#C9A96A]/10 via-transparent to-[#C9A96A]/10"
+        className="hero flex flex-col bg-linear-to-b from-[#C9A96A]/10 via-transparent to-[#C9A96A]/10 min-[768px]:min-h-[calc(100svh-var(--hauteur-barre-header))]"
       >
-        <div className="hero-haut flex flex-col items-center px-6 pt-12">
-          <p className="hero-entree font-bold tracking-[0.25em] text-[#C9A96A] [animation-delay:150ms]">
-            L&rsquo;EXCELLENCE, AUTREMENT
-          </p>
-          <h1
-            id="titre-hero"
-            className="hero-entree hero-titre mt-4 font-sans font-bold text-white [animation-delay:300ms]"
-          >
-            L&rsquo;âme intacte
-            <br />
-            la légèreté en plus
-          </h1>
-        </div>
-        {/* Photos du sousaphone, deux cadrages pour deux dispositions :
-            photos/hero-mobile.webp (600×1141, portrait) en empilé
-            mobile — l'appareil en main et la photo partagent
-            l'orientation verticale ; photos/hero-desktop.webp
-            (856×1141, portrait serré) en colonne desktop (toutes
-            deux en WebP, qualité 82).
-            Fonte dans le fond de section teinté : mix-blend-screen
-            (les zones sombres laissent passer le fond) et un masque
-            limité aux seuls bords haut/bas (fondu sur ~10 %). */}
-        <div className="hero-entree hero-photo relative mt-6 min-h-48 flex-1 w-full [animation-delay:450ms]">
-          <Image
-            src="/photos/hero-mobile.webp"
-            alt="Sousaphone en laiton sur fond sombre"
-            fill
-            priority
-            sizes="100vw"
-            className="object-contain object-center mix-blend-screen mask-[linear-gradient(to_bottom,transparent_2%,black_10%,black_90%,transparent_98%)] min-[768px]:hidden"
-          />
-          <Image
-            src="/photos/hero-desktop.webp"
-            alt="Sousaphone en laiton sur fond sombre"
-            fill
-            priority
-            sizes="45vw"
-            className="hidden object-contain object-center mix-blend-screen mask-[linear-gradient(to_bottom,transparent_2%,black_10%,black_90%,transparent_98%)] min-[768px]:block"
-          />
-        </div>
-        <div className="hero-bas flex flex-col items-center px-6 pb-10">
-          <p className="hero-entree hero-promesse mt-6 text-base leading-relaxed text-stone-200 [animation-delay:600ms]">
-            Un corps en fibre de carbone, façonné en France pour libérer le
-            musicien sans jamais altérer le son et la projection.
-          </p>
-          {/* Chiffres clés : trois groupes terme/définition,
-              séparateurs verticaux blancs entre eux ; cellules de
-              largeur fixe sur desktop, en rampe (10rem à partir
-              de 1024px, 12rem à 1440px, 14rem à 1555px, 16rem à
-              1920px). */}
-          <dl className="hero-entree hero-metrics mt-6 grid w-full grid-cols-3 divide-x divide-white/40 min-[1024px]:w-auto min-[1024px]:grid-cols-[repeat(3,10rem)] min-[1440px]:grid-cols-[repeat(3,12rem)] min-[1555px]:grid-cols-[repeat(3,14rem)] min-[1920px]:grid-cols-[repeat(3,16rem)] [animation-delay:750ms]">
-            <StatProduit valeur="-40" legende="DE POIDS" dore />
-            <StatProduit valeur="100" legende="CARBONE" />
-            <StatProduit valeur="Made" legende="IN FRANCE" pourcent={false} />
-          </dl>
-          <BoutonAction
-            href="/instrument"
-            classe="hero-bouton hero-entree mt-6 self-center [animation-delay:900ms]"
-          >
-            SOUSAPHONE CARBON
-          </BoutonAction>
+        <div className="flex w-full flex-1 flex-col items-center px-6 pt-12 pb-10 text-center min-[768px]:mx-auto min-[768px]:grid min-[768px]:max-w-[90rem] min-[768px]:grid-cols-[minmax(0,2fr)_minmax(0,3fr)] min-[768px]:items-center min-[768px]:gap-10 min-[768px]:pt-0 min-[768px]:text-left">
+          {/* Texte de l'accueil : accroche, titre, promesse, puis
+              les trois chiffres clés (termes/définitions séparés
+              par des filets verticaux) et l'appel à l'action. En
+              desktop il occupe la colonne de droite (order-2), en
+              mobile il précède la photo — même lecture que le hero
+              instrument. */}
+          <div className="flex flex-col items-center min-[768px]:order-2 min-[768px]:items-start">
+            <p className="hero-entree hero-accroche font-bold tracking-[0.25em] text-[#C9A96A] [animation-delay:150ms]">
+              L&rsquo;EXCELLENCE, AUTREMENT
+            </p>
+            <h1
+              id="titre-hero"
+              className="hero-entree hero-titre mt-4 font-sans font-bold text-white [animation-delay:300ms]"
+            >
+              L&rsquo;âme intacte
+              <br />
+              la légèreté en plus
+            </h1>
+            <p className="hero-entree hero-promesse mt-6 text-base leading-relaxed text-stone-200 [animation-delay:450ms]">
+              Un corps en fibre de carbone, façonné en France pour libérer le
+              musicien sans jamais altérer le son et la projection.
+            </p>
+            <dl className="hero-entree hero-metrics mt-8 grid w-full grid-cols-3 divide-x divide-white/40 [animation-delay:600ms]">
+              <StatProduit valeur="-40" legende="DE POIDS" dore />
+              <StatProduit valeur="100" legende="CARBONE" />
+              <StatProduit valeur="Made" legende="IN FRANCE" pourcent={false} />
+            </dl>
+            <BoutonAction
+              href="/instrument"
+              classe="hero-entree mt-8 [animation-delay:750ms]"
+            >
+              SOUSAPHONE CARBON
+            </BoutonAction>
+          </div>
+          {/* Photo du sousaphone : photos/hero-desktop.webp
+              (856×1141, ratio 3/4) sert les deux dispositions —
+              elle épouse exactement la boîte en aspect 3/4.
+              Fonte dans le fond de section teinté : mix-blend-screen
+              (les zones sombres laissent passer le fond) et un
+              masque limité aux seuls bords haut/bas (fondu sur
+              ~10 %). En desktop : colonne de gauche (order-1),
+              plafonnée à 48rem ; en mobile : sous le texte,
+              plafonnée à 45 % de l'écran (hero compact). */}
+          <div className="hero-entree relative mt-6 min-h-64 w-full aspect-[3/4] max-h-[45svh] [animation-delay:900ms] min-[768px]:order-1 min-[768px]:mt-0 min-[768px]:max-h-[48rem]">
+            <Image
+              src="/photos/hero-desktop.webp"
+              alt="Sousaphone en laiton sur fond sombre"
+              fill
+              priority
+              sizes="(min-width: 768px) 40vw, 75vw"
+              className="object-contain object-center mix-blend-screen mask-[linear-gradient(to_bottom,transparent_2%,black_10%,black_90%,transparent_98%)]"
+            />
+          </div>
         </div>
       </section>
 
