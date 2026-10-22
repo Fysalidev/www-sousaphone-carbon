@@ -83,14 +83,15 @@ export function SeparateurSection() {
 // (max-w-3xl) ; le titre porte l'ancre aria référencée par `titreAria`.
 // Rythme vertical partagé avec le séparateur (py-12 / py-16) : chaque
 // transition section→logo→section est symétrique, sans empilement
-// des paddings. Le contenu passe par <Revelation> : il apparaît en
-// fondu à l'arrivée dans la fenêtre (désactivé avec
-// prefers-reduced-motion, visible sans JavaScript).
-export function SectionEditoriale({ titreAria, children }) {
+// des paddings. `classe` écarte la mesure pour une section donnée
+// (ex. padding vertical élargi de la clôture). Le contenu passe par
+// <Revelation> : il apparaît en fondu à l'arrivée dans la fenêtre
+// (désactivé avec prefers-reduced-motion, visible sans JavaScript).
+export function SectionEditoriale({ titreAria, children, classe = "" }) {
   return (
     <section
       aria-labelledby={titreAria}
-      className="px-6 py-12 min-[768px]:py-16"
+      className={`px-6 py-12 min-[768px]:py-16 ${classe}`}
     >
       <div className="mx-auto max-w-3xl">
         <Revelation>{children}</Revelation>

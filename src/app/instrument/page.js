@@ -415,8 +415,13 @@ export default function InstrumentPage() {
 
       {/* Pièce unique : la promesse sur mesure, refermée par l'appel
           à l'action « Nous contacter » — dernière section de la page,
-          le footer prend le relais. */}
-      <SectionEditoriale titreAria="titre-piece-unique">
+          le footer prend le relais. Rythme élargi (py-16 / py-24) :
+          la clôture respire davantage avant la photo de fond du
+          footer. */}
+      <SectionEditoriale
+        titreAria="titre-piece-unique"
+        classe="py-16 min-[768px]:py-24"
+      >
         <EtiquetteDoree>PIÈCE UNIQUE — SÉRIE CARBONE</EtiquetteDoree>
         <h2
           id="titre-piece-unique"
