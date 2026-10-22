@@ -251,9 +251,9 @@ export default function InstrumentPage() {
       </section>
 
       {/* Chiffres clés commentés, mobile uniquement (sur desktop ils
-          vivent dans la colonne texte du hero) : les trois mêmes stats
-          que l'accueil (-40 %, 100 %, 100 %) avec ici une phrase
-          d'explication sous chacune, empilées et centrées. */}
+          vivent dans la colonne texte du hero) : les trois chiffres
+          du hero avec ici une phrase d'explication sous chacun,
+          empilés et centrés. */}
       <section
         aria-label="Chiffres clés"
         className="px-6 py-12 min-[768px]:hidden"

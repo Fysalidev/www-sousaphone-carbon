@@ -151,19 +151,19 @@ const ATTRIBUTS = [
 const EQUIPE = [
   {
     nom: "Guillaume COSTE",
-    role: "ARTISAN CREATEUR | CONCEPTION - FABRICATION",
+    role: "ARTISAN CRÉATEUR | CONCEPTION - FABRICATION",
   },
   {
     nom: "François COSTE",
-    role: "ARTISAN CREATEUR | CONCEPTION - FABRICATION - VENTE",
+    role: "ARTISAN CRÉATEUR | CONCEPTION - FABRICATION - VENTE",
   },
   {
     nom: "Jérome WISS",
-    role: "ARTISAN CREATEUR | CONCEPTION - FABRICATION",
+    role: "ARTISAN CRÉATEUR | CONCEPTION - FABRICATION",
   },
   {
     nom: "Christian BOSC",
-    role: "ARTISAN CREATEUR | CONCEPTION - FABRICATION",
+    role: "ARTISAN CRÉATEUR | CONCEPTION - FABRICATION",
   },
   {
     nom: "Victor HEGE",
