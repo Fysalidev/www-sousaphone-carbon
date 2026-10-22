@@ -135,7 +135,7 @@ export default function InstrumentPage() {
                 dédiée ci-dessous prend le relais. */}
             <dl
               aria-label="Chiffres clés"
-              className="hero-entree mt-10 hidden w-full grid-cols-1 gap-6 min-[768px]:grid min-[1280px]:grid-cols-3 min-[1280px]:gap-10 [animation-delay:750ms]"
+              className="instrument-stats hero-entree mt-10 hidden w-full grid-cols-1 gap-6 min-[768px]:grid min-[1280px]:grid-cols-3 min-[1280px]:gap-10 [animation-delay:750ms]"
             >
               {STATS.map((stat) => (
                 <StatCommentee

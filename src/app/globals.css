@@ -426,30 +426,40 @@ body {
   }
 }
 /* Sous 80rem (1280px), la colonne texte est trop étroite pour trois
-   colonnes commentées : les stats deviennent des lignes éditoriales
-   — valeur à gauche, légende et phrase empilées à droite — si bien
-   que toute l'information reste visible à toutes les largeurs. À
-   partir de 80rem, le gabarit trois colonnes reprend la main.
-   Hors @layer : prime sur les utilitaires. */
+   colonnes commentées : les stats deviennent des lignes éditoriales —
+   les trois valeurs s'alignent dans une colonne unique (max-content),
+   légende et phrase empilées à droite, toutes alignées entre elles ;
+   toute l'information reste visible à toutes les largeurs. À partir
+   de 80rem, le gabarit trois colonnes reprend la main. Hors @layer :
+   prime sur les utilitaires. */
 @media (min-width: 48rem) and (max-width: 79.99rem) {
-  .instrument-hero .instrument-stat {
+  .instrument-hero .instrument-stats {
     display: grid;
-    grid-template-columns: auto minmax(0, 1fr);
+    grid-template-columns: max-content minmax(0, 1fr);
     column-gap: 1.25rem;
+    row-gap: 0;
     align-items: baseline;
+  }
+  /* Chaque stat ouvre sa grille sur la dl (display: contents) :
+     dt/dd/p deviennent des items directs, placés par leurs classes
+     order-* — la valeur en colonne 1, légende et phrase en colonne 2.
+     Le margin-top des valeurs espace les lignes entre stats. */
+  .instrument-hero .instrument-stat {
+    display: contents;
   }
   .instrument-hero .instrument-stat dd {
     grid-column: 1;
-    grid-row: 1;
+    margin-top: 1.25rem;
+  }
+  .instrument-hero .instrument-stat:first-child dd {
+    margin-top: 0;
   }
   .instrument-hero .instrument-stat dt {
     grid-column: 2;
-    grid-row: 1;
     margin-top: 0;
   }
   .instrument-hero .instrument-stat-description {
     grid-column: 2;
-    grid-row: 2;
     margin-top: 0.25rem;
   }
 }
