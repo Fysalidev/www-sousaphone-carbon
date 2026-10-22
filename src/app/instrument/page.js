@@ -101,8 +101,9 @@ export default function InstrumentPage() {
           gauche et l'instrument à droite. La section occupe au minimum
           la hauteur d'écran restante après le header ; sur mobile la
           photo, flex-1, absorbe l'espace vertical disponible. Même
-          fond dégradé doré haut/bas et mêmes photos (mix-blend-screen,
-          masque limité aux bords) que le hero d'accueil. */}
+          fond dégradé doré haut/bas et même traitement de photo
+          (mix-blend-screen, masque limité aux bords) que le hero
+          d'accueil. */}
       <section className="flex flex-col bg-linear-to-b from-[#C9A96A]/10 via-transparent to-[#C9A96A]/10 min-h-[calc(100svh-var(--hauteur-barre-header))]">
         <div className="flex w-full flex-1 flex-col items-center px-6 pt-12 pb-10 text-center min-[768px]:mx-auto min-[768px]:grid min-[768px]:max-w-[90rem] min-[768px]:grid-cols-[minmax(0,3fr)_minmax(0,2fr)] min-[768px]:items-center min-[768px]:gap-10 min-[768px]:pt-0 min-[768px]:text-left">
           <div className="flex flex-col items-center min-[768px]:items-start">
@@ -121,28 +122,21 @@ export default function InstrumentPage() {
               prédécesseurs.
             </p>
           </div>
-          {/* Photos de l'instrument, mêmes fichiers et même traitement
-              que le hero d'accueil : hero-mobile.webp (600×1141) en
-              empilé mobile, hero-desktop.webp (856×1141) en colonne
-              desktop, object-contain pour ne jamais déformer
-              l'instrument et ratio 3/4 sur desktop pour le tenir en
-              hauteur. */}
+          {/* Photo de l'instrument : galerie-05.webp (740×1038) sert
+              les deux dispositions — empilé mobile et colonne
+              desktop —, avec le même traitement que le hero
+              d'accueil : object-contain pour ne jamais déformer
+              l'instrument, mix-blend-screen pour fondre dans le fond
+              doré, masque limité aux bords haut/bas, ratio 3/4 sur
+              desktop pour le tenir en hauteur. */}
           <div className="hero-entree relative mt-6 min-h-64 flex-1 w-full [animation-delay:600ms] min-[768px]:mt-0 min-[768px]:aspect-[3/4] min-[768px]:max-h-[48rem] min-[768px]:flex-none">
             <Image
-              src="/photos/hero-mobile.webp"
-              alt="Sousaphone sur fond sombre"
+              src="/galerie/galerie-05.webp"
+              alt="Photographie du Sousaphone Carbon"
               fill
               priority
-              sizes="calc(100vw - 3rem)"
-              className="object-contain object-center mix-blend-screen mask-[linear-gradient(to_bottom,transparent_2%,black_10%,black_90%,transparent_98%)] min-[768px]:hidden"
-            />
-            <Image
-              src="/photos/hero-desktop.webp"
-              alt="Sousaphone sur fond sombre"
-              fill
-              priority
-              sizes="40vw"
-              className="hidden object-contain object-center mix-blend-screen mask-[linear-gradient(to_bottom,transparent_2%,black_10%,black_90%,transparent_98%)] min-[768px]:block"
+              sizes="(min-width: 768px) 40vw, calc(100vw - 3rem)"
+              className="object-contain object-center mix-blend-screen mask-[linear-gradient(to_bottom,transparent_2%,black_10%,black_90%,transparent_98%)]"
             />
           </div>
         </div>
