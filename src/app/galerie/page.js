@@ -17,10 +17,8 @@ export const metadata = {
 // Photos câblées, par numéro d'emplacement : chaque dépôt se câble
 // ici, ex. :
 //   "06": { src: "/galerie/galerie-06.webp", alt: "…" }
-// Le bandeau d'ouverture (00) est en place ; les autres emplacements
-// restent en placeholder. Les dépôts en attente reprennent leur
-// numéro d'origine une fois le préfixe « XX - » retiré (XX-01 →
-// galerie-01.webp sur l'emplacement 01, etc.).
+// En place : bandeau (00), grande d'ouverture (01-x) et petites
+// 03–05. Les dépôts suivants se câblent au fil de l'eau.
 const PHOTOS = {
   // Bandeau d'ouverture : galerie-00.webp (2304×852, pile la
   // consigne de l'empreinte). L'alt décrira la scène réelle à la
@@ -29,16 +27,13 @@ const PHOTOS = {
     src: "/galerie/galerie-00.webp",
     alt: "Photographie du Sousaphone Carbon",
   },
-  // Emplacement 01 (moyenne 4/5) : galerie-01.webp (1130×1410, pile
-  // la consigne). L'alt décrira la scène réelle à la relecture.
-  "01": {
-    src: "/galerie/galerie-01.webp",
-    alt: "Photographie du Sousaphone Carbon",
-  },
-  // Emplacement 02 (moyenne 4/5) : galerie-02.webp (1130×1410, pile
-  // la consigne). L'alt décrira la scène réelle à la relecture.
-  "02": {
-    src: "/galerie/galerie-02.webp",
+  // Grande d'ouverture hors numérotation : galerie-01-X.webp
+  // (2028×1141, déposée telle quelle — l'empreinte 16/10 la recadre
+  // par object-cover). Un source au gabarit 2304×1440 gagnerait en
+  // netteté à pleine colonne. L'alt décrira la scène réelle à la
+  // relecture.
+  "01-x": {
+    src: "/galerie/galerie-01-X.webp",
     alt: "Photographie du Sousaphone Carbon",
   },
   // Emplacements 03–05 (petites 3/4) : exports WebP q85 depuis les
@@ -67,19 +62,18 @@ const PHOTO_HERO = {
 };
 
 // ——— Trame alignée ———
-// La série ouvre sur un bandeau panoramique pleine colonne (numéro
-// 00, hors numérotation des photos de la série), puis se lit en
-// lignes alignées, motif 2–3–1 répété : une ligne de 2 (moyennes),
-// une ligne de 3 (petites), une grande pleine colonne — cinq motifs
-// complets, une ligne de 2 puis la grande de clôture (33 photos).
-// Les numéros de photo suivent l'ordre de lecture ; les fichiers
-// déposés sont renumérotés pour que chaque photo tombe sur une
-// empreinte à son ratio natif (06 et 12 : larges 16/10 des grandes,
-// 01–02 / 07–08 / 13–14 : portraits 4/5 des lignes de 2, 03–05 /
-// 09–11 : portraits 3/4 des lignes de 3).
+// La série ouvre sur deux images pleine colonne hors numérotation :
+// le bandeau panoramique (00) puis la grande d'ouverture (01-x,
+// galerie-01-X.webp). La série numérotée reprend ensuite le motif
+// 3–1–2 répété : une ligne de 3 (petites), une grande pleine
+// colonne, une ligne de 2 (moyennes) — cinq motifs complets, puis
+// la grande de clôture (31 photos, numéros 03–33). Les numéros de
+// photo suivent l'ordre de lecture ; les fichiers déposés portent
+// le numéro de leur emplacement (06 et 12 : larges 16/10 des
+// grandes, 03–05 / 09–11 : portraits 3/4 des lignes de 3, etc.).
 const LIGNES = [
   ["bandeau"],
-  ["moyenne", "moyenne"],
+  ["grande-x"],
   ["petite", "petite", "petite"],
   ["grande"],
   ["moyenne", "moyenne"],
@@ -120,6 +114,14 @@ const EMPREINTES = {
     ratio: "2304/852",
     sizes: "(min-width: 72rem) 1152px, 100vw",
   },
+  // Grande d'ouverture hors numérotation (01-x) : même gabarit que
+  // les grandes de la série.
+  "grande-x": {
+    classes: "aspect-[16/10]",
+    conseils: "≈ 2304 × 1440 px",
+    ratio: "16/10",
+    sizes: "(min-width: 72rem) 1152px, 100vw",
+  },
   grande: {
     classes: "aspect-[16/10]",
     conseils: "≈ 2304 × 1440 px",
@@ -141,14 +143,20 @@ const EMPREINTES = {
 };
 
 // Emplacements numérotés dans l'ordre de lecture de LIGNES — le
-// bandeau d'ouverture garde le 00, hors numérotation de la série
-// (01–33) : les numéros d'origine des fichiers déposés restent
-// valables.
-let compteur = 0;
+// bandeau garde le 00, la grande d'ouverture le 01-x, tous deux
+// hors numérotation de la série (03–33) : la grande-x occupe la
+// place des anciennes moyennes 01–02 et la numérotation reprend
+// à 03, les numéros des photos déposées restent valables.
+let compteur = 2;
 const LIGNES_NUMEROTEES = LIGNES.map((ligne) =>
   ligne.map((taille) => ({
     taille,
-    numero: taille === "bandeau" ? "00" : String(++compteur).padStart(2, "0"),
+    numero:
+      taille === "bandeau"
+        ? "00"
+        : taille === "grande-x"
+          ? "01-x"
+          : String(++compteur).padStart(2, "0"),
   })),
 );
 
@@ -289,13 +297,14 @@ export default function GaleriePage() {
       </section>
       {/* Trame de la galerie : chaque ligne de LIGNES se rend dans sa
           propre grille, contenue (px-6, max-w-6xl) — bandeau
-          panoramique d'ouverture en ligne 1, lignes de 2 et de 3
-          alignées, grandes pleine colonne aux lignes 4, 7, 10, 13,
-          16 et 18 (clôture) ; sur mobile, chaque trio se ferme
-          en 2×2 par la carte de marque. Les photos passent par
-          l'optimiseur d'images (next/image, fill + sizes de
-          l'empreinte) ; emplacement vide : placeholder pointillé
-          avec le fichier attendu et son ratio. */}
+          panoramique d'ouverture en ligne 1, grande d'ouverture en
+          ligne 2, puis lignes de 3 et de 2 alignées, grandes pleine
+          colonne aux lignes 4, 7, 10, 13, 16 et 18 (clôture) ; sur
+          mobile, chaque trio se ferme en 2×2 par la carte de
+          marque. Les photos passent par l'optimiseur d'images
+          (next/image, fill + sizes de l'empreinte) ; emplacement
+          vide : placeholder pointillé avec le fichier attendu et
+          son ratio. */}
       <section
         aria-label="Photos"
         className="px-6 pt-12 pb-20 min-[768px]:pt-16 min-[768px]:pb-28"
