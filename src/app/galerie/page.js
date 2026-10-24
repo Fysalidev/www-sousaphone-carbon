@@ -1,10 +1,5 @@
 import Image from "next/image";
 import Revelation from "@/components/Revelation";
-import {
-  EtiquetteDoree,
-  ParagrapheSection,
-  SectionEditoriale,
-} from "@/components/SectionsEditoriales";
 
 export const metadata = {
   title: "Galerie",
@@ -231,19 +226,46 @@ function EmplacementGalerie({ taille, numero, decalage = 0 }) {
 export default function GaleriePage() {
   return (
     <main className="flex flex-col bg-black">
-      <SectionEditoriale titreAria="titre-galerie" bandeau>
-        <EtiquetteDoree>GALERIE</EtiquetteDoree>
+      {/* Hero galerie : même mécanique que les heroes d'accueil et
+          d'instrument — fond dégradé doré haut/bas, cascade
+          hero-entree à l'arrivée, accroche et titre Montserrat sur
+          les rampes continues de globals.css (hero-accroche,
+          hero-titre, hero-promesse — aucune taille ici). Compacité
+          assumée : pas de hauteur d'écran verrouillée, la galerie
+          est une page de défilement et la série doit rester proche.
+          La photo d'ouverture (galerie-09.webp, 2304×1440, pile 16/10
+          — aucun recadrage) occupe la colonne de la grille
+          (max-w-6xl) et annonce son langage : carte arrondie,
+          object-cover, brightness-90. Elle réapparaît plus bas à
+          son emplacement (09) — même licence que le hero instrument
+          (galerie-05) et les vignettes d'accueil. */}
+      <section
+        aria-labelledby="titre-galerie"
+        className="hero flex flex-col bg-linear-to-b from-[#C9A96A]/10 via-transparent to-[#C9A96A]/10 px-6 pt-12 pb-12 text-center min-[768px]:pt-16 min-[768px]:pb-16"
+      >
+        <p className="hero-entree hero-accroche font-bold tracking-[0.25em] text-[#C9A96A] [animation-delay:150ms]">
+          GALERIE
+        </p>
         <h1
           id="titre-galerie"
-          className="titre-section font-serif-carte mt-4 font-semibold leading-tight text-white"
+          className="hero-entree hero-titre mx-auto mt-4 max-w-3xl font-sans font-bold leading-[1.125] text-white [animation-delay:300ms]"
         >
           L&rsquo;instrument en images.
         </h1>
-        <div aria-hidden="true" className="mt-6 h-px w-16 bg-[#C9A96A]" />
-        <ParagrapheSection>
+        <p className="hero-entree hero-promesse mx-auto mt-6 text-base leading-relaxed text-stone-200 [animation-delay:450ms]">
           L&rsquo;atelier, l&rsquo;instrument et les musiciens en situation.
-        </ParagrapheSection>
-      </SectionEditoriale>
+        </p>
+        <div className="hero-entree relative mx-auto mt-10 w-full max-w-6xl aspect-[16/10] overflow-hidden rounded-2xl min-[768px]:mt-12 [animation-delay:600ms]">
+          <Image
+            src="/galerie/galerie-09.webp"
+            alt="Photographie du Sousaphone Carbon"
+            fill
+            priority
+            sizes="(min-width: 72rem) 1152px, calc(100vw - 3rem)"
+            className="object-cover brightness-90"
+          />
+        </div>
+      </section>
       {/* Trame de la galerie : chaque ligne de LIGNES se rend dans sa
           propre grille, contenue (px-6, max-w-6xl) ; les décalages
           verticaux — desktop uniquement — font respirer la série en
@@ -251,7 +273,10 @@ export default function GaleriePage() {
           pleine colonne. Les photos passent par l'optimiseur d'images
           (next/image, fill + sizes de l'empreinte) ; emplacement vide :
           placeholder pointillé avec le fichier attendu et son ratio. */}
-      <section aria-label="Photos" className="px-6 pb-20 min-[768px]:pb-28">
+      <section
+        aria-label="Photos"
+        className="px-6 pt-12 pb-20 min-[768px]:pt-16 min-[768px]:pb-28"
+      >
         <Revelation>
           <div className="mx-auto flex max-w-6xl flex-col gap-6">
             {LIGNES_NUMEROTEES.map((ligne, indexLigne) => (
