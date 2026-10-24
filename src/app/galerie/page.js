@@ -14,14 +14,37 @@ export const metadata = {
 // Emplacement vide : placeholder pointillé avec le fichier attendu
 // et son ratio.
 
-// Photos câblées, par numéro d'emplacement : la trame s'évalue
-// pour l'instant sur ses seuls placeholders — la table est vide.
-// Chaque dépôt se câble ici, ex. :
-//   "06": { src: "/galerie/galerie-06.webp", alt: "…" }
-// Les fichiers déjà déposés (01–14) portent chacun le ratio de
-// leur emplacement : les rebrancher ne demande que l'entrée
-// src/alt correspondante.
-const PHOTOS = {};
+// Photos câblées, par numéro d'emplacement : chaque dépôt se câble
+// ici, ex. :
+//   "01": { src: "/galerie/galerie-01.webp", alt: "…" }
+// En place : bandeau (00) et images carrées 01–02. Les emplacements
+// suivants restent en placeholder, chaque source définitive se
+// câble ici au fil de la validation.
+const PHOTOS = {
+  // Bandeau d'ouverture : galerie-00.webp (2304×852, pile la
+  // consigne de l'empreinte). L'alt décrira la scène réelle à la
+  // relecture.
+  "00": {
+    src: "/galerie/galerie-00.webp",
+    alt: "Photographie du Sousaphone Carbon",
+  },
+  // Emplacement 01 (carré) : galerie-01.webp, exportée en WebP q85
+  // depuis sources/galerie-01.jpg (3264×3264, carré — affichage
+  // entier, sans recadrage). L'alt décrira la scène réelle à la
+  // relecture.
+  "01": {
+    src: "/galerie/galerie-01.webp",
+    alt: "Photographie du Sousaphone Carbon",
+  },
+  // Emplacement 02 (carré) : galerie-02.webp, exportée en WebP q85
+  // depuis sources/galerie-02.jpg (3264×3264, carré — affichage
+  // entier, sans recadrage). L'alt décrira la scène réelle à la
+  // relecture.
+  "02": {
+    src: "/galerie/galerie-02.webp",
+    alt: "Photographie du Sousaphone Carbon",
+  },
+};
 
 // Photo d'ouverture du hero : dédiée au hero, hors numérotation de
 // la trame — déposée dans public/galerie/ (2304×1440, pile le 16/10
@@ -32,76 +55,43 @@ const PHOTO_HERO = {
 };
 
 // ——— Trame alignée ———
-// La série se lit en lignes alignées, motif 2–3–1 répété : une ligne
-// de 2 (moyennes), une ligne de 3 (petites), une grande pleine
-// colonne — cinq motifs complets, une ligne de 2 puis la grande de
-// clôture (33 photos). Les numéros de photo suivent l'ordre de
-// lecture ; les fichiers déposés sont renumérotés pour que chaque
-// photo tombe sur une empreinte à son ratio natif (06 et 12 :
-// larges 16/10 des grandes, 01–02 / 07–08 / 13–14 : portraits 4/5
-// des lignes de 2, 03–05 / 09–11 : portraits 3/4 des lignes de 3).
-const LIGNES = [
-  ["moyenne", "moyenne"],
-  ["petite", "petite", "petite"],
-  ["grande"],
-  ["moyenne", "moyenne"],
-  ["petite", "petite", "petite"],
-  ["grande"],
-  ["moyenne", "moyenne"],
-  ["petite", "petite", "petite"],
-  ["grande"],
-  ["moyenne", "moyenne"],
-  ["petite", "petite", "petite"],
-  ["grande"],
-  ["moyenne", "moyenne"],
-  ["petite", "petite", "petite"],
-  ["grande"],
-  ["moyenne", "moyenne"],
-  ["grande"],
-];
-
-// Colonnes de la ligne selon son remplissage : les lignes de 2 et
-// de 3 vivent en 2 colonnes sur mobile, la ligne de 3 passe à 3
-// colonnes à partir de 768px — sur mobile sa quatrième cellule
-// (libérée par l'enveloppement en 2×2) reçoit la carte de marque
-// ci-dessous.
-const GRILLES_LIGNE = {
-  1: "grid-cols-1",
-  2: "grid-cols-2",
-  3: "grid-cols-2 md:grid-cols-3",
-};
+// La galerie se construit ligne par ligne, au fil des dépôts : le
+// bandeau panoramique d'ouverture (00) puis des images carrées
+// pleine colonne, une par ligne — les portraits et les paysages
+// s'y fondent par object-cover (recadrage centré), chaque dépôt
+// vise la consigne carrée, 2304×2304. En place aujourd'hui : le
+// bandeau, les photos 01–02 puis un placeholder (03) ; chaque dépôt
+// suivant ajoute sa ligne carrée.
+const LIGNES = [["bandeau"], ["grande"], ["grande"], ["grande"]];
 
 // Empreinte de chaque taille : ratio d'affichage — l'object-cover
 // cadre la photo dans son emplacement —, dimensions conseillées
 // pour la source (rétina 2×, la galerie s'affichant au maximum à
 // 1152px de large) et sizes pour l'optimiseur d'images.
 const EMPREINTES = {
-  grande: {
-    classes: "aspect-[16/10]",
-    conseils: "≈ 2304 × 1440 px",
-    ratio: "16/10",
+  bandeau: {
+    classes: "aspect-[2304/852]",
+    conseils: "≈ 2304 × 852 px",
+    ratio: "2304/852",
     sizes: "(min-width: 72rem) 1152px, 100vw",
   },
-  moyenne: {
-    classes: "aspect-[4/5]",
-    conseils: "≈ 1130 × 1410 px",
-    ratio: "4/5",
-    sizes: "(min-width: 48rem) 552px, 50vw",
-  },
-  petite: {
-    classes: "aspect-[3/4]",
-    conseils: "≈ 740 × 985 px",
-    ratio: "3/4",
-    sizes: "(min-width: 48rem) 368px, 50vw",
+  // Images de la série : carrées, pleine colonne.
+  grande: {
+    classes: "aspect-square",
+    conseils: "≈ 2304 × 2304 px",
+    ratio: "1/1",
+    sizes: "(min-width: 72rem) 1152px, 100vw",
   },
 };
 
-// Emplacements numérotés dans l'ordre de lecture de LIGNES.
+// Emplacements numérotés dans l'ordre de lecture de LIGNES — le
+// bandeau garde le 00, hors numérotation ; la série numérotée
+// commence à 01.
 let compteur = 0;
 const LIGNES_NUMEROTEES = LIGNES.map((ligne) =>
   ligne.map((taille) => ({
     taille,
-    numero: String(++compteur).padStart(2, "0"),
+    numero: taille === "bandeau" ? "00" : String(++compteur).padStart(2, "0"),
   })),
 );
 
@@ -141,31 +131,6 @@ function EmplacementGalerie({ taille, numero }) {
         alt&nbsp;: décrire la scène en 10–20 mots
       </p>
     </figure>
-  );
-}
-
-// Carte de marque des lignes de 3 : sur mobile, le trio
-// s'enveloppe en 2×2 et la carte ferme la grille à la place de la
-// cellule vide — étiquette dorée et phrase courte, même langage
-// que les cartes de contenu (bord or, coins adoucis). Sans ratio :
-// la cellule s'étire à la hauteur de la photo voisine. Desktop :
-// masquée (md:hidden), la rangée de 3 est déjà complète.
-// Répétée à chaque trio en défilement mobile, elle est purement
-// décorative : aria-hidden pour ne pas marteler la marque aux
-// lecteurs d'écran.
-function CarteMarque() {
-  return (
-    <div
-      aria-hidden="true"
-      className="flex flex-col items-center justify-center gap-2 rounded-2xl border border-[#C9A96A]/40 p-4 text-center md:hidden"
-    >
-      <p className="text-xs max-[399px]:tracking-widest font-bold tracking-[0.25em] text-[#C9A96A]">
-        SOUSAPHONE CARBON
-      </p>
-      <p className="text-[10px] min-[768px]:text-xs leading-relaxed text-stone-300">
-        Pièce unique artisanale en fibre de carbone.
-      </p>
-    </div>
   );
 }
 
@@ -215,7 +180,7 @@ export default function GaleriePage() {
           ) : (
             <figure className="flex aspect-[16/10] flex-col items-center justify-center gap-1 rounded-2xl border border-dashed border-[#C9A96A]/30 bg-stone-900 p-4 text-center">
               <figcaption className="text-xs min-[768px]:text-sm font-bold text-[#C9A96A]">
-                photos/hero-galerie.webp
+                galerie/hero-galerie.webp
               </figcaption>
               <p className="text-[10px] min-[768px]:text-xs text-stone-300">
                 16/10
@@ -230,14 +195,13 @@ export default function GaleriePage() {
           )}
         </div>
       </section>
-      {/* Trame de la galerie : chaque ligne de LIGNES se rend dans sa
-          propre grille, contenue (px-6, max-w-6xl) — lignes de 2 et
-          de 3 alignées, grandes pleine colonne aux lignes 3, 6, 9,
-          12, 15 et 17 (clôture) ; sur mobile, chaque trio se ferme
-          en 2×2 par la carte de marque. Les photos passent par
-          l'optimiseur d'images (next/image, fill + sizes de
-          l'empreinte) ; emplacement vide : placeholder pointillé
-          avec le fichier attendu et son ratio. */}
+      {/* Trame de la galerie : chaque ligne de LIGNES se rend dans
+          sa propre grille, contenue (px-6, max-w-6xl) — bandeau en
+          ligne 1, puis les lignes s'ajoutent au fil des dépôts,
+          une image carrée pleine colonne par photo. Les photos
+          passent par l'optimiseur d'images (next/image, fill +
+          sizes de l'empreinte) ; emplacement vide : placeholder
+          pointillé avec le fichier attendu et son ratio. */}
       <section
         aria-label="Photos"
         className="px-6 pt-12 pb-20 min-[768px]:pt-16 min-[768px]:pb-28"
@@ -245,10 +209,7 @@ export default function GaleriePage() {
         <Revelation>
           <div className="mx-auto flex max-w-6xl flex-col gap-6">
             {LIGNES_NUMEROTEES.map((ligne, indexLigne) => (
-              <div
-                key={indexLigne}
-                className={`grid gap-6 ${GRILLES_LIGNE[ligne.length]}`}
-              >
+              <div key={indexLigne} className="grid grid-cols-1 gap-6">
                 {ligne.map(({ taille, numero }) => (
                   <EmplacementGalerie
                     key={numero}
@@ -256,9 +217,6 @@ export default function GaleriePage() {
                     numero={numero}
                   />
                 ))}
-                {/* Ligne de 3 : la carte de marque ferme la grille
-                    mobile en 2×2 (cellule vide de l'enveloppement). */}
-                {ligne.length === 3 && <CarteMarque />}
               </div>
             ))}
           </div>
