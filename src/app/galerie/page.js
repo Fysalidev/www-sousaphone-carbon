@@ -199,17 +199,27 @@ function EmplacementGalerie({ taille, numero }) {
 // masquée (md:hidden), la rangée de 3 est déjà complète.
 // Répétée à chaque trio en défilement mobile, elle est purement
 // décorative : aria-hidden pour ne pas marteler la marque aux
-// lecteurs d'écran.
+// lecteurs d'écran. Fond photo : galerie-02.webp, assombrie
+// (brightness-50) sous un voile noir pour garder l'étiquette et
+// la phrase lisibles — alt vide, l'image est décorative.
 function CarteMarque() {
   return (
     <div
       aria-hidden="true"
-      className="flex flex-col items-center justify-center gap-2 rounded-2xl border border-[#C9A96A]/40 p-4 text-center md:hidden"
+      className="relative flex flex-col items-center justify-center gap-2 overflow-hidden rounded-2xl border border-[#C9A96A]/40 p-4 text-center md:hidden"
     >
-      <p className="text-xs max-[399px]:tracking-widest font-bold tracking-[0.25em] text-[#C9A96A]">
+      <Image
+        src="/galerie/galerie-02.webp"
+        alt=""
+        fill
+        sizes="50vw"
+        className="brightness-50 object-cover object-center"
+      />
+      <div className="absolute inset-0 bg-black/30" />
+      <p className="relative text-xs max-[399px]:tracking-widest font-bold tracking-[0.25em] text-[#C9A96A]">
         SOUSAPHONE CARBON
       </p>
-      <p className="text-[10px] min-[768px]:text-xs leading-relaxed text-stone-300">
+      <p className="relative text-[10px] min-[768px]:text-xs leading-relaxed text-stone-300">
         Pièce unique artisanale en fibre de carbone.
       </p>
     </div>
