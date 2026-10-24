@@ -9,41 +9,43 @@
 // Nombre d'emplacements de la galerie.
 export const NOMBRE_PHOTOS = 33;
 
-// Rythme de la composition, répété sur toute la série : une grande
-// pleine largeur, une ligne de 2 (moyennes), une ligne de 3
-// (petites), de nouveau 2 — 33 photos = 4 cycles + la grande de
-// clôture.
+// Trame alignée de la composition, motif 2–3–1 répété : une ligne
+// de 2 (moyennes), une ligne de 3 (petites), une grande pleine
+// colonne — cinq motifs complets, une ligne de 2 puis la grande de
+// clôture (33 photos). Les numéros de photo suivent l'ordre de
+// lecture du motif déroulé (moyennes 01–02, petites 03–05, grande
+// 06, puis 07...).
 export const CYCLE = [
+  "moyenne",
+  "moyenne",
+  "petite",
+  "petite",
+  "petite",
   "grande",
-  "moyenne",
-  "moyenne",
-  "petite",
-  "petite",
-  "petite",
-  "moyenne",
-  "moyenne",
 ];
 
-// Empreinte de chaque taille : colonnes occupées (grille de 2
-// colonnes en mobile, 6 au-delà de 768px), ratio d'affichage —
-// l'object-cover cadre la photo dans son emplacement — dimensions
-// conseillées pour la source (rétina 2×, la grille s'affichant au
-// maximum à 1152px) et sizes pour l'optimiseur.
+// Empreinte de chaque taille : ratio d'affichage — l'object-cover
+// cadre la photo dans son emplacement —, dimensions conseillées
+// pour la source (rétina 2×, la galerie s'affichant au maximum à
+// 1152px de large) et sizes pour l'optimiseur d'images. Les
+// colonnes ne vivent plus ici : la page galerie rend chaque ligne
+// dans sa propre grille (2 colonnes, 3 à partir de 768px, la
+// grande pleine colonne).
 export const EMPREINTES = {
   grande: {
-    classes: "col-span-2 md:col-span-6 aspect-[16/10]",
+    classes: "aspect-[16/10]",
     conseils: "≈ 2304 × 1440 px",
     ratio: "16/10",
     sizes: "(min-width: 72rem) 1152px, 100vw",
   },
   moyenne: {
-    classes: "col-span-1 md:col-span-3 aspect-[4/5]",
+    classes: "aspect-[4/5]",
     conseils: "≈ 1130 × 1410 px",
     ratio: "4/5",
     sizes: "(min-width: 48rem) 552px, 50vw",
   },
   petite: {
-    classes: "col-span-1 md:col-span-2 aspect-[3/4]",
+    classes: "aspect-[3/4]",
     conseils: "≈ 740 × 985 px",
     ratio: "3/4",
     sizes: "(min-width: 48rem) 368px, 50vw",
@@ -54,9 +56,9 @@ export const EMPREINTES = {
 export const PHOTOS = {
   "01": {
     src: "/galerie/galerie-01.webp",
-    alt: "Sousaphone en laiton de profil sur fond noir, pavillon doré au premier plan",
-    largeur: 2028,
-    hauteur: 1141,
+    alt: "Photographie du Sousaphone Carbon",
+    largeur: 1130,
+    hauteur: 1410,
   },
   "02": {
     src: "/galerie/galerie-02.webp",
@@ -67,7 +69,7 @@ export const PHOTOS = {
   "03": {
     src: "/galerie/galerie-03.webp",
     alt: "Photographie du Sousaphone Carbon",
-    largeur: 1130,
-    hauteur: 1410,
+    largeur: 740,
+    hauteur: 985,
   },
 };
