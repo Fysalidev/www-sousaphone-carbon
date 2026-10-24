@@ -5,15 +5,16 @@
 // bascule alors du placeholder à l'image. La page /galerie garde
 // sa propre trame dans src/app/galerie/page.js.
 
-// Nombre d'emplacements de la galerie.
-export const NOMBRE_PHOTOS = 34;
+// Nombre d'emplacements numérotés de la galerie — le bandeau
+// d'ouverture (00) s'ajoute par-dessus, hors numérotation.
+export const NOMBRE_PHOTOS = 33;
 
-// Trame alignée de la composition, motif 2–3–1 répété : le bandeau
-// panoramique d'ouverture (01), puis une ligne de 2 (moyennes), une
-// ligne de 3 (petites), une grande pleine colonne — cinq motifs
-// complets, une ligne de 2 puis la grande de clôture. Les numéros
-// de photo suivent l'ordre de lecture du motif déroulé (moyennes
-// 02–03, petites 04–06, grande 07, puis 08...).
+// Trame alignée de la composition, motif 2–3–1 répété : une ligne
+// de 2 (moyennes), une ligne de 3 (petites), une grande pleine
+// colonne — cinq motifs complets, une ligne de 2 puis la grande de
+// clôture (33 photos). Les numéros de photo suivent l'ordre de
+// lecture du motif déroulé (moyennes 01–02, petites 03–05, grande
+// 06, puis 07...) ; le bandeau d'ouverture (00) précède le motif.
 export const CYCLE = [
   "moyenne",
   "moyenne",
@@ -52,8 +53,7 @@ export const EMPREINTES = {
 };
 
 // Photos déposées, par numéro d'emplacement. Table vide en attendant
-// la renumérotation des dépôts « XX - galerie-NN.webp » (un cran de
-// plus : XX-01 → galerie-02.webp sur l'emplacement 02, etc.) ;
-// chaque renommage se rebranche ici, ex. :
-//   "02": { src: "/galerie/galerie-02.webp", alt: "…", largeur: 1130, hauteur: 1410 }
+// le retrait du préfixe « XX - » des dépôts (XX-01 → galerie-01.webp,
+// etc.) ; chaque renommage se rebranche ici, ex. :
+//   "01": { src: "/galerie/galerie-01.webp", alt: "…", largeur: 1130, hauteur: 1410 }
 export const PHOTOS = {};

@@ -172,10 +172,9 @@ const EQUIPE = [
 ];
 
 // Vignettes de la section galerie : les trois premiers emplacements
-// portraits de la galerie (02–04, le bandeau panoramique en 01 ne
-// se décline pas en vignette), lus dans DonneesGalerie.js — photo
-// déposée ou placeholder, même gabarit que la page galerie.
-const VIGNETTES = ["02", "03", "04"];
+// de la galerie (01–03), lus dans DonneesGalerie.js — photo déposée
+// ou placeholder, même gabarit que la page galerie.
+const VIGNETTES = ["01", "02", "03"];
 
 // ——— Page ———
 
