@@ -14,14 +14,22 @@ export const metadata = {
 // Emplacement vide : placeholder pointillé avec le fichier attendu
 // et son ratio.
 
-// Photos câblées, par numéro d'emplacement : la trame s'évalue
-// pour l'instant sur ses seuls placeholders — la table est vide.
-// Chaque dépôt se câble ici, ex. :
+// Photos câblées, par numéro d'emplacement : chaque dépôt se câble
+// ici, ex. :
 //   "06": { src: "/galerie/galerie-06.webp", alt: "…" }
-// Les fichiers déjà déposés (01–14) portent chacun le ratio de
-// leur emplacement : les rebrancher ne demande que l'entrée
-// src/alt correspondante.
-const PHOTOS = {};
+// Le bandeau d'ouverture (01) est en place ; les autres emplacements
+// restent en placeholder. Les dépôts en attente de renumérotation
+// vivent dans public/galerie/ sous le préfixe « XX - » : un cran de
+// plus (NN+1) les fait retomber sur leur empreinte native.
+const PHOTOS = {
+  // Bandeau d'ouverture : galerie-01.webp (2304×852, pile la
+  // consigne de l'empreinte). L'alt décrira la scène réelle à la
+  // relecture.
+  "01": {
+    src: "/galerie/galerie-01.webp",
+    alt: "Photographie du Sousaphone Carbon",
+  },
+};
 
 // Photo d'ouverture du hero : dédiée au hero, hors numérotation de
 // la trame — déposée dans public/galerie/ (2304×1440, pile le 16/10
@@ -33,15 +41,13 @@ const PHOTO_HERO = {
 
 // ——— Trame alignée ———
 // La série ouvre sur un bandeau panoramique pleine colonne (numéro
-// 00, hors numérotation des photos de la série), puis se lit en
-// lignes alignées, motif 2–3–1 répété : une ligne de 2 (moyennes),
-// une ligne de 3 (petites), une grande pleine colonne — cinq motifs
-// complets, une ligne de 2 puis la grande de clôture (33 photos).
-// Les numéros de photo suivent l'ordre de lecture ; les fichiers
-// déposés sont renumérotés pour que chaque photo tombe sur une
-// empreinte à son ratio natif (06 et 12 : larges 16/10 des grandes,
-// 01–02 / 07–08 / 13–14 : portraits 4/5 des lignes de 2, 03–05 /
-// 09–11 : portraits 3/4 des lignes de 3).
+// 01, première image de la série), puis se lit en lignes alignées,
+// motif 2–3–1 répété : une ligne de 2 (moyennes), une ligne de 3
+// (petites), une grande pleine colonne — cinq motifs complets, une
+// ligne de 2 puis la grande de clôture (34 photos au total). Les
+// numéros de photo suivent l'ordre de lecture : le bandeau en 01
+// décale la série d'un cran (moyennes 02–03 / 08–09 / 14–15,
+// petites 04–06 / 10–12, grandes 16/10 en 07 et 13, etc.).
 const LIGNES = [
   ["bandeau"],
   ["moyenne", "moyenne"],
@@ -105,14 +111,12 @@ const EMPREINTES = {
   },
 };
 
-// Emplacements numérotés dans l'ordre de lecture de LIGNES — le
-// bandeau d'ouverture garde le 00, hors numérotation de la série
-// (01–33) : les fichiers déjà déposés restent sur leur emplacement.
+// Emplacements numérotés dans l'ordre de lecture de LIGNES.
 let compteur = 0;
 const LIGNES_NUMEROTEES = LIGNES.map((ligne) =>
   ligne.map((taille) => ({
     taille,
-    numero: taille === "bandeau" ? "00" : String(++compteur).padStart(2, "0"),
+    numero: String(++compteur).padStart(2, "0"),
   })),
 );
 
