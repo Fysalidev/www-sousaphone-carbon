@@ -171,7 +171,7 @@ export default function GaleriePage() {
           Sousaphone Carbon
         </h1>
         <p className="hero-entree hero-promesse mx-auto mt-6 text-base leading-relaxed text-stone-200 [animation-delay:450ms]">
-          L&rsquo;atelier, l&rsquo;instrument et les musiciens en situation.
+          L&rsquo;atelier, l&rsquo;instrument, de l&rsquo;idée à la vie.
         </p>
         <div className="hero-entree mx-auto mt-10 w-full max-w-6xl min-[768px]:mt-12 [animation-delay:600ms]">
           {PHOTO_HERO ? (
