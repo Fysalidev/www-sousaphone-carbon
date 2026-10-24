@@ -24,9 +24,12 @@ export const metadata = {
 const PHOTOS = {};
 
 // Photo d'ouverture du hero : dédiée au hero, hors numérotation de
-// la trame — à déposer dans public/photos/ puis renseigner src/alt
-// ici, le placeholder bascule alors à l'image.
-const PHOTO_HERO = null; // ex. { src: "/photos/hero-galerie.webp", alt: "…" }
+// la trame — déposée dans public/galerie/ (2304×1440, pile le 16/10
+// de l'empreinte). L'alt décrira la scène réelle à la relecture.
+const PHOTO_HERO = {
+  src: "/galerie/hero-galerie.webp",
+  alt: "Photographie du Sousaphone Carbon",
+};
 
 // ——— Trame alignée ———
 // La série se lit en lignes alignées, motif 2–3–1 répété : une ligne
@@ -151,10 +154,9 @@ export default function GaleriePage() {
           est une page de défilement et la série doit rester proche.
           La photo d'ouverture est dédiée au hero — hors
           numérotation de la trame, comme hero-desktop.webp sur
-          l'accueil : elle attend photos/hero-galerie.webp
-          (empreinte grande 16/10) et vit dans la colonne de la
-          grille (max-w-6xl) ; le câblage se fait dans PHOTO_HERO
-          ci-dessus, le placeholder laisse alors place à l'image. */}
+          l'accueil : galerie/hero-galerie.webp (2304×1440, pile 16/10)
+          vit dans la colonne de la grille (max-w-6xl) ; elle se
+          câble dans PHOTO_HERO ci-dessus. */}
       <section
         aria-labelledby="titre-galerie"
         className="hero flex flex-col bg-linear-to-b from-[#C9A96A]/10 via-transparent to-[#C9A96A]/10 px-6 pt-12 pb-12 text-center min-[768px]:pt-16 min-[768px]:pb-16"
