@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Revelation from "@/components/Revelation";
 
 export const metadata = {
