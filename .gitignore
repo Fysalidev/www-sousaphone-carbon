@@ -24,6 +24,12 @@
 .DS_Store
 *.pem
 
+# sources photo (JPEG originaux, hors dépôt — export WebP via sharp)
+public/galerie/sources/
+
+# journal du serveur de dev local (lancé en arrière-plan)
+dev-serveur.log
+
 # debug
 npm-debug.log*
 yarn-debug.log*
