@@ -23,9 +23,12 @@ export const metadata = {
 // src/alt correspondante.
 const PHOTOS = {};
 
-// Photo d'ouverture du hero : dédiée au hero, hors numérotation de
-// la trame — déposée dans public/galerie/ (2304×1440, pile le 16/10
-// de l'empreinte). L'alt décrira la scène réelle à la relecture.
+// Bandeau d'ouverture du hero : dédiée au hero, hors numérotation de
+// la trame — déposée dans public/galerie/. Panoramique 21/9 : la
+// source vise 2304px de large (2× de la colonne), ≈ 986px de haut ;
+// hero-galerie.webp (2304×1440) est recadrée par object-cover en
+// attendant la source au ratio pile. L'alt décrira la scène réelle à
+// la relecture.
 const PHOTO_HERO = {
   src: "/galerie/hero-galerie.webp",
   alt: "Photographie du Sousaphone Carbon",
@@ -181,9 +184,10 @@ export default function GaleriePage() {
           est une page de défilement et la série doit rester proche.
           La photo d'ouverture est dédiée au hero — hors
           numérotation de la trame, comme hero-desktop.webp sur
-          l'accueil : galerie/hero-galerie.webp (2304×1440, pile 16/10)
-          vit dans la colonne de la grille (max-w-6xl) ; elle se
-          câble dans PHOTO_HERO ci-dessus. */}
+          l'accueil : galerie/hero-galerie.webp ouvre la série en
+          bandeau panoramique 21/9 (source visée ≈ 2304 × 986 px)
+          dans la colonne de la grille (max-w-6xl) ; elle se câble
+          dans PHOTO_HERO ci-dessus. */}
       <section
         aria-labelledby="titre-galerie"
         className="hero flex flex-col bg-linear-to-b from-[#C9A96A]/10 via-transparent to-[#C9A96A]/10 px-6 pt-12 pb-12 text-center min-[768px]:pt-16 min-[768px]:pb-16"
@@ -202,7 +206,7 @@ export default function GaleriePage() {
         </p>
         <div className="hero-entree mx-auto mt-10 w-full max-w-6xl min-[768px]:mt-12 [animation-delay:600ms]">
           {PHOTO_HERO ? (
-            <div className="relative aspect-[16/10] overflow-hidden rounded-2xl">
+            <div className="relative aspect-[21/9] overflow-hidden rounded-2xl">
               <Image
                 src={PHOTO_HERO.src}
                 alt={PHOTO_HERO.alt}
@@ -213,15 +217,15 @@ export default function GaleriePage() {
               />
             </div>
           ) : (
-            <figure className="flex aspect-[16/10] flex-col items-center justify-center gap-1 rounded-2xl border border-dashed border-[#C9A96A]/30 bg-stone-900 p-4 text-center">
+            <figure className="flex aspect-[21/9] flex-col items-center justify-center gap-1 rounded-2xl border border-dashed border-[#C9A96A]/30 bg-stone-900 p-4 text-center">
               <figcaption className="text-xs min-[768px]:text-sm font-bold text-[#C9A96A]">
                 photos/hero-galerie.webp
               </figcaption>
               <p className="text-[10px] min-[768px]:text-xs text-stone-300">
-                16/10
+                21/9
               </p>
               <p className="text-[10px] min-[768px]:text-xs text-stone-400">
-                ≈ 2304 × 1440 px
+                ≈ 2304 × 986 px
               </p>
               <p className="text-[10px] min-[768px]:text-xs text-stone-500">
                 alt&nbsp;: décrire la scène en 10–20 mots
