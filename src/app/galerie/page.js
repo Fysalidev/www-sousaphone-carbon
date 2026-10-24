@@ -250,7 +250,7 @@ export default function GaleriePage() {
           id="titre-galerie"
           className="hero-entree hero-titre mx-auto mt-4 max-w-3xl font-sans font-bold leading-[1.125] text-white [animation-delay:300ms]"
         >
-          L&rsquo;instrument en images.
+          Sousaphone Carbon
         </h1>
         <p className="hero-entree hero-promesse mx-auto mt-6 text-base leading-relaxed text-stone-200 [animation-delay:450ms]">
           L&rsquo;atelier, l&rsquo;instrument et les musiciens en situation.
