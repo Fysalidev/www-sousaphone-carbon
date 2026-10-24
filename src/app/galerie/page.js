@@ -32,15 +32,18 @@ const PHOTO_HERO = {
 };
 
 // ——— Trame alignée ———
-// La série se lit en lignes alignées, motif 2–3–1 répété : une ligne
-// de 2 (moyennes), une ligne de 3 (petites), une grande pleine
-// colonne — cinq motifs complets, une ligne de 2 puis la grande de
-// clôture (33 photos). Les numéros de photo suivent l'ordre de
-// lecture ; les fichiers déposés sont renumérotés pour que chaque
-// photo tombe sur une empreinte à son ratio natif (06 et 12 :
-// larges 16/10 des grandes, 01–02 / 07–08 / 13–14 : portraits 4/5
-// des lignes de 2, 03–05 / 09–11 : portraits 3/4 des lignes de 3).
+// La série ouvre sur un bandeau panoramique pleine colonne (numéro
+// 00, hors numérotation des photos de la série), puis se lit en
+// lignes alignées, motif 2–3–1 répété : une ligne de 2 (moyennes),
+// une ligne de 3 (petites), une grande pleine colonne — cinq motifs
+// complets, une ligne de 2 puis la grande de clôture (33 photos).
+// Les numéros de photo suivent l'ordre de lecture ; les fichiers
+// déposés sont renumérotés pour que chaque photo tombe sur une
+// empreinte à son ratio natif (06 et 12 : larges 16/10 des grandes,
+// 01–02 / 07–08 / 13–14 : portraits 4/5 des lignes de 2, 03–05 /
+// 09–11 : portraits 3/4 des lignes de 3).
 const LIGNES = [
+  ["bandeau"],
   ["moyenne", "moyenne"],
   ["petite", "petite", "petite"],
   ["grande"],
@@ -76,6 +79,12 @@ const GRILLES_LIGNE = {
 // pour la source (rétina 2×, la galerie s'affichant au maximum à
 // 1152px de large) et sizes pour l'optimiseur d'images.
 const EMPREINTES = {
+  bandeau: {
+    classes: "aspect-[2304/852]",
+    conseils: "≈ 2304 × 852 px",
+    ratio: "2304/852",
+    sizes: "(min-width: 72rem) 1152px, 100vw",
+  },
   grande: {
     classes: "aspect-[16/10]",
     conseils: "≈ 2304 × 1440 px",
@@ -96,12 +105,14 @@ const EMPREINTES = {
   },
 };
 
-// Emplacements numérotés dans l'ordre de lecture de LIGNES.
+// Emplacements numérotés dans l'ordre de lecture de LIGNES — le
+// bandeau d'ouverture garde le 00, hors numérotation de la série
+// (01–33) : les fichiers déjà déposés restent sur leur emplacement.
 let compteur = 0;
 const LIGNES_NUMEROTEES = LIGNES.map((ligne) =>
   ligne.map((taille) => ({
     taille,
-    numero: String(++compteur).padStart(2, "0"),
+    numero: taille === "bandeau" ? "00" : String(++compteur).padStart(2, "0"),
   })),
 );
 
@@ -231,9 +242,10 @@ export default function GaleriePage() {
         </div>
       </section>
       {/* Trame de la galerie : chaque ligne de LIGNES se rend dans sa
-          propre grille, contenue (px-6, max-w-6xl) — lignes de 2 et
-          de 3 alignées, grandes pleine colonne aux lignes 3, 6, 9,
-          12, 15 et 17 (clôture) ; sur mobile, chaque trio se ferme
+          propre grille, contenue (px-6, max-w-6xl) — bandeau
+          panoramique d'ouverture en ligne 1, lignes de 2 et de 3
+          alignées, grandes pleine colonne aux lignes 4, 7, 10, 13,
+          16 et 18 (clôture) ; sur mobile, chaque trio se ferme
           en 2×2 par la carte de marque. Les photos passent par
           l'optimiseur d'images (next/image, fill + sizes de
           l'empreinte) ; emplacement vide : placeholder pointillé
