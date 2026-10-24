@@ -199,7 +199,7 @@ export default function InstrumentPage() {
         aria-labelledby="titre-hero"
         className="instrument-hero flex flex-col bg-linear-to-b from-[#C9A96A]/10 via-transparent to-[#C9A96A]/10 min-[768px]:min-h-[calc(100svh-var(--hauteur-barre-header))]"
       >
-        <div className="flex w-full flex-1 flex-col items-center px-6 pt-12 pb-12 text-center min-[768px]:mx-auto min-[768px]:grid min-[768px]:max-w-[90rem] min-[768px]:grid-cols-[minmax(0,3fr)_minmax(0,2fr)] min-[768px]:items-center min-[768px]:gap-10 min-[768px]:pt-0 min-[768px]:text-left">
+        <div className="flex w-full flex-1 flex-col items-center px-6 pt-12 pb-12 text-center min-[768px]:mx-auto min-[768px]:grid min-[768px]:max-w-360 min-[768px]:grid-cols-[minmax(0,3fr)_minmax(0,2fr)] min-[768px]:items-center min-[768px]:gap-10 min-[768px]:pt-0 min-[768px]:text-left">
           <div className="flex flex-col items-center min-[768px]:items-start">
             <p className="hero-entree instrument-accroche font-bold tracking-[0.25em] text-[#C9A96A] [animation-delay:150ms]">
               LE SOUSAPHONE RÉINVENTÉ
@@ -244,7 +244,7 @@ export default function InstrumentPage() {
               doré, masque limité aux bords haut/bas. Boîte en aspect
               3/4 à toutes les largeurs, plafonnée à 45svh sur mobile
               (hero compact) et 48rem sur desktop. */}
-          <div className="hero-entree relative mt-6 min-h-64 w-full aspect-[3/4] max-h-[45svh] [animation-delay:600ms] min-[768px]:mt-0 min-[768px]:max-h-[48rem]">
+          <div className="hero-entree relative mt-6 min-h-64 w-full aspect-3/4 max-h-[45svh] [animation-delay:600ms] min-[768px]:mt-0 min-[768px]:max-h-192">
             <Image
               src="/galerie/galerie-04.webp"
               alt="Photographie du Sousaphone Carbon"
