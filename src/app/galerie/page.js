@@ -61,8 +61,10 @@ const LIGNES = [
 ];
 
 // Colonnes de la ligne selon son remplissage : les lignes de 2 et
-// de 3 vivent en 2 colonnes sur mobile (la ligne de 3 s'enveloppe
-// en 2 + 1), la ligne de 3 passe à 3 colonnes à partir de 768px.
+// de 3 vivent en 2 colonnes sur mobile, la ligne de 3 passe à 3
+// colonnes à partir de 768px — sur mobile sa quatrième cellule
+// (libérée par l'enveloppement en 2×2) reçoit la carte de marque
+// ci-dessous.
 const GRILLES_LIGNE = {
   1: "grid-cols-1",
   2: "grid-cols-2",
@@ -142,6 +144,31 @@ function EmplacementGalerie({ taille, numero }) {
   );
 }
 
+// Carte de marque des lignes de 3 : sur mobile, le trio
+// s'enveloppe en 2×2 et la carte ferme la grille à la place de la
+// cellule vide — étiquette dorée et phrase courte, même langage
+// que les cartes de contenu (bord or, coins adoucis). Sans ratio :
+// la cellule s'étire à la hauteur de la photo voisine. Desktop :
+// masquée (md:hidden), la rangée de 3 est déjà complète.
+// Répétée à chaque trio en défilement mobile, elle est purement
+// décorative : aria-hidden pour ne pas marteler la marque aux
+// lecteurs d'écran.
+function CarteMarque() {
+  return (
+    <div
+      aria-hidden="true"
+      className="flex flex-col items-center justify-center gap-2 rounded-2xl border border-[#C9A96A]/40 p-4 text-center md:hidden"
+    >
+      <p className="text-xs max-[399px]:tracking-widest font-bold tracking-[0.25em] text-[#C9A96A]">
+        SOUSAPHONE CARBON
+      </p>
+      <p className="text-[10px] min-[768px]:text-xs leading-relaxed text-stone-300">
+        Pièce unique artisanale en fibre de carbone.
+      </p>
+    </div>
+  );
+}
+
 export default function GaleriePage() {
   return (
     <main className="flex flex-col bg-black">
@@ -206,10 +233,11 @@ export default function GaleriePage() {
       {/* Trame de la galerie : chaque ligne de LIGNES se rend dans sa
           propre grille, contenue (px-6, max-w-6xl) — lignes de 2 et
           de 3 alignées, grandes pleine colonne aux lignes 3, 6, 9,
-          12, 15 et 17 (clôture). Les photos passent par l'optimiseur
-          d'images (next/image, fill + sizes de l'empreinte) ;
-          emplacement vide : placeholder pointillé avec le fichier
-          attendu et son ratio. */}
+          12, 15 et 17 (clôture) ; sur mobile, chaque trio se ferme
+          en 2×2 par la carte de marque. Les photos passent par
+          l'optimiseur d'images (next/image, fill + sizes de
+          l'empreinte) ; emplacement vide : placeholder pointillé
+          avec le fichier attendu et son ratio. */}
       <section
         aria-label="Photos"
         className="px-6 pt-12 pb-20 min-[768px]:pt-16 min-[768px]:pb-28"
@@ -228,6 +256,9 @@ export default function GaleriePage() {
                     numero={numero}
                   />
                 ))}
+                {/* Ligne de 3 : la carte de marque ferme la grille
+                    mobile en 2×2 (cellule vide de l'enveloppement). */}
+                {ligne.length === 3 && <CarteMarque />}
               </div>
             ))}
           </div>
