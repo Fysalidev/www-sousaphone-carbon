@@ -1,4 +1,3 @@
-import Image from "next/image";
 import Revelation from "@/components/Revelation";
 
 export const metadata = {
@@ -144,12 +143,11 @@ export default function GaleriePage() {
           hero-titre, hero-promesse — aucune taille ici). Compacité
           assumée : pas de hauteur d'écran verrouillée, la galerie
           est une page de défilement et la série doit rester proche.
-          La photo d'ouverture (galerie-12.webp, 2304×1440, pile 16/10
-          — aucun recadrage) occupe la colonne de la grille
-          (max-w-6xl) et annonce son langage : carte arrondie,
-          object-cover, brightness-90. Elle ne vit que dans le hero
-          pour l'instant — la trame s'évalue sur ses placeholders,
-          l'emplacement 12 la reprendra au câblage. */}
+          La photo d'ouverture vit à l'emplacement 12 de la trame
+          (galerie-12.webp, empreinte grande 16/10) : le hero la
+          reprendra au dépôt — pour l'instant il rend le même
+          placeholder que la trame, avec les consignes de taille
+          et d'alt, dans la colonne de la grille (max-w-6xl). */}
       <section
         aria-labelledby="titre-galerie"
         className="hero flex flex-col bg-linear-to-b from-[#C9A96A]/10 via-transparent to-[#C9A96A]/10 px-6 pt-12 pb-12 text-center min-[768px]:pt-16 min-[768px]:pb-16"
@@ -166,15 +164,8 @@ export default function GaleriePage() {
         <p className="hero-entree hero-promesse mx-auto mt-6 text-base leading-relaxed text-stone-200 [animation-delay:450ms]">
           L&rsquo;atelier, l&rsquo;instrument et les musiciens en situation.
         </p>
-        <div className="hero-entree relative mx-auto mt-10 w-full max-w-6xl aspect-[16/10] overflow-hidden rounded-2xl min-[768px]:mt-12 [animation-delay:600ms]">
-          <Image
-            src="/galerie/galerie-12.webp"
-            alt="Photographie du Sousaphone Carbon"
-            fill
-            priority
-            sizes="(min-width: 72rem) 1152px, calc(100vw - 3rem)"
-            className="object-cover brightness-90"
-          />
+        <div className="hero-entree mx-auto mt-10 w-full max-w-6xl min-[768px]:mt-12 [animation-delay:600ms]">
+          <EmplacementGalerie taille="grande" numero="12" />
         </div>
       </section>
       {/* Trame de la galerie : chaque ligne de LIGNES se rend dans sa
