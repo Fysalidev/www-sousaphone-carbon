@@ -35,6 +35,12 @@ const PHOTOS = {
     src: "/galerie/galerie-01.webp",
     alt: "Photographie du Sousaphone Carbon",
   },
+  // Emplacement 02 (moyenne 4/5) : galerie-02.webp (1130×1410, pile
+  // la consigne). L'alt décrira la scène réelle à la relecture.
+  "02": {
+    src: "/galerie/galerie-02.webp",
+    alt: "Photographie du Sousaphone Carbon",
+  },
 };
 
 // Photo d'ouverture du hero : dédiée au hero, hors numérotation de
