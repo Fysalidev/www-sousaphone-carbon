@@ -17,7 +17,7 @@ export const metadata = {
 // Photos câblées, par numéro d'emplacement : chaque dépôt se câble
 // ici, ex. :
 //   "01": { src: "/galerie/galerie-01.webp", alt: "…" }
-// En place : bandeau (00) et images carrées 01–02. Les emplacements
+// En place : bandeau (00) et images carrées 01–03. Les emplacements
 // suivants restent en placeholder, chaque source définitive se
 // câble ici au fil de la validation.
 const PHOTOS = {
@@ -44,6 +44,14 @@ const PHOTOS = {
     src: "/galerie/galerie-02.webp",
     alt: "Photographie du Sousaphone Carbon",
   },
+  // Emplacement 03 (carré) : galerie-03.webp, exportée en WebP q85
+  // depuis sources/galerie-03.jpg (3264×3264, carré — affichage
+  // entier, sans recadrage). L'alt décrira la scène réelle à la
+  // relecture.
+  "03": {
+    src: "/galerie/galerie-03.webp",
+    alt: "Photographie du Sousaphone Carbon",
+  },
 };
 
 // Photo d'ouverture du hero : dédiée au hero, hors numérotation de
@@ -60,9 +68,16 @@ const PHOTO_HERO = {
 // pleine colonne, une par ligne — les portraits et les paysages
 // s'y fondent par object-cover (recadrage centré), chaque dépôt
 // vise la consigne carrée, 2304×2304. En place aujourd'hui : le
-// bandeau, les photos 01–02 puis un placeholder (03) ; chaque dépôt
+// bandeau, les photos 01–03 ; chaque dépôt
 // suivant ajoute sa ligne carrée.
-const LIGNES = [["bandeau"], ["grande"], ["grande"], ["grande"]];
+const LIGNES = [
+  ["bandeau"],
+  ["grande"],
+  ["grande"],
+  ["grande"],
+  // Placeholder suivant, en attente du prochain dépôt.
+  ["grande"],
+];
 
 // Empreinte de chaque taille : ratio d'affichage — l'object-cover
 // cadre la photo dans son emplacement —, dimensions conseillées
