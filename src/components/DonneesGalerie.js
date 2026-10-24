@@ -56,4 +56,13 @@ export const EMPREINTES = {
 // le retrait du préfixe « XX - » des dépôts (XX-01 → galerie-01.webp,
 // etc.) ; chaque renommage se rebranche ici, ex. :
 //   "01": { src: "/galerie/galerie-01.webp", alt: "…", largeur: 1130, hauteur: 1410 }
-export const PHOTOS = {};
+export const PHOTOS = {
+  // Vignette 01 (moyenne 4/5) : galerie-01.webp (1130×1410, pile la
+  // consigne). L'alt décrira la scène réelle à la relecture.
+  "01": {
+    src: "/galerie/galerie-01.webp",
+    alt: "Photographie du Sousaphone Carbon",
+    largeur: 1130,
+    hauteur: 1410,
+  },
+};
