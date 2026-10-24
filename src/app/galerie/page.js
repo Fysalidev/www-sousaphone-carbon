@@ -4,7 +4,7 @@ import Revelation from "@/components/Revelation";
 export const metadata = {
   title: "Galerie",
   description:
-    "L'atelier, l'instrument et les musiciens en situation : découvrez le Sousaphone Carbon en images.",
+    "L'atelier, l'instrument, de l'idée à la vie : découvrez le Sousaphone Carbon en images.",
 };
 
 // Page galerie : la trame vit dans LIGNES ci-dessous — chaque ligne
