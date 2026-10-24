@@ -9,41 +9,44 @@
 // Nombre d'emplacements de la galerie.
 export const NOMBRE_PHOTOS = 33;
 
-// Rythme de la composition, répété sur toute la série : une grande
-// pleine largeur, une ligne de 2 (moyennes), une ligne de 3
-// (petites), de nouveau 2 — 33 photos = 4 cycles + la grande de
-// clôture.
-export const CYCLE = [
-  "grande",
-  "moyenne",
-  "moyenne",
-  "petite",
-  "petite",
-  "petite",
-  "moyenne",
-  "moyenne",
+// Trame de la composition : la galerie se lit en lignes composées,
+// répétées sur toute la série — une grande pleine page, une ligne
+// de 2 (moyennes), une ligne de 3 (petites), de nouveau 2 —
+// 33 photos = 4 répétitions + la grande de clôture. Les numéros de
+// photo suivent l'ordre de lecture du motif déroulé (grande 01,
+// moyennes 02–03, petites 04–06, moyennes 07–08, puis 09...).
+export const LIGNES = [
+  ["grande"],
+  ["moyenne", "moyenne"],
+  ["petite", "petite", "petite"],
+  ["moyenne", "moyenne"],
 ];
 
-// Empreinte de chaque taille : colonnes occupées (grille de 2
-// colonnes en mobile, 6 au-delà de 768px), ratio d'affichage —
-// l'object-cover cadre la photo dans son emplacement — dimensions
-// conseillées pour la source (rétina 2×, la grille s'affichant au
-// maximum à 1152px) et sizes pour l'optimiseur.
+// Empreinte de chaque taille : ratio d'affichage — l'object-cover
+// cadre la photo dans son emplacement —, `grille` porte les colonnes
+// de la ligne qui la contient (les grandes vivent hors grille,
+// pleine page : chaîne vide), dimensions conseillées pour la source
+// (rétina 2×, les lignes contenues s'affichant au maximum à 1152px,
+// les grandes à la largeur de l'écran) et sizes pour l'optimiseur
+// d'images.
 export const EMPREINTES = {
   grande: {
-    classes: "col-span-2 md:col-span-6 aspect-[16/10]",
-    conseils: "≈ 2304 × 1440 px",
+    classes: "aspect-[16/10]",
+    grille: "",
+    conseils: "≈ 2880 × 1800 px",
     ratio: "16/10",
-    sizes: "(min-width: 72rem) 1152px, 100vw",
+    sizes: "100vw",
   },
   moyenne: {
-    classes: "col-span-1 md:col-span-3 aspect-[4/5]",
+    classes: "aspect-[4/5]",
+    grille: "grid-cols-2",
     conseils: "≈ 1130 × 1410 px",
     ratio: "4/5",
     sizes: "(min-width: 48rem) 552px, 50vw",
   },
   petite: {
-    classes: "col-span-1 md:col-span-2 aspect-[3/4]",
+    classes: "aspect-[3/4]",
+    grille: "grid-cols-2 md:grid-cols-3",
     conseils: "≈ 740 × 985 px",
     ratio: "3/4",
     sizes: "(min-width: 48rem) 368px, 50vw",
@@ -69,5 +72,49 @@ export const PHOTOS = {
     alt: "Photographie du Sousaphone Carbon",
     largeur: 1130,
     hauteur: 1410,
+  },
+  "04": {
+    src: "/galerie/galerie-04.webp",
+    alt: "Photographie du Sousaphone Carbon",
+  },
+  "05": {
+    src: "/galerie/galerie-05.webp",
+    alt: "Photographie du Sousaphone Carbon",
+  },
+  "06": {
+    src: "/galerie/galerie-06.webp",
+    alt: "Photographie du Sousaphone Carbon",
+  },
+  "07": {
+    src: "/galerie/galerie-07.webp",
+    alt: "Photographie du Sousaphone Carbon",
+  },
+  "08": {
+    src: "/galerie/galerie-08.webp",
+    alt: "Photographie du Sousaphone Carbon",
+  },
+  "09": {
+    src: "/galerie/galerie-09.webp",
+    alt: "Photographie du Sousaphone Carbon",
+  },
+  10: {
+    src: "/galerie/galerie-10.webp",
+    alt: "Photographie du Sousaphone Carbon",
+  },
+  11: {
+    src: "/galerie/galerie-11.webp",
+    alt: "Photographie du Sousaphone Carbon",
+  },
+  12: {
+    src: "/galerie/galerie-12.webp",
+    alt: "Photographie du Sousaphone Carbon",
+  },
+  13: {
+    src: "/galerie/galerie-13.webp",
+    alt: "Photographie du Sousaphone Carbon",
+  },
+  14: {
+    src: "/galerie/galerie-14.webp",
+    alt: "Photographie du Sousaphone Carbon",
   },
 };
