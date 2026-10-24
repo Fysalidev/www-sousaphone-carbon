@@ -41,6 +41,21 @@ const PHOTOS = {
     src: "/galerie/galerie-02.webp",
     alt: "Photographie du Sousaphone Carbon",
   },
+  // Emplacements 03–05 (petites 3/4) : exports WebP q85 depuis les
+  // JPEG sources, recadrés à 740×985 (consigne rétina 2×). Les alt
+  // décriront les scènes réelles à la relecture.
+  "03": {
+    src: "/galerie/galerie-03.webp",
+    alt: "Photographie du Sousaphone Carbon",
+  },
+  "04": {
+    src: "/galerie/galerie-04.webp",
+    alt: "Photographie du Sousaphone Carbon",
+  },
+  "05": {
+    src: "/galerie/galerie-05.webp",
+    alt: "Photographie du Sousaphone Carbon",
+  },
 };
 
 // Photo d'ouverture du hero : dédiée au hero, hors numérotation de
