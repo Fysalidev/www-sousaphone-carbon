@@ -14,65 +14,14 @@ export const metadata = {
 // Emplacement vide : placeholder pointillé avec le fichier attendu
 // et son ratio.
 
-// Photos déposées, par numéro d'emplacement.
-const PHOTOS = {
-  "01": {
-    src: "/galerie/galerie-01.webp",
-    alt: "Photographie du Sousaphone Carbon",
-  },
-  "02": {
-    src: "/galerie/galerie-02.webp",
-    alt: "Photographie du Sousaphone Carbon",
-  },
-  "03": {
-    src: "/galerie/galerie-03.webp",
-    alt: "Photographie du Sousaphone Carbon",
-  },
-  "04": {
-    src: "/galerie/galerie-04.webp",
-    alt: "Photographie du Sousaphone Carbon",
-  },
-  "05": {
-    src: "/galerie/galerie-05.webp",
-    alt: "Photographie du Sousaphone Carbon",
-  },
-  "06": {
-    src: "/galerie/galerie-06.webp",
-    alt: "Sousaphone en laiton de profil sur fond noir, pavillon doré au premier plan",
-  },
-  "07": {
-    src: "/galerie/galerie-07.webp",
-    alt: "Photographie du Sousaphone Carbon",
-  },
-  "08": {
-    src: "/galerie/galerie-08.webp",
-    alt: "Photographie du Sousaphone Carbon",
-  },
-  "09": {
-    src: "/galerie/galerie-09.webp",
-    alt: "Photographie du Sousaphone Carbon",
-  },
-  10: {
-    src: "/galerie/galerie-10.webp",
-    alt: "Photographie du Sousaphone Carbon",
-  },
-  11: {
-    src: "/galerie/galerie-11.webp",
-    alt: "Photographie du Sousaphone Carbon",
-  },
-  12: {
-    src: "/galerie/galerie-12.webp",
-    alt: "Photographie du Sousaphone Carbon",
-  },
-  13: {
-    src: "/galerie/galerie-13.webp",
-    alt: "Photographie du Sousaphone Carbon",
-  },
-  14: {
-    src: "/galerie/galerie-14.webp",
-    alt: "Photographie du Sousaphone Carbon",
-  },
-};
+// Photos câblées, par numéro d'emplacement : la trame s'évalue
+// pour l'instant sur ses seuls placeholders — la table est vide.
+// Chaque dépôt se câble ici, ex. :
+//   "06": { src: "/galerie/galerie-06.webp", alt: "…" }
+// Les fichiers déjà déposés (01–14) portent chacun le ratio de
+// leur emplacement : les rebrancher ne demande que l'entrée
+// src/alt correspondante.
+const PHOTOS = {};
 
 // ——— Trame alignée ———
 // La série se lit en lignes alignées, motif 2–3–1 répété : une ligne
@@ -198,9 +147,9 @@ export default function GaleriePage() {
           La photo d'ouverture (galerie-12.webp, 2304×1440, pile 16/10
           — aucun recadrage) occupe la colonne de la grille
           (max-w-6xl) et annonce son langage : carte arrondie,
-          object-cover, brightness-90. Elle réapparaît plus bas à
-          son emplacement (12) — même licence que le hero instrument
-          (galerie-04) et les vignettes d'accueil. */}
+          object-cover, brightness-90. Elle ne vit que dans le hero
+          pour l'instant — la trame s'évalue sur ses placeholders,
+          l'emplacement 12 la reprendra au câblage. */}
       <section
         aria-labelledby="titre-galerie"
         className="hero flex flex-col bg-linear-to-b from-[#C9A96A]/10 via-transparent to-[#C9A96A]/10 px-6 pt-12 pb-12 text-center min-[768px]:pt-16 min-[768px]:pb-16"
