@@ -23,6 +23,11 @@ export const metadata = {
 // src/alt correspondante.
 const PHOTOS = {};
 
+// Photo d'ouverture du hero : dédiée au hero, hors numérotation de
+// la trame — à déposer dans public/photos/ puis renseigner src/alt
+// ici, le placeholder bascule alors à l'image.
+const PHOTO_HERO = null; // ex. { src: "/photos/hero-galerie.webp", alt: "…" }
+
 // ——— Trame alignée ———
 // La série se lit en lignes alignées, motif 2–3–1 répété : une ligne
 // de 2 (moyennes), une ligne de 3 (petites), une grande pleine
@@ -144,11 +149,12 @@ export default function GaleriePage() {
           hero-titre, hero-promesse — aucune taille ici). Compacité
           assumée : pas de hauteur d'écran verrouillée, la galerie
           est une page de défilement et la série doit rester proche.
-          La photo d'ouverture vit à l'emplacement 12 de la trame
-          (galerie-12.webp, empreinte grande 16/10) : le hero la
-          reprendra au dépôt — pour l'instant il rend le même
-          placeholder que la trame, avec les consignes de taille
-          et d'alt, dans la colonne de la grille (max-w-6xl). */}
+          La photo d'ouverture est dédiée au hero — hors
+          numérotation de la trame, comme hero-desktop.webp sur
+          l'accueil : elle attend photos/hero-galerie.webp
+          (empreinte grande 16/10) et vit dans la colonne de la
+          grille (max-w-6xl) ; le câblage se fait dans PHOTO_HERO
+          ci-dessus, le placeholder laisse alors place à l'image. */}
       <section
         aria-labelledby="titre-galerie"
         className="hero flex flex-col bg-linear-to-b from-[#C9A96A]/10 via-transparent to-[#C9A96A]/10 px-6 pt-12 pb-12 text-center min-[768px]:pt-16 min-[768px]:pb-16"
@@ -166,7 +172,33 @@ export default function GaleriePage() {
           L&rsquo;atelier, l&rsquo;instrument et les musiciens en situation.
         </p>
         <div className="hero-entree mx-auto mt-10 w-full max-w-6xl min-[768px]:mt-12 [animation-delay:600ms]">
-          <EmplacementGalerie taille="grande" numero="12" />
+          {PHOTO_HERO ? (
+            <div className="relative aspect-[16/10] overflow-hidden rounded-2xl">
+              <Image
+                src={PHOTO_HERO.src}
+                alt={PHOTO_HERO.alt}
+                fill
+                priority
+                sizes="(min-width: 72rem) 1152px, calc(100vw - 3rem)"
+                className="object-cover brightness-90"
+              />
+            </div>
+          ) : (
+            <figure className="flex aspect-[16/10] flex-col items-center justify-center gap-1 rounded-2xl border border-dashed border-[#C9A96A]/30 bg-stone-900 p-4 text-center">
+              <figcaption className="text-xs min-[768px]:text-sm font-bold text-[#C9A96A]">
+                photos/hero-galerie.webp
+              </figcaption>
+              <p className="text-[10px] min-[768px]:text-xs text-stone-300">
+                16/10
+              </p>
+              <p className="text-[10px] min-[768px]:text-xs text-stone-400">
+                ≈ 2304 × 1440 px
+              </p>
+              <p className="text-[10px] min-[768px]:text-xs text-stone-500">
+                alt&nbsp;: décrire la scène en 10–20 mots
+              </p>
+            </figure>
+          )}
         </div>
       </section>
       {/* Trame de la galerie : chaque ligne de LIGNES se rend dans sa
