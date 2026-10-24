@@ -8,17 +8,17 @@ export const metadata = {
 };
 
 // Page galerie : la trame vit dans LIGNES ci-dessous — chaque ligne
-// de la série est composée à la main, sans motif répété. Chaque photo
-// passe par l'optimiseur d'images (next/image, fill + sizes de
-// l'empreinte) : chaque emplacement reçoit la variante taillée à sa
-// taille réelle. Emplacement vide : placeholder pointillé avec le
-// fichier attendu et son ratio.
+// de la série est composée à la main. Chaque photo passe par
+// l'optimiseur d'images (next/image, fill + sizes de l'empreinte) :
+// chaque emplacement reçoit la variante taillée à sa taille réelle.
+// Emplacement vide : placeholder pointillé avec le fichier attendu
+// et son ratio.
 
 // Photos déposées, par numéro d'emplacement.
 const PHOTOS = {
   "01": {
     src: "/galerie/galerie-01.webp",
-    alt: "Sousaphone en laiton de profil sur fond noir, pavillon doré au premier plan",
+    alt: "Photographie du Sousaphone Carbon",
   },
   "02": {
     src: "/galerie/galerie-02.webp",
@@ -38,7 +38,7 @@ const PHOTOS = {
   },
   "06": {
     src: "/galerie/galerie-06.webp",
-    alt: "Photographie du Sousaphone Carbon",
+    alt: "Sousaphone en laiton de profil sur fond noir, pavillon doré au premier plan",
   },
   "07": {
     src: "/galerie/galerie-07.webp",
@@ -74,66 +74,38 @@ const PHOTOS = {
   },
 };
 
-// ——— Trame éditoriale ———
-// La série se lit en lignes composées une à une : grandes qui
-// ouvrent et respirent, duos et trios décalés qui cassent les
-// alignements stricts, panoramiques qui changent de registre. Une
-// ligne = un tableau d'emplacements ; `decalage` enfoncé l'item vers
-// le bas à partir de 768px (en rem, multiples du gap de 1.5 rem :
-// 12 = 3rem, 24 = 6rem) — sur mobile les lignes restent posées.
-// Les numéros de photo suivent l'ordre de lecture ; les photos déjà
-// déposées (01–14) tombent chacune sur une empreinte à son ratio
-// natif, les panoramiques n'existent qu'au-delà.
+// ——— Trame alignée ———
+// La série se lit en lignes alignées, motif 2–3–1 répété : une ligne
+// de 2 (moyennes), une ligne de 3 (petites), une grande pleine
+// colonne — cinq motifs complets, une ligne de 2 puis la grande de
+// clôture (33 photos). Les numéros de photo suivent l'ordre de
+// lecture ; les fichiers déposés sont renumérotés pour que chaque
+// photo tombe sur une empreinte à son ratio natif (06 et 12 :
+// larges 16/10 des grandes, 01–02 / 07–08 / 13–14 : portraits 4/5
+// des lignes de 2, 03–05 / 09–11 : portraits 3/4 des lignes de 3).
 const LIGNES = [
-  [{ taille: "grande" }],
-  [{ taille: "moyenne" }, { taille: "moyenne", decalage: 12 }],
-  [
-    { taille: "petite" },
-    { taille: "petite", decalage: 24 },
-    { taille: "petite", decalage: 12 },
-  ],
-  [{ taille: "moyenne", decalage: 12 }, { taille: "moyenne" }],
-  [{ taille: "grande" }],
-  [{ taille: "moyenne" }, { taille: "moyenne", decalage: 12 }],
-  [
-    { taille: "petite", decalage: 12 },
-    { taille: "petite" },
-    { taille: "petite", decalage: 24 },
-  ],
-  [{ taille: "panoramique" }],
-  [{ taille: "moyenne", decalage: 12 }, { taille: "moyenne" }],
-  [
-    { taille: "petite" },
-    { taille: "petite", decalage: 12 },
-    { taille: "petite", decalage: 24 },
-  ],
-  [{ taille: "grande" }],
-  [{ taille: "moyenne" }, { taille: "moyenne", decalage: 12 }],
-  [
-    { taille: "petite", decalage: 24 },
-    { taille: "petite", decalage: 12 },
-    { taille: "petite" },
-  ],
-  [{ taille: "panoramique" }],
-  [{ taille: "moyenne", decalage: 12 }, { taille: "moyenne" }],
-  [
-    { taille: "petite" },
-    { taille: "petite", decalage: 24 },
-    { taille: "petite", decalage: 12 },
-  ],
-  [{ taille: "grande" }],
+  ["moyenne", "moyenne"],
+  ["petite", "petite", "petite"],
+  ["grande"],
+  ["moyenne", "moyenne"],
+  ["petite", "petite", "petite"],
+  ["grande"],
+  ["moyenne", "moyenne"],
+  ["petite", "petite", "petite"],
+  ["grande"],
+  ["moyenne", "moyenne"],
+  ["petite", "petite", "petite"],
+  ["grande"],
+  ["moyenne", "moyenne"],
+  ["petite", "petite", "petite"],
+  ["grande"],
+  ["moyenne", "moyenne"],
+  ["grande"],
 ];
 
-// Chaînes littérales des décalages : Tailwind doit les voir en
-// clair dans le source pour générer les utilitaires.
-const DECALAGES = {
-  12: "md:mt-12",
-  24: "md:mt-24",
-};
-
-// Colonnes de la ligne selon son remplissage : les duos et trios
-// vivent en 2 colonnes sur mobile (le trio s'enveloppe en 2 + 1),
-// le trio passe à 3 colonnes à partir de 768px.
+// Colonnes de la ligne selon son remplissage : les lignes de 2 et
+// de 3 vivent en 2 colonnes sur mobile (la ligne de 3 s'enveloppe
+// en 2 + 1), la ligne de 3 passe à 3 colonnes à partir de 768px.
 const GRILLES_LIGNE = {
   1: "grid-cols-1",
   2: "grid-cols-2",
@@ -149,12 +121,6 @@ const EMPREINTES = {
     classes: "aspect-[16/10]",
     conseils: "≈ 2304 × 1440 px",
     ratio: "16/10",
-    sizes: "(min-width: 72rem) 1152px, 100vw",
-  },
-  panoramique: {
-    classes: "aspect-[21/9]",
-    conseils: "≈ 2304 × 990 px",
-    ratio: "21/9",
     sizes: "(min-width: 72rem) 1152px, 100vw",
   },
   moyenne: {
@@ -174,25 +140,21 @@ const EMPREINTES = {
 // Emplacements numérotés dans l'ordre de lecture de LIGNES.
 let compteur = 0;
 const LIGNES_NUMEROTEES = LIGNES.map((ligne) =>
-  ligne.map(({ taille, decalage }) => ({
+  ligne.map((taille) => ({
     taille,
-    decalage,
     numero: String(++compteur).padStart(2, "0"),
   })),
 );
 
 // Emplacement photo : carte arrondie, zoom et filet or au survol ;
-// `self-start` préserve le ratio de l'empreinte — sans lui, la
-// grille étirerait chaque carte à la hauteur de sa ligne et
-// recadrerait la photo. Emplacement vide : placeholder pointillé
-// avec le fichier attendu, son ratio et la consigne d'alt.
-function EmplacementGalerie({ taille, numero, decalage = 0 }) {
+// emplacement vide : placeholder pointillé avec le fichier attendu,
+// son ratio et la consigne d'alt.
+function EmplacementGalerie({ taille, numero }) {
   const empreinte = EMPREINTES[taille];
   const photo = PHOTOS[numero];
-  const decalageClasse = DECALAGES[decalage] ?? "";
   return photo ? (
     <figure
-      className={`group relative self-start overflow-hidden rounded-2xl outline-1 -outline-offset-1 outline-transparent transition-[outline-color] duration-300 ease-out hover:outline-[#C9A96A] motion-reduce:transition-none ${decalageClasse} ${empreinte.classes}`}
+      className={`group relative overflow-hidden rounded-2xl outline-1 -outline-offset-1 outline-transparent transition-[outline-color] duration-300 ease-out hover:outline-[#C9A96A] motion-reduce:transition-none ${empreinte.classes}`}
     >
       <Image
         src={photo.src}
@@ -205,7 +167,7 @@ function EmplacementGalerie({ taille, numero, decalage = 0 }) {
     </figure>
   ) : (
     <figure
-      className={`flex flex-col items-center justify-center gap-1 self-start rounded-2xl border border-dashed border-[#C9A96A]/30 bg-stone-900 p-4 text-center ${decalageClasse} ${empreinte.classes}`}
+      className={`flex flex-col items-center justify-center gap-1 rounded-2xl border border-dashed border-[#C9A96A]/30 bg-stone-900 p-4 text-center ${empreinte.classes}`}
     >
       <figcaption className="text-xs min-[768px]:text-sm font-bold text-[#C9A96A]">
         galerie-{numero}.webp
@@ -233,12 +195,12 @@ export default function GaleriePage() {
           hero-titre, hero-promesse — aucune taille ici). Compacité
           assumée : pas de hauteur d'écran verrouillée, la galerie
           est une page de défilement et la série doit rester proche.
-          La photo d'ouverture (galerie-09.webp, 2304×1440, pile 16/10
+          La photo d'ouverture (galerie-12.webp, 2304×1440, pile 16/10
           — aucun recadrage) occupe la colonne de la grille
           (max-w-6xl) et annonce son langage : carte arrondie,
           object-cover, brightness-90. Elle réapparaît plus bas à
-          son emplacement (09) — même licence que le hero instrument
-          (galerie-05) et les vignettes d'accueil. */}
+          son emplacement (12) — même licence que le hero instrument
+          (galerie-04) et les vignettes d'accueil. */}
       <section
         aria-labelledby="titre-galerie"
         className="hero flex flex-col bg-linear-to-b from-[#C9A96A]/10 via-transparent to-[#C9A96A]/10 px-6 pt-12 pb-12 text-center min-[768px]:pt-16 min-[768px]:pb-16"
@@ -257,7 +219,7 @@ export default function GaleriePage() {
         </p>
         <div className="hero-entree relative mx-auto mt-10 w-full max-w-6xl aspect-[16/10] overflow-hidden rounded-2xl min-[768px]:mt-12 [animation-delay:600ms]">
           <Image
-            src="/galerie/galerie-09.webp"
+            src="/galerie/galerie-12.webp"
             alt="Photographie du Sousaphone Carbon"
             fill
             priority
@@ -267,12 +229,12 @@ export default function GaleriePage() {
         </div>
       </section>
       {/* Trame de la galerie : chaque ligne de LIGNES se rend dans sa
-          propre grille, contenue (px-6, max-w-6xl) ; les décalages
-          verticaux — desktop uniquement — font respirer la série en
-          cascade, les grandes et panoramiques ouvrent des respirations
-          pleine colonne. Les photos passent par l'optimiseur d'images
-          (next/image, fill + sizes de l'empreinte) ; emplacement vide :
-          placeholder pointillé avec le fichier attendu et son ratio. */}
+          propre grille, contenue (px-6, max-w-6xl) — lignes de 2 et
+          de 3 alignées, grandes pleine colonne aux lignes 3, 6, 9,
+          12, 15 et 17 (clôture). Les photos passent par l'optimiseur
+          d'images (next/image, fill + sizes de l'empreinte) ;
+          emplacement vide : placeholder pointillé avec le fichier
+          attendu et son ratio. */}
       <section
         aria-label="Photos"
         className="px-6 pt-12 pb-20 min-[768px]:pt-16 min-[768px]:pb-28"
@@ -284,12 +246,11 @@ export default function GaleriePage() {
                 key={indexLigne}
                 className={`grid gap-6 ${GRILLES_LIGNE[ligne.length]}`}
               >
-                {ligne.map(({ taille, numero, decalage }) => (
+                {ligne.map(({ taille, numero }) => (
                   <EmplacementGalerie
                     key={numero}
                     taille={taille}
                     numero={numero}
-                    decalage={decalage}
                   />
                 ))}
               </div>

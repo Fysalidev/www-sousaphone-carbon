@@ -27,7 +27,7 @@ const bebasNeue = Bebas_Neue({
 
 // Métadonnées mère : titre (gabarit « Page — Sousaphone Carbon » pour
 // les pages filles), description, Open Graph — image paysage
-// galerie-01, mieux taillée pour les cartes de partage que le
+// galerie-06, mieux taillée pour les cartes de partage que le
 // portrait du hero — et carte Twitter large. Les pages filles
 // n'ont plus qu'à donner leur titre court.
 export const metadata = {
@@ -45,7 +45,7 @@ export const metadata = {
     description: DESCRIPTION,
     images: [
       {
-        url: "/galerie/galerie-01.webp",
+        url: "/galerie/galerie-06.webp",
         width: 2028,
         height: 1141,
         alt: "Sousaphone Carbon",

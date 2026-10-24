@@ -236,7 +236,7 @@ export default function InstrumentPage() {
               ))}
             </dl>
           </div>
-          {/* Photo de l'instrument : galerie-05.webp (740×1038) sert
+          {/* Photo de l'instrument : galerie-04.webp (740×1038) sert
               les deux dispositions — empilé mobile et colonne
               desktop —, avec le même traitement que le hero
               d'accueil : object-contain pour ne jamais déformer
@@ -246,7 +246,7 @@ export default function InstrumentPage() {
               (hero compact) et 48rem sur desktop. */}
           <div className="hero-entree relative mt-6 min-h-64 w-full aspect-[3/4] max-h-[45svh] [animation-delay:600ms] min-[768px]:mt-0 min-[768px]:max-h-[48rem]">
             <Image
-              src="/galerie/galerie-05.webp"
+              src="/galerie/galerie-04.webp"
               alt="Photographie du Sousaphone Carbon"
               fill
               priority
